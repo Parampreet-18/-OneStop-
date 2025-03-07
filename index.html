@@ -21,7 +21,6 @@
             height: 100vh;
         }
 
-        /* Top Navbar */
         .top-bar {
             background-color: rgb(17, 17, 17);
             color: white;
@@ -38,9 +37,7 @@
             margin-left: 15px;
         }
 
-        /* Main Navbar */
         .nav-bar {
-            /* background-color: black; */
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -52,18 +49,12 @@
             align-items: center;
         }
 
-        .logo img {
-            width: 50px;
-            margin-right: 5px;
-        }
-
         .logo span {
             font-size: 22px;
             font-weight: bold;
             color: white;
         }
 
-        /* Search Bar */
         .search-box {
             display: flex;
             width: 40%;
@@ -91,11 +82,6 @@
             font-size: 16px;
         }
 
-        .search-box button:hover {
-            background: #444;
-        }
-
-        /* Cart and Sign-in */
         .cart-signin {
             display: flex;
             align-items: center;
@@ -110,15 +96,34 @@
             align-items: center;
         }
 
-        .cart-signin a img {
-            width: 20px;
-            margin-left: 5px;
+        .container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 20px;
         }
-
+        .products {
+            flex: 1;
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .product-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .product-list img {
+            width: 100px;
+            height: auto;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
-     <!-- Top Bar -->
      <div class="top-bar">
         <p>Brand Waali Quality, Bazaar Waali Deal!</p>
         <nav>
@@ -129,10 +134,8 @@
         </nav>
     </div>
 
-    <!-- Main Navbar -->
     <div class="nav-bar">
         <div class="logo">
-            <!-- <img src="https://static.vecteezy.com/system/resources/thumbnails/020/662/327/small_2x/store-icon-logo-illustration-vector.jpg" alt="Shopme Logo"> -->
             <span>Shopme</span>
         </div>
         <div class="search-box">
@@ -143,6 +146,44 @@
             <a href="#" class="cart">🛒 Cart</a>
             <a href="#" class="signin">👤 Sign In</a>
         </div>
+    </div>
+
+    <div class="container">
+        <section class="products">
+            <h2>Pick up where you left off</h2>
+            <div class="product-list">
+                <img src="product1.jpg" alt="Product">
+                <img src="product2.jpg" alt="Product">
+                <img src="product3.jpg" alt="Product">
+            </div>
+        </section>
+
+        <section class="products">
+            <h2>Keep shopping for</h2>
+            <div class="product-list">
+                <img src="product4.jpg" alt="Product">
+                <img src="product5.jpg" alt="Product">
+                <img src="product6.jpg" alt="Product">
+            </div>
+        </section>
+
+        <section class="products">
+            <h2>Buy again</h2>
+            <div class="product-list">
+                <img src="product7.jpg" alt="Product">
+                <img src="product8.jpg" alt="Product">
+                <img src="product9.jpg" alt="Product">
+            </div>
+        </section>
+
+        <section class="products">
+            <h2>Deals related to items you've saved</h2>
+            <div class="product-list">
+                <img src="product10.jpg" alt="Product">
+                <img src="product11.jpg" alt="Product">
+                <img src="product12.jpg" alt="Product">
+            </div>
+        </section>
     </div>
 </body>
 </html>
