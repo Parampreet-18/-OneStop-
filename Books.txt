@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Bookstore</title>
+</head>
+<body>
+
+    <header>
+        <h1>Buying New Books</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Books</a></li>
+                <li><a href="#">Sell Books</a></li>
+                <li><a href="#">Audiobooks</a></li>
+                <li><a href="#">Search</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Buying New & Old Books</h2>
+            <p>Find new books, sell old books, or listen to audiobooks online.</p>
+            <button>Explore</button>
+        </section>
+
+        <section>
+            <div>
+                <h3>Buy New Books</h3>
+                <button>Shop Now</button>
+            </div>
+            <div>
+                <h3>Sell Old Books</h3>
+                <button>Start Selling</button>
+            </div>
+            <div>
+                <h3>Audiobooks</h3>
+                <button>Listen Now</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Online Bookstore | All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
