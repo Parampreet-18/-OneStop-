@@ -43,7 +43,7 @@
 
         /* Hero Section */
         .hero {
-            background-image: url('https://libreshot.com/wp-content/uploads/2018/02/books-background.jpg');
+            background-image: url(books-background.jpg);
             background-size: cover;
             background-position: center;
             color: white;
@@ -65,6 +65,25 @@
             color: #333;
         }
 
+        .book-category {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        .book-category div {
+            width: 30%;
+            text-align: center;
+        }
+
+        .book-category img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
         button {
             background-color: #ff6600;
             color: white;
@@ -72,6 +91,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            margin-top: 10px;
         }
 
         button:hover {
@@ -123,17 +143,20 @@
             <button>Explore</button>
         </section>
 
-        <section>
+        <section class="book-category">
             <div>
                 <h3>Buy New Books</h3>
+                <img src="new-book.jpg" alt="Buy New Books">
                 <button>Shop Now</button>
             </div>
             <div>
                 <h3>Sell Old Books</h3>
+                <img src="sell-book.jpg" alt="Sell Old Books">
                 <button>Start Selling</button>
             </div>
             <div>
                 <h3>Audiobooks</h3>
+                <img src="Audiobooks.jpg" alt="Audiobooks">
                 <button>Listen Now</button>
             </div>
         </section>
