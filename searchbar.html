@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopme</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-image: url('https://c4.wallpaperflare.com/wallpaper/613/163/666/black-texture-wallpaper-preview.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+        }
+
+        /* Top Navbar */
+        .top-bar {
+            background-color: rgb(17, 17, 17);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+
+        .top-bar nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        /* Main Navbar */
+        .nav-bar {
+            /* background-color: black; */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 50px;
+            margin-right: 5px;
+        }
+
+        .logo span {
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+        }
+
+        /* Search Bar */
+        .search-box {
+            display: flex;
+            width: 40%;
+            max-width: 500px;
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-box input {
+            width: 80%;
+            padding: 10px;
+            border: none;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .search-box button {
+            width: 20%;
+            background: #222;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .search-box button:hover {
+            background: #444;
+        }
+
+        /* Cart and Sign-in */
+        .cart-signin {
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-signin a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-signin a img {
+            width: 20px;
+            margin-left: 5px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <p>Brand Waali Quality, Bazaar Waali Deal!</p>
+        <nav>
+            <a href="#">Our Blog</a>
+            <a href="#">Help Center</a>
+            <a href="#">Sell On Shopme</a>
+            <a href="#">📱 Download App</a>
+        </nav>
+    </div>
+
+    <!-- Main Navbar -->
+    <div class="nav-bar">
+        <div class="logo">
+            <!-- <img src="https://static.vecteezy.com/system/resources/thumbnails/020/662/327/small_2x/store-icon-logo-illustration-vector.jpg" alt="Shopme Logo"> -->
+            <span>Shopme</span>
+        </div>
+        <div class="search-box">
+            <input type="text" placeholder="Search products & brands">
+            <button>🔍</button>
+        </div>
+        <div class="cart-signin">
+            <a href="#" class="cart">🛒 Cart</a>
+            <a href="#" class="signin">👤 Sign In</a>
+        </div>
+    </div>
+
+</body>
+</html>
