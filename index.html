@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Useme</title>
+    <link rel="icon" type="image/png" href="https://play-lh.googleusercontent.com/yyYdYmchIUBnIjhhTCkNG25BaJ97h4KdG9QIbB9XN8GyqLRDhaxXeKfBRYC_Fs_wGg=w240-h480-rw">
+    <style>
+        .mySlides {display: none}
+        img {vertical-align: middle;}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-image: url('https://i.pinimg.com/736x/6c/bb/36/6cbb36a34afe45944dc1280aed5f9c0c.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            /* changes */
+            height: 100%;
+        }
+
+        .top-bar {
+            background-color: rgb(17, 17, 17);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+
+        .top-bar nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .search-box {
+            display: flex;
+            width: 40%;
+            max-width: 800px;
+            /* background: rgb(146, 25, 25); */
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-box input {
+            width: 80%;
+            padding: 10px;
+            border: none;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .search-box button {
+            width: 20%;
+            background: #222;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .cart-signin {
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-signin a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 50px;
+            padding-top: 100px;
+        }
+        .products {
+            flex: 1 1 calc(25% - 20px);
+            background: rgb(131, 109, 131);
+            padding: 20px;
+            border-radius: 30px;
+            text-align: center;
+            opacity: 0.9;
+        }
+        .product-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .product-list img {
+            width: 100px;
+            height: auto;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        /* Slideshow container */
+.slideshow-container {
+padding-top: 50px;
+  max-width: 800px;
+  position: relative;
+
+  margin: auto;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 400px) {
+  .prev, .next,.text {font-size: 11px}
+}
+
+.footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+        }
+
+        .footer .social-icons a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: white;
+            font-size: 20px;
+        }
+
+        .footer .links {
+            margin: 10px 0;
+        }
+
+        .footer .links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .footer .links a:hover {
+            text-decoration: underline;
+        }
+
+
+
+
+
+    </style>
+</head>
+<body>
+    
+        
+        
+        
+
+     <div class="top-bar">
+        <p>Brand Waali Quality, Bazaar Waali Deal!</p>
+        <nav>
+            <a href="#">Our Blog</a>
+            <a href="#">Help Center</a>
+            <a href="#">Sell On Shopme</a>
+            <a href="#">📱 Download App</a>
+        </nav>
+    </div>
+
+    <div class="nav-bar">
+        <div class="logo">
+            <span>Useme</span>
+        </div>
+        <div class="search-box">
+            <input type="text" placeholder="Search products & brands">
+            <button>🔍</button>
+        </div>
+        <div class="cart-signin">
+            <a href="#" class="cart">🛒 Cart</a>
+            <a href="signin.html" class="signin">👤 Sign In</a>
+        </div>
+    </div>
+    <div class="slideshow-container">
+
+        <div class="mySlides fade">
+          <img src="https://images.travelandleisureasia.com/wp-content/uploads/sites/3/2023/01/20122322/shopping.jpeg?tr=w-1200,q-60" style="width:100%">
+     
+        </div>
+        
+        <div class="mySlides fade">
+          <img src="https://www.londonperfect.com/g/photos/upload/sml_56160603-1502116691-shopping-london.jpg" style="width:100%">
+         
+        </div>
+        
+        <div class="mySlides fade">
+          <img src="https://www.hotelestequendama.com.co/assets/cache/uploads/tequendama-hoteles/destinos/cali/shopping/1920x1080/shopping-compras-cali-tequendama-hoteles-colombia-1708514344.jpeg" style="width:100%">
+          
+        </div>
+        
+        <a class="prev" onclick="plusSlides(-1)">❮</a>
+        <a class="next" onclick="plusSlides(1)">❯</a>
+        
+        </div>
+        <br>
+        
+        <div style="text-align:center">
+          <span class="dot" onclick="currentSlide(1)"></span> 
+          <span class="dot" onclick="currentSlide(2)"></span> 
+          <span class="dot" onclick="currentSlide(3)"></span> 
+        </div>
+        <script src="slideshow.js"></script>
+
+    <div class="container">
+        <section class="products">
+            <h2>Pick up where you left off</h2>
+            <div class="product-list">
+                <img src="product1.jpg" alt="Product">
+                <img src="product2.jpg" alt="Product">
+                <img src="product3.jpg" alt="Product">
+            </div>
+        </section>
+
+        <section class="products">
+            <h2>Keep shopping for</h2>
+            <div class="product-list">
+                <img src="product4.jpg" alt="Product">
+                <img src="product5.jpg" alt="Product">
+                <img src="product6.jpg" alt="Product">
+            </div>
+        </section>
+
+        <section class="products">
+            <h2>Buy again</h2>
+            <div class="product-list">
+                <img src="product7.jpg" alt="Product">
+                <img src="product8.jpg" alt="Product">
+                <img src="product9.jpg" alt="Product">
+            </div>
+        </section>
+
+        <section class="products">
+            <h2>Deals related to items you've saved</h2>
+            <div class="product-list">
+                <img src="product10.jpg" alt="Product">
+                <img src="product11.jpg" alt="Product">
+                <img src="product12.jpg" alt="Product">
+            </div>
+        </section>
+
+        <section class="products">
+            <h2>Recommended for you</h2>
+            <div class="product-list">
+                <img src="product13.jpg" alt="Product">
+                <img src="product14.jpg" alt="Product">
+                <img src="product15.jpg" alt="Product">
+            </div>
+        </section>
+
+        <section class="products">
+            <h2>New arrivals</h2>
+            <div class="product-list">
+                <img src="product16.jpg" alt="Product">
+                <img src="product17.jpg" alt="Product">
+                <img src="product18.jpg" alt="Product">
+            </div>
+        </section>
+    </div>
+    <div class="footer">
+        <div class="social-icons">
+            <a href="#">🔵 Facebook</a>
+            <a href="#">📸 Instagram</a>
+            <a href="#">🐦 Twitter</a>
+            <a href="#">💼 LinkedIn</a>
+        </div>
+        
+        <div class="links">
+            <a href="#">About</a> |
+            <a href="#">Contact</a> |
+            <a href="#">Privacy Policy</a> |
+            <a href="#">Terms of Service</a>
+        </div>
+
+        <p>© 2025 Useme. All rights reserved.</p>
+    </div>
+
+
+
+</body>
+</html>
