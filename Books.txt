@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Bookstore</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        
+        /* Header */
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px 0;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-image: url(books-background.jpg);
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 50px;
+        }
+
+        /* Main Sections */
+        section {
+            background: white;
+            margin: 20px auto;
+            padding: 20px;
+            width: 80%;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .book-category {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        .book-category div {
+            width: 30%;
+            text-align: center;
+        }
+
+        .book-category img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        button {
+            background-color: #ff6600;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #cc5500;
+        }
+
+        /* Contact Form */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        form input, form textarea {
+            width: 80%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Buying New Books</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Books</a></li>
+                <li><a href="#">Sell Books</a></li>
+                <li><a href="#">Audiobooks</a></li>
+                <li><a href="#">Search</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Buying New & Old Books</h2>
+            <p>Find new books, sell old books, or listen to audiobooks online.</p>
+            <button>Explore</button>
+        </section>
+
+        <section class="book-category">
+            <div>
+                <h3>Buy New Books</h3>
+                <img src="new-book.jpg" alt="Buy New Books">
+                <button>Shop Now</button>
+            </div>
+            <div>
+                <h3>Sell Old Books</h3>
+                <img src="sell-book.jpg" alt="Sell Old Books">
+                <button>Start Selling</button>
+            </div>
+            <div>
+                <h3>Audiobooks</h3>
+                <img src="Audiobooks.jpg" alt="Audiobooks">
+                <button>Listen Now</button>
+            </div>
+        </section>
+
+        <section>
+            <h2>User Reviews</h2>
+            <div>
+                <p><strong>John Doe:</strong> "Great selection of books! Fast delivery."</p>
+            </div>
+            <div>
+                <p><strong>Jane Smith:</strong> "I sold my old books here. Easy process!"</p>
+            </div>
+            <div>
+                <p><strong>Emily Johnson:</strong> "Audiobooks collection is amazing. Highly recommended!"</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Contact Us</h2>
+            <form action="#" method="post">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+                
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Online Bookstore | All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+
+</body>
+</html>
