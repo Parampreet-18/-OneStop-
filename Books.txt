@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Bookstore</title>
+    <title>Epic Reads - Online Bookstore</title>
     <style>
-        /* General Styles */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -13,16 +12,17 @@
             background-color: #f4f4f4;
             text-align: center;
         }
-        
+
         /* Header */
         header {
             background-color: #333;
             color: white;
-            padding: 15px 0;
+            padding: 20px 0;
         }
 
         header h1 {
             margin: 0;
+            font-size: 2.2em;
         }
 
         nav ul {
@@ -38,7 +38,13 @@
         nav ul li a {
             color: white;
             text-decoration: none;
-            font-weight: bold;
+            font-size: 1.2em;
+            padding: 8px 15px;
+        }
+
+        nav ul li a:hover {
+            background-color: #555;
+            border-radius: 5px;
         }
 
         /* Hero Section */
@@ -48,50 +54,46 @@
             background-position: center;
             color: white;
             text-align: center;
-            padding: 50px;
+            padding: 80px 20px;
         }
 
-        /* Main Sections */
-        section {
-            background: white;
-            margin: 20px auto;
-            padding: 20px;
-            width: 80%;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h2 {
-            color: #333;
-        }
-
+        /* Book Categories */
         .book-category {
             display: flex;
             justify-content: space-around;
-            align-items: center;
             flex-wrap: wrap;
-            padding: 20px;
+            gap: 20px;
+            padding: 30px;
         }
 
         .book-category div {
+            background: #f8f8f8;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
             width: 30%;
-            text-align: center;
+        }
+
+        .book-category div:hover {
+            transform: translateY(-5px);
         }
 
         .book-category img {
             width: 100%;
             height: auto;
             border-radius: 8px;
+            max-width: 200px;
         }
 
         button {
             background-color: #ff6600;
             color: white;
-            padding: 10px 15px;
+            padding: 12px 18px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 10px;
+            font-size: 1.1em;
         }
 
         button:hover {
@@ -120,12 +122,23 @@
             padding: 15px;
             margin-top: 20px;
         }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .book-category {
+                flex-direction: column;
+                align-items: center;
+            }
+            .book-category div {
+                width: 80%;
+            }
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Buying New Books</h1>
+        <h1>Epic Reads</h1>
         <nav>
             <ul>
                 <li><a href="#">Books</a></li>
@@ -138,26 +151,26 @@
 
     <main>
         <section class="hero">
-            <h2>Buying New & Old Books</h2>
+            <h2>Buy New & Old Books</h2>
             <p>Find new books, sell old books, or listen to audiobooks online.</p>
-            <button>Explore</button>
+            <button id="explore-btn">Explore</button>
         </section>
 
         <section class="book-category">
             <div>
                 <h3>Buy New Books</h3>
                 <img src="new-book.jpg" alt="Buy New Books">
-                <button>Shop Now</button>
+                <button class="cart-btn">Add to Cart</button>
             </div>
             <div>
                 <h3>Sell Old Books</h3>
                 <img src="sell-book.jpg" alt="Sell Old Books">
-                <button>Start Selling</button>
+                <button class="sell-btn">Start Selling</button>
             </div>
             <div>
                 <h3>Audiobooks</h3>
-                <img src="Audiobooks.jpg" alt="Audiobooks">
-                <button>Listen Now</button>
+                <img src="audiobooks.jpg" alt="Audiobooks">
+                <button class="listen-btn">Listen Now</button>
             </div>
         </section>
 
@@ -176,7 +189,7 @@
 
         <section>
             <h2>Contact Us</h2>
-            <form action="#" method="post">
+            <form id="contactForm">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required>
                 
@@ -188,13 +201,15 @@
                 
                 <button type="submit">Send Message</button>
             </form>
+            <p id="formResponse" style="color: green; display: none;">Thank you! Your message has been sent.</p>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2025 Online Bookstore | All rights reserved.</p>
+        <p>&copy; 2025 Epic Reads | All rights reserved.</p>
     </footer>
-    <script src="script.js"></script>
+
+    <script src="script.js"></script> <!-- Linking JavaScript File -->
 
 </body>
 </html>
