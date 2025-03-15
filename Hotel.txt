@@ -3,47 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Hotels & Homestays in India</title>
+    <title>Book Hotels & Homestays - India</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #ff6600;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 24px;
+        }
+        .container {
+            width: 90%;
+            margin: 20px auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .hotel {
+            background-color: white;
+            width: 300px;
+            margin: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+        img {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+        }
+        h2 {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+        p {
+            margin: 5px 0;
+        }
+        .price {
+            font-size: 18px;
+            font-weight: bold;
+            color: green;
+        }
+        .book-now {
+            display: block;
+            background-color: #ff6600;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to India's Best Hotel & Homestay Booking</h1>
-    
-    <h2>Popular Destinations</h2>
-    <ul>
-        <li><strong>Goa</strong> - ₹3,500/night</li>
-        <li><strong>Manali</strong> - ₹2,800/night</li>
-        <li><strong>Jaipur</strong> - ₹2,200/night</li>
-        <li><strong>Kerala</strong> - ₹4,000/night</li>
-    </ul>
-    
-    <h2>Book Your Stay</h2>
-    <form>
-        <label for="location">Select Location:</label>
-        <select id="location" name="location">
-            <option value="goa">Goa</option>
-            <option value="manali">Manali</option>
-            <option value="jaipur">Jaipur</option>
-            <option value="kerala">Kerala</option>
-        </select>
-        <br><br>
-        
-        <label for="checkin">Check-in Date:</label>
-        <input type="date" id="checkin" name="checkin">
-        <br><br>
-        
-        <label for="checkout">Check-out Date:</label>
-        <input type="date" id="checkout" name="checkout">
-        <br><br>
-        
-        <label for="guests">Number of Guests:</label>
-        <input type="number" id="guests" name="guests" min="1" max="10">
-        <br><br>
-        
-        <input type="submit" value="Book Now">
-    </form>
-    
-    <h2>Contact Us</h2>
-    <p>Email: support@hotelsindia.com</p>
-    <p>Phone: +91 98765 43210</p>
+
+<header>Book Hotels & Homestays in India</header>
+
+<div class="container">
+    <div class="hotel">
+        <img src="Hotel Image.jpg" alt="Hotel Image">
+        <h2>Taj Hotel, Mumbai</h2>
+        <p>5-star luxury hotel near Gateway of India</p>
+        <p class="price">₹10,500 per night</p>
+        <a href="#" class="book-now">Book Now</a>
+    </div>
+
+    <div class="hotel">
+        <img src="Coorg Homestay.jpg" alt="Homestay Image">
+        <h2>Coorg Homestay</h2>
+        <p>Beautiful homestay in the middle of coffee plantations</p>
+        <p class="price">₹3,200 per night</p>
+        <a href="#" class="book-now">Book Now</a>
+    </div>
+
+    <div class="hotel">
+        <img src="Goa Beach Resort.jpg" alt="Resort Image">
+        <h2>Goa Beach Resort</h2>
+        <p>Enjoy a relaxing beachside stay in Goa</p>
+        <p class="price">₹7,500 per night</p>
+        <a href="#" class="book-now">Book Now</a>
+    </div>
+</div>
+
 </body>
 </html>
