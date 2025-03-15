@@ -1,0 +1,43 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const loginButton = document.querySelector(".login-btn");
+    
+    loginButton.addEventListener("click", function () {
+        const loginForm = document.createElement("div");
+        loginForm.innerHTML = `
+            <div class="login-popup">
+                <h2>Login</h2>
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button id="submit-login">Login</button>
+                <button id="close-login">Close</button>
+            </div>
+        `;
+        
+        loginForm.style.position = "fixed";
+        loginForm.style.top = "50%";
+        loginForm.style.left = "50%";
+        loginForm.style.transform = "translate(-50%, -50%)";
+        loginForm.style.background = "white";
+        loginForm.style.padding = "20px";
+        loginForm.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.3)";
+        loginForm.style.borderRadius = "10px";
+        
+        document.body.appendChild(loginForm);
+        
+        document.getElementById("close-login").addEventListener("click", function () {
+            loginForm.remove();
+        });
+        
+        document.getElementById("submit-login").addEventListener("click", function () {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            
+            if (username && password) {
+                alert("Login successful!");
+                loginForm.remove();
+            } else {
+                alert("Please enter both username and password.");
+            }
+        });
+    });
+});
