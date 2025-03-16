@@ -3,102 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Hotels & Homestays - India</title>
+    <title>StayIndia - Book Hotels & Homestays</title>
     <style>
-        /* CSS Inside HTML */
+        /* Global Styles */
         body {
             font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: black;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-        }
-
-        header {
-            background-color: #ff6600;
-            color: white;
             text-align: center;
-            padding: 15px;
         }
 
-        h1 {
-            margin: 0;
+        /* Header */
+        .header {
+            background-color: #003580;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            position: relative;
         }
 
-        #searchBox {
-            width: 80%;
+        /* Login Button */
+        .login {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            background-color: #ffcc00;
+            color: black;
             padding: 10px;
-            margin-top: 10px;
             border: none;
             border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
         }
 
-        .container {
-            width: 90%;
+        .login:hover {
+            background-color: #e6b800;
+        }
+
+        /* Search Section */
+        .search-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
             margin: 20px auto;
+            width: 80%;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-container label {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .search-container input,
+        .search-container select,
+        .search-container button {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            display: block;
+        }
+
+        .search-container button {
+            background-color: #ff6600;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .search-container button:hover {
+            background-color: #e65c00;
+        }
+
+        /* Guest Section */
+        .guest-section {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        /* Hotel Listings */
+        .hotels-container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-around;
+            justify-content: center;
+            margin-top: 20px;
         }
 
         .hotel {
             background-color: white;
+            color: black;
             width: 300px;
             margin: 15px;
             padding: 15px;
             border-radius: 10px;
-            box-shadow: 0px 0px 10px gray;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
             text-align: center;
         }
 
-        img {
+        .hotel img {
             width: 100%;
-            height: 200px;
+            height: 180px;
             border-radius: 10px;
         }
 
-        h2 {
-            font-size: 20px;
+        .hotel .price {
+            font-weight: bold;
+            color: #008000;
             margin: 10px 0;
         }
 
-        p {
-            margin: 5px 0;
-        }
-
-        .price {
-            font-size: 18px;
-            font-weight: bold;
-            color: green;
-        }
-
-        .book-now {
-            display: block;
+        .hotel button {
             background-color: #ff6600;
             color: white;
-            text-align: center;
             padding: 10px;
-            text-decoration: none;
+            border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 10px;
+            font-size: 16px;
         }
 
-        .book-now:hover {
-            background-color: #cc5500;
+        .hotel button:hover {
+            background-color: #e65c00;
         }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Book Hotels & Homestays in India</h1>
-    <input type="text" id="searchBox" placeholder="Search hotels..." onkeyup="searchHotels()">
-</header>
+    <div class="header">
+        StayIndia - Find Your Perfect Stay
+        <button class="login">Login</button>
+    </div>
 
-<div class="container" id="hotelsContainer">
-    <!-- Hotels will be added dynamically using JS -->
-</div>
+    <div class="search-container">
+        <input type="text" id="searchBox" placeholder="Enter city or hotel name">
 
-<script src="Hotel.js"></script>
+        <div>
+            <label for="checkin">Check-in Date:</label>
+            <input type="date" id="checkin">
+        </div>
+        
+        <div>
+            <label for="checkout">Check-out Date:</label>
+            <input type="date" id="checkout">
+        </div>
+
+        <div class="guest-section">
+            <div>
+                <label for="adults">Adults:</label>
+                <select id="adults">
+                    <option value="1">1 Adult</option>
+                    <option value="2">2 Adults</option>
+                    <option value="3">3 Adults</option>
+                    <option value="4">4 Adults</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="children">Children:</label>
+                <select id="children">
+                    <option value="0">0 Children</option>
+                    <option value="1">1 Child</option>
+                    <option value="2">2 Children</option>
+                    <option value="3">3 Children</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="rooms">Rooms:</label>
+                <select id="rooms">
+                    <option value="1">1 Room</option>
+                    <option value="2">2 Rooms</option>
+                    <option value="3">3 Rooms</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="pets">Pets:</label>
+                <select id="pets">
+                    <option value="0">No Pets</option>
+                    <option value="1">1 Pet</option>
+                    <option value="2">2 Pets</option>
+                </select>
+            </div>
+        </div>
+
+        <button onclick="searchHotels()">Search</button>
+    </div>
+
+    <h2>Top Trending Hotels</h2>
+    <div class="hotels-container" id="hotelsContainer">
+        <div class="hotel">
+            <img src="hotel1.jpg" alt="Luxury Hotel">
+            <h3>Luxury Grand Hotel</h3>
+            <p class="price">$120 / night</p>
+            <button>Book Now</button>
+        </div>
+
+        <div class="hotel">
+            <img src="hotel2.jpg" alt="Resort">
+            <h3>Beachside Resort</h3>
+            <p class="price">$150 / night</p>
+            <button>Book Now</button>
+        </div>
+
+        <div class="hotel">
+            <img src="hotel3.jpg" alt="Budget Stay">
+            <h3>Budget Inn</h3>
+            <p class="price">$80 / night</p>
+            <button>Book Now</button>
+        </div>
+    </div>
+
+    <script src="Hotel.js"></script>
+
 </body>
 </html>
