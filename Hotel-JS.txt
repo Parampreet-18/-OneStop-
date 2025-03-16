@@ -1,0 +1,110 @@
+// List of hotels (Dynamic Data)
+const hotels = [
+    {
+        name: "Taj Hotel, Mumbai",
+        description: "5-star luxury hotel near Gateway of India",
+        price: "₹10,500 per night",
+        image: "Taj-Hotel.jpg"
+    },
+    {
+        name: "Coorg Homestay",
+        description: "Beautiful homestay in the middle of coffee plantations",
+        price: "₹3,200 per night",
+        image: "Coorg-Homestay.jpg"
+    },
+    {
+        name: "Goa Beach Resort",
+        description: "Enjoy a relaxing beachside stay in Goa",
+        price: "₹7,500 per night",
+        image: "Goa-Beach-Resort.jpg"
+    },
+    {
+        name: "Jaipur Royal Palace",
+        description: "Experience a luxurious royal stay in Jaipur",
+        price: "₹8,000 per night",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkq_VHxX7wBw0uXhlX6Q5-ueKgRxS2xJlb8Q&s"
+    },
+    {
+        name: "Manali Mountain Resort",
+        description: "A peaceful resort in the snowy mountains of Manali",
+        price: "₹5,500 per night",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEhGNir1Ww-yHsxjOImzMPDdgCdZwqEBeAeQ&s"
+    },
+    {
+        name: "Kerala Backwater Villa",
+        description: "Stay in a beautiful villa near the serene backwaters of Kerala",
+        price: "₹6,800 per night",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS03WsdHvCw5J8I7m4fLyP_dcNe8ojLaWXaGQ&s"
+    },
+    {
+        name: "Rajasthan Desert Camp",
+        description: "Luxury tent stay in the heart of the Thar Desert",
+        price: "₹4,500 per night",
+        image: "https://static.toiimg.com/photo/msid-115695045,width-96,height-65.cms"
+    },
+    {
+        name: "Ooty Hilltop Cottage",
+        description: "Cozy cottage stay with breathtaking views in Ooty",
+        price: "₹3,900 per night",
+        image: "https://res.cloudinary.com/voyehomes/image/upload/w_1280,f_auto,c_scale/v1721993939/property/107/image/d5830ff7-42f7-4c92-a447-1073b7877d92.jpg"
+    },
+    {
+        name: "Shimla Heritage Hotel",
+        description: "A heritage hotel with a colonial charm in Shimla",
+        price: "₹6,200 per night",
+        image: "https://media-cdn.tripadvisor.com/media/photo-s/0e/66/1f/75/hotel-facade.jpg"
+    }
+];
+
+// Function to display hotels dynamically
+function displayHotels() {
+    const container = document.getElementById("hotelsContainer");
+    container.innerHTML = ""; // Clear previous hotels
+
+    hotels.forEach((hotel) => {
+        let hotelDiv = document.createElement("div");
+        hotelDiv.classList.add("hotel");
+        hotelDiv.innerHTML = `
+            <img src="${hotel.image}" alt="${hotel.name}">
+            <h2>${hotel.name}</h2>
+            <p>${hotel.description}</p>
+            <p class="price">${hotel.price}</p>
+            <button class="book-now" onclick="bookNow('${hotel.name}')">Book Now</button>
+        `;
+        container.appendChild(hotelDiv);
+    });
+}
+
+// Function to handle booking
+function bookNow(hotelName) {
+    alert(`Your booking for ${hotelName} is confirmed! 🎉`);
+}
+
+// Function for searching hotels
+function searchHotels() {
+    let searchValue = document.getElementById("searchBox").value.toLowerCase();
+    let filteredHotels = hotels.filter(hotel => hotel.name.toLowerCase().includes(searchValue));
+    
+    const container = document.getElementById("hotelsContainer");
+    container.innerHTML = ""; // Clear previous hotels
+
+    if (filteredHotels.length === 0) {
+        container.innerHTML = "<p style='text-align:center; font-size:18px;'>No results found 😔</p>";
+    } else {
+        filteredHotels.forEach((hotel) => {
+            let hotelDiv = document.createElement("div");
+            hotelDiv.classList.add("hotel");
+            hotelDiv.innerHTML = `
+                <img src="${hotel.image}" alt="${hotel.name}">
+                <h2>${hotel.name}</h2>
+                <p>${hotel.description}</p>
+                <p class="price">${hotel.price}</p>
+                <button class="book-now" onclick="bookNow('${hotel.name}')">Book Now</button>
+            `;
+            container.appendChild(hotelDiv);
+        });
+    }
+}
+
+// Call function to display hotels on page load
+window.onload = displayHotels;
