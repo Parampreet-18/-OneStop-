@@ -1,43 +1,222 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const loginButton = document.querySelector(".login-btn");
-    
-    loginButton.addEventListener("click", function () {
-        const loginForm = document.createElement("div");
-        loginForm.innerHTML = `
-            <div class="login-popup">
-                <h2>Login</h2>
-                <input type="text" id="username" placeholder="Username" required>
-                <input type="password" id="password" placeholder="Password" required>
-                <button id="submit-login">Login</button>
-                <button id="close-login">Close</button>
-            </div>
+document.addEventListener('DOMContentLoaded', () => {
+    // Global variables
+    let viewMode = 'all'; // 'all' or 'favorites'
+  
+    // Array of book objects with additional properties
+    const books = [
+      {
+        title: 'The Great Gatsby',
+        author: 'F. Scott Fitzgerald',
+        cover: 'https://cdn.kobo.com/book-images/5addc4c9-fbc1-42d7-a79f-cec7619d4b23/1200/1200/False/the-great-gatsby-a-novel-1.jpg',
+        description: 'A novel set in the Roaring Twenties that explores themes of wealth, society, and the American Dream.',
+        rating: 4,
+        favorite: false
+      },
+      {
+        title: '1984',
+        author: 'George Orwell',
+        cover: 'https://cdn.ibpbooks.com/images/sdf/1985.jpg',
+        description: 'A dystopian novel that delves into the dangers of totalitarianism and extreme political ideology.',
+        rating: 5,
+        favorite: false
+      },
+      {
+        title: 'To Kill a Mockingbird',
+        author: 'Harper Lee',
+        cover: 'https://cdn.penguin.co.uk/dam-assets/books/9780434020485/9780434020485-jacket-large.jpg',
+        description: 'A story of racial injustice and childhood innocence in the Deep South, seen through the eyes of a young girl.',
+        rating: 5,
+        favorite: false
+      },
+      {
+        title: 'Pride and Prejudice',
+        author: 'Jane Austen',
+        cover: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU5AfrvhPMMEL7WHYy-I3HS9VOWRhhiT4McQ&s',
+        description: 'A classic novel exploring manners, morality, and marriage in early 19th century England.',
+        rating: 4,
+        favorite: false
+      },
+      {
+        title: 'The Hobbit',
+        author: 'J.R.R. Tolkien',
+        cover: 'https://kitabay.com/cdn/shop/files/1_40b85980-54b8-4c8a-925d-9f00c399553f.jpg?v=1706779709',
+        description: 'An epic fantasy adventure that follows the journey of Bilbo Baggins.',
+        rating: 5,
+        favorite: false
+      },
+      {
+        title: "Harry Potter and the Sorcerer's Stone",
+        author: 'J.K. Rowling',
+        cover: 'https://rukminim3.flixcart.com/image/850/1000/xif0q/book/6/t/7/harry-potter-and-the-sorcerer-s-stone-book-1-original-imah9b3wjbvvq2wf.jpeg?q=20&crop=false',
+        description: 'The first book in the Harry Potter series, introducing the world of magic and Hogwarts.',
+        rating: 5,
+        favorite: false
+      },
+      {
+        title: 'The Catcher in the Rye',
+        author: 'J.D. Salinger',
+        cover: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDC0a2YK5ZjXo-wSLSlOi_CyfCASqa-W4eCA&s',
+        description: 'A story about teenage alienation and rebellion as seen through the eyes of Holden Caulfield.',
+        rating: 4,
+        favorite: false
+      },
+      {
+        title: 'Moby Dick',
+        author: 'Herman Melville',
+        cover: 'https://rukminim2.flixcart.com/image/850/1000/kgl5ua80/book/2/6/1/moby-dick-or-the-whale-original-imafwsh4gt7ffufp.jpeg?q=90&crop=false',
+        description: 'The narrative of Captain Ahab’s obsessive quest to kill the white whale, Moby Dick.',
+        rating: 3,
+        favorite: false
+      },
+      {
+        title: 'The Lord of the Rings',
+        author: 'J.R.R. Tolkien',
+        cover: 'https://images.fathomevents.com/image/upload/w_400,dpr_2,f_auto,q_auto/v1709924664/Events/2024/1928/The_Lord_of_the_Rings_The_Fellowship_of_the_Ring_1000x1480_FE_Website.jpg.jpg',
+        description: 'An epic high-fantasy trilogy that follows the quest to destroy the One Ring.',
+        rating: 5,
+        favorite: false
+      },
+      {
+        title: 'Brave New World',
+        author: 'Aldous Huxley',
+        cover: 'https://rukminim2.flixcart.com/image/850/1000/xif0q/book/4/g/b/brave-new-world-english-original-imagqmrstkhzgqst.jpeg?q=20&crop=false',
+        description: 'A futuristic novel that explores a dystopian society driven by technological and genetic manipulation.',
+        rating: 4,
+        favorite: false
+      }
+    ];
+  
+    const booksContainer = document.getElementById('books-container');
+    const searchBar = document.getElementById('searchBar');
+    const sortDropdown = document.getElementById('sortDropdown');
+    const allBooksBtn = document.getElementById('allBooksBtn');
+    const favoritesBtn = document.getElementById('favoritesBtn');
+    const modal = document.getElementById('bookModal');
+    const modalCover = document.getElementById('modalCover');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalAuthor = document.getElementById('modalAuthor');
+    const modalDescription = document.getElementById('modalDescription');
+    const modalRating = document.getElementById('modalRating');
+    const closeButton = document.querySelector('.close-button');
+    const darkModeToggle = document.getElementById('darkModeToggle');
+  
+    // Function to filter and sort books based on search, view mode, and sorting criteria
+    function filterAndSortBooks() {
+      let filteredBooks = books.filter(book => {
+        const query = searchBar.value.toLowerCase();
+        const matchesSearch = book.title.toLowerCase().includes(query) || book.author.toLowerCase().includes(query);
+        const matchesView = viewMode === 'all' ? true : book.favorite;
+        return matchesSearch && matchesView;
+      });
+  
+      const sortValue = sortDropdown.value;
+      if (sortValue !== "none") {
+        filteredBooks.sort((a, b) => {
+          if (sortValue === "title-asc") {
+            return a.title.localeCompare(b.title);
+          } else if (sortValue === "title-desc") {
+            return b.title.localeCompare(a.title);
+          } else if (sortValue === "author-asc") {
+            return a.author.localeCompare(b.author);
+          } else if (sortValue === "author-desc") {
+            return b.author.localeCompare(a.author);
+          } else if (sortValue === "rating-asc") {
+            return a.rating - b.rating;
+          } else if (sortValue === "rating-desc") {
+            return b.rating - a.rating;
+          }
+        });
+      }
+      return filteredBooks;
+    }
+  
+    // Function to display books
+    function displayBooks() {
+      booksContainer.innerHTML = '';
+      const filteredBooks = filterAndSortBooks();
+      filteredBooks.forEach((book) => {
+        const bookDiv = document.createElement('div');
+        bookDiv.className = 'book';
+        bookDiv.innerHTML = `
+          <img src="${book.cover}" alt="${book.title}">
+          <h3>${book.title}</h3>
+          <p>by ${book.author}</p>
+          <p>Rating: ${book.rating} / 5</p>
+          <span class="favorite-icon ${book.favorite ? 'favorited' : ''}">♥</span>
         `;
-        
-        loginForm.style.position = "fixed";
-        loginForm.style.top = "50%";
-        loginForm.style.left = "50%";
-        loginForm.style.transform = "translate(-50%, -50%)";
-        loginForm.style.background = "white";
-        loginForm.style.padding = "20px";
-        loginForm.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.3)";
-        loginForm.style.borderRadius = "10px";
-        
-        document.body.appendChild(loginForm);
-        
-        document.getElementById("close-login").addEventListener("click", function () {
-            loginForm.remove();
+  
+        // Open modal with book details (unless clicking on favorite icon)
+        bookDiv.addEventListener('click', (e) => {
+          if (e.target.classList.contains('favorite-icon')) return;
+          modalCover.src = book.cover;
+          modalTitle.textContent = book.title;
+          modalAuthor.textContent = `by ${book.author}`;
+          modalDescription.textContent = book.description;
+          modalRating.textContent = `Rating: ${book.rating} / 5`;
+          modal.style.display = 'block';
         });
-        
-        document.getElementById("submit-login").addEventListener("click", function () {
-            const username = document.getElementById("username").value;
-            const password = document.getElementById("password").value;
-            
-            if (username && password) {
-                alert("Login successful!");
-                loginForm.remove();
-            } else {
-                alert("Please enter both username and password.");
-            }
+  
+        // Favorite icon toggle
+        const favIcon = bookDiv.querySelector('.favorite-icon');
+        favIcon.addEventListener('click', (e) => {
+          e.stopPropagation();
+          book.favorite = !book.favorite;
+          favIcon.classList.toggle('favorited', book.favorite);
+          // If in favorites view and book is unfavorited, update display
+          if (viewMode === 'favorites' && !book.favorite) {
+            displayBooks();
+          }
         });
+  
+        booksContainer.appendChild(bookDiv);
+      });
+    }
+  
+    // Initial display of books
+    displayBooks();
+  
+    // Event listeners for search, sort, and view toggle
+    searchBar.addEventListener('input', displayBooks);
+    sortDropdown.addEventListener('change', displayBooks);
+    
+    allBooksBtn.addEventListener('click', () => {
+      viewMode = 'all';
+      allBooksBtn.classList.add('active');
+      favoritesBtn.classList.remove('active');
+      displayBooks();
     });
-});
+  
+    favoritesBtn.addEventListener('click', () => {
+      viewMode = 'favorites';
+      favoritesBtn.classList.add('active');
+      allBooksBtn.classList.remove('active');
+      displayBooks();
+    });
+  
+    // Dark mode toggle functionality
+    darkModeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      darkModeToggle.textContent = document.body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
+    });
+  
+    // Close modal when clicking the close button
+    closeButton.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+  
+    // Close modal when clicking outside of modal content
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+  
+    // Contact form submission handling
+    const contactForm = document.getElementById('contactForm');
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you for contacting Epic Reads!');
+      contactForm.reset();
+    });
+  });
+  
