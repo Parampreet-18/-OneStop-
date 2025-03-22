@@ -1,3 +1,11 @@
+document.addEventListener("DOMContentLoaded", function () {
+    displayTrendingHotels();
+    
+    // Setup dark mode toggle
+    const darkModeToggle = document.getElementById("darkModeToggle");
+    darkModeToggle.addEventListener("click", toggleDarkMode);
+});
+
 // List of hotels (Dynamic Data)
 const hotels = [
     {
@@ -53,58 +61,97 @@ const hotels = [
         description: "A heritage hotel with a colonial charm in Shimla",
         price: "₹6,200 per night",
         image: "https://media-cdn.tripadvisor.com/media/photo-s/0e/66/1f/75/hotel-facade.jpg"
+    },
+    {
+        name: "Darjeeling Tea Estate Retreat",
+        city: "darjeeling",
+        description: "A peaceful retreat in the middle of Darjeeling's tea gardens",
+        price: "₹5,000 per night",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-aeIJL8pJLAQgz_xjPTX92Wg6ffDwf2xvAA&s"
+    },
+    {
+        name: "Rishikesh Riverside Resort",
+        city: "rishikesh",
+        description: "Relax by the Ganges in this beautiful riverside resort",
+        price: "₹5,200 per night",
+        image: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/514051210.jpg?k=6dd34390e2b2de9688101408f7800eb9fc2b69ddef9a93e2087cb6b510f52379&o=&hp=1"
+    },
+    {
+        name: "Bangalore Business Hotel",
+        city: "bangalore",
+        description: "Perfect stay for business and leisure in the tech city",
+        price: "₹6,500 per night",
+        image: "https://images.trvl-media.com/lodging/5000000/4320000/4319200/4319124/32340772.jpg?impolicy=fcrop&w=357&h=201&p=1&q=medium"
     }
 ];
 
-// Function to display hotels dynamically
-function displayHotels() {
-    const container = document.getElementById("hotelsContainer");
-    container.innerHTML = ""; // Clear previous hotels
 
-    hotels.forEach((hotel) => {
-        let hotelDiv = document.createElement("div");
-        hotelDiv.classList.add("hotel");
-        hotelDiv.innerHTML = `
-            <img src="${hotel.image}" alt="${hotel.name}">
-            <h2>${hotel.name}</h2>
-            <p>${hotel.description}</p>
-            <p class="price">${hotel.price}</p>
-            <button class="book-now" onclick="bookNow('${hotel.name}')">Book Now</button>
+
+function searchHotels() {
+    let searchQuery = document.getElementById("searchBox").value.toLowerCase();
+    let checkinDate = document.getElementById("checkin").value;
+    let checkoutDate = document.getElementById("checkout").value;
+    
+    // Guest details
+    let adults = document.getElementById("adults").value;
+    let children = document.getElementById("children").value;
+    let rooms = document.getElementById("rooms").value;
+    let pets = document.getElementById("pets").value;
+    
+    // Sorting option
+    let sortBy = document.getElementById("sortBy").value;
+
+    if (!searchQuery || !checkinDate || !checkoutDate) {
+        alert("Please enter all required fields!");
+        return;
+    }
+
+    // Filter hotels based on city match
+    let filteredHotels = hotels.filter(hotel => hotel.city.toLowerCase().includes(searchQuery));
+
+    if (filteredHotels.length === 0) {
+        alert("No hotels found in this location!");
+        return;
+    }
+    
+    // Sort hotels if option selected
+    if (sortBy === "lowToHigh") {
+        filteredHotels.sort((a, b) => a.price - b.price);
+    } else if (sortBy === "highToLow") {
+        filteredHotels.sort((a, b) => b.price - a.price);
+    }
+    
+    displayHotels(filteredHotels);
+}
+
+function displayHotels(hotelList) {
+    let hotelsContainer = document.getElementById("hotelsContainer");
+    hotelsContainer.innerHTML = ""; // Clear previous content
+    
+    hotelList.forEach(hotel => {
+        let hotelCard = `
+            <div class="hotel">
+                <img src="${hotel.image}" alt="${hotel.name}">
+                <h3>${hotel.name}</h3>
+                <p class="price">$${hotel.price} / night</p>
+                <button>Book Now</button>
+            </div>
         `;
-        container.appendChild(hotelDiv);
+        hotelsContainer.innerHTML += hotelCard;
     });
 }
 
-// Function to handle booking
-function bookNow(hotelName) {
-    alert(`Your booking for ${hotelName} is confirmed! 🎉`);
+function displayTrendingHotels() {
+    displayHotels(hotels);
 }
 
-// Function for searching hotels
-function searchHotels() {
-    let searchValue = document.getElementById("searchBox").value.toLowerCase();
-    let filteredHotels = hotels.filter(hotel => hotel.name.toLowerCase().includes(searchValue));
+function toggleDarkMode() {
+    document.body.classList.toggle("dark");
     
-    const container = document.getElementById("hotelsContainer");
-    container.innerHTML = ""; // Clear previous hotels
-
-    if (filteredHotels.length === 0) {
-        container.innerHTML = "<p style='text-align:center; font-size:18px;'>No results found 😔</p>";
+    const darkModeToggle = document.getElementById("darkModeToggle");
+    if(document.body.classList.contains("dark")) {
+        darkModeToggle.textContent = "Light Mode";
     } else {
-        filteredHotels.forEach((hotel) => {
-            let hotelDiv = document.createElement("div");
-            hotelDiv.classList.add("hotel");
-            hotelDiv.innerHTML = `
-                <img src="${hotel.image}" alt="${hotel.name}">
-                <h2>${hotel.name}</h2>
-                <p>${hotel.description}</p>
-                <p class="price">${hotel.price}</p>
-                <button class="book-now" onclick="bookNow('${hotel.name}')">Book Now</button>
-            `;
-            container.appendChild(hotelDiv);
-        });
+        darkModeToggle.textContent = "Dark Mode";
     }
 }
-
-// Call function to display hotels on page load
-window.onload = displayHotels;

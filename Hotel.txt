@@ -1,230 +1,260 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StayIndia - Book Hotels & Homestays</title>
-    <style>
-        /* Global Styles */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            color: black;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
-
-        /* Header */
-        .header {
-            background-color: #003580;
-            color: white;
-            padding: 20px;
-            font-size: 24px;
-            font-weight: bold;
-            position: relative;
-        }
-
-        /* Login Button */
-        .login {
-            position: absolute;
-            right: 20px;
-            top: 15px;
-            background-color: #ffcc00;
-            color: black;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .login:hover {
-            background-color: #e6b800;
-        }
-
-        /* Search Section */
-        .search-container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            margin: 20px auto;
-            width: 80%;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .search-container label {
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        .search-container input,
-        .search-container select,
-        .search-container button {
-            margin: 10px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-            display: block;
-        }
-
-        .search-container button {
-            background-color: #ff6600;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .search-container button:hover {
-            background-color: #e65c00;
-        }
-
-        /* Guest Section */
-        .guest-section {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        /* Hotel Listings */
-        .hotels-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .hotel {
-            background-color: white;
-            color: black;
-            width: 300px;
-            margin: 15px;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-            text-align: center;
-        }
-
-        .hotel img {
-            width: 100%;
-            height: 180px;
-            border-radius: 10px;
-        }
-
-        .hotel .price {
-            font-weight: bold;
-            color: #008000;
-            margin: 10px 0;
-        }
-
-        .hotel button {
-            background-color: #ff6600;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .hotel button:hover {
-            background-color: #e65c00;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StayIndia - Book Hotels & Homestays</title>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    
+    /* Dark mode styles */
+    body.dark {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+    
+    /* Header */
+    .header {
+      background-color: #003580;
+      color: white;
+      padding: 20px;
+      font-size: 24px;
+      font-weight: bold;
+      position: relative;
+    }
+    
+    /* Login Button */
+    .login {
+      position: absolute;
+      right: 20px;
+      top: 15px;
+      background-color: #ffcc00;
+      color: black;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    
+    .login:hover {
+      background-color: #e6b800;
+    }
+    
+    /* Dark Mode Toggle Button */
+    .dark-mode-toggle {
+      position: absolute;
+      right: 100px;
+      top: 15px;
+      background-color: #ccc;
+      color: #333;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    
+    .dark-mode-toggle:hover {
+      background-color: #bbb;
+    }
+    
+    /* Search Section */
+    .search-container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 20px auto;
+      width: 80%;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    .search-container label {
+      font-size: 14px;
+      font-weight: bold;
+      margin-right: 5px;
+    }
+    
+    .search-container input,
+    .search-container select,
+    .search-container button {
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    
+    .search-container button {
+      background-color: #ff6600;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    
+    .search-container button:hover {
+      background-color: #e65c00;
+    }
+    
+    /* Guest Section */
+    .guest-section {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    /* Sort Section */
+    .sort-section {
+      margin: 10px;
+    }
+    
+    /* Hotel Listings */
+    .hotels-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    
+    .hotel {
+      background-color: white;
+      color: #333;
+      width: 300px;
+      margin: 15px;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    
+    body.dark .hotel {
+      background-color: #1e1e1e;
+      color: #e0e0e0;
+    }
+    
+    .hotel img {
+      width: 100%;
+      height: 180px;
+      border-radius: 10px;
+    }
+    
+    .hotel .price {
+      font-weight: bold;
+      color: #008000;
+      margin: 10px 0;
+    }
+    
+    .hotel button {
+      background-color: #ff6600;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    
+    .hotel button:hover {
+      background-color: #e65c00;
+    }
+    
+    /* Trending Hotels Header */
+    h2 {
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
 
-    <div class="header">
-        StayIndia - Find Your Perfect Stay
-        <button class="login">Login</button>
+  <div class="header">
+    StayIndia - Find Your Perfect Stay
+    <button class="login">Login</button>
+    <button class="dark-mode-toggle" id="darkModeToggle">Dark Mode</button>
+  </div>
+
+  <div class="search-container">
+    <input type="text" id="searchBox" placeholder="Enter city or hotel name">
+    
+    <div>
+      <label for="checkin">Check-in Date:</label>
+      <input type="date" id="checkin">
+    </div>
+    
+    <div>
+      <label for="checkout">Check-out Date:</label>
+      <input type="date" id="checkout">
     </div>
 
-    <div class="search-container">
-        <input type="text" id="searchBox" placeholder="Enter city or hotel name">
-
-        <div>
-            <label for="checkin">Check-in Date:</label>
-            <input type="date" id="checkin">
-        </div>
-        
-        <div>
-            <label for="checkout">Check-out Date:</label>
-            <input type="date" id="checkout">
-        </div>
-
-        <div class="guest-section">
-            <div>
-                <label for="adults">Adults:</label>
-                <select id="adults">
-                    <option value="1">1 Adult</option>
-                    <option value="2">2 Adults</option>
-                    <option value="3">3 Adults</option>
-                    <option value="4">4 Adults</option>
-                </select>
-            </div>
-
-            <div>
-                <label for="children">Children:</label>
-                <select id="children">
-                    <option value="0">0 Children</option>
-                    <option value="1">1 Child</option>
-                    <option value="2">2 Children</option>
-                    <option value="3">3 Children</option>
-                </select>
-            </div>
-
-            <div>
-                <label for="rooms">Rooms:</label>
-                <select id="rooms">
-                    <option value="1">1 Room</option>
-                    <option value="2">2 Rooms</option>
-                    <option value="3">3 Rooms</option>
-                </select>
-            </div>
-
-            <div>
-                <label for="pets">Pets:</label>
-                <select id="pets">
-                    <option value="0">No Pets</option>
-                    <option value="1">1 Pet</option>
-                    <option value="2">2 Pets</option>
-                </select>
-            </div>
-        </div>
-
-        <button onclick="searchHotels()">Search</button>
+    <div class="guest-section">
+      <div>
+        <label for="adults">Adults:</label>
+        <select id="adults">
+          <option value="1">1 Adult</option>
+          <option value="2">2 Adults</option>
+          <option value="3">3 Adults</option>
+          <option value="4">4 Adults</option>
+        </select>
+      </div>
+      
+      <div>
+        <label for="children">Children:</label>
+        <select id="children">
+          <option value="0">0 Children</option>
+          <option value="1">1 Child</option>
+          <option value="2">2 Children</option>
+          <option value="3">3 Children</option>
+        </select>
+      </div>
+      
+      <div>
+        <label for="rooms">Rooms:</label>
+        <select id="rooms">
+          <option value="1">1 Room</option>
+          <option value="2">2 Rooms</option>
+          <option value="3">3 Rooms</option>
+        </select>
+      </div>
+      
+      <div>
+        <label for="pets">Pets:</label>
+        <select id="pets">
+          <option value="0">No Pets</option>
+          <option value="1">1 Pet</option>
+          <option value="2">2 Pets</option>
+        </select>
+      </div>
     </div>
-
-    <h2>Top Trending Hotels</h2>
-    <div class="hotels-container" id="hotelsContainer">
-        <div class="hotel">
-            <img src="hotel1.jpg" alt="Luxury Hotel">
-            <h3>Luxury Grand Hotel</h3>
-            <p class="price">$120 / night</p>
-            <button>Book Now</button>
-        </div>
-
-        <div class="hotel">
-            <img src="hotel2.jpg" alt="Resort">
-            <h3>Beachside Resort</h3>
-            <p class="price">$150 / night</p>
-            <button>Book Now</button>
-        </div>
-
-        <div class="hotel">
-            <img src="hotel3.jpg" alt="Budget Stay">
-            <h3>Budget Inn</h3>
-            <p class="price">$80 / night</p>
-            <button>Book Now</button>
-        </div>
+    
+    <div class="sort-section">
+      <label for="sortBy">Sort by Price:</label>
+      <select id="sortBy">
+        <option value="default">Default</option>
+        <option value="lowToHigh">Low to High</option>
+        <option value="highToLow">High to Low</option>
+      </select>
     </div>
+    
+    <button onclick="searchHotels()">Search</button>
+  </div>
 
-    <script src="Hotel.js"></script>
+  <h2>Top Trending Hotels</h2>
+  <div class="hotels-container" id="hotelsContainer"></div>
 
+  <script src="Hotel.js"></script>
 </body>
 </html>
