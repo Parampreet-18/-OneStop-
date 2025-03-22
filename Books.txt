@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Epic Reads</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
@@ -17,18 +17,19 @@
     <nav>
       <ul>
         <li><a href="#featured">Featured Books</a></li>
+        <li><a href="#submitBook">Submit Book</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
   </header>
-  
+
   <main>
     <!-- Featured Books Section -->
     <section id="featured">
       <h2>Featured Books</h2>
       <div class="controls">
-        <input type="text" id="searchBar" placeholder="Search books...">
+        <input type="text" id="searchBar" placeholder="Search books..." />
         <select id="sortDropdown">
           <option value="none">Sort By</option>
           <option value="title-asc">Title: A-Z</option>
@@ -38,31 +39,73 @@
           <option value="rating-desc">Rating: High to Low</option>
           <option value="rating-asc">Rating: Low to High</option>
         </select>
+        <select id="categoryFilter">
+          <option value="all">All Categories</option>
+          <option value="Classic">Classic</option>
+          <option value="Dystopian">Dystopian</option>
+          <option value="Fantasy">Fantasy</option>
+          <option value="Sci-Fi">Sci-Fi</option>
+          <option value="Non-Fiction">Non-Fiction</option>
+        </select>
         <div class="view-toggle">
           <button id="allBooksBtn" class="active">All Books</button>
           <button id="favoritesBtn">Favorites</button>
         </div>
+        <button id="randomBookBtn">Random Book</button>
       </div>
       <div id="books-container">
         <!-- Books will be dynamically inserted here -->
       </div>
     </section>
-    
+
+    <!-- Submit Book Section -->
+    <section id="submitBook">
+      <h2>Submit a New Book</h2>
+      <form id="submitBookForm">
+        <label for="newTitle">Title:</label>
+        <input type="text" id="newTitle" name="newTitle" required />
+
+        <label for="newAuthor">Author:</label>
+        <input type="text" id="newAuthor" name="newAuthor" required />
+
+        <label for="newCover">Cover URL:</label>
+        <input type="url" id="newCover" name="newCover" required />
+
+        <label for="newCategory">Category:</label>
+        <select id="newCategory" name="newCategory">
+          <option value="Classic">Classic</option>
+          <option value="Dystopian">Dystopian</option>
+          <option value="Fantasy">Fantasy</option>
+          <option value="Sci-Fi">Sci-Fi</option>
+          <option value="Non-Fiction">Non-Fiction</option>
+        </select>
+
+        <label for="newDescription">Description:</label>
+        <textarea id="newDescription" name="newDescription" required></textarea>
+
+        <button type="submit">Add Book</button>
+      </form>
+    </section>
+
     <!-- About Section -->
     <section id="about">
       <h2>About Epic Reads</h2>
-      <p>Epic Reads is your go-to website for the best book recommendations and reviews. Explore our featured books and discover your next great read!</p>
+      <p>
+        Epic Reads is your go-to website for the best book recommendations,
+        reviews, and a community of avid readers. Discover new titles, share
+        your thoughts, and explore our featured books!
+      </p>
     </section>
-    
+
     <!-- Contact Section -->
     <section id="contact">
       <h2>Contact Us</h2>
       <form id="contactForm">
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
+        <input type="text" id="name" name="name" required />
 
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" name="email" required />
 
         <label for="message">Message:</label>
         <textarea id="message" name="message" required></textarea>
@@ -71,20 +114,31 @@
       </form>
     </section>
   </main>
-  
+
   <footer>
     <p>&copy; 2025 Epic Reads. All rights reserved.</p>
   </footer>
+
+  <!-- Scroll-to-Top Button -->
+  <button id="scrollTopBtn" title="Go to top">↑</button>
 
   <!-- Book Details Modal -->
   <div id="bookModal" class="modal">
     <div class="modal-content">
       <span class="close-button">&times;</span>
-      <img id="modalCover" src="" alt="Book Cover">
+      <img id="modalCover" src="" alt="Book Cover" />
       <h3 id="modalTitle"></h3>
       <p id="modalAuthor"></p>
       <p id="modalDescription"></p>
       <p id="modalRating"></p>
+      <div id="ratingContainer"></div>
+      <hr />
+      <h4>Reviews</h4>
+      <ul id="reviewsList"></ul>
+      <form id="reviewForm">
+        <textarea id="newReview" placeholder="Add your review..." required></textarea>
+        <button type="submit">Submit Review</button>
+      </form>
     </div>
   </div>
 
