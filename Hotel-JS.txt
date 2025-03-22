@@ -1,6 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
     displayTrendingHotels();
+    
+    // Setup dark mode toggle
+    const darkModeToggle = document.getElementById("darkModeToggle");
+    darkModeToggle.addEventListener("click", toggleDarkMode);
 });
+
 // List of hotels (Dynamic Data)
 const hotels = [
     {
@@ -79,37 +84,50 @@ const hotels = [
         image: "https://images.trvl-media.com/lodging/5000000/4320000/4319200/4319124/32340772.jpg?impolicy=fcrop&w=357&h=201&p=1&q=medium"
     }
 ];
-// Function to search hotels
+
+
+
 function searchHotels() {
     let searchQuery = document.getElementById("searchBox").value.toLowerCase();
     let checkinDate = document.getElementById("checkin").value;
     let checkoutDate = document.getElementById("checkout").value;
-
+    
+    // Guest details
     let adults = document.getElementById("adults").value;
     let children = document.getElementById("children").value;
     let rooms = document.getElementById("rooms").value;
     let pets = document.getElementById("pets").value;
+    
+    // Sorting option
+    let sortBy = document.getElementById("sortBy").value;
 
     if (!searchQuery || !checkinDate || !checkoutDate) {
         alert("Please enter all required fields!");
         return;
     }
 
+    // Filter hotels based on city match
     let filteredHotels = hotels.filter(hotel => hotel.city.toLowerCase().includes(searchQuery));
 
     if (filteredHotels.length === 0) {
         alert("No hotels found in this location!");
         return;
     }
-
+    
+    // Sort hotels if option selected
+    if (sortBy === "lowToHigh") {
+        filteredHotels.sort((a, b) => a.price - b.price);
+    } else if (sortBy === "highToLow") {
+        filteredHotels.sort((a, b) => b.price - a.price);
+    }
+    
     displayHotels(filteredHotels);
 }
 
-// Function to display hotels
 function displayHotels(hotelList) {
     let hotelsContainer = document.getElementById("hotelsContainer");
-    hotelsContainer.innerHTML = ""; // Clear previous results
-
+    hotelsContainer.innerHTML = ""; // Clear previous content
+    
     hotelList.forEach(hotel => {
         let hotelCard = `
             <div class="hotel">
@@ -123,7 +141,17 @@ function displayHotels(hotelList) {
     });
 }
 
-// Function to display trending hotels by default
 function displayTrendingHotels() {
     displayHotels(hotels);
+}
+
+function toggleDarkMode() {
+    document.body.classList.toggle("dark");
+    
+    const darkModeToggle = document.getElementById("darkModeToggle");
+    if(document.body.classList.contains("dark")) {
+        darkModeToggle.textContent = "Light Mode";
+    } else {
+        darkModeToggle.textContent = "Dark Mode";
+    }
 }
