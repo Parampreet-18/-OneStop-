@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>StayIndia - Book Hotels & Homestays</title>
   <style>
     /* Global Styles */
@@ -15,13 +15,14 @@
       text-align: center;
       transition: background-color 0.3s, color 0.3s;
     }
-    
-    /* Dark mode styles */
     body.dark {
       background-color: #121212;
       color: #e0e0e0;
     }
-    
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
     /* Header */
     .header {
       background-color: #003580;
@@ -31,11 +32,10 @@
       font-weight: bold;
       position: relative;
     }
-    
-    /* Login Button */
-    .login {
+    /* Authentication and Dark Mode Buttons */
+    .auth-btn,
+    .dark-mode-toggle {
       position: absolute;
-      right: 20px;
       top: 15px;
       background-color: #ffcc00;
       color: black;
@@ -45,49 +45,43 @@
       cursor: pointer;
       font-weight: bold;
     }
-    
-    .login:hover {
+    .auth-btn:hover,
+    .dark-mode-toggle:hover {
       background-color: #e6b800;
     }
-    
-    /* Dark Mode Toggle Button */
-    .dark-mode-toggle {
-      position: absolute;
+    #signInBtn {
       right: 100px;
-      top: 15px;
+    }
+    #signUpBtn {
+      right: 20px;
+    }
+    .dark-mode-toggle {
+      right: 220px;
       background-color: #ccc;
       color: #333;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
     }
-    
     .dark-mode-toggle:hover {
       background-color: #bbb;
     }
-    
     /* Search Section */
     .search-container {
       background-color: white;
       padding: 20px;
       border-radius: 10px;
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
       align-items: center;
-      flex-wrap: wrap;
       margin: 20px auto;
-      width: 80%;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 1000px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
-    
     .search-container label {
       font-size: 14px;
       font-weight: bold;
       margin-right: 5px;
     }
-    
     .search-container input,
     .search-container select,
     .search-container button {
@@ -97,31 +91,26 @@
       border-radius: 5px;
       font-size: 16px;
     }
-    
     .search-container button {
       background-color: #ff6600;
       color: white;
       font-weight: bold;
       cursor: pointer;
     }
-    
     .search-container button:hover {
       background-color: #e65c00;
     }
-    
     /* Guest Section */
     .guest-section {
       display: flex;
-      gap: 10px;
       flex-wrap: wrap;
+      gap: 10px;
       justify-content: center;
     }
-    
-    /* Sort Section */
-    .sort-section {
+    /* Filter Section */
+    .filter-section {
       margin: 10px;
     }
-    
     /* Hotel Listings */
     .hotels-container {
       display: flex;
@@ -129,7 +118,6 @@
       justify-content: center;
       margin-top: 20px;
     }
-    
     .hotel {
       background-color: white;
       color: #333;
@@ -137,28 +125,24 @@
       margin: 15px;
       padding: 15px;
       border-radius: 10px;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       text-align: center;
       transition: background-color 0.3s, color 0.3s;
     }
-    
     body.dark .hotel {
       background-color: #1e1e1e;
       color: #e0e0e0;
     }
-    
     .hotel img {
       width: 100%;
       height: 180px;
       border-radius: 10px;
     }
-    
     .hotel .price {
       font-weight: bold;
       color: #008000;
       margin: 10px 0;
     }
-    
     .hotel button {
       background-color: #ff6600;
       color: white;
@@ -168,36 +152,132 @@
       cursor: pointer;
       font-size: 16px;
     }
-    
     .hotel button:hover {
       background-color: #e65c00;
     }
-    
-    /* Trending Hotels Header */
-    h2 {
+    /* Footer */
+    footer {
+      background-color: #003580;
+      color: white;
+      padding: 20px 10px;
       margin-top: 20px;
+    }
+    footer .contact,
+    footer .social {
+      margin: 10px 0;
+    }
+    footer .social a {
+      margin: 0 10px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    footer .social img {
+      width: 32px;
+      height: 32px;
+    }
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+    .modal-content {
+      background-color: #fefefe;
+      margin: 10% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 300px;
+      border-radius: 10px;
+      text-align: left;
+    }
+    .modal-content input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .modal-content button {
+      background-color: #003580;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      width: 100%;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .modal-content button:hover {
+      background-color: #00264d;
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close:hover,
+    .close:focus {
+      color: black;
+    }
+    /* Responsive Media Queries */
+    @media (max-width: 768px) {
+      .header {
+        font-size: 20px;
+        padding: 15px;
+      }
+      .auth-btn,
+      .dark-mode-toggle {
+        top: 10px;
+        padding: 8px;
+        font-size: 14px;
+      }
+      #signInBtn {
+        right: 90px;
+      }
+      #signUpBtn {
+        right: 10px;
+      }
+      .dark-mode-toggle {
+        right: 170px;
+      }
+      .search-container {
+        width: 95%;
+        padding: 15px;
+      }
+      .hotel {
+        width: 90%;
+        margin: 10px auto;
+      }
     }
   </style>
 </head>
 <body>
-
   <div class="header">
     StayIndia - Find Your Perfect Stay
-    <button class="login">Login</button>
     <button class="dark-mode-toggle" id="darkModeToggle">Dark Mode</button>
+    <button class="auth-btn" id="signInBtn">Sign In</button>
+    <button class="auth-btn" id="signUpBtn">Sign Up</button>
   </div>
 
   <div class="search-container">
-    <input type="text" id="searchBox" placeholder="Enter city or hotel name">
-    
+    <input type="text" id="searchBox" placeholder="Enter city or hotel name" />
+
     <div>
       <label for="checkin">Check-in Date:</label>
-      <input type="date" id="checkin">
+      <input type="date" id="checkin" />
     </div>
-    
+
     <div>
       <label for="checkout">Check-out Date:</label>
-      <input type="date" id="checkout">
+      <input type="date" id="checkout" />
     </div>
 
     <div class="guest-section">
@@ -210,7 +290,7 @@
           <option value="4">4 Adults</option>
         </select>
       </div>
-      
+
       <div>
         <label for="children">Children:</label>
         <select id="children">
@@ -220,7 +300,7 @@
           <option value="3">3 Children</option>
         </select>
       </div>
-      
+
       <div>
         <label for="rooms">Rooms:</label>
         <select id="rooms">
@@ -229,7 +309,7 @@
           <option value="3">3 Rooms</option>
         </select>
       </div>
-      
+
       <div>
         <label for="pets">Pets:</label>
         <select id="pets">
@@ -239,8 +319,8 @@
         </select>
       </div>
     </div>
-    
-    <div class="sort-section">
+
+    <div class="filter-section">
       <label for="sortBy">Sort by Price:</label>
       <select id="sortBy">
         <option value="default">Default</option>
@@ -248,12 +328,70 @@
         <option value="highToLow">High to Low</option>
       </select>
     </div>
-    
+
+    <div class="filter-section">
+      <label for="ratingFilter">Filter by Rating:</label>
+      <select id="ratingFilter">
+        <option value="all">All Ratings</option>
+        <option value="5">5 Stars</option>
+        <option value="4">4 Stars & Above</option>
+        <option value="3">3 Stars & Above</option>
+      </select>
+    </div>
+
     <button onclick="searchHotels()">Search</button>
   </div>
 
   <h2>Top Trending Hotels</h2>
   <div class="hotels-container" id="hotelsContainer"></div>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="contact">
+      <p>Contact Us: +91-1234567890 | email@stayindia.com</p>
+      <p>Address: 123, Sample Street, New Delhi, India</p>
+    </div>
+    <div class="social">
+      <p>Follow us on:</p>
+      <a href="https://instagram.com" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/2048px-Instagram_logo_2022.svg.png" alt="Instagram" />
+      </a>
+      <a href="https://facebook.com" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Facebook_f_logo_%282021%29.svg/1024px-Facebook_f_logo_%282021%29.svg.png" alt="Facebook" />
+      </a>
+      <a href="https://telegram.org" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/3488/3488463.png" alt="Telegram" />
+      </a>
+    </div>
+  </footer>
+
+  <!-- Sign In Modal -->
+  <div id="signInModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('signInModal')">&times;</span>
+      <h2>Sign In</h2>
+      <form id="signInForm">
+        <input type="email" id="signInEmail" placeholder="Email" required />
+        <input type="password" id="signInPassword" placeholder="Password" required />
+        <button type="submit">Sign In</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Sign Up Modal -->
+  <div id="signUpModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('signUpModal')">&times;</span>
+      <h2>Sign Up</h2>
+      <form id="signUpForm">
+        <input type="text" id="signUpName" placeholder="Full Name" required />
+        <input type="email" id="signUpEmail" placeholder="Email" required />
+        <input type="password" id="signUpPassword" placeholder="Password" required />
+        <input type="password" id="signUpConfirmPassword" placeholder="Confirm Password" required />
+        <button type="submit">Sign Up</button>
+      </form>
+    </div>
+  </div>
 
   <script src="Hotel.js"></script>
 </body>
