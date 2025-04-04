@@ -1,120 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-        body {
-            display: flex;
-            height: 100vh;
-
-            /* background-color: #104aec; */
-            /* color: white; */
-        }
-        .left-panel {
-            width: 40%;
-            background-image: url("https://wallpapers.com/images/featured/cool-black-background-zuepoib34iujg4he.jpg");
-            background: #1e2026;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        .left-panel img {
-            width: 150px;
-            margin-bottom: 20px;
-        }
-        .right-panel {
-            width: 60%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            /* background-image: url("https://wallpapers.com/images/featured/cool-black-background-zuepoib34iujg4he.jpg"); */
-            background: #2a2d35;
-        }
-        .login-box {
-            width: 350px;
-            background: #323741;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-        }
-        .login-box h2 {
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 5px;
-            background: #454b57;
-            color: white;
-        }
-        .forgot-password {
-            text-align: right;
-            font-size: 12px;
-            margin-bottom: 10px;
-        }
-        .forgot-password a {
-            color: #bbb;
-            text-decoration: none;
-        }
-        .btn {
-            width: 100%;
-            padding: 10px;
-            background: black;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .btn:hover {
-            background: #333;
-        }
-        .signup {
-            margin-top: 15px;
-            text-align: center;
-        }
-        .signup a {
-            color: #4caf50;
-            text-decoration: none;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="signin.css">
+    <title>Modern Login Page | AsmrProg</title>
 </head>
+
 <body>
-    <div class="left-panel">
-        <img src="https://play-lh.googleusercontent.com/yyYdYmchIUBnIjhhTCkNG25BaJ97h4KdG9QIbB9XN8GyqLRDhaxXeKfBRYC_Fs_wGg=w240-h480-rw" alt="Logo">
-    </div>
-    <div class="right-panel">
-        <div class="login-box">
-            <h2>Log in to your account</h2>
+
+    <div class="container" id="container">
+        <div class="form-container sign-up">
             <form>
-                <label>Email</label>
-                <input type="email" placeholder="Enter your email" required>
-                
-                <label>Password</label>
-                <input type="password" placeholder="Enter your password" required>
-                
-                <div class="forgot-password">
-                    <a href="#">Forgotten Password?</a>
+                <h1>Create Account</h1>
+                <div class="social-icons">
+                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
                 </div>
-                
-                <button type="submit" class="btn">Login</button>
+                <span>or use your email for registeration</span>
+                <input type="text" placeholder="Name">
+                <input type="email" placeholder="Email">
+                <input type="password" placeholder="Password">
+                <button>Sign Up</button>
             </form>
-            <div class="signup">
-                Need an account? <a href="#">Sign Up</a>
+        </div>
+        <div class="form-container sign-in">
+            <form>
+                <h1>Sign In</h1>
+                <div class="social-icons">
+                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+                <span>or use your email password</span>
+                <input type="email" placeholder="Email">
+                <input type="password" placeholder="Password">
+                <a href="#">Forget Your Password?</a>
+                <button>Sign In</button>
+            </form>
+        </div>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1>Welcome Back!</h1>
+                    <p>Enter your personal details to use all of site features</p>
+                    <button class="hidden" id="login">Sign In</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>Hello, Friend!</h1>
+                    <p>Register with your personal details to use all of site features</p>
+                    <button class="hidden" id="register">Sign Up</button>
+                </div>
             </div>
         </div>
     </div>
+
+    <script src="signin.js"></script>
 </body>
+
 </html>
