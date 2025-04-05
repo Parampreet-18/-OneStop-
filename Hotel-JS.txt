@@ -67,13 +67,21 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
-      alert("✅ Booking Confirmed! Confirmation sent to your email.");
+      // Simulate document verification (AI-based logic can be added here)
+      const fileName = doc.name.toLowerCase();
+      if (!(fileName.endsWith(".pdf") || fileName.endsWith(".jpg") || fileName.endsWith(".png"))) {
+        alert("Please upload a valid document (PDF, JPG, PNG)");
+        return;
+      }
+
+      // Show booking confirmation
+      alert(`✅ Booking Confirmed for ${name}! Confirmation sent to ${email}. Payment via ${payment}.`);
       closeModal("bookingModal");
     });
   }
 });
 
-// Hotel data with missing cities added
+// Hotel data
 const hotels = [
   {
     name: "Taj Hotel, Mumbai",
@@ -253,4 +261,19 @@ function bookHotel(hotelName) {
   openModal("bookingModal");
   usedOffers[hotelName] = true;
   displayHotels(hotels); // update offer used
+}
+// Scroll to top
+function scrollUp() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+
+// Scroll to bottom
+function scrollDown() {
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: 'smooth'
+  });
 }
