@@ -1,218 +1,220 @@
 document.addEventListener("DOMContentLoaded", function () {
-    displayTrendingHotels();
-  
-    // Setup dark mode toggle
-    const darkModeToggle = document.getElementById("darkModeToggle");
-    darkModeToggle.addEventListener("click", toggleDarkMode);
-  
-    // Setup Sign In and Sign Up modal triggers
-    document.getElementById("signInBtn").addEventListener("click", () => openModal("signInModal"));
-    document.getElementById("signUpBtn").addEventListener("click", () => openModal("signUpModal"));
-  
-    // Setup Sign In form submission
-    document.getElementById("signInForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-      const email = document.getElementById("signInEmail").value;
-      const password = document.getElementById("signInPassword").value;
-      if (email && password) {
-        alert("Sign In successful!");
-        closeModal("signInModal");
-      } else {
-        alert("Please fill in all fields.");
-      }
-    });
-  
-    // Setup Sign Up form submission
-    document.getElementById("signUpForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-      const name = document.getElementById("signUpName").value;
-      const email = document.getElementById("signUpEmail").value;
-      const password = document.getElementById("signUpPassword").value;
-      const confirmPassword = document.getElementById("signUpConfirmPassword").value;
-  
-      if (!name || !email || !password || !confirmPassword) {
-        alert("Please fill in all fields.");
-        return;
-      }
-      if (password !== confirmPassword) {
-        alert("Passwords do not match!");
-        return;
-      }
-      alert("Sign Up successful!");
-      closeModal("signUpModal");
-    });
-  });
-  
- // List of hotels (Dynamic Data)
-const hotels = [
-    {
-        name: "Taj Hotel, Mumbai",
-        description: "5-star luxury hotel near Gateway of India",
-        price: "10,500",
-        rating: 5,
-        image: "https://images.hindustantimes.com/rf/image_size_960x540/HT/p2/2018/12/15/Pictures/_9f2b6346-ffd3-11e8-9457-b1b429387a4e.jpg"
-    },
-    {
-        name: "Coorg Homestay",
-        description: "Beautiful homestay in the middle of coffee plantations",
-        price: "3,200",
-        rating: 5,
-        image: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/501528790.jpg?k=ab62245fd0c7a103e2cb34e587058afcddbe8981d1ada06b4c9dd968de46da47&o=&hp=1"
-    },
-    {
-        name: "Goa Beach Resort",
-        description: "Enjoy a relaxing beachside stay in Goa",
-        price: "7,500",
-        rating: 4.5,
-        image: "https://media-cdn.tripadvisor.com/media/photo-s/13/17/90/18/swimming-pool.jpg"
-    },
-    {
-        name: "Jaipur Royal Palace",
-        description: "Experience a luxurious royal stay in Jaipur",
-        price: "8,000",
-        rating: 4.8,
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkq_VHxX7wBw0uXhlX6Q5-ueKgRxS2xJlb8Q&s"
-    },
-    {
-        name: "Manali Mountain Resort",
-        description: "A peaceful resort in the snowy mountains of Manali",
-        price: "5,500",
-        rating: 4.2,
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEhGNir1Ww-yHsxjOImzMPDdgCdZwqEBeAeQ&s"
-    },
-    {
-        name: "Kerala Backwater Villa",
-        description: "Stay in a beautiful villa near the serene backwaters of Kerala",
-        price: "6,800",
-        rating: 5,
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS03WsdHvCw5J8I7m4fLyP_dcNe8ojLaWXaGQ&s"
-    },
-    {
-        name: "Rajasthan Desert Camp",
-        description: "Luxury tent stay in the heart of the Thar Desert",
-        price: "4,500",
-        rating: 4.6,
-        image: "https://static.toiimg.com/photo/msid-115695045,width-96,height-65.cms"
-    },
-    {
-        name: "Ooty Hilltop Cottage",
-        description: "Cozy cottage stay with breathtaking views in Ooty",
-        price: "3,900",
-        rating: 5,
-        image: "https://res.cloudinary.com/voyehomes/image/upload/w_1280,f_auto,c_scale/v1721993939/property/107/image/d5830ff7-42f7-4c92-a447-1073b7877d92.jpg"
-    },
-    {
-        name: "Shimla Heritage Hotel",
-        description: "A heritage hotel with a colonial charm in Shimla",
-        price: "6,200",
-        rating: 4.1,
-        image: "https://media-cdn.tripadvisor.com/media/photo-s/0e/66/1f/75/hotel-facade.jpg"
-    },
-    {
-        name: "Darjeeling Tea Estate Retreat",
-        city: "darjeeling",
-        description: "A peaceful retreat in the middle of Darjeeling's tea gardens",
-        price: "5,000",
-        rating: 4.7,
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-aeIJL8pJLAQgz_xjPTX92Wg6ffDwf2xvAA&s"
-    },
-    {
-        name: "Rishikesh Riverside Resort",
-        city: "rishikesh",
-        description: "Relax by the Ganges in this beautiful riverside resort",
-        price: "5,200",
-        rating: 4.9,
-        image: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/514051210.jpg?k=6dd34390e2b2de9688101408f7800eb9fc2b69ddef9a93e2087cb6b510f52379&o=&hp=1"
-    },
-    {
-        name: "Bangalore Business Hotel",
-        city: "bangalore",
-        description: "Perfect stay for business and leisure in the tech city",
-        price: "6,500",
-        rating: 4.8,
-        image: "https://images.trvl-media.com/lodging/5000000/4320000/4319200/4319124/32340772.jpg?impolicy=fcrop&w=357&h=201&p=1&q=medium"
+  displayTrendingHotels();
+
+  // Setup dark mode toggle
+  const darkModeToggle = document.getElementById("darkModeToggle");
+  darkModeToggle.addEventListener("click", toggleDarkMode);
+
+  // Setup Sign In and Sign Up modal triggers
+  document.getElementById("signInBtn").addEventListener("click", () => openModal("signInModal"));
+  document.getElementById("signUpBtn").addEventListener("click", () => openModal("signUpModal"));
+
+  // Setup Sign In form submission
+  document.getElementById("signInForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const email = document.getElementById("signInEmail").value;
+    const password = document.getElementById("signInPassword").value;
+    if (email && password) {
+      alert("Sign In successful!");
+      closeModal("signInModal");
+    } else {
+      alert("Please fill in all fields.");
     }
+  });
+
+  // Setup Sign Up form submission
+  document.getElementById("signUpForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const name = document.getElementById("signUpName").value;
+    const email = document.getElementById("signUpEmail").value;
+    const password = document.getElementById("signUpPassword").value;
+    const confirmPassword = document.getElementById("signUpConfirmPassword").value;
+
+    if (!name || !email || !password || !confirmPassword) {
+      alert("Please fill in all fields.");
+      return;
+    }
+    if (password !== confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+    alert("Sign Up successful!");
+    closeModal("signUpModal");
+  });
+});
+
+// List of hotels with offers
+const hotels = [
+  {
+    name: "Taj Hotel, Mumbai",
+    description: "5-star luxury hotel near Gateway of India",
+    price: "10500",
+    rating: 5,
+    offer: "20% off this weekend!",
+    image: "https://images.hindustantimes.com/rf/image_size_960x540/HT/p2/2018/12/15/Pictures/_9f2b6346-ffd3-11e8-9457-b1b429387a4e.jpg"
+  },
+  {
+    name: "Coorg Homestay",
+    description: "Beautiful homestay in the middle of coffee plantations",
+    price: "3200",
+    rating: 5,
+    offer: "Limited time deal!",
+    image: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/501528790.jpg?k=ab62245fd0c7a103e2cb34e587058afcddbe8981d1ada06b4c9dd968de46da47&o=&hp=1"
+  },
+  {
+    name: "Goa Beach Resort",
+    description: "Enjoy a relaxing beachside stay in Goa",
+    price: "7500",
+    rating: 4.5,
+    offer: "Book 2 nights, get 1 free!",
+    image: "https://media-cdn.tripadvisor.com/media/photo-s/13/17/90/18/swimming-pool.jpg"
+  },
+  {
+    name: "Jaipur Royal Palace",
+    description: "Experience a luxurious royal stay in Jaipur",
+    price: "8000",
+    rating: 4.8,
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkq_VHxX7wBw0uXhlX6Q5-ueKgRxS2xJlb8Q&s"
+  },
+  {
+    name: "Manali Mountain Resort",
+    description: "A peaceful resort in the snowy mountains of Manali",
+    price: "5500",
+    rating: 4.2,
+    offer: "Early bird discount!",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEhGNir1Ww-yHsxjOImzMPDdgCdZwqEBeAeQ&s"
+  },
+  {
+    name: "Kerala Backwater Villa",
+    description: "Stay in a beautiful villa near the serene backwaters of Kerala",
+    price: "6800",
+    rating: 5,
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS03WsdHvCw5J8I7m4fLyP_dcNe8ojLaWXaGQ&s"
+  },
+  {
+    name: "Rajasthan Desert Camp",
+    description: "Luxury tent stay in the heart of the Thar Desert",
+    price: "4500",
+    rating: 4.6,
+    offer: "15% off for couples!",
+    image: "https://static.toiimg.com/photo/msid-115695045,width-96,height-65.cms"
+  },
+  {
+    name: "Ooty Hilltop Cottage",
+    description: "Cozy cottage stay with breathtaking views in Ooty",
+    price: "3900",
+    rating: 5,
+    image: "https://res.cloudinary.com/voyehomes/image/upload/w_1280,f_auto,c_scale/v1721993939/property/107/image/d5830ff7-42f7-4c92-a447-1073b7877d92.jpg"
+  },
+  {
+    name: "Shimla Heritage Hotel",
+    description: "A heritage hotel with a colonial charm in Shimla",
+    price: "6200",
+    rating: 4.1,
+    image: "https://media-cdn.tripadvisor.com/media/photo-s/0e/66/1f/75/hotel-facade.jpg"
+  },
+  {
+    name: "Darjeeling Tea Estate Retreat",
+    city: "darjeeling",
+    description: "A peaceful retreat in the middle of Darjeeling's tea gardens",
+    price: "5000",
+    rating: 4.7,
+    offer: "Special tea tour included!",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-aeIJL8pJLAQgz_xjPTX92Wg6ffDwf2xvAA&s"
+  },
+  {
+    name: "Rishikesh Riverside Resort",
+    city: "rishikesh",
+    description: "Relax by the Ganges in this beautiful riverside resort",
+    price: "5200",
+    rating: 4.9,
+    image: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/514051210.jpg?k=6dd34390e2b2de9688101408f7800eb9fc2b69ddef9a93e2087cb6b510f52379&o=&hp=1"
+  },
+  {
+    name: "Bangalore Business Hotel",
+    city: "bangalore",
+    description: "Perfect stay for business and leisure in the tech city",
+    price: "6500",
+    rating: 4.8,
+    offer: "Free breakfast for corporate stays!",
+    image: "https://images.trvl-media.com/lodging/5000000/4320000/4319200/4319124/32340772.jpg?impolicy=fcrop&w=357&h=201&p=1&q=medium"
+  }
 ];
 
+function searchHotels() {
+  const searchQuery = document.getElementById("searchBox").value.toLowerCase();
+  const checkinDate = document.getElementById("checkin").value;
+  const checkoutDate = document.getElementById("checkout").value;
+  const adults = document.getElementById("adults").value;
+  const children = document.getElementById("children").value;
+  const rooms = document.getElementById("rooms").value;
+  const pets = document.getElementById("pets").value;
+  const sortBy = document.getElementById("sortBy").value;
+  const ratingFilter = document.getElementById("ratingFilter").value;
 
-  
-  function searchHotels() {
-    const searchQuery = document.getElementById("searchBox").value.toLowerCase();
-    const checkinDate = document.getElementById("checkin").value;
-    const checkoutDate = document.getElementById("checkout").value;
-  
-    // Guest details (captured for future expansion)
-    const adults = document.getElementById("adults").value;
-    const children = document.getElementById("children").value;
-    const rooms = document.getElementById("rooms").value;
-    const pets = document.getElementById("pets").value;
-  
-    // Sorting and Rating filter options
-    const sortBy = document.getElementById("sortBy").value;
-    const ratingFilter = document.getElementById("ratingFilter").value;
-  
-    if (!searchQuery || !checkinDate || !checkoutDate) {
-      alert("Please enter all required fields!");
-      return;
-    }
-  
-    // Filter hotels based on city match
-    let filteredHotels = hotels.filter(hotel => hotel.city.includes(searchQuery));
-  
-    // Filter by rating if selected
-    if (ratingFilter !== "all") {
-      const filterRating = parseInt(ratingFilter);
-      filteredHotels = filteredHotels.filter(hotel => hotel.rating >= filterRating);
-    }
-  
-    // Sort hotels if needed
-    if (sortBy === "lowToHigh") {
-      filteredHotels.sort((a, b) => a.price - b.price);
-    } else if (sortBy === "highToLow") {
-      filteredHotels.sort((a, b) => b.price - a.price);
-    }
-  
-    if (filteredHotels.length === 0) {
-      alert("No hotels found matching your criteria!");
-      return;
-    }
-  
-    displayHotels(filteredHotels);
+  if (!searchQuery || !checkinDate || !checkoutDate) {
+    alert("Please enter all required fields!");
+    return;
   }
-  
-  function displayHotels(hotelList) {
-    const hotelsContainer = document.getElementById("hotelsContainer");
-    hotelsContainer.innerHTML = ""; // Clear previous content
-  
-    hotelList.forEach(hotel => {
-      const hotelCard = `
-        <div class="hotel">
-            <img src="${hotel.image}" alt="${hotel.name}" />
-            <h3>${hotel.name}</h3>
-            <p class="price">₹${hotel.price} / night</p>
-            <p>Rating: ${hotel.rating}★</p>
-            <button>Book Now</button>
-        </div>
-      `;
-      hotelsContainer.innerHTML += hotelCard;
-    });
+
+  let filteredHotels = hotels.filter(hotel => (hotel.city || "").includes(searchQuery));
+
+  if (ratingFilter !== "all") {
+    const filterRating = parseInt(ratingFilter);
+    filteredHotels = filteredHotels.filter(hotel => hotel.rating >= filterRating);
   }
-  
-  function displayTrendingHotels() {
-    displayHotels(hotels);
+
+  if (sortBy === "lowToHigh") {
+    filteredHotels.sort((a, b) => parseInt(a.price) - parseInt(b.price));
+  } else if (sortBy === "highToLow") {
+    filteredHotels.sort((a, b) => parseInt(b.price) - parseInt(a.price));
   }
-  
-  function toggleDarkMode() {
-    document.body.classList.toggle("dark");
-    const darkModeToggle = document.getElementById("darkModeToggle");
-    darkModeToggle.textContent = document.body.classList.contains("dark") ? "Light Mode" : "Dark Mode";
+
+  if (filteredHotels.length === 0) {
+    alert("No hotels found matching your criteria!");
+    return;
   }
-  
-  function openModal(modalId) {
-    document.getElementById(modalId).style.display = "block";
-  }
-  
-  function closeModal(modalId) {
-    document.getElementById(modalId).style.display = "none";
-  }
-  
+
+  displayHotels(filteredHotels);
+}
+
+function displayHotels(hotelList) {
+  const hotelsContainer = document.getElementById("hotelsContainer");
+  hotelsContainer.innerHTML = "";
+
+  hotelList.forEach(hotel => {
+    const hotelCard = `
+      <div class="hotel">
+          <img src="${hotel.image}" alt="${hotel.name}" />
+          <h3>${hotel.name}</h3>
+          <p class="price">₹${hotel.price} / night</p>
+          <p>Rating: ${hotel.rating}★</p>
+          ${hotel.offer ? `<p class="offer">🎉 ${hotel.offer}</p>` : ""}
+          <button onclick="bookHotel('${hotel.name}')">Book Now</button>
+      </div>
+    `;
+    hotelsContainer.innerHTML += hotelCard;
+  });
+}
+
+function displayTrendingHotels() {
+  displayHotels(hotels);
+}
+
+function toggleDarkMode() {
+  document.body.classList.toggle("dark");
+  const darkModeToggle = document.getElementById("darkModeToggle");
+  darkModeToggle.textContent = document.body.classList.contains("dark") ? "Light Mode" : "Dark Mode";
+}
+
+function openModal(modalId) {
+  document.getElementById(modalId).style.display = "block";
+}
+
+function closeModal(modalId) {
+  document.getElementById(modalId).style.display = "none";
+}
+
+function bookHotel(hotelName) {
+  alert(`🎉 You have booked: ${hotelName}`);
+}
