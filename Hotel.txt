@@ -259,6 +259,35 @@
     .close:focus {
       color: black;
     }
+    /* Scroll Buttons Styling */
+#scrollUpBtn, #scrollDownBtn {
+  position: fixed;
+  right: 20px;
+  padding: 10px 15px;
+  font-size: 24px;
+  background-color: #ff6600;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+  z-index: 1000;
+}
+
+#scrollUpBtn:hover, #scrollDownBtn:hover {
+  opacity: 1;
+}
+
+/* Positioning: scroll up button at the bottom right, scroll down button just below it */
+#scrollUpBtn {
+  bottom: 80px;
+}
+
+#scrollDownBtn {
+  bottom: 20px;
+}
+
     /* Responsive Media Queries */
     @media (max-width: 768px) {
       .header {
@@ -295,12 +324,16 @@
   </style>
 </head>
 <body>
+  
   <div class="header">
     StayIndia - Find Your Perfect Stay
     <button class="dark-mode-toggle" id="darkModeToggle">Dark Mode</button>
     <button class="auth-btn" id="signInBtn">Sign In</button>
     <button class="auth-btn" id="signUpBtn">Sign Up</button>
   </div>
+  <!-- Scroll Buttons -->
+<button id="scrollUpBtn" onclick="scrollUp()">&#8679;</button>
+<button id="scrollDownBtn" onclick="scrollDown()">&#8681;</button>
 
   <div class="search-container">
     <input type="text" id="searchBox" placeholder="Enter city or hotel name" />
