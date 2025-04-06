@@ -123,8 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
       reviews: []
     }))
   ];
-
-  const bookCategories = new Map([
+ const bookCategories = new Map([
     ['The Great Gatsby', 'Classics'],
     ['1984', 'Classics'],
     ['To Kill a Mockingbird', 'Classics'],
@@ -149,6 +148,8 @@ document.addEventListener('DOMContentLoaded', () => {
     ['The Last Ember', 'New Releases'],
   ]);
 
+
+
   books.forEach(book => {
     book.category = bookCategories.get(book.title) || 'Uncategorized';
   });
@@ -171,7 +172,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const reviewForm = document.getElementById('reviewForm');
   const newReviewText = document.getElementById('newReview');
   const closeButton = document.querySelector('.close-button');
-  const darkModeToggle = document.getElementById('darkModeToggle');
   const submitBookForm = document.getElementById('submitBookForm');
   const scrollTopBtn = document.getElementById('scrollTopBtn');
 
@@ -310,11 +310,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  darkModeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-    darkModeToggle.textContent = document.body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
-  });
-
   submitBookForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const newBook = {
@@ -360,7 +355,7 @@ document.addEventListener('DOMContentLoaded', () => {
   sortDropdown.addEventListener('change', displayBooks);
   categoryFilter.addEventListener('change', displayBooks);
 
-  // Initial load
+  // Initial Load
   populateCategoryFilter();
   displayBooks();
 });
