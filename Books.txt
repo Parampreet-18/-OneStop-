@@ -5,61 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Epic Reads</title>
   <style>
-    /* (Same CSS as before) */
-
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, #ffecd2, #fcb69f);
       color: #333;
       line-height: 1.6;
     }
+
     header {
       background-color: #1a1a1a;
       color: #fff;
       padding: 1rem 0;
     }
+
     .header-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 0 1rem;
     }
-    header h1 {
-      margin-bottom: 0.5rem;
-    }
+
     nav ul {
       list-style: none;
       display: flex;
       justify-content: center;
       margin-top: 0.5rem;
     }
+
     nav ul li {
       margin: 0 1rem;
     }
+
     nav ul li a {
       color: #ffecd2;
       text-decoration: none;
       font-weight: bold;
     }
+
     .header-buttons button {
       background-color: #ffecd2;
       color: #1a1a1a;
       border: none;
       padding: 0.5rem 1rem;
       border-radius: 4px;
-      cursor: not-allowed; /* No JS functionality */
+      cursor: pointer;
     }
+
     main {
       padding: 2rem;
+      padding-bottom: 5rem;
     }
+
     section {
       margin-bottom: 2rem;
     }
+
     .controls {
       display: flex;
       flex-wrap: wrap;
@@ -68,28 +74,33 @@
       gap: 1rem;
       margin-bottom: 1rem;
     }
+
     input, select, textarea, button {
       font-family: inherit;
     }
+
     #searchBar, #sortDropdown, #categoryFilter {
       padding: 0.5rem;
       border: 1px solid #ccc;
       border-radius: 4px;
     }
+
     .view-toggle button,
     #randomBookBtn {
       padding: 0.5rem 1rem;
       border: 1px solid #ccc;
       background-color: #fff;
-      cursor: not-allowed;
+      cursor: pointer;
       border-radius: 4px;
     }
+
     #books-container {
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
       justify-content: center;
     }
+
     .book {
       background-color: #fff;
       border: 1px solid #ddd;
@@ -98,23 +109,28 @@
       text-align: center;
       border-radius: 8px;
     }
+
     .book img {
       max-width: 100%;
       height: auto;
       margin-bottom: 0.5rem;
     }
+
     .favorite-icon, .rating-star {
-      display: none; /* Hidden since they rely on JS */
+      display: none;
     }
+
     form {
       max-width: 600px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
     }
+
     form label {
       margin-top: 1rem;
     }
+
     form input,
     form textarea,
     form select {
@@ -123,6 +139,7 @@
       border-radius: 4px;
       margin-top: 0.5rem;
     }
+
     form button {
       margin-top: 1rem;
       padding: 0.7rem;
@@ -130,8 +147,9 @@
       color: #ffecd2;
       border: none;
       border-radius: 4px;
-      cursor: not-allowed;
+      cursor: pointer;
     }
+
     footer {
       text-align: center;
       padding: 1rem;
@@ -141,11 +159,48 @@
       bottom: 0;
       width: 100%;
     }
+
     #scrollTopBtn {
-      display: none;
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      background-color: #ffecd2;
+      color: #1a1a1a;
+      border: none;
+      padding: 0.5rem;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
     }
+
     .modal {
       display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      max-width: 500px;
+      margin: auto;
+      position: relative;
+    }
+
+    .close-button {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -154,7 +209,7 @@
     <div class="header-top">
       <h1>Epic Reads</h1>
       <div class="header-buttons">
-        <button disabled>Dark Mode</button>
+        <button id="darkModeToggle">Dark Mode</button>
       </div>
     </div>
     <nav>
@@ -171,66 +226,68 @@
     <section id="featured">
       <h2>Featured Books</h2>
       <div class="controls">
-        <input type="text" id="searchBar" placeholder="Search books..." disabled />
-        <select id="sortDropdown" disabled>
-          <option>Sort By</option>
+        <input type="text" id="searchBar" placeholder="Search books..." />
+        <select id="sortDropdown">
+          <option value="none">Sort By</option>
+          <option value="title-asc">Title (A–Z)</option>
+          <option value="title-desc">Title (Z–A)</option>
+          <option value="author-asc">Author (A–Z)</option>
+          <option value="author-desc">Author (Z–A)</option>
+          <option value="rating-asc">Rating (Low to High)</option>
+          <option value="rating-desc">Rating (High to Low)</option>
         </select>
-        <select id="categoryFilter" disabled>
+        <select id="categoryFilter">
           <option>All Categories</option>
+          <option>Fiction</option>
+          <option>Non-fiction</option>
+          <option>Mystery</option>
         </select>
         <div class="view-toggle">
-          <button disabled>All Books</button>
-          <button disabled>Favorites</button>
+          <button id="allBooksBtn">All Books</button>
+          <button id="favoritesBtn">Favorites</button>
         </div>
-        <button id="randomBookBtn" disabled>Random Book</button>
+        <button id="randomBookBtn">Random Book</button>
       </div>
-      <div id="books-container">
-        <div class="book">
-          <img src="https://via.placeholder.com/150x220?text=Book+1" alt="Book Cover">
-          <h4>Sample Book</h4>
-          <p>Author Name</p>
-        </div>
-      </div>
+      <div id="books-container"></div>
     </section>
 
     <section id="submitBook">
       <h2>Submit a New Book</h2>
       <form id="submitBookForm">
         <label for="newTitle">Title:</label>
-        <input type="text" id="newTitle" name="newTitle" required disabled />
+        <input type="text" id="newTitle" required />
         <label for="newAuthor">Author:</label>
-        <input type="text" id="newAuthor" name="newAuthor" required disabled />
+        <input type="text" id="newAuthor" required />
         <label for="newCover">Cover URL:</label>
-        <input type="url" id="newCover" name="newCover" required disabled />
+        <input type="url" id="newCover" required />
         <label for="newCategory">Category:</label>
-        <select id="newCategory" name="newCategory" disabled>
+        <select id="newCategory">
           <option>Classic</option>
           <option>Dystopian</option>
+          <option>Fiction</option>
+          <option>Non-fiction</option>
         </select>
         <label for="newDescription">Description:</label>
-        <textarea id="newDescription" name="newDescription" required disabled></textarea>
-        <button type="submit" disabled>Add Book</button>
+        <textarea id="newDescription" required></textarea>
+        <button type="submit">Add Book</button>
       </form>
     </section>
 
     <section id="about">
       <h2>About Epic Reads</h2>
-      <p>
-        Epic Reads is your go-to website for the best book recommendations,
-        reviews, and a community of avid readers.
-      </p>
+      <p>Epic Reads is your go-to website for the best book recommendations, reviews, and a community of avid readers.</p>
     </section>
 
     <section id="contact">
       <h2>Contact Us</h2>
       <form id="contactForm">
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required disabled />
+        <input type="text" id="name" required />
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required disabled />
+        <input type="email" id="email" required />
         <label for="message">Message:</label>
-        <textarea id="message" name="message" required disabled></textarea>
-        <button type="submit" disabled>Send Message</button>
+        <textarea id="message" required></textarea>
+        <button type="submit">Send Message</button>
       </form>
     </section>
   </main>
@@ -239,21 +296,28 @@
     <p>&copy; 2025 Epic Reads. All rights reserved.</p>
   </footer>
 
-  <button id="scrollTopBtn" title="Go to top" disabled>↑</button>
+  <button id="scrollTopBtn" title="Go to top">↑</button>
 
   <div id="bookModal" class="modal">
     <div class="modal-content">
       <span class="close-button">&times;</span>
-      <img id="modalCover" src="" alt="Book Cover" />
+      <img id="modalCover" src="" alt="Book Cover" style="max-width: 100%;" />
       <h3 id="modalTitle">Book Title</h3>
       <p id="modalAuthor">Author</p>
       <p id="modalDescription">Description</p>
+      <p id="modalRating">Rating: </p>
+      <div id="ratingContainer"></div>
       <hr />
       <h4>Reviews</h4>
-      <ul id="reviewsList">
-        <li>Example Review</li>
-      </ul>
+      <ul id="reviewsList"></ul>
+      <form id="reviewForm">
+        <input type="text" id="newReview" placeholder="Write a review..." required />
+        <button type="submit">Add Review</button>
+      </form>
     </div>
   </div>
+
+  <!-- External JS -->
+  <script src="script.js"></script>
 </body>
 </html>
