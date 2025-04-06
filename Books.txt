@@ -4,50 +4,51 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Epic Reads</title>
+  <!-- Font Awesome for Social Media Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, #ffecd2, #fcb69f);
       color: #333;
       line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
     }
-
     header {
       background-color: #1a1a1a;
       color: #fff;
       padding: 1rem 0;
     }
-
     .header-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 0 1rem;
     }
-
     nav ul {
       list-style: none;
       display: flex;
       justify-content: center;
       margin-top: 0.5rem;
     }
-
     nav ul li {
       margin: 0 1rem;
     }
-
     nav ul li a {
       color: #ffecd2;
       text-decoration: none;
       font-weight: bold;
     }
-
+    .header-buttons {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
     .header-buttons button {
       background-color: #ffecd2;
       color: #1a1a1a;
@@ -56,16 +57,13 @@
       border-radius: 4px;
       cursor: pointer;
     }
-
     main {
       padding: 2rem;
       padding-bottom: 5rem;
     }
-
     section {
       margin-bottom: 2rem;
     }
-
     .controls {
       display: flex;
       flex-wrap: wrap;
@@ -74,17 +72,14 @@
       gap: 1rem;
       margin-bottom: 1rem;
     }
-
     input, select, textarea, button {
       font-family: inherit;
     }
-
     #searchBar, #sortDropdown, #categoryFilter {
       padding: 0.5rem;
       border: 1px solid #ccc;
       border-radius: 4px;
     }
-
     .view-toggle button,
     #randomBookBtn {
       padding: 0.5rem 1rem;
@@ -93,14 +88,12 @@
       cursor: pointer;
       border-radius: 4px;
     }
-
     #books-container {
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
       justify-content: center;
     }
-
     .book {
       background-color: #fff;
       border: 1px solid #ddd;
@@ -109,28 +102,23 @@
       text-align: center;
       border-radius: 8px;
     }
-
     .book img {
       max-width: 100%;
       height: auto;
       margin-bottom: 0.5rem;
     }
-
     .favorite-icon, .rating-star {
       display: none;
     }
-
     form {
       max-width: 600px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
     }
-
     form label {
       margin-top: 1rem;
     }
-
     form input,
     form textarea,
     form select {
@@ -139,7 +127,6 @@
       border-radius: 4px;
       margin-top: 0.5rem;
     }
-
     form button {
       margin-top: 1rem;
       padding: 0.7rem;
@@ -149,7 +136,6 @@
       border-radius: 4px;
       cursor: pointer;
     }
-
     footer {
       text-align: center;
       padding: 1rem;
@@ -159,7 +145,15 @@
       bottom: 0;
       width: 100%;
     }
-
+    .social-icons {
+      margin-top: 0.5rem;
+    }
+    .social-icons a {
+      color: #ffecd2;
+      margin: 0 0.5rem;
+      text-decoration: none;
+      font-size: 1.2rem;
+    }
     #scrollTopBtn {
       position: fixed;
       bottom: 80px;
@@ -172,7 +166,6 @@
       font-size: 1.2rem;
       cursor: pointer;
     }
-
     .modal {
       display: none;
       position: fixed;
@@ -185,7 +178,6 @@
       justify-content: center;
       align-items: center;
     }
-
     .modal-content {
       background-color: #fff;
       padding: 2rem;
@@ -194,7 +186,6 @@
       margin: auto;
       position: relative;
     }
-
     .close-button {
       position: absolute;
       top: 10px;
@@ -209,7 +200,8 @@
     <div class="header-top">
       <h1>Epic Reads</h1>
       <div class="header-buttons">
-        <button id="darkModeToggle">Dark Mode</button>
+        <button id="signInBtn">Sign In</button>
+        <button id="signUpBtn">Sign Up</button>
       </div>
     </div>
     <nav>
@@ -294,14 +286,21 @@
 
   <footer>
     <p>&copy; 2025 Epic Reads. All rights reserved.</p>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-telegram"></i></a>
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-whatsapp"></i></a>
+    </div>
   </footer>
 
   <button id="scrollTopBtn" title="Go to top">↑</button>
 
+  <!-- Modals -->
   <div id="bookModal" class="modal">
     <div class="modal-content">
-      <span class="close-button">&times;</span>
-      <img id="modalCover" src="" alt="Book Cover" style="max-width: 100%;" />
+      <span class="close-button" data-close="bookModal">&times;</span>
+      <img id="modalCover" src="" alt="Book Cover" />
       <h3 id="modalTitle">Book Title</h3>
       <p id="modalAuthor">Author</p>
       <p id="modalDescription">Description</p>
@@ -317,7 +316,47 @@
     </div>
   </div>
 
-  <!-- External JS -->
+  <div id="signupModal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" data-close="signupModal">&times;</span>
+      <h3>Sign Up</h3>
+      <form id="signupForm">
+        <label for="signupUsername">Username:</label>
+        <input type="text" id="signupUsername" required />
+        <label for="signupEmail">Email:</label>
+        <input type="email" id="signupEmail" required />
+        <label for="signupPassword">Password:</label>
+        <input type="password" id="signupPassword" required />
+        <button type="submit">Register</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="signinModal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" data-close="signinModal">&times;</span>
+      <h3>Sign In</h3>
+      <form id="signinForm">
+        <label for="signinEmail">Email:</label>
+        <input type="email" id="signinEmail" required />
+        <label for="signinPassword">Password:</label>
+        <input type="password" id="signinPassword" required />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+
   <script src="script.js"></script>
+  <script>
+    const signupModal = document.getElementById('signupModal');
+    const signinModal = document.getElementById('signinModal');
+    const bookModal = document.getElementById('bookModal');
+    const signUpBtn = document.getElementById('signUpBtn');
+    const signInBtn = document.getElementById('signInBtn');
+    const closeButtons = document.querySelectorAll('.close-button');
+
+    signUpBtn.addEventListener('click', () => signupModal.style.display = 'flex');
+    signInBtn.addEventListener('click', () => signinModal.style.display = 'flex');
+  </script>
 </body>
 </html>
