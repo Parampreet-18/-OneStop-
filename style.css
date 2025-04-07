@@ -6,7 +6,8 @@
 }
 
 body {
-    background-color: #eeeeea;
+    /* background-color: #77770a; */
+    background-image: url('https://images.unsplash.com/photo-1643916861337-1e13c6f09b72?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); 
 }
 
 .wrapper {
@@ -39,14 +40,15 @@ body {
 }
 
 .card > .row {
+    background-image: url('https://mrwallpaper.com/images/hd/pink-moon-vaporwave-aesthetic-tablet-x2n475qqug111lqg.jpgg'); 
     color: white;
     display: flex;
     flex-wrap: nowrap;
 }
 
 .card > .row > .icon {
-    background: #223;
-    color: white;
+    /* background: #223; */
+    color: rgb(10, 10, 10);
     border-radius: 50%;
     width: 50px;
     display: flex;
@@ -69,7 +71,7 @@ body {
 }
 
 .description p {
-    color: #b0b0ba;
+    color: #0f0f10;
     padding-top: 5px;
 }
 
