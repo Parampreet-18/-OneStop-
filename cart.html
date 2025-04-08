@@ -1,70 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ShopWithUs - Cart</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopWithUs - Your Online Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function removeItem(button) {
+            const card = button.closest('.product-card');
+            card.remove();
+        }
+    </script>
 </head>
-<body class="bg-gray-100">
-  <!-- Navbar -->
-  <nav class="bg-white shadow-md p-4 flex justify-between items-center sticky top-0 z-50">
-    <h1 class="text-2xl font-bold text-blue-600">ShopWithUs</h1>
-    <div class="flex space-x-4">
-      <a href="#" class="text-blue-600 hover:underline">Home</a>
-      <a href="#" class="text-blue-600 hover:underline">Products</a>
-      <a href="#" class="text-blue-600 hover:underline">Delivery</a>
-    </div>
-  </nav>
+<body class="bg-yellow-100">
+    <nav class="bg-white shadow-md p-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold text-blue-600">ShopWithUs</h1>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Cart</button>
+    </nav>
 
-  <!-- Cart Header -->
-  <header class="bg-blue-500 text-white text-center py-12">
-    <h2 class="text-4xl font-bold">Your Cart</h2>
-    <p class="mt-2 text-lg">Review your items before checkout</p>
-  </header>
+    <header class="bg-blue-500 text-white text-center py-12">
+        <h2 class="text-4xl font-bold">Welcome to ShopWithUs</h2>
+        <p class="mt-2 text-lg">Your ultimate destination for sports gear!</p>
+    </header>
 
-  <!-- Cart Items -->
-  <section class="container mx-auto my-10 px-4">
-    <div class="bg-white p-6 rounded-lg shadow-lg">
-      <h3 class="text-2xl font-semibold mb-6 text-gray-800">🛒 Cart Summary</h3>
-      <div class="space-y-6">
-        <!-- Item 1 -->
-        <div class="flex items-center justify-between border-b pb-4">
-          <div class="flex items-center space-x-4">
-            <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTUI4ZoywYumCRci35_9jsxmZfKhjtQxW9nZe72SUC9zmtF_txVOsQlsHZSxUSyawbf_StxV5NU6tpyN7r-4ui3AV-ki1_vmBJuOr37aoBEW_xjtWQq2JJf" alt="Cricket Ball" class="w-20 h-20 object-contain">
-            <div>
-              <h4 class="text-lg font-semibold">Cricket Ball</h4>
-              <p class="text-sm text-gray-600">₹200</p>
+    <section class="container mx-auto my-8 px-4">
+        <h3 class="text-2xl font-bold mb-6 text-gray-800">All Sports Gear</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Shoes and Socks for Each Sport -->
+            <div class="product-card bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
+                <img src="https://example.com/football-shoes.jpg" alt="Football Shoes" class="mx-auto w-32 h-32 object-cover">
+                <h4 class="mt-4 font-bold text-lg">Football Shoes</h4>
+                <p class="text-gray-600">Grip-enhanced cleats for turf play.</p>
+                <p class="text-blue-600 font-semibold mt-2">₹3200</p>
+                <button onclick="removeItem(this)" class="mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Remove</button>
             </div>
-          </div>
-          <button class="text-red-500 hover:underline">Remove</button>
-        </div>
 
-        <!-- Item 2 -->
-        <div class="flex items-center justify-between border-b pb-4">
-          <div class="flex items-center space-x-4">
-            <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSgnQGbxsGXJl4tw_Q2zpmWXJnLSdg_H8CIprAwdX68rB1U7LTKXivVxqPeS9SVydXy6hv0WsaPRaFn-kdsyqmWGQOhOy5JGNghWC7XIwFxwxvdxbue5Lg4" alt="Cricket Bat" class="w-20 h-20 object-contain">
-            <div>
-              <h4 class="text-lg font-semibold">Cricket Bat</h4>
-              <p class="text-sm text-gray-600">₹2500</p>
+            <div class="product-card bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
+                <img src="https://example.com/football-socks.jpg" alt="Football Socks" class="mx-auto w-32 h-32 object-cover">
+                <h4 class="mt-4 font-bold text-lg">Football Socks</h4>
+                <p class="text-gray-600">Moisture-wicking long socks.</p>
+                <p class="text-blue-600 font-semibold mt-2">₹350</p>
+                <button onclick="removeItem(this)" class="mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Remove</button>
             </div>
-          </div>
-          <button class="text-red-500 hover:underline">Remove</button>
+
+            <div class="product-card bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
+                <img src="https://example.com/basketball-shoes.jpg" alt="Basketball Shoes" class="mx-auto w-32 h-32 object-cover">
+                <h4 class="mt-4 font-bold text-lg">Basketball Shoes</h4>
+                <p class="text-gray-600">Ankle support and shock absorption.</p>
+                <p class="text-blue-600 font-semibold mt-2">₹4000</p>
+                <button onclick="removeItem(this)" class="mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Remove</button>
+            </div>
+
+            <div class="product-card bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
+                <img src="https://example.com/basketball-socks.jpg" alt="Basketball Socks" class="mx-auto w-32 h-32 object-cover">
+                <h4 class="mt-4 font-bold text-lg">Basketball Socks</h4>
+                <p class="text-gray-600">Cushioned socks for comfort.</p>
+                <p class="text-blue-600 font-semibold mt-2">₹300</p>
+                <button onclick="removeItem(this)" class="mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Remove</button>
+            </div>
+
+            <div class="product-card bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
+                <img src="https://example.com/baseball-ball.jpg" alt="Baseball Ball" class="mx-auto w-32 h-32 object-cover">
+                <h4 class="mt-4 font-bold text-lg">Baseball Ball</h4>
+                <p class="text-gray-600">Official size leather ball.</p>
+                <p class="text-blue-600 font-semibold mt-2">₹500</p>
+                <button onclick="removeItem(this)" class="mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Remove</button>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <!-- Total & Checkout -->
-      <div class="mt-6 flex justify-between items-center">
-        <h4 class="text-xl font-bold">Total: ₹2700</h4>
-        <button class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 transition">Proceed to Checkout</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-gray-800 text-white text-center py-4 mt-12">
-    <p>&copy; 2025 ShopWithUs - All Rights Reserved.</p>
-  </footer>
+    <footer class="bg-gray-800 text-white text-center py-4 mt-8">
+        <p>&copy; 2025 ShopWithUs - All Rights Reserved.</p>
+    </footer>
 </body>
 </html>
-
