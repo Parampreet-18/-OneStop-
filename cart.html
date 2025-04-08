@@ -9,16 +9,45 @@
         function removeItem(button) {
             const card = button.closest('.product-card');
             card.remove();
-            updateCartCount();
+            saveCartState();
+            updateCartSummary();
         }
 
-        function updateCartCount() {
-            const count = document.querySelectorAll('.product-card').length;
-            document.getElementById('cart-count').textContent = count;
-            document.getElementById('total-count').textContent = count;
+        function updateQuantity(input) {
+            if (input.value < 1) input.value = 1;
+            saveCartState();
+            updateCartSummary();
         }
 
-        window.onload = updateCartCount;
+        function updateCartSummary() {
+            const cards = document.querySelectorAll('.product-card');
+            let totalItems = 0;
+            let totalPrice = 0;
+            cards.forEach(card => {
+                const quantity = parseInt(card.querySelector('.item-qty').value);
+                const price = parseFloat(card.querySelector('.item-price').textContent.replace('₹',''));
+                totalItems += quantity;
+                totalPrice += quantity * price;
+            });
+            document.getElementById('cart-count').textContent = totalItems;
+            document.getElementById('total-count').textContent = totalItems;
+            document.getElementById('total-price').textContent = `₹${totalPrice.toFixed(2)}`;
+        }
+
+        function saveCartState() {
+            const cartHTML = document.querySelector('.cart-items').innerHTML;
+            localStorage.setItem('cartHTML', cartHTML);
+        }
+
+        function loadCartState() {
+            const savedCart = localStorage.getItem('cartHTML');
+            if (savedCart) {
+                document.querySelector('.cart-items').innerHTML = savedCart;
+            }
+            updateCartSummary();
+        }
+
+        window.onload = loadCartState;
     </script>
 </head>
 <body class="bg-yellow-100">
@@ -37,19 +66,21 @@
 
     <section class="container mx-auto my-8 px-4">
         <h3 class="text-2xl font-bold mb-6 text-gray-800">All Sports Gear</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <!-- Example product cards -->
+        <div class="cart-items grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             <div class="product-card bg-white shadow-md rounded-lg p-4 text-center">
                 <img src="https://via.placeholder.com/100" alt="Football" class="mx-auto mb-2 w-24 h-24 object-cover">
                 <h4 class="text-lg font-bold">Football Shoes</h4>
-                <p class="text-blue-600">₹1500</p>
+                <p class="text-blue-600 item-price">₹1500</p>
+                <div class="mt-2">
+                    <label for="qty" class="block text-sm">Qty:</label>
+                    <input type="number" class="item-qty w-16 px-2 py-1 border rounded text-center" value="1" min="1" onchange="updateQuantity(this)">
+                </div>
                 <button onclick="removeItem(this)" class="mt-3 bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition">Remove</button>
             </div>
-            <!-- Add more product cards here -->
         </div>
 
         <div class="mt-10 flex justify-between items-center bg-white p-4 shadow-md rounded-lg">
-            <p class="text-lg font-semibold">Total Items in Cart: <span id="total-count">0</span></p>
+            <p class="text-lg font-semibold">Total Items in Cart: <span id="total-count">0</span> | Total Price: <span id="total-price">₹0.00</span></p>
             <button class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 transition">Proceed to Checkout</button>
         </div>
     </section>
@@ -59,4 +90,3 @@
     </footer>
 </body>
 </html>
-
