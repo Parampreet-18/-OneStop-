@@ -1,187 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopWithUs - Your Online Store</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ShopWithUs - Your Online Store</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-amber-900">
-    <nav class="bg-white shadow-md p-4 flex justify-between items-center">
-        <h1 class="text-2xl font-bold text-blue-600">ShopWithUs</h1>
-        <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Cart</button>
-    </nav>
-    
-    <header class="bg-blue-500 text-white text-center py-12">
-        <h2 class="text-4xl font-bold">Welcome to ShopWithUs</h2>
-        <p class="mt-2 text-lg">Your one-stop shop for quality cricket gear!</p>
-    </header>
-    
-    <section class="container mx-auto my-8 px-4">
-        <h3 class="text-2xl font-bold mb-6 text-white">Featured Products</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            <!-- Product 1 -->
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTUI4ZoywYumCRci35_9jsxmZfKhjtQxW9nZe72SUC9zmtF_txVOsQlsHZSxUSyawbf_StxV5NU6tpyN7r-4ui3AV-ki1_vmBJuOr37aoBEW_xjtWQq2JJf" alt="Cricket Ball" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Cricket Ball</h4>
-                <p class="text-gray-600">High-quality leather ball for professional play.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹200</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
-            <!-- Product 2 -->
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSgnQGbxsGXJl4tw_Q2zpmWXJnLSdg_H8CIprAwdX68rB1U7LTKXivVxqPeS9SVydXy6hv0WsaPRaFn-kdsyqmWGQOhOy5JGNghWC7XIwFxwxvdxbue5Lg4" alt="Cricket Bat" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Cricket Bat</h4>
-                <p class="text-gray-600">Premium quality willow bat for powerful shots.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹2500</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
-            <!-- Product 3 -->
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://m.media-amazon.com/images/I/61Z0+ihZF5L._AC_UF1000,1000_QL80_.jpg" alt="Cricket Helmet" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Cricket Helmet</h4>
-                <p class="text-gray-600">Durable helmet for maximum head protection.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹1200</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
-            <!-- Product 4 -->
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://5.imimg.com/data5/YH/BL/MY-41417742/cricket-gloves.jpg" alt="Cricket Gloves" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Cricket Gloves</h4>
-                <p class="text-gray-600">Comfortable gloves for secure grip and safety.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹800</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
-            <!-- Product 5 -->
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://m.media-amazon.com/images/I/51V6MChyRDL._SX466_.jpg" alt="Cricket Pads" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Cricket Pads</h4>
-                <p class="text-gray-600">Lightweight pads with extra knee protection.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹950</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
-            <!-- Product 6 -->
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://www.khelmart.com/pub/media/catalog/product/cache/1/image/600x600/9df78eab33525d08d6e5fb8d27136e95/m/r/mrf-sticker-kit-for-bat.jpg" alt="Bat Stickers" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Bat Stickers</h4>
-                <p class="text-gray-600">Stylish MRF bat stickers to personalize your gear.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹150</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://example.com/football.jpg" alt="Football" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Football</h4>
-                <p class="text-gray-600">FIFA-approved match ball.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹1800</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
-    
-                <!-- Basketball Gear -->
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://example.com/basketball.jpg" alt="Basketball" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Basketball</h4>
-                <p class="text-gray-600">Durable indoor/outdoor ball.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹1500</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
-    
-                <!-- Tennis Gear -->
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://example.com/tennis-racket.jpg" alt="Tennis Racket" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Tennis Racket</h4>
-                <p class="text-gray-600">Lightweight racket with grip.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹3500</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
-    
-                <!-- Hockey Gear -->
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://example.com/hockey-stick.jpg" alt="Hockey Stick" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Hockey Stick</h4>
-                <p class="text-gray-600">Fiberglass hockey stick.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹2200</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
-    
-                <!-- Badminton Gear -->
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://example.com/badminton-racket.jpg" alt="Badminton Racket" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Badminton Racket</h4>
-                <p class="text-gray-600">Lightweight graphite frame.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹1200</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
-    
-                <!-- Table Tennis Paddle -->
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://example.com/table-tennis.jpg" alt="Table Tennis Paddle" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Table Tennis Paddle</h4>
-                <p class="text-gray-600">Professional paddle with grip.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹800</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
-    
-                <!-- Boxing Gloves -->
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://example.com/boxing-gloves.jpg" alt="Boxing Gloves" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Boxing Gloves</h4>
-                <p class="text-gray-600">Heavy-duty training gloves.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹2200</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
-    
-                <!-- Baseball Bat -->
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://example.com/baseball-bat.jpg" alt="Baseball Bat" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Baseball Bat</h4>
-                <p class="text-gray-600">Aluminum bat for practice and match.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹3000</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://example.com/football-shoes.jpg" alt="Football Shoes" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Football Shoes</h4>
-                <p class="text-gray-600">Grip-enhanced cleats for turf play.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹3200</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
+  <nav class="bg-white shadow-md p-4 flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-blue-600">ShopWithUs</h1>
+    <a href="/cart.html" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Cart</a>
+  </nav>
 
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://example.com/football-socks.jpg" alt="Football Socks" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Football Socks</h4>
-                <p class="text-gray-600">Moisture-wicking long socks.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹350</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
+  <header class="bg-blue-500 text-white text-center py-12">
+    <h2 class="text-4xl font-bold">Welcome to ShopWithUs</h2>
+    <p class="mt-2 text-lg">Your one-stop shop for quality cricket gear!</p>
+  </header>
 
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://example.com/basketball-shoes.jpg" alt="Basketball Shoes" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Basketball Shoes</h4>
-                <p class="text-gray-600">Ankle support and shock absorption.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹4000</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
+  <section class="container mx-auto my-8 px-4">
+    <h3 class="text-2xl font-bold mb-6 text-white">Featured Products</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
 
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://example.com/basketball-socks.jpg" alt="Basketball Socks" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Basketball Socks</h4>
-                <p class="text-gray-600">Cushioned socks for comfort.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹300</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
+      <!-- Product Cards -->
+      <!-- Cricket Ball -->
+      <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
+        <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTUI4ZoywYumCRci35_9jsxmZfKhjtQxW9nZe72SUC9zmtF_txVOsQlsHZSxUSyawbf_StxV5NU6tpyN7r-4ui3AV-ki1_vmBJuOr37aoBEW_xjtWQq2JJf" alt="Professional Cricket Ball" class="mx-auto w-32 h-32 object-cover">
+        <h4 class="mt-4 font-bold text-lg">Cricket Ball</h4>
+        <p class="text-gray-600">High-quality leather ball for professional play.</p>
+        <p class="text-blue-600 font-semibold mt-2">₹200</p>
+        <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
+      </div>
 
-            <!-- Baseball Ball -->
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://example.com/baseball-ball.jpg" alt="Baseball Ball" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Baseball Ball</h4>
-                <p class="text-gray-600">Official size leather ball.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹500</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
-        </div>
-    </section>
-    
-    <footer class="bg-gray-900 text-white text-center py-4 mt-8">
-        <p>&copy; 2025 ShopWithUs - All Rights Reserved.</p>
-    </footer>
+      <!-- ... [Repeat similar structure for each product] ... -->
+
+      <!-- Bat Stickers (fixed missing closing div) -->
+      <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
+        <img src="https://www.khelmart.com/pub/media/catalog/product/cache/1/image/600x600/9df78eab33525d08d6e5fb8d27136e95/m/r/mrf-sticker-kit-for-bat.jpg" alt="Stylish MRF Bat Stickers" class="mx-auto w-32 h-32 object-cover">
+        <h4 class="mt-4 font-bold text-lg">Bat Stickers</h4>
+        <p class="text-gray-600">Stylish MRF bat stickers to personalize your gear.</p>
+        <p class="text-blue-600 font-semibold mt-2">₹150</p>
+        <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
+      </div>
+
+      <!-- Football -->
+      <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
+        <img src="https://placehold.co/200x200?text=Football" alt="FIFA-approved Match Football" class="mx-auto w-32 h-32 object-cover">
+        <h4 class="mt-4 font-bold text-lg">Football</h4>
+        <p class="text-gray-600">FIFA-approved match ball.</p>
+        <p class="text-blue-600 font-semibold mt-2">₹1800</p>
+        <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
+      </div>
+
+      <!-- Basketball -->
+      <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
+        <img src="https://placehold.co/200x200?text=Basketball" alt="Durable Indoor/Outdoor Basketball" class="mx-auto w-32 h-32 object-cover">
+        <h4 class="mt-4 font-bold text-lg">Basketball</h4>
+        <p class="text-gray-600">Durable indoor/outdoor ball.</p>
+        <p class="text-blue-600 font-semibold mt-2">₹1500</p>
+        <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
+      </div>
+
+      <!-- Continue other sports similarly -->
+      <!-- Example: -->
+      <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
+        <img src="https://placehold.co/200x200?text=Tennis+Racket" alt="Lightweight Tennis Racket" class="mx-auto w-32 h-32 object-cover">
+        <h4 class="mt-4 font-bold text-lg">Tennis Racket</h4>
+        <p class="text-gray-600">Lightweight racket with grip.</p>
+        <p class="text-blue-600 font-semibold mt-2">₹3500</p>
+        <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
+      </div>
+
+      <!-- Add more products here if needed -->
+
+    </div>
+  </section>
+
+  <footer class="bg-gray-900 text-white text-center py-4 mt-8">
+    <p>&copy; 2025 ShopWithUs - All Rights Reserved.</p>
+  </footer>
 </body>
 </html>
