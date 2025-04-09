@@ -1,54 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopWithUs - Delivery</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ShopWithUs - Delivery</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-yellow-100">
-    <nav class="bg-white shadow-md p-4 flex justify-between items-center">
-        <h1 class="text-2xl font-bold text-blue-600">ShopWithUs</h1>
-        <a href="cart.html" class="text-blue-600 hover:underline">Back to Cart</a>
-    </nav>
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md p-4 flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-blue-600">ShopWithUs</h1>
+    <a href="cart.html" class="text-blue-600 hover:underline">Back to Cart</a>
+  </nav>
 
-    <header class="bg-blue-500 text-white text-center py-12">
-        <h2 class="text-4xl font-bold">Delivery Details</h2>
-        <p class="mt-2 text-lg">Please provide your shipping information</p>
-    </header>
+  <!-- Header -->
+  <header class="bg-blue-500 text-white text-center py-12">
+    <h2 class="text-4xl font-bold">Delivery Details</h2>
+    <p class="mt-2 text-lg">Please provide your shipping information</p>
+  </header>
 
-    <section class="container mx-auto my-8 px-4">
-        <form class="bg-white p-6 rounded-lg shadow-md max-w-xl mx-auto">
-            <div class="mb-4">
-                <label class="block text-gray-700 font-semibold mb-2" for="name">Full Name</label>
-                <input type="text" id="name" class="w-full px-4 py-2 border rounded" placeholder="John Doe" required>
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 font-semibold mb-2" for="address">Address</label>
-                <textarea id="address" class="w-full px-4 py-2 border rounded" placeholder="123 Main Street" rows="3" required></textarea>
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 font-semibold mb-2" for="phone">Phone Number</label>
-                <input type="tel" id="phone" class="w-full px-4 py-2 border rounded" placeholder="9876543210" required>
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 font-semibold mb-2" for="delivery">Delivery Method</label>
-                <select id="delivery" class="w-full px-4 py-2 border rounded">
-                    <option>Standard Delivery (3-5 days)</option>
-                    <option>Express Delivery (1-2 days)</option>
-                </select>
-            </div>
+  <!-- Form Section -->
+  <section class="container mx-auto my-8 px-4">
+    <form class="bg-white p-6 rounded-lg shadow-md max-w-xl mx-auto">
+      <!-- Name -->
+      <div class="mb-4">
+        <label for="name" class="block text-gray-700 font-semibold mb-2">Full Name</label>
+        <input type="text" id="name" class="w-full px-4 py-2 border rounded" placeholder="John Doe" required>
+      </div>
 
-            <div class="mt-6">
-                <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 transition w-full">Confirm Delivery</button>
-            </div>
-        </form>
-    </section>
+      <!-- Email -->
+      <div class="mb-4">
+        <label for="email" class="block text-gray-700 font-semibold mb-2">Email Address</label>
+        <input type="email" id="email" class="w-full px-4 py-2 border rounded" placeholder="john@example.com" required>
+      </div>
 
-    <footer class="bg-gray-800 text-white text-center py-4 mt-8">
-        <p>&copy; 2025 ShopWithUs - All Rights Reserved.</p>
-    </footer>
+      <!-- Address -->
+      <div class="mb-4">
+        <label for="address" class="block text-gray-700 font-semibold mb-2">Address</label>
+        <textarea id="address" class="w-full px-4 py-2 border rounded" placeholder="123 Main Street" rows="3" required></textarea>
+      </div>
+
+      <!-- Pincode -->
+      <div class="mb-4">
+        <label for="pincode" class="block text-gray-700 font-semibold mb-2">Pincode</label>
+        <input type="text" id="pincode" class="w-full px-4 py-2 border rounded" placeholder="123456" required>
+      </div>
+
+      <!-- Phone -->
+      <div class="mb-4">
+        <label for="phone" class="block text-gray-700 font-semibold mb-2">Phone Number</label>
+        <input type="tel" id="phone" class="w-full px-4 py-2 border rounded" placeholder="9876543210" required>
+      </div>
+
+      <!-- Delivery Method -->
+      <div class="mb-4">
+        <label for="delivery" class="block text-gray-700 font-semibold mb-2">Delivery Method</label>
+        <select id="delivery" class="w-full px-4 py-2 border rounded">
+          <option>Standard Delivery (3-5 days)</option>
+          <option>Express Delivery (1-2 days)</option>
+        </select>
+      </div>
+
+      <!-- Save Info -->
+      <div class="mb-4 flex items-center">
+        <input type="checkbox" id="save" class="mr-2">
+        <label for="save" class="text-gray-700">Save this information for next time</label>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="mt-6">
+        <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 transition w-full">
+          Confirm Delivery
+        </button>
+      </div>
+
+      <!-- Confirmation Message Placeholder -->
+      <p id="confirmation" class="text-green-600 font-medium text-center mt-4 hidden">Your delivery information has been submitted!</p>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white text-center py-4 mt-8">
+    <p>&copy; 2025 ShopWithUs - All Rights Reserved.</p>
+  </footer>
+
+  <!-- Optional JS for basic confirmation (can be improved with real backend) -->
+  <script>
+    const form = document.querySelector("form");
+    const confirmation = document.getElementById("confirmation");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      confirmation.classList.remove("hidden");
+      form.reset();
+    });
+  </script>
 </body>
 </html>
-
-
