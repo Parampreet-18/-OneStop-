@@ -4,9 +4,23 @@
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
 }
+html, body {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    overflow-x: hidden;
+}
+
 
 body {
-    /* background-color: #77770a; */
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    overflow-x: hidden;
     background-image: url('https://media.istockphoto.com/id/1473333850/vector/abstract-watercolor-background-pastel-colored-beige-sepia-toned.jpg?s=2048x2048&w=is&k=20&c=-XWgbA9pBuu1hznM7tPuzvqp5FjfwfD_ym-2PxsnxbU='); 
 }
 
