@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Epic Reads</title>
-  <!-- Font Awesome for Social Media Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     * {
@@ -43,19 +42,6 @@
       color: #ffecd2;
       text-decoration: none;
       font-weight: bold;
-    }
-    .header-buttons {
-      display: flex;
-      gap: 0.5rem;
-      align-items: center;
-    }
-    .header-buttons button {
-      background-color: #ffecd2;
-      color: #1a1a1a;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      cursor: pointer;
     }
     main {
       padding: 2rem;
@@ -106,9 +92,6 @@
       max-width: 100%;
       height: auto;
       margin-bottom: 0.5rem;
-    }
-    .favorite-icon, .rating-star {
-      display: none;
     }
     form {
       max-width: 600px;
@@ -186,6 +169,21 @@
       margin: auto;
       position: relative;
     }
+    .rating-star {
+      font-size: 24px;
+      cursor: pointer;
+      margin-right: 5px;
+      transition: color 0.2s ease;
+    }
+    .rating-star.red {
+      color: red;
+    }
+    .rating-star.inactive {
+      color: lightgray;
+    }
+    .rating-star:hover {
+      transform: scale(1.2);
+    }
     .close-button {
       position: absolute;
       top: 10px;
@@ -199,17 +197,12 @@
   <header>
     <div class="header-top">
       <h1>Epic Reads</h1>
-      <div class="header-buttons">
-        <button id="signInBtn">Sign In</button>
-        <button id="signUpBtn">Sign Up</button>
-      </div>
     </div>
     <nav>
       <ul>
         <li><a href="#featured">Featured Books</a></li>
         <li><a href="#submitBook">Submit Book</a></li>
         <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
   </header>
@@ -229,10 +222,10 @@
           <option value="rating-desc">Rating (High to Low)</option>
         </select>
         <select id="categoryFilter">
-          <option>All Categories</option>
-          <option>Fiction</option>
-          <option>Non-fiction</option>
-          <option>Mystery</option>
+          <option value="all">All Categories</option>
+          <option value="fiction">Fiction</option>
+          <option value="non-fiction">Non-fiction</option>
+          <option value="mystery">Mystery</option>
         </select>
         <div class="view-toggle">
           <button id="allBooksBtn">All Books</button>
@@ -247,20 +240,20 @@
       <h2>Submit a New Book</h2>
       <form id="submitBookForm">
         <label for="newTitle">Title:</label>
-        <input type="text" id="newTitle" required />
+        <input type="text" id="newTitle" name="newTitle" required />
         <label for="newAuthor">Author:</label>
-        <input type="text" id="newAuthor" required />
+        <input type="text" id="newAuthor" name="newAuthor" required />
         <label for="newCover">Cover URL:</label>
-        <input type="url" id="newCover" required />
+        <input type="url" id="newCover" name="newCover" required />
         <label for="newCategory">Category:</label>
-        <select id="newCategory">
-          <option>Classic</option>
-          <option>Dystopian</option>
-          <option>Fiction</option>
-          <option>Non-fiction</option>
+        <select id="newCategory" name="newCategory">
+          <option value="classic">Classic</option>
+          <option value="dystopian">Dystopian</option>
+          <option value="fiction">Fiction</option>
+          <option value="non-fiction">Non-fiction</option>
         </select>
         <label for="newDescription">Description:</label>
-        <textarea id="newDescription" required></textarea>
+        <textarea id="newDescription" name="newDescription" required></textarea>
         <button type="submit">Add Book</button>
       </form>
     </section>
@@ -268,19 +261,6 @@
     <section id="about">
       <h2>About Epic Reads</h2>
       <p>Epic Reads is your go-to website for the best book recommendations, reviews, and a community of avid readers.</p>
-    </section>
-
-    <section id="contact">
-      <h2>Contact Us</h2>
-      <form id="contactForm">
-        <label for="name">Name:</label>
-        <input type="text" id="name" required />
-        <label for="email">Email:</label>
-        <input type="email" id="email" required />
-        <label for="message">Message:</label>
-        <textarea id="message" required></textarea>
-        <button type="submit">Send Message</button>
-      </form>
     </section>
   </main>
 
@@ -296,7 +276,7 @@
 
   <button id="scrollTopBtn" title="Go to top">↑</button>
 
-  <!-- Modals -->
+  <!-- Book Modal -->
   <div id="bookModal" class="modal">
     <div class="modal-content">
       <span class="close-button" data-close="bookModal">&times;</span>
@@ -310,53 +290,12 @@
       <h4>Reviews</h4>
       <ul id="reviewsList"></ul>
       <form id="reviewForm">
-        <input type="text" id="newReview" placeholder="Write a review..." required />
+        <input type="text" id="newReview" name="newReview" placeholder="Write a review..." required />
         <button type="submit">Add Review</button>
       </form>
     </div>
   </div>
 
-  <div id="signupModal" class="modal">
-    <div class="modal-content">
-      <span class="close-button" data-close="signupModal">&times;</span>
-      <h3>Sign Up</h3>
-      <form id="signupForm">
-        <label for="signupUsername">Username:</label>
-        <input type="text" id="signupUsername" required />
-        <label for="signupEmail">Email:</label>
-        <input type="email" id="signupEmail" required />
-        <label for="signupPassword">Password:</label>
-        <input type="password" id="signupPassword" required />
-        <button type="submit">Register</button>
-      </form>
-    </div>
-  </div>
-
-  <div id="signinModal" class="modal">
-    <div class="modal-content">
-      <span class="close-button" data-close="signinModal">&times;</span>
-      <h3>Sign In</h3>
-      <form id="signinForm">
-        <label for="signinEmail">Email:</label>
-        <input type="email" id="signinEmail" required />
-        <label for="signinPassword">Password:</label>
-        <input type="password" id="signinPassword" required />
-        <button type="submit">Login</button>
-      </form>
-    </div>
-  </div>
-
   <script src="script.js"></script>
-  <script>
-    const signupModal = document.getElementById('signupModal');
-    const signinModal = document.getElementById('signinModal');
-    const bookModal = document.getElementById('bookModal');
-    const signUpBtn = document.getElementById('signUpBtn');
-    const signInBtn = document.getElementById('signInBtn');
-    const closeButtons = document.querySelectorAll('.close-button');
-
-    signUpBtn.addEventListener('click', () => signupModal.style.display = 'flex');
-    signInBtn.addEventListener('click', () => signinModal.style.display = 'flex');
-  </script>
 </body>
 </html>
