@@ -16,19 +16,37 @@
       background: linear-gradient(135deg, #ffecd2, #fcb69f);
       color: #333;
       line-height: 1.6;
-      transition: background 0.3s, color 0.3s;
+      transition: background 0.3s ease, color 0.3s ease;
     }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes popUp {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
     header {
       background-color: #1a1a1a;
       color: #fff;
       padding: 1rem 0;
+      animation: slideIn 1s ease forwards;
     }
+
     .header-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 0 1rem;
     }
+
     nav ul {
       list-style: none;
       display: flex;
@@ -37,19 +55,27 @@
     }
     nav ul li {
       margin: 0 1rem;
+      transition: transform 0.3s ease;
+    }
+    nav ul li:hover {
+      transform: translateY(-3px);
     }
     nav ul li a {
       color: #ffecd2;
       text-decoration: none;
       font-weight: bold;
     }
+
     main {
       padding: 2rem;
       padding-bottom: 5rem;
+      animation: fadeIn 1.5s ease forwards;
     }
+
     section {
       margin-bottom: 2rem;
     }
+
     .controls {
       display: flex;
       flex-wrap: wrap;
@@ -57,15 +83,20 @@
       align-items: center;
       gap: 1rem;
       margin-bottom: 1rem;
+      animation: fadeIn 1.2s ease forwards;
     }
+
     input, select, textarea, button {
       font-family: inherit;
+      transition: all 0.3s ease;
     }
+
     #searchBar, #sortDropdown, #categoryFilter {
       padding: 0.5rem;
       border: 1px solid #ccc;
       border-radius: 4px;
     }
+
     .view-toggle button,
     #randomBookBtn {
       padding: 0.5rem 1rem;
@@ -73,13 +104,21 @@
       background-color: #fff;
       cursor: pointer;
       border-radius: 4px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
     }
+    .view-toggle button:hover,
+    #randomBookBtn:hover {
+      background-color: #fcb69f;
+      transform: scale(1.05);
+    }
+
     #books-container {
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
       justify-content: center;
     }
+
     .book {
       background-color: #fff;
       border: 1px solid #ddd;
@@ -87,21 +126,37 @@
       width: 200px;
       text-align: center;
       border-radius: 8px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: popUp 0.5s ease forwards;
     }
+    .book:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
     .book img {
       max-width: 100%;
       height: auto;
       margin-bottom: 0.5rem;
+      border-radius: 4px;
+      transition: transform 0.3s ease;
     }
+    .book img:hover {
+      transform: scale(1.05);
+    }
+
     form {
       max-width: 600px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
+      animation: fadeIn 1s ease forwards;
     }
+
     form label {
       margin-top: 1rem;
     }
+
     form input,
     form textarea,
     form select {
@@ -110,6 +165,7 @@
       border-radius: 4px;
       margin-top: 0.5rem;
     }
+
     form button {
       margin-top: 1rem;
       padding: 0.7rem;
@@ -118,25 +174,37 @@
       border: none;
       border-radius: 4px;
       cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
     }
+    form button:hover {
+      background-color: #333;
+      transform: scale(1.05);
+    }
+
     footer {
       text-align: center;
       padding: 1rem;
       background-color: #1a1a1a;
       color: #ffecd2;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
     }
+
     .social-icons {
       margin-top: 0.5rem;
     }
+
     .social-icons a {
       color: #ffecd2;
       margin: 0 0.5rem;
       text-decoration: none;
       font-size: 1.2rem;
+      transition: color 0.3s ease, transform 0.3s ease;
     }
+
+    .social-icons a:hover {
+      color: #fcb69f;
+      transform: scale(1.2);
+    }
+
     #scrollTopBtn {
       position: fixed;
       bottom: 80px;
@@ -148,7 +216,13 @@
       border-radius: 50%;
       font-size: 1.2rem;
       cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
     }
+    #scrollTopBtn:hover {
+      background-color: #fcb69f;
+      transform: scale(1.1);
+    }
+
     .modal {
       display: none;
       position: fixed;
@@ -160,7 +234,9 @@
       z-index: 1000;
       justify-content: center;
       align-items: center;
+      animation: fadeIn 0.5s ease forwards;
     }
+
     .modal-content {
       background-color: #fff;
       padding: 2rem;
@@ -168,12 +244,14 @@
       max-width: 500px;
       margin: auto;
       position: relative;
+      animation: popUp 0.4s ease forwards;
     }
+
     .rating-star {
       font-size: 24px;
       cursor: pointer;
       margin-right: 5px;
-      transition: color 0.2s ease;
+      transition: color 0.2s ease, transform 0.2s ease;
     }
     .rating-star.red {
       color: red;
@@ -184,12 +262,17 @@
     .rating-star:hover {
       transform: scale(1.2);
     }
+
     .close-button {
       position: absolute;
       top: 10px;
       right: 15px;
       font-size: 1.5rem;
       cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .close-button:hover {
+      transform: rotate(90deg);
     }
   </style>
 </head>
@@ -222,7 +305,7 @@
           <option value="rating-desc">Rating (High to Low)</option>
         </select>
         <select id="categoryFilter">
-          <option value="all">All Categories</option>
+          <option value="All">All Categories</option>
           <option value="fiction">Fiction</option>
           <option value="non-fiction">Non-fiction</option>
           <option value="mystery">Mystery</option>
@@ -260,7 +343,7 @@
 
     <section id="about">
       <h2>About Epic Reads</h2>
-      <p>Epic Reads is your go-to website for the best book recommendations, reviews, and a community of avid readers.</p>
+      <p>Epic Reads is a vibrant online community and platform created by HarperCollins, dedicated to young adult (YA) literature. It helps readers discover new and upcoming YA books across genres like fantasy, romance, sci-fi, and contemporary fiction. Known for its fun, fan-centered vibe, Epic Reads features book recommendations, quizzes, polls, cover reveals, and exclusive content such as author interviews and sneak peeks. The platform also thrives on social media, engaging readers through TikToks, memes, and aesthetic bookish content. With a strong sense of community and excitement, Epic Reads is the go-to space for YA book lovers to connect, explore, and fangirl.</p>
     </section>
   </main>
 
@@ -286,7 +369,7 @@
       <p id="modalDescription">Description</p>
       <p id="modalRating">Rating: </p>
       <div id="ratingContainer"></div>
-      <hr />
+      <hr/>
       <h4>Reviews</h4>
       <ul id="reviewsList"></ul>
       <form id="reviewForm">
