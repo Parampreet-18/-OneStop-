@@ -371,7 +371,7 @@
     <section id="about">
       <h2>About Epic Reads</h2>
       <p>
-        Epic Reads is a vibrant online community and platform created by HarperCollins, dedicated to young adult (YA) literature. It helps readers discover new and upcoming YA books across genres like fantasy, romance, sci-fi, and contemporary fiction. Known for its fun, fan-centered vibe, Epic Reads features book recommendations, quizzes, polls, cover reveals, and exclusive content such as author interviews and sneak peeks. The platform also thrives on social media, engaging readers through TikToks, memes, and aesthetic bookish content. With a strong sense of community and excitement, Epic Reads is the go-to space for YA book lovers to connect, explore, and fangirl.
+        Epic Reads is a vibrant online community and platform created by HarperCollins, dedicated to young adult (YA) literature. It helps readers discover new and upcoming YA books across genres like fantasy, romance, sci-fi, and contemporary fiction. Known for its fun, fan-centered vibe, Epic Reads features book recommendations, quizzes, polls, cover reveals, and exclusive content such as author interviews and sneak peeks. The platform also thrives on social media, engaging readers through TikToks, memes, and aesthetic bookish content. With a strong sense of community and excitement, Epic Reads is the go-to space for YA book lovers to connect, explore, and fangirl."Where every page begins a quest, and stories bring your soul to rest."
       </p>
     </section>
   </main>
