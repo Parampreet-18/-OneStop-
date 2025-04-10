@@ -1,6 +1,31 @@
-document.addEventListener('DOMContentLoaded', () => { 
+document.addEventListener('DOMContentLoaded', () => {
   let viewMode = 'all';
   let currentBook = null;
+  let favorites = [];
+
+  const getEl = id => document.getElementById(id);
+
+  const booksContainer = getEl('books-container');
+  const searchBar = getEl('searchBar');
+  const sortDropdown = getEl('sortDropdown');
+  const categoryFilter = getEl('categoryFilter');
+  const allBooksBtn = getEl('allBooksBtn');
+  const favoritesBtn = getEl('favoritesBtn');
+  const randomBookBtn = getEl('randomBookBtn');
+  const modal = getEl('bookModal');
+  const modalCover = getEl('modalCover');
+  const modalTitle = getEl('modalTitle');
+  const modalAuthor = getEl('modalAuthor');
+  const modalDescription = getEl('modalDescription');
+  const modalRating = getEl('modalRating');
+  const ratingContainer = getEl('ratingContainer');
+  const reviewsList = getEl('reviewsList');
+  const reviewForm = getEl('reviewForm');
+  const newReviewText = getEl('newReview');
+  const closeButton = document.querySelector('.close-button');
+  const submitBookForm = getEl('submitBookForm');
+  const scrollTopBtn = getEl('scrollTopBtn');
+  const searchSuggestions = getEl('searchSuggestions');
 
   const books = [
     {
@@ -140,43 +165,26 @@ document.addEventListener('DOMContentLoaded', () => {
     book.category = bookCategories.get(book.title) || 'Uncategorized';
   });
 
-  const getEl = id => document.getElementById(id);
+  // Dark Mode
+  const darkModeToggle = getEl('darkModeToggle');
+  darkModeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    darkModeToggle.textContent = document.body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
+  });
 
-  const booksContainer = getEl('books-container');
-  const searchBar = getEl('searchBar');
-  const sortDropdown = getEl('sortDropdown');
-  const categoryFilter = getEl('categoryFilter');
-  const allBooksBtn = getEl('allBooksBtn');
-  const favoritesBtn = getEl('favoritesBtn');
-  const randomBookBtn = getEl('randomBookBtn');
-  const modal = getEl('bookModal');
-  const modalCover = getEl('modalCover');
-  const modalTitle = getEl('modalTitle');
-  const modalAuthor = getEl('modalAuthor');
-  const modalDescription = getEl('modalDescription');
-  const modalRating = getEl('modalRating');
-  const ratingContainer = getEl('ratingContainer');
-  const reviewsList = getEl('reviewsList');
-  const reviewForm = getEl('reviewForm');
-  const newReviewText = getEl('newReview');
-  const closeButton = document.querySelector('.close-button');
-  const submitBookForm = getEl('submitBookForm');
-  const scrollTopBtn = getEl('scrollTopBtn');
-
+  // Filter and Sort
   function filterAndSortBooks() {
     const query = searchBar.value.toLowerCase();
     const selectedCategory = categoryFilter.value;
 
     return books
       .filter(book =>
-        (book.title.toLowerCase().includes(query) ||
-        book.author.toLowerCase().includes(query)) &&
-        (viewMode === 'all') &&
-        (selectedCategory === 'all' || book.category === selectedCategory)
+        (book.title.toLowerCase().includes(query) || book.author.toLowerCase().includes(query)) &&
+        (viewMode === 'all' || favorites.includes(book.title)) &&
+        (selectedCategory === 'All' || book.category === selectedCategory)
       )
       .sort((a, b) => {
-        const sortValue = sortDropdown.value;
-        switch (sortValue) {
+        switch (sortDropdown.value) {
           case 'title-asc': return a.title.localeCompare(b.title);
           case 'title-desc': return b.title.localeCompare(a.title);
           case 'author-asc': return a.author.localeCompare(b.author);
@@ -188,6 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
 
+  // Display Books
   function displayBooks() {
     booksContainer.innerHTML = '';
     const filteredBooks = filterAndSortBooks();
@@ -200,42 +209,62 @@ document.addEventListener('DOMContentLoaded', () => {
         <h3>${book.title}</h3>
         <p>by ${book.author}</p>
         <p>Rating: ${book.rating} / 5</p>
+        <button class="favorite-btn">${favorites.includes(book.title) ? 'Unfavorite' : 'Favorite'}</button>
       `;
 
-      bookDiv.addEventListener('click', () => {
-        currentBook = book;
-        openModal(book);
+      bookDiv.querySelector('.favorite-btn').addEventListener('click', e => {
+        e.stopPropagation();
+        toggleFavorite(book);
       });
 
+      bookDiv.addEventListener('click', () => openModal(book));
       booksContainer.appendChild(bookDiv);
     });
   }
 
+  // Toggle Favorite
+  function toggleFavorite(book) {
+    if (favorites.includes(book.title)) {
+      favorites = favorites.filter(fav => fav !== book.title);
+    } else {
+      favorites.push(book.title);
+    }
+    displayBooks();
+  }
+
+  // Open Modal
   function openModal(book) {
+    currentBook = book;
     modalCover.src = book.cover;
     modalTitle.textContent = book.title;
     modalAuthor.textContent = `by ${book.author}`;
     modalDescription.textContent = book.description;
     modalRating.textContent = `Rating: ${book.rating} / 5`;
-    ratingContainer.innerHTML = '';
     updateReviewsList(book.reviews);
     modal.style.display = 'block';
   }
 
-  function updateReviewsList(reviews = []) {
+  // Close Modal
+  closeButton.addEventListener('click', () => {
+    modal.style.display = 'none';
+    currentBook = null;
+  });
+
+  window.addEventListener('click', e => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+      currentBook = null;
+    }
+  });
+
+  // Update Reviews
+  function updateReviewsList(reviews) {
     reviewsList.innerHTML = '';
     reviews.forEach(review => {
       const li = document.createElement('li');
       li.textContent = review;
       reviewsList.appendChild(li);
     });
-  }
-
-  function populateCategoryFilter() {
-    const uniqueCategories = ['all', ...new Set(books.map(b => b.category))];
-    categoryFilter.innerHTML = uniqueCategories
-      .map(cat => `<option value="${cat}">${cat}</option>`)
-      .join('');
   }
 
   reviewForm.addEventListener('submit', e => {
@@ -247,66 +276,85 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  allBooksBtn.addEventListener('click', () => {
-    viewMode = 'all';
-    allBooksBtn.classList.add('active');
-    favoritesBtn.classList.remove('active');
-    displayBooks();
-  });
+  // Category Filter
+  function populateCategoryFilter() {
+    categoryFilter.innerHTML = `<option value="All">All Categories</option>` +
+      [...new Set(books.map(b => b.category))]
+        .sort()
+        .map(cat => `<option value="${cat}">${cat}</option>`)
+        .join('');
+  }
 
-  favoritesBtn.addEventListener('click', () => {
-    viewMode = 'favorites';
-    favoritesBtn.classList.add('active');
-    allBooksBtn.classList.remove('active');
-    displayBooks();
-  });
-
-  randomBookBtn.addEventListener('click', () => {
-    const filtered = filterAndSortBooks();
-    if (filtered.length) {
-      const randomBook = filtered[Math.floor(Math.random() * filtered.length)];
-      openModal(randomBook);
-    }
-  });
-
-  submitBookForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const newBook = {
-      title: getEl('newTitle').value,
-      author: getEl('newAuthor').value,
-      cover: getEl('newCover').value,
-      category: getEl('newCategory').value,
-      description: getEl('newDescription').value,
-      rating: 3,
-      reviews: []
-    };
-    books.push(newBook);
-    populateCategoryFilter();
-    displayBooks();
-    submitBookForm.reset();
-    alert('Book added!');
+  // Scroll to Top Button
+  window.addEventListener('scroll', () => {
+    scrollTopBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
   });
 
   scrollTopBtn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  window.addEventListener('scroll', () => {
-    scrollTopBtn.style.display = (document.documentElement.scrollTop > 200) ? 'block' : 'none';
+  // Search Suggestions
+  searchBar.addEventListener('input', () => {
+    const query = searchBar.value.toLowerCase();
+    searchSuggestions.innerHTML = '';
+    if (!query) return;
+
+    const suggestions = books
+      .filter(b => b.title.toLowerCase().includes(query) || b.author.toLowerCase().includes(query))
+      .slice(0, 5);
+
+    suggestions.forEach(s => {
+      const li = document.createElement('li');
+      li.textContent = s.title;
+      li.addEventListener('click', () => {
+        searchBar.value = s.title;
+        searchSuggestions.innerHTML = '';
+        displayBooks();
+      });
+      searchSuggestions.appendChild(li);
+    });
   });
 
-  closeButton.addEventListener('click', () => {
-    modal.style.display = 'none';
+  // Sort, Filter, View Events
+  [sortDropdown, categoryFilter].forEach(el => el.addEventListener('change', displayBooks));
+  allBooksBtn.addEventListener('click', () => {
+    viewMode = 'all';
+    displayBooks();
+  });
+  favoritesBtn.addEventListener('click', () => {
+    viewMode = 'favorites';
+    displayBooks();
+  });
+  randomBookBtn.addEventListener('click', () => {
+    const filteredBooks = filterAndSortBooks();
+    if (filteredBooks.length) {
+      openModal(filteredBooks[Math.floor(Math.random() * filteredBooks.length)]);
+    }
   });
 
-  window.addEventListener('click', e => {
-    if (e.target === modal) modal.style.display = 'none';
+  // Book Submission
+  submitBookForm.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const newBook = {
+      title: getEl('newTitle').value,
+      author: getEl('newAuthor').value,
+      cover: getEl('newCover').value,
+      category: getEl('newCategory').value,
+      description: getEl('newDescription').value,
+      rating: Math.floor(Math.random() * 3) + 3, // 3–5
+      reviews: []
+    };
+
+    books.push(newBook);
+    populateCategoryFilter();
+    displayBooks();
+    submitBookForm.reset();
+    alert('Book added successfully!');
   });
 
-  searchBar.addEventListener('input', displayBooks);
-  sortDropdown.addEventListener('change', displayBooks);
-  categoryFilter.addEventListener('change', displayBooks);
-
+  // Initialize
   populateCategoryFilter();
   displayBooks();
 });
