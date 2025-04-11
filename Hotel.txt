@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>StayIndia - Book Hotels & Homestays</title>
   <style>
+    /* Base Styling */
     body {
       font-family: Arial, sans-serif;
       background-color: #f5f5f5;
@@ -14,14 +15,17 @@
       text-align: center;
       transition: background-color 0.3s, color 0.3s;
     }
+
     body.dark {
       background-color: #121212;
       color: #e0e0e0;
     }
+
     a {
       color: inherit;
       text-decoration: none;
     }
+
     .header {
       background-color: #003580;
       color: white;
@@ -30,6 +34,7 @@
       font-weight: bold;
       position: relative;
     }
+
     .dark-mode-toggle {
       position: absolute;
       top: 15px;
@@ -41,10 +46,14 @@
       border-radius: 5px;
       cursor: pointer;
       font-weight: bold;
+      transition: background-color 0.3s, transform 0.2s;
     }
+
     .dark-mode-toggle:hover {
       background-color: #bbb;
+      transform: scale(1.05);
     }
+
     .search-container {
       background-color: white;
       padding: 20px;
@@ -58,11 +67,13 @@
       max-width: 1000px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
+
     .search-container label {
       font-size: 14px;
       font-weight: bold;
       margin-right: 5px;
     }
+
     .search-container input,
     .search-container select,
     .search-container button {
@@ -72,15 +83,20 @@
       border-radius: 5px;
       font-size: 16px;
     }
+
     .search-container button {
       background-color: #ff6600;
       color: white;
       font-weight: bold;
       cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
     }
+
     .search-container button:hover {
       background-color: #e65c00;
+      transform: scale(1.05);
     }
+
     .offers-container {
       display: flex;
       flex-wrap: wrap;
@@ -89,6 +105,7 @@
       width: 90%;
       max-width: 1000px;
     }
+
     .offer {
       background-color: #ffebcc;
       border: 2px dashed #ffa31a;
@@ -98,29 +115,41 @@
       width: 300px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       text-align: left;
+      animation: fadeIn 0.8s ease-in;
+      transition: transform 0.3s;
     }
+
+    .offer:hover {
+      transform: scale(1.03);
+    }
+
     .offer h3 {
       margin-top: 0;
       color: #cc5200;
     }
+
     .offer p {
       margin: 5px 0;
     }
+
     .guest-section {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       justify-content: center;
     }
+
     .filter-section {
       margin: 10px;
     }
+
     .hotels-container {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       margin-top: 20px;
     }
+
     .hotel {
       background-color: white;
       color: #333;
@@ -130,22 +159,31 @@
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       text-align: center;
-      transition: background-color 0.3s, color 0.3s;
+      transition: background-color 0.3s, color 0.3s, transform 0.3s;
+      animation: fadeIn 0.8s ease-in;
     }
+
     body.dark .hotel {
       background-color: #1e1e1e;
       color: #e0e0e0;
     }
+
+    .hotel:hover {
+      transform: scale(1.03);
+    }
+
     .hotel img {
       width: 100%;
       height: 180px;
       border-radius: 10px;
     }
+
     .hotel .price {
       font-weight: bold;
       color: #008000;
       margin: 10px 0;
     }
+
     .hotel button {
       background-color: #ff6600;
       color: white;
@@ -154,29 +192,37 @@
       border-radius: 5px;
       cursor: pointer;
       font-size: 16px;
+      transition: background-color 0.3s, transform 0.2s;
     }
+
     .hotel button:hover {
       background-color: #e65c00;
+      transform: scale(1.05);
     }
+
     footer {
       background-color: #003580;
       color: white;
       padding: 20px 10px;
       margin-top: 20px;
     }
+
     footer .contact,
     footer .social {
       margin: 10px 0;
     }
+
     footer .social a {
       margin: 0 10px;
       display: inline-block;
       vertical-align: middle;
     }
+
     footer .social img {
       width: 32px;
       height: 32px;
     }
+
     .modal {
       display: none;
       position: fixed;
@@ -188,6 +234,7 @@
       overflow: auto;
       background-color: rgba(0, 0, 0, 0.4);
     }
+
     .modal-content {
       background-color: #fefefe;
       margin: 10% auto;
@@ -196,7 +243,9 @@
       width: 300px;
       border-radius: 10px;
       text-align: left;
+      animation: slideDown 0.5s ease;
     }
+
     .modal-content input {
       width: 100%;
       padding: 10px;
@@ -204,11 +253,13 @@
       border: 1px solid #ccc;
       border-radius: 5px;
     }
+
     .modal-content label {
       display: block;
       margin-top: 10px;
       font-weight: bold;
     }
+
     .modal-content button {
       background-color: #003580;
       color: white;
@@ -218,10 +269,14 @@
       width: 100%;
       cursor: pointer;
       font-weight: bold;
+      transition: background-color 0.3s, transform 0.2s;
     }
+
     .modal-content button:hover {
       background-color: #00264d;
+      transform: scale(1.05);
     }
+
     .close {
       color: #aaa;
       float: right;
@@ -229,10 +284,12 @@
       font-weight: bold;
       cursor: pointer;
     }
+
     .close:hover,
     .close:focus {
       color: black;
     }
+
     #scrollUpBtn, #scrollDownBtn {
       position: fixed;
       right: 20px;
@@ -247,35 +304,66 @@
       transition: opacity 0.3s;
       z-index: 1000;
     }
+
     #scrollUpBtn:hover, #scrollDownBtn:hover {
       opacity: 1;
     }
+
     #scrollUpBtn {
       bottom: 80px;
     }
+
     #scrollDownBtn {
       bottom: 20px;
     }
+
     @media (max-width: 768px) {
       .header {
         font-size: 20px;
         padding: 15px;
       }
+
       .dark-mode-toggle {
         top: 10px;
         padding: 8px;
         font-size: 14px;
       }
+
       .search-container {
         width: 95%;
         padding: 15px;
       }
+
       .hotel {
         width: 90%;
         margin: 10px auto;
       }
+
       .offer {
         width: 90%;
+      }
+    }
+
+    /* Animation Keyframes */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
   </style>
@@ -289,7 +377,6 @@
   <!-- Scroll Buttons -->
   <button id="scrollUpBtn" onclick="scrollUp()">&#8679;</button>
   <button id="scrollDownBtn" onclick="scrollDown()">&#8681;</button>
-
   <div class="search-container">
     <input type="text" id="searchBox" placeholder="Enter city or hotel name" />
 
@@ -433,3 +520,4 @@
   <script src="Hotel.js"></script>
 </body>
 </html>
+
