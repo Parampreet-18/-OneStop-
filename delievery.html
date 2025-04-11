@@ -37,25 +37,26 @@
       <!-- Address -->
       <div class="mb-4">
         <label for="address" class="block text-gray-700 font-semibold mb-2">Address</label>
-        <textarea id="address" class="w-full px-4 py-2 border rounded" placeholder="123 Main Street" rows="3" required></textarea>
+        <textarea id="address" class="w-full px-4 py-2 border rounded" placeholder="123 Main Street, City, State" rows="3" required></textarea>
       </div>
 
       <!-- Pincode -->
       <div class="mb-4">
         <label for="pincode" class="block text-gray-700 font-semibold mb-2">Pincode</label>
-        <input type="text" id="pincode" class="w-full px-4 py-2 border rounded" placeholder="123456" required>
+        <input type="text" id="pincode" class="w-full px-4 py-2 border rounded" placeholder="123456" pattern="\d{6}" title="Enter a 6-digit pincode" required>
       </div>
 
       <!-- Phone -->
       <div class="mb-4">
         <label for="phone" class="block text-gray-700 font-semibold mb-2">Phone Number</label>
-        <input type="tel" id="phone" class="w-full px-4 py-2 border rounded" placeholder="9876543210" required>
+        <input type="tel" id="phone" class="w-full px-4 py-2 border rounded" placeholder="9876543210" pattern="\d{10}" title="Enter a 10-digit phone number" required>
       </div>
 
       <!-- Delivery Method -->
       <div class="mb-4">
         <label for="delivery" class="block text-gray-700 font-semibold mb-2">Delivery Method</label>
-        <select id="delivery" class="w-full px-4 py-2 border rounded">
+        <select id="delivery" class="w-full px-4 py-2 border rounded" required>
+          <option value="">-- Select a Delivery Option --</option>
           <option>Standard Delivery (3-5 days)</option>
           <option>Express Delivery (1-2 days)</option>
         </select>
@@ -84,7 +85,7 @@
     <p>&copy; 2025 ShopWithUs - All Rights Reserved.</p>
   </footer>
 
-  <!-- Optional JS for basic confirmation (can be improved with real backend) -->
+  <!-- JS Confirmation Handling -->
   <script>
     const form = document.querySelector("form");
     const confirmation = document.getElementById("confirmation");
@@ -92,7 +93,10 @@
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       confirmation.classList.remove("hidden");
-      form.reset();
+
+      setTimeout(() => {
+        form.reset();
+      }, 1500); // small delay before reset
     });
   </script>
 </body>
