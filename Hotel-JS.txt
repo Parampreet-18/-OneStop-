@@ -6,53 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     darkModeToggle.addEventListener("click", toggleDarkMode);
   }
 
-  const signInBtn = document.getElementById("signInBtn");
-  const signUpBtn = document.getElementById("signUpBtn");
-  const signInForm = document.getElementById("signInForm");
-  const signUpForm = document.getElementById("signUpForm");
   const bookingForm = document.getElementById("bookingForm");
-
-  if (signInBtn) {
-    signInBtn.addEventListener("click", () => openModal("signInModal"));
-  }
-  if (signUpBtn) {
-    signUpBtn.addEventListener("click", () => openModal("signUpModal"));
-  }
-
-  if (signInForm) {
-    signInForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-      const email = document.getElementById("signInEmail").value;
-      const password = document.getElementById("signInPassword").value;
-      if (email && password) {
-        alert("Sign In successful!");
-        closeModal("signInModal");
-      } else {
-        alert("Please fill in all fields.");
-      }
-    });
-  }
-
-  if (signUpForm) {
-    signUpForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-      const name = document.getElementById("signUpName").value;
-      const email = document.getElementById("signUpEmail").value;
-      const password = document.getElementById("signUpPassword").value;
-      const confirmPassword = document.getElementById("signUpConfirmPassword").value;
-
-      if (!name || !email || !password || !confirmPassword) {
-        alert("Please fill in all fields.");
-        return;
-      }
-      if (password !== confirmPassword) {
-        alert("Passwords do not match!");
-        return;
-      }
-      alert("Sign Up successful!");
-      closeModal("signUpModal");
-    });
-  }
 
   if (bookingForm) {
     bookingForm.addEventListener("submit", function (e) {
@@ -67,14 +21,12 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
-      // Simulate document verification (AI-based logic can be added here)
       const fileName = doc.name.toLowerCase();
       if (!(fileName.endsWith(".pdf") || fileName.endsWith(".jpg") || fileName.endsWith(".png"))) {
         alert("Please upload a valid document (PDF, JPG, PNG)");
         return;
       }
 
-      // Show booking confirmation
       alert(`✅ Booking Confirmed for ${name}! Confirmation sent to ${email}. Payment via ${payment}.`);
       closeModal("bookingModal");
     });
@@ -262,7 +214,7 @@ function bookHotel(hotelName) {
   usedOffers[hotelName] = true;
   displayHotels(hotels); // update offer used
 }
-// Scroll to top
+
 function scrollUp() {
   window.scrollTo({
     top: 0,
@@ -270,7 +222,6 @@ function scrollUp() {
   });
 }
 
-// Scroll to bottom
 function scrollDown() {
   window.scrollTo({
     top: document.body.scrollHeight,
