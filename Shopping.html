@@ -26,7 +26,7 @@
 
       <!-- Cricket Ball -->
       <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-        <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTUI4ZoywYumCRci35_9jsxmZfKhjtQxW9nZe72SUC9zmtF_txVOsQlsHZSxUSyawbf_StxV5NU6tpyN7r-4ui3AV-ki1_vmBJuOr37aoBEW_xjtWQq2JJf" alt="Professional Cricket Ball" class="mx-auto w-32 h-32 object-cover">
+        <img src="https://placehold.co/200x200?text=Cricket+Ball" alt="Professional Cricket Ball" class="mx-auto w-32 h-32 object-cover">
         <h4 class="mt-4 font-bold text-lg">Cricket Ball</h4>
         <p class="text-gray-600">High-quality leather ball for professional play.</p>
         <p class="text-blue-600 font-semibold mt-2">₹200</p>
@@ -35,7 +35,7 @@
 
       <!-- Bat Stickers -->
       <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-        <img src="https://www.khelmart.com/pub/media/catalog/product/cache/1/image/600x600/9df78eab33525d08d6e5fb8d27136e95/m/r/mrf-sticker-kit-for-bat.jpg" alt="Stylish MRF Bat Stickers" class="mx-auto w-32 h-32 object-cover">
+        <img src="https://placehold.co/200x200?text=Bat+Stickers" alt="Stylish MRF Bat Stickers" class="mx-auto w-32 h-32 object-cover">
         <h4 class="mt-4 font-bold text-lg">Bat Stickers</h4>
         <p class="text-gray-600">Stylish MRF bat stickers to personalize your gear.</p>
         <p class="text-blue-600 font-semibold mt-2">₹150</p>
@@ -94,5 +94,25 @@
   <footer class="bg-gray-900 text-white text-center py-4 mt-8">
     <p>&copy; 2025 ShopWithUs - All Rights Reserved.</p>
   </footer>
+
+  <!-- Cart Script -->
+  <script>
+    const buttons = document.querySelectorAll("button");
+    buttons.forEach(button => {
+      button.addEventListener("click", () => {
+        const productCard = button.closest("div");
+        const name = productCard.querySelector("h4").textContent;
+        const price = productCard.querySelector("p.text-blue-600").textContent;
+        const image = productCard.querySelector("img").src;
+
+        const item = { name, price, image };
+
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart.push(item);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert(`${name} added to cart!`);
+      });
+    });
+  </script>
 </body>
 </html>
