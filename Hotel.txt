@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>StayIndia - Book Hotels & Homestays</title>
   <style>
-    /* Global Styles */
     body {
       font-family: Arial, sans-serif;
       background-color: #f5f5f5;
@@ -23,7 +22,6 @@
       color: inherit;
       text-decoration: none;
     }
-    /* Header */
     .header {
       background-color: #003580;
       color: white;
@@ -32,38 +30,21 @@
       font-weight: bold;
       position: relative;
     }
-    /* Authentication and Dark Mode Buttons */
-    .auth-btn,
     .dark-mode-toggle {
       position: absolute;
       top: 15px;
-      background-color: #ffcc00;
-      color: black;
+      right: 20px;
+      background-color: #ccc;
+      color: #333;
       padding: 10px;
       border: none;
       border-radius: 5px;
       cursor: pointer;
       font-weight: bold;
     }
-    .auth-btn:hover,
-    .dark-mode-toggle:hover {
-      background-color: #e6b800;
-    }
-    #signInBtn {
-      right: 100px;
-    }
-    #signUpBtn {
-      right: 20px;
-    }
-    .dark-mode-toggle {
-      right: 220px;
-      background-color: #ccc;
-      color: #333;
-    }
     .dark-mode-toggle:hover {
       background-color: #bbb;
     }
-    /* Search Section */
     .search-container {
       background-color: white;
       padding: 20px;
@@ -100,7 +81,6 @@
     .search-container button:hover {
       background-color: #e65c00;
     }
-    /* Offers Section */
     .offers-container {
       display: flex;
       flex-wrap: wrap;
@@ -126,18 +106,15 @@
     .offer p {
       margin: 5px 0;
     }
-    /* Guest Section */
     .guest-section {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       justify-content: center;
     }
-    /* Filter Section */
     .filter-section {
       margin: 10px;
     }
-    /* Hotel Listings */
     .hotels-container {
       display: flex;
       flex-wrap: wrap;
@@ -181,7 +158,6 @@
     .hotel button:hover {
       background-color: #e65c00;
     }
-    /* Footer */
     footer {
       background-color: #003580;
       color: white;
@@ -201,7 +177,6 @@
       width: 32px;
       height: 32px;
     }
-    /* Modal Styles */
     .modal {
       display: none;
       position: fixed;
@@ -230,11 +205,10 @@
       border-radius: 5px;
     }
     .modal-content label {
-  display: block;
-  margin-top: 10px;
-  font-weight: bold;
-}
-
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
     .modal-content button {
       background-color: #003580;
       color: white;
@@ -259,55 +233,38 @@
     .close:focus {
       color: black;
     }
-    /* Scroll Buttons Styling */
-#scrollUpBtn, #scrollDownBtn {
-  position: fixed;
-  right: 20px;
-  padding: 10px 15px;
-  font-size: 24px;
-  background-color: #ff6600;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  opacity: 0.7;
-  transition: opacity 0.3s;
-  z-index: 1000;
-}
-
-#scrollUpBtn:hover, #scrollDownBtn:hover {
-  opacity: 1;
-}
-
-/* Positioning: scroll up button at the bottom right, scroll down button just below it */
-#scrollUpBtn {
-  bottom: 80px;
-}
-
-#scrollDownBtn {
-  bottom: 20px;
-}
-
-    /* Responsive Media Queries */
+    #scrollUpBtn, #scrollDownBtn {
+      position: fixed;
+      right: 20px;
+      padding: 10px 15px;
+      font-size: 24px;
+      background-color: #ff6600;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+      z-index: 1000;
+    }
+    #scrollUpBtn:hover, #scrollDownBtn:hover {
+      opacity: 1;
+    }
+    #scrollUpBtn {
+      bottom: 80px;
+    }
+    #scrollDownBtn {
+      bottom: 20px;
+    }
     @media (max-width: 768px) {
       .header {
         font-size: 20px;
         padding: 15px;
       }
-      .auth-btn,
       .dark-mode-toggle {
         top: 10px;
         padding: 8px;
         font-size: 14px;
-      }
-      #signInBtn {
-        right: 90px;
-      }
-      #signUpBtn {
-        right: 10px;
-      }
-      .dark-mode-toggle {
-        right: 170px;
       }
       .search-container {
         width: 95%;
@@ -324,16 +281,14 @@
   </style>
 </head>
 <body>
-  
   <div class="header">
     StayIndia - Find Your Perfect Stay
     <button class="dark-mode-toggle" id="darkModeToggle">Dark Mode</button>
-    <button class="auth-btn" id="signInBtn">Sign In</button>
-    <button class="auth-btn" id="signUpBtn">Sign Up</button>
   </div>
+
   <!-- Scroll Buttons -->
-<button id="scrollUpBtn" onclick="scrollUp()">&#8679;</button>
-<button id="scrollDownBtn" onclick="scrollDown()">&#8681;</button>
+  <button id="scrollUpBtn" onclick="scrollUp()">&#8679;</button>
+  <button id="scrollDownBtn" onclick="scrollDown()">&#8681;</button>
 
   <div class="search-container">
     <input type="text" id="searchBox" placeholder="Enter city or hotel name" />
@@ -410,7 +365,6 @@
     <button onclick="searchHotels()">Search</button>
   </div>
 
-  <!-- Offers Section -->
   <h2>Exclusive Offers</h2>
   <div class="offers-container">
     <div class="offer">
@@ -433,7 +387,6 @@
   <h2>Top Trending Hotels</h2>
   <div class="hotels-container" id="hotelsContainer"></div>
 
-  <!-- Footer Section -->
   <footer>
     <div class="contact">
       <p>Contact Us: +91-1234567890 | email@stayindia.com</p>
@@ -453,61 +406,29 @@
     </div>
   </footer>
 
-  <!-- Sign In Modal -->
-  <div id="signInModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('signInModal')">&times;</span>
-      <h2>Sign In</h2>
-      <form id="signInForm">
-        <input type="email" id="signInEmail" placeholder="Email" required />
-        <input type="password" id="signInPassword" placeholder="Password" required />
-        <button type="submit">Sign In</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- Sign Up Modal -->
-  <div id="signUpModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('signUpModal')">&times;</span>
-      <h2>Sign Up</h2>
-      <form id="signUpForm">
-        <input type="text" id="signUpName" placeholder="Full Name" required />
-        <input type="email" id="signUpEmail" placeholder="Email" required />
-        <input type="password" id="signUpPassword" placeholder="Password" required />
-        <input type="password" id="signUpConfirmPassword" placeholder="Confirm Password" required />
-        <button type="submit">Sign Up</button>
-      </form>
-    </div>
-  </div>
   <!-- Booking Modal -->
-<div id="bookingModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('bookingModal')">&times;</span>
-    <h2>Complete Your Booking</h2>
-    <form id="bookingForm">
-      <label for="guestName">Full Name:</label>
-      <input type="text" id="guestName" placeholder="Your name" required />
-
-      <label for="guestEmail">Email:</label>
-      <input type="email" id="guestEmail" placeholder="you@example.com" required />
-
-      <label for="documentUpload">Upload ID Proof:</label>
-      <input type="file" id="documentUpload" accept=".pdf,.jpg,.png" required />
-
-      <label for="paymentMethod">Payment Method:</label>
-      <select id="paymentMethod" required>
-        <option value="">Select Method</option>
-        <option value="creditCard">Credit Card</option>
-        <option value="upi">UPI</option>
-        <option value="paypal">PayPal</option>
-      </select>
-
-      <button type="submit">Confirm Booking</button>
-    </form>
+  <div id="bookingModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('bookingModal')">&times;</span>
+      <h2>Complete Your Booking</h2>
+      <form id="bookingForm">
+        <label for="guestName">Full Name:</label>
+        <input type="text" id="guestName" placeholder="Your name" required />
+        <label for="guestEmail">Email:</label>
+        <input type="email" id="guestEmail" placeholder="you@example.com" required />
+        <label for="documentUpload">Upload ID Proof:</label>
+        <input type="file" id="documentUpload" accept=".pdf,.jpg,.png" required />
+        <label for="paymentMethod">Payment Method:</label>
+        <select id="paymentMethod" required>
+          <option value="">Select Method</option>
+          <option value="creditCard">Credit Card</option>
+          <option value="upi">UPI</option>
+          <option value="paypal">PayPal</option>
+        </select>
+        <button type="submit">Confirm Booking</button>
+      </form>
+    </div>
   </div>
-</div>
-
 
   <script src="Hotel.js"></script>
 </body>
