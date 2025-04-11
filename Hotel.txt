@@ -8,17 +8,32 @@
     /* Base Styling */
     body {
       font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
+      background: url('https://mbluxury1.s3.amazonaws.com/2024/02/26165331/Luxury-hotel-website-design.jpg') no-repeat center center fixed;
+      background-size: cover;
       color: #333;
       margin: 0;
       padding: 0;
       text-align: center;
       transition: background-color 0.3s, color 0.3s;
     }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.7); /* Light overlay for readability */
+      z-index: -1;
+    }
 
     body.dark {
-      background-color: #121212;
+      background: url('https://mbluxury1.s3.amazonaws.com/2024/02/26165331/Luxury-hotel-website-design.jpg') no-repeat center center fixed;
+      background-size: cover;
       color: #e0e0e0;
+    }
+    body.dark::before {
+      background-color: rgba(0, 0, 0, 0.7); /* Dark overlay for dark mode */
     }
 
     a {
