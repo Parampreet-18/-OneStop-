@@ -9,31 +9,65 @@ document.addEventListener("DOMContentLoaded", function () {
   const bookingForm = document.getElementById("bookingForm");
 
   if (bookingForm) {
+    const storedName = localStorage.getItem("guestName");
+    const storedEmail = localStorage.getItem("guestEmail");
+    if (storedName) document.getElementById("guestName").value = storedName;
+    if (storedEmail) document.getElementById("guestEmail").value = storedEmail;
+
     bookingForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      const name = document.getElementById("guestName").value;
-      const email = document.getElementById("guestEmail").value;
+
+      const nameInput = document.getElementById("guestName");
+      const emailInput = document.getElementById("guestEmail");
+      const name = nameInput.value.trim();
+      const email = emailInput.value.trim();
       const doc = document.getElementById("documentUpload").files[0];
       const payment = document.getElementById("paymentMethod").value;
+      const selectedHotel = document.getElementById("selectedHotelName")?.value || "Hotel";
+      const offerCodeInput = document.getElementById("offerCode").value.trim();
+
+      // Offer code validation
+      if (offerCodeInput && !isValidOfferCode(offerCodeInput, selectedHotel)) {
+        alert("❗ Invalid or expired offer code!");
+        return;
+      }
 
       if (!name || !email || !doc || !payment) {
-        alert("Please fill all booking fields!");
+        alert("❗ Please fill all booking fields!");
+        return;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert("❗ Please enter a valid email address!");
         return;
       }
 
       const fileName = doc.name.toLowerCase();
       if (!(fileName.endsWith(".pdf") || fileName.endsWith(".jpg") || fileName.endsWith(".png"))) {
-        alert("Please upload a valid document (PDF, JPG, PNG)");
+        alert("❗ Please upload a valid document (PDF, JPG, PNG)");
         return;
       }
 
-      alert(`✅ Booking Confirmed for ${name}! Confirmation sent to ${email}. Payment via ${payment}.`);
-      closeModal("bookingModal");
+      localStorage.setItem("guestName", name);
+      localStorage.setItem("guestEmail", email);
+
+      alert("⏳ Processing your booking...");
+
+      setTimeout(() => {
+        alert(`✅ Booking Confirmed for ${name} at ${selectedHotel}!\n📩 Confirmation sent to ${email}.\n💳 Payment via ${payment}.`);
+        closeModal("bookingModal");
+        
+        // Refresh the hotel list after booking
+        usedOffers[selectedHotel] = offerCodeInput ? "✅ Offer Applied" : null;
+        displayHotels(hotels);
+      }, 800);
     });
   }
 });
 
-// Hotel data
+
+
 const hotels = [
   {
     name: "Taj Hotel, Mumbai",
@@ -41,7 +75,8 @@ const hotels = [
     description: "5-star luxury hotel near Gateway of India",
     price: "10500",
     rating: 5,
-    image: "https://images.hindustantimes.com/rf/image_size_960x540/HT/p2/2018/12/15/Pictures/_9f2b6346-ffd3-11e8-9457-b1b429387a4e.jpg"
+    image: "https://images.hindustantimes.com/rf/image_size_960x540/HT/p2/2018/12/15/Pictures/_9f2b6346-ffd3-11e8-9457-b1b429387a4e.jpg",
+    offer: "20% off with code TAJ20"
   },
   {
     name: "Coorg Homestay",
@@ -49,7 +84,8 @@ const hotels = [
     description: "Beautiful homestay in the middle of coffee plantations",
     price: "3200",
     rating: 5,
-    image: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/501528790.jpg?k=ab62245fd0c7a103e2cb34e587058afcddbe8981d1ada06b4c9dd968de46da47&o=&hp=1"
+    image: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/501528790.jpg?k=ab62245fd0c7a103e2cb34e587058afcddbe8981d1ada06b4c9dd968de46da47&o=&hp=1",
+    offer: "10% off with code COORG10"
   },
   {
     name: "Goa Beach Resort",
@@ -81,7 +117,8 @@ const hotels = [
     description: "Stay in a beautiful villa near the serene backwaters of Kerala",
     price: "6800",
     rating: 5,
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS03WsdHvCw5J8I7m4fLyP_dcNe8ojLaWXaGQ&s"
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS03WsdHvCw5J8I7m4fLyP_dcNe8ojLaWXaGQ&s",
+    offer: "15% off with code VILLA10"
   },
   {
     name: "Rajasthan Desert Camp",
@@ -121,7 +158,8 @@ const hotels = [
     description: "Relax by the Ganges in this beautiful riverside resort",
     price: "5200",
     rating: 4.9,
-    image: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/514051210.jpg?k=6dd34390e2b2de9688101408f7800eb9fc2b69ddef9a93e2087cb6b510f52379&o=&hp=1"
+    image: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/514051210.jpg?k=6dd34390e2b2de9688101408f7800eb9fc2b69ddef9a93e2087cb6b510f52379&o=&hp=1",
+    offer: "5% off with code RISHIKESH10"
   },
   {
     name: "Bangalore Business Hotel",
@@ -132,7 +170,6 @@ const hotels = [
     image: "https://images.trvl-media.com/lodging/5000000/4320000/4319200/4319124/32340772.jpg?impolicy=fcrop&w=357&h=201&p=1&q=medium"
   }
 ];
-
 let usedOffers = {};
 
 function searchHotels() {
@@ -211,8 +248,26 @@ function closeModal(modalId) {
 
 function bookHotel(hotelName) {
   openModal("bookingModal");
-  usedOffers[hotelName] = true;
-  displayHotels(hotels); // update offer used
+  const hiddenInput = document.getElementById("selectedHotelName");
+  if (hiddenInput) {
+    hiddenInput.value = hotelName;
+  } else {
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.id = "selectedHotelName";
+    input.value = hotelName;
+    document.getElementById("bookingForm").appendChild(input);
+  }
+
+  const storedName = localStorage.getItem("guestName");
+  const storedEmail = localStorage.getItem("guestEmail");
+  if (storedName) document.getElementById("guestName").value = storedName;
+  if (storedEmail) document.getElementById("guestEmail").value = storedEmail;
+}
+
+function isValidOfferCode(offerCode, hotelName) {
+  const hotel = hotels.find(h => h.name === hotelName);
+  return hotel && hotel.offer && hotel.offer.includes(offerCode);
 }
 
 function scrollUp() {

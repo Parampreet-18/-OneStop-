@@ -237,6 +237,7 @@
       width: 32px;
       height: 32px;
     }
+    
 
     .modal {
       display: none;
@@ -513,11 +514,17 @@
     <div class="modal-content">
       <span class="close" onclick="closeModal('bookingModal')">&times;</span>
       <h2>Complete Your Booking</h2>
+      <h2 id="selectedHotelName">Selected Hotel</h2>
+<div id="bookingLoader" style="display:none;">Processing your booking...</div>
       <form id="bookingForm">
+        <!-- Inside #bookingForm -->
         <label for="guestName">Full Name:</label>
         <input type="text" id="guestName" placeholder="Your name" required />
         <label for="guestEmail">Email:</label>
         <input type="email" id="guestEmail" placeholder="you@example.com" required />
+        <label>Check-in: <input type="date" id="checkin" required></label>
+<label>Check-out: <input type="date" id="checkout" required></label>
+
         <label for="documentUpload">Upload ID Proof:</label>
         <input type="file" id="documentUpload" accept=".pdf,.jpg,.png" required />
         <label for="paymentMethod">Payment Method:</label>
@@ -535,4 +542,3 @@
   <script src="Hotel.js"></script>
 </body>
 </html>
-
