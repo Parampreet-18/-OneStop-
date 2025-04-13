@@ -382,6 +382,207 @@
         transform: translateY(0);
       }
     }
+    /* Booking Modal Enhancements */
+.modal-content h2 {
+  margin-bottom: 10px;
+  color: #003580;
+}
+
+#bookingForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#bookingForm input[type="text"],
+#bookingForm input[type="email"],
+#bookingForm input[type="date"],
+#bookingForm select,
+#bookingForm input[type="file"] {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 15px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#bookingForm input:focus,
+#bookingForm select:focus {
+  border-color: #003580;
+  box-shadow: 0 0 5px rgba(0, 53, 128, 0.3);
+  outline: none;
+}
+
+/* File upload */
+#documentUpload {
+  background-color: #f7f7f7;
+  cursor: pointer;
+}
+
+/* Payment Method Select */
+#paymentMethod {
+  background-color: #f1f1f1;
+  font-weight: bold;
+}
+
+/* Confirm Button */
+#bookingForm button[type="submit"] {
+  background-color: #ff6600;
+  font-size: 16px;
+  padding: 12px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+#bookingForm button[type="submit"]:hover {
+  background-color: #e65c00;
+  transform: scale(1.03);
+}
+
+/* Booking Modal as Card */
+.modal-content {
+  background: linear-gradient(to bottom, #ffffff, #f9f9f9);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  padding: 30px 25px;
+  width: 100%;
+  max-width: 420px;
+  font-family: 'Segoe UI', sans-serif;
+  animation: fadeInModal 0.5s ease;
+}
+
+/* Smooth Modal Entrance */
+@keyframes fadeInModal {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Stepper UI with Icons (you can add icons via JS or emojis) */
+.booking-stepper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e0e0e0;
+  position: relative;
+}
+
+.booking-stepper div {
+  flex: 1;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #999;
+  position: relative;
+}
+
+.booking-stepper div::before {
+  content: "⬤";
+  font-size: 14px;
+  display: block;
+  margin-bottom: 4px;
+  color: #ccc;
+}
+
+.booking-stepper div.active {
+  color: #003580;
+}
+
+.booking-stepper div.active::before {
+  color: #ff6600;
+}
+
+/* Input Focus with Floating Label Feel */
+.modal-content label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  margin-top: 12px;
+  display: block;
+}
+
+.modal-content input,
+.modal-content select {
+  width: 100%;
+  padding: 12px 14px;
+  margin-top: 4px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: 0.3s;
+  background-color: #fff;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.modal-content input:focus,
+.modal-content select:focus {
+  border-color: #003580;
+  outline: none;
+  box-shadow: 0 0 6px rgba(0, 53, 128, 0.2);
+}
+
+/* Custom File Upload Button */
+#documentUpload {
+  border: 2px dashed #ccc;
+  background-color: #f4f4f4;
+  text-align: center;
+  cursor: pointer;
+  padding: 14px;
+  transition: 0.3s;
+}
+
+#documentUpload:hover {
+  background-color: #f0f8ff;
+  border-color: #003580;
+}
+
+/* Payment Select */
+#paymentMethod {
+  background-color: #f9f9f9;
+  font-weight: bold;
+}
+
+/* Booking Confirm Button */
+#bookingForm button[type="submit"] {
+  margin-top: 15px;
+  background: linear-gradient(to right, #ff6600, #ff8533);
+  border: none;
+  padding: 14px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#bookingForm button[type="submit"]:hover {
+  background: linear-gradient(to right, #e65c00, #ff751a);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 12px rgba(255, 102, 0, 0.3);
+}
+
+/* Success Confirmation Styling */
+#bookingConfirmationMessage {
+  background-color: #e6ffed;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 500;
+}
+@media (max-width: 480px) {
+  .modal-content {
+    width: 90%;
+    padding: 20px 15px;
+  }
+}
   </style>
 </head>
 <body>
@@ -508,37 +709,41 @@
       </a>
     </div>
   </footer>
-
-  <!-- Booking Modal -->
-  <div id="bookingModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('bookingModal')">&times;</span>
-      <h2>Complete Your Booking</h2>
-      <h2 id="selectedHotelName">Selected Hotel</h2>
-<div id="bookingLoader" style="display:none;">Processing your booking...</div>
-      <form id="bookingForm">
-        <!-- Inside #bookingForm -->
-        <label for="guestName">Full Name:</label>
-        <input type="text" id="guestName" placeholder="Your name" required />
-        <label for="guestEmail">Email:</label>
-        <input type="email" id="guestEmail" placeholder="you@example.com" required />
-        <label>Check-in: <input type="date" id="checkin" required></label>
-<label>Check-out: <input type="date" id="checkout" required></label>
-
-        <label for="documentUpload">Upload ID Proof:</label>
-        <input type="file" id="documentUpload" accept=".pdf,.jpg,.png" required />
-        <label for="paymentMethod">Payment Method:</label>
-        <select id="paymentMethod" required>
-          <option value="">Select Method</option>
-          <option value="creditCard">Credit Card</option>
-          <option value="upi">UPI</option>
-          <option value="paypal">PayPal</option>
-        </select>
-        <button type="submit">Confirm Booking</button>
-      </form>
-    </div>
+<!-- Booking Modal -->
+<div id="bookingModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('bookingModal')">&times;</span>
+    <h2>Complete Your Booking</h2>
+    <h2 id="selectedHotelName">Selected Hotel</h2>
+    <div id="bookingConfirmationMessage" style="display:none; padding:15px; background:#d4edda; color:#155724; border:1px solid #c3e6cb; margin: 20px 0; border-radius: 5px;"></div>
+     <div class="booking-stepper">
+  <div class="active">🧍 Guest</div>
+  <div>🛏️ Stay</div>
+  <div>💳 Payment</div>
+</div>
+  
+    <form id="bookingForm">
+      <label for="guestName">Full Name:</label>
+      <input type="text" id="guestName" placeholder="Your name" required />
+      <label for="guestEmail">Email:</label>
+      <input type="email" id="guestEmail" placeholder="you@example.com" required />
+      <label for="bookingCheckin">Check-in:</label>
+      <input type="date" id="bookingCheckin" required />
+      <label for="bookingCheckout">Check-out:</label>
+      <input type="date" id="bookingCheckout" required />
+      <label for="documentUpload">Upload ID Proof:</label>
+      <input type="file" id="documentUpload" accept=".pdf,.jpg,.png" required />
+      <label for="paymentMethod">Payment Method:</label>
+      <select id="paymentMethod" required>
+        <option value="">Select Method</option>
+        <option value="creditCard">Credit Card</option>
+        <option value="upi">UPI</option>
+        <option value="paypal">PayPal</option>
+      </select>
+      <button type="submit">Confirm Booking</button>
+    </form>
   </div>
-
+</div>
   <script src="Hotel.js"></script>
 </body>
 </html>
