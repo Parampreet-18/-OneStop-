@@ -19,14 +19,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const nameInput = document.getElementById("guestName");
       const emailInput = document.getElementById("guestEmail");
-      const name = nameInput.value.trim();
-      const email = emailInput.value.trim();
-      const doc = document.getElementById("documentUpload").files[0];
-      const payment = document.getElementById("paymentMethod").value;
+      const name = nameInput?.value.trim();
+      const email = emailInput?.value.trim();
+      const doc = document.getElementById("documentUpload")?.files[0];
+      const payment = document.getElementById("paymentMethod")?.value;
       const selectedHotel = document.getElementById("selectedHotelName")?.value || "Hotel";
-      const offerCodeInput = document.getElementById("offerCode").value.trim();
+      const offerCodeInput = document.getElementById("offerCode")?.value.trim();
 
-      // Offer code validation
+      const confirmationDiv = document.getElementById("bookingConfirmationMessage");
+
       if (offerCodeInput && !isValidOfferCode(offerCodeInput, selectedHotel)) {
         alert("❗ Invalid or expired offer code!");
         return;
@@ -52,21 +53,29 @@ document.addEventListener("DOMContentLoaded", function () {
       localStorage.setItem("guestName", name);
       localStorage.setItem("guestEmail", email);
 
-      alert("⏳ Processing your booking...");
+      if (confirmationDiv) {
+        confirmationDiv.innerHTML = "⏳ Processing your booking...";
+        confirmationDiv.style.display = "block";
+        confirmationDiv.style.opacity = 1;
+      }
 
       setTimeout(() => {
-        alert(`✅ Booking Confirmed for ${name} at ${selectedHotel}!\n📩 Confirmation sent to ${email}.\n💳 Payment via ${payment}.`);
+        if (confirmationDiv) {
+          confirmationDiv.innerHTML = `✅ Booking Confirmed for <strong>${name}</strong> at <strong>${selectedHotel}</strong>!<br>📩 Confirmation sent to <strong>${email}</strong>.<br>💳 Payment via <strong>${payment}</strong>.`;
+          confirmationDiv.style.display = "block";
+        }
+
         closeModal("bookingModal");
-        
-        // Refresh the hotel list after booking
-        usedOffers[selectedHotel] = offerCodeInput ? "✅ Offer Applied" : null;
+
+        if (offerCodeInput) {
+          usedOffers[selectedHotel] = "✅ Offer Applied";
+        }
+
         displayHotels(hotels);
       }, 800);
     });
   }
 });
-
-
 
 const hotels = [
   {
@@ -170,6 +179,8 @@ const hotels = [
     image: "https://images.trvl-media.com/lodging/5000000/4320000/4319200/4319124/32340772.jpg?impolicy=fcrop&w=357&h=201&p=1&q=medium"
   }
 ];
+
+
 let usedOffers = {};
 
 function searchHotels() {
@@ -248,16 +259,19 @@ function closeModal(modalId) {
 
 function bookHotel(hotelName) {
   openModal("bookingModal");
-  const hiddenInput = document.getElementById("selectedHotelName");
-  if (hiddenInput) {
-    hiddenInput.value = hotelName;
-  } else {
-    const input = document.createElement("input");
-    input.type = "hidden";
-    input.id = "selectedHotelName";
-    input.value = hotelName;
-    document.getElementById("bookingForm").appendChild(input);
+
+  const bookingForm = document.getElementById("bookingForm");
+  if (!bookingForm) return;
+
+  let hiddenInput = document.getElementById("selectedHotelName");
+  if (!hiddenInput) {
+    hiddenInput = document.createElement("input");
+    hiddenInput.type = "hidden";
+    hiddenInput.id = "selectedHotelName";
+    bookingForm.appendChild(hiddenInput);
   }
+
+  hiddenInput.value = hotelName;
 
   const storedName = localStorage.getItem("guestName");
   const storedEmail = localStorage.getItem("guestEmail");
