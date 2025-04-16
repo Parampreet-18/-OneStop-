@@ -44,12 +44,14 @@
       wishlist.forEach((item, index) => {
         const card = document.createElement('div');
         card.className = 'bg-white shadow-md rounded-lg p-6 text-center';
+
         card.innerHTML = `
           <img src="${item.image}" alt="${item.name}" class="mx-auto w-32 h-32 object-cover mb-4">
           <h4 class="text-lg font-bold">${item.name}</h4>
           <p class="text-blue-600 font-semibold mt-2">${item.price}</p>
           <button onclick="removeFromWishlist(${index})" class="mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Remove</button>
         `;
+
         wishlistContainer.appendChild(card);
       });
     }
