@@ -18,7 +18,6 @@
   <!-- Navbar -->
   <nav class="bg-white shadow-md p-4 flex justify-between items-center sticky top-0 z-50">
     <h1 class="text-2xl font-bold text-blue-600">ShopWithUs</h1>
-    <a href="/cart.html" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Cart</a>
   </nav>
 
   <!-- Hero Section -->
@@ -35,7 +34,7 @@
     <h3 class="text-3xl font-bold mb-8 text-gray-800">Featured Products</h3>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
-      <!-- Example Product -->
+      <!-- Cricket Ball -->
       <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition">
         <img src="https://placehold.co/200x200?text=Cricket+Ball" alt="Cricket Ball" class="mx-auto w-32 h-32 object-cover">
         <h4 class="mt-4 font-bold text-lg">Cricket Ball</h4>
@@ -44,7 +43,7 @@
         <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
       </div>
 
-      <!-- Add more products here as needed -->
+      <!-- Football -->
       <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition">
         <img src="https://placehold.co/200x200?text=Football" alt="Football" class="mx-auto w-32 h-32 object-cover">
         <h4 class="mt-4 font-bold text-lg">Football</h4>
@@ -53,6 +52,7 @@
         <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
       </div>
 
+      <!-- Basketball -->
       <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition">
         <img src="https://placehold.co/200x200?text=Basketball" alt="Basketball" class="mx-auto w-32 h-32 object-cover">
         <h4 class="mt-4 font-bold text-lg">Basketball</h4>
@@ -61,6 +61,7 @@
         <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
       </div>
 
+      <!-- Helmet -->
       <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition">
         <img src="https://placehold.co/200x200?text=Helmet" alt="Helmet" class="mx-auto w-32 h-32 object-cover">
         <h4 class="mt-4 font-bold text-lg">Cricket Helmet</h4>
@@ -71,6 +72,11 @@
 
     </div>
   </section>
+
+  <!-- Floating Cart Icon -->
+  <a href="/cart.html" class="fixed bottom-6 right-6 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 z-50 text-2xl">
+    🛒
+  </a>
 
   <!-- Footer -->
   <footer class="bg-gray-900 text-white text-center py-4 mt-12">
@@ -91,7 +97,6 @@
 
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-        // Check if item already exists in cart
         const existingItemIndex = cart.findIndex(i => i.name === item.name);
         if (existingItemIndex > -1) {
           cart[existingItemIndex].quantity += 1;
