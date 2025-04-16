@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wishlist - ShopWithUs</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-yellow-100">
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md p-4 flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-blue-600">ShopWithUs</h1>
+    <a href="/index.html" class="text-blue-600 font-semibold hover:underline">Back to Store</a>
+  </nav>
+
+  <!-- Header -->
+  <header class="bg-blue-500 text-white text-center py-12">
+    <h2 class="text-4xl font-bold">Your Wishlist</h2>
+    <p class="mt-2 text-lg">Save your favorite sports gear for later</p>
+  </header>
+
+  <!-- Wishlist Items -->
+  <section class="container mx-auto my-8 px-4">
+    <div id="wishlist-items" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <!-- Wishlist items injected by JavaScript -->
+    </div>
+  </section>
+
+  <footer class="bg-gray-900 text-white text-center py-4 mt-8">
+    <p>&copy; 2025 ShopWithUs - All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    function loadWishlist() {
+      const wishlistContainer = document.getElementById('wishlist-items');
+      wishlistContainer.innerHTML = '';
+      const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+
+      if (wishlist.length === 0) {
+        wishlistContainer.innerHTML = '<p class="text-center text-gray-600 col-span-full">No items in your wishlist.</p>';
+        return;
+      }
+
+      wishlist.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = 'bg-white shadow-md rounded-lg p-6 text-center';
+        card.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" class="mx-auto w-32 h-32 object-cover mb-4">
+          <h4 class="text-lg font-bold">${item.name}</h4>
+          <p class="text-blue-600 font-semibold mt-2">${item.price}</p>
+          <button onclick="removeFromWishlist(${index})" class="mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Remove</button>
+        `;
+        wishlistContainer.appendChild(card);
+      });
+    }
+
+    function removeFromWishlist(index) {
+      let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+      wishlist.splice(index, 1);
+      localStorage.setItem('wishlist', JSON.stringify(wishlist));
+      loadWishlist();
+    }
+
+    window.onload = loadWishlist;
+  </script>
+</body>
+</html>
