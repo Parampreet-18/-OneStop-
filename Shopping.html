@@ -18,6 +18,7 @@
   <!-- Navbar -->
   <nav class="bg-white shadow-md p-4 flex justify-between items-center sticky top-0 z-50">
     <h1 class="text-2xl font-bold text-blue-600">ShopWithUs</h1>
+    <a href="/wishlist.html" class="text-blue-600 font-medium hover:underline">Wishlist</a>
   </nav>
 
   <!-- Hero Section -->
@@ -34,40 +35,49 @@
     <h3 class="text-3xl font-bold mb-8 text-gray-800">Featured Products</h3>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
-      <!-- Cricket Ball -->
+      <!-- Product Template (Repeatable) -->
       <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition">
         <img src="https://placehold.co/200x200?text=Cricket+Ball" alt="Cricket Ball" class="mx-auto w-32 h-32 object-cover">
         <h4 class="mt-4 font-bold text-lg">Cricket Ball</h4>
         <p class="text-gray-600">High-quality leather ball for professional play.</p>
         <p class="text-blue-600 font-semibold mt-2">₹200</p>
-        <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
+        <div class="mt-4 flex justify-center gap-3">
+          <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition add-to-cart">Add to Cart</button>
+          <button class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition add-to-wishlist">♡ Wishlist</button>
+        </div>
       </div>
 
-      <!-- Football -->
       <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition">
         <img src="https://placehold.co/200x200?text=Football" alt="Football" class="mx-auto w-32 h-32 object-cover">
         <h4 class="mt-4 font-bold text-lg">Football</h4>
         <p class="text-gray-600">FIFA-approved match ball.</p>
         <p class="text-blue-600 font-semibold mt-2">₹1800</p>
-        <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
+        <div class="mt-4 flex justify-center gap-3">
+          <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition add-to-cart">Add to Cart</button>
+          <button class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition add-to-wishlist">♡ Wishlist</button>
+        </div>
       </div>
 
-      <!-- Basketball -->
       <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition">
         <img src="https://placehold.co/200x200?text=Basketball" alt="Basketball" class="mx-auto w-32 h-32 object-cover">
         <h4 class="mt-4 font-bold text-lg">Basketball</h4>
         <p class="text-gray-600">Durable indoor/outdoor basketball.</p>
         <p class="text-blue-600 font-semibold mt-2">₹1500</p>
-        <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
+        <div class="mt-4 flex justify-center gap-3">
+          <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition add-to-cart">Add to Cart</button>
+          <button class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition add-to-wishlist">♡ Wishlist</button>
+        </div>
       </div>
 
-      <!-- Helmet -->
       <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition">
         <img src="https://placehold.co/200x200?text=Helmet" alt="Helmet" class="mx-auto w-32 h-32 object-cover">
         <h4 class="mt-4 font-bold text-lg">Cricket Helmet</h4>
         <p class="text-gray-600">Protective gear for head safety.</p>
         <p class="text-blue-600 font-semibold mt-2">₹2200</p>
-        <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
+        <div class="mt-4 flex justify-center gap-3">
+          <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition add-to-cart">Add to Cart</button>
+          <button class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition add-to-wishlist">♡ Wishlist</button>
+        </div>
       </div>
 
     </div>
@@ -83,10 +93,9 @@
     <p>&copy; 2025 ShopWithUs - All Rights Reserved.</p>
   </footer>
 
-  <!-- Cart Script -->
+  <!-- Scripts -->
   <script>
-    const buttons = document.querySelectorAll("button");
-    buttons.forEach(button => {
+    document.querySelectorAll(".add-to-cart").forEach(button => {
       button.addEventListener("click", () => {
         const productCard = button.closest("div");
         const name = productCard.querySelector("h4").textContent;
@@ -96,16 +105,34 @@
         const item = { name, price, image, quantity: 1 };
 
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-        const existingItemIndex = cart.findIndex(i => i.name === item.name);
-        if (existingItemIndex > -1) {
-          cart[existingItemIndex].quantity += 1;
+        const index = cart.findIndex(i => i.name === item.name);
+        if (index > -1) {
+          cart[index].quantity += 1;
         } else {
           cart.push(item);
         }
-
         localStorage.setItem("cart", JSON.stringify(cart));
         alert(`${name} added to cart!`);
+      });
+    });
+
+    document.querySelectorAll(".add-to-wishlist").forEach(button => {
+      button.addEventListener("click", () => {
+        const productCard = button.closest("div");
+        const name = productCard.querySelector("h4").textContent;
+        const price = productCard.querySelector("p.text-blue-600").textContent;
+        const image = productCard.querySelector("img").src;
+
+        const item = { name, price, image };
+
+        let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+        if (!wishlist.some(i => i.name === item.name)) {
+          wishlist.push(item);
+          localStorage.setItem("wishlist", JSON.stringify(wishlist));
+          alert(`${name} added to wishlist!`);
+        } else {
+          alert(`${name} is already in your wishlist!`);
+        }
       });
     });
   </script>
