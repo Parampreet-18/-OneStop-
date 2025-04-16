@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ShopWithUs - Your Online Store</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    #backToTop {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      display: none;
+      z-index: 50;
+    }
+  </style>
 </head>
 <body class="bg-amber-900">
   <!-- Navbar -->
@@ -24,6 +33,7 @@
     <h3 class="text-2xl font-bold mb-6 text-white">Featured Products</h3>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
 
+      <!-- Product Cards -->
       <!-- Cricket Ball -->
       <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
         <img src="https://placehold.co/200x200?text=Cricket+Ball" alt="Professional Cricket Ball" class="mx-auto w-32 h-32 object-cover">
@@ -95,23 +105,42 @@
     <p>&copy; 2025 ShopWithUs - All Rights Reserved.</p>
   </footer>
 
-  <!-- Cart Script -->
+  <!-- Back to Top Button -->
+  <button id="backToTop" class="bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition text-lg">↑</button>
+
+  <!-- Cart & Scroll Script -->
   <script>
     const buttons = document.querySelectorAll("button");
     buttons.forEach(button => {
-      button.addEventListener("click", () => {
-        const productCard = button.closest("div");
-        const name = productCard.querySelector("h4").textContent;
-        const price = productCard.querySelector("p.text-blue-600").textContent;
-        const image = productCard.querySelector("img").src;
+      if (button.textContent.includes("Add to Cart")) {
+        button.addEventListener("click", () => {
+          const productCard = button.closest("div");
+          const name = productCard.querySelector("h4").textContent;
+          const price = productCard.querySelector("p.text-blue-600").textContent;
+          const image = productCard.querySelector("img").src;
 
-        const item = { name, price, image };
+          const item = { name, price, image };
 
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-        cart.push(item);
-        localStorage.setItem("cart", JSON.stringify(cart));
-        alert(`${name} added to cart!`);
-      });
+          let cart = JSON.parse(localStorage.getItem("cart")) || [];
+          cart.push(item);
+          localStorage.setItem("cart", JSON.stringify(cart));
+          alert(`${name} added to cart!`);
+        });
+      }
+    });
+
+    const backToTopBtn = document.getElementById("backToTop");
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) {
+        backToTopBtn.style.display = "block";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    });
+
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   </script>
 </body>
