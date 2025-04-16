@@ -6,94 +6,66 @@
   <title>ShopWithUs - Your Online Store</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    #backToTop {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      display: none;
-      z-index: 50;
+    .hero {
+      background-image: url('https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1600&q=80');
+      background-size: cover;
+      background-position: center;
     }
   </style>
 </head>
-<body class="bg-amber-900">
+<body class="bg-amber-100">
+
   <!-- Navbar -->
-  <nav class="bg-white shadow-md p-4 flex justify-between items-center">
+  <nav class="bg-white shadow-md p-4 flex justify-between items-center sticky top-0 z-50">
     <h1 class="text-2xl font-bold text-blue-600">ShopWithUs</h1>
     <a href="/cart.html" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Cart</a>
   </nav>
 
-  <!-- Header -->
-  <header class="bg-blue-500 text-white text-center py-12">
-    <h2 class="text-4xl font-bold">Welcome to ShopWithUs</h2>
-    <p class="mt-2 text-lg">Your one-stop shop for quality cricket gear!</p>
+  <!-- Hero Section -->
+  <header class="hero text-white text-center py-32 relative">
+    <div class="bg-black bg-opacity-50 absolute inset-0"></div>
+    <div class="relative z-10">
+      <h2 class="text-5xl font-bold mb-4">Welcome to ShopWithUs</h2>
+      <p class="text-xl">Your one-stop shop for all sports gear</p>
+    </div>
   </header>
 
   <!-- Product Section -->
-  <section class="container mx-auto my-8 px-4">
-    <h3 class="text-2xl font-bold mb-6 text-white">Featured Products</h3>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+  <section class="container mx-auto my-12 px-4">
+    <h3 class="text-3xl font-bold mb-8 text-gray-800">Featured Products</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
-      <!-- Product Cards -->
-      <!-- Cricket Ball -->
-      <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-        <img src="https://placehold.co/200x200?text=Cricket+Ball" alt="Professional Cricket Ball" class="mx-auto w-32 h-32 object-cover">
+      <!-- Example Product -->
+      <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition">
+        <img src="https://placehold.co/200x200?text=Cricket+Ball" alt="Cricket Ball" class="mx-auto w-32 h-32 object-cover">
         <h4 class="mt-4 font-bold text-lg">Cricket Ball</h4>
         <p class="text-gray-600">High-quality leather ball for professional play.</p>
         <p class="text-blue-600 font-semibold mt-2">₹200</p>
         <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
       </div>
 
-      <!-- Bat Stickers -->
-      <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-        <img src="https://placehold.co/200x200?text=Bat+Stickers" alt="Stylish MRF Bat Stickers" class="mx-auto w-32 h-32 object-cover">
-        <h4 class="mt-4 font-bold text-lg">Bat Stickers</h4>
-        <p class="text-gray-600">Stylish MRF bat stickers to personalize your gear.</p>
-        <p class="text-blue-600 font-semibold mt-2">₹150</p>
-        <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-      </div>
-
-      <!-- Football -->
-      <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-        <img src="https://placehold.co/200x200?text=Football" alt="FIFA-approved Match Football" class="mx-auto w-32 h-32 object-cover">
+      <!-- Add more products here as needed -->
+      <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition">
+        <img src="https://placehold.co/200x200?text=Football" alt="Football" class="mx-auto w-32 h-32 object-cover">
         <h4 class="mt-4 font-bold text-lg">Football</h4>
         <p class="text-gray-600">FIFA-approved match ball.</p>
         <p class="text-blue-600 font-semibold mt-2">₹1800</p>
         <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
       </div>
 
-      <!-- Basketball -->
-      <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-        <img src="https://placehold.co/200x200?text=Basketball" alt="Durable Indoor/Outdoor Basketball" class="mx-auto w-32 h-32 object-cover">
+      <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition">
+        <img src="https://placehold.co/200x200?text=Basketball" alt="Basketball" class="mx-auto w-32 h-32 object-cover">
         <h4 class="mt-4 font-bold text-lg">Basketball</h4>
-        <p class="text-gray-600">Durable indoor/outdoor ball.</p>
+        <p class="text-gray-600">Durable indoor/outdoor basketball.</p>
         <p class="text-blue-600 font-semibold mt-2">₹1500</p>
         <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
       </div>
 
-      <!-- Tennis Racket -->
-      <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-        <img src="https://placehold.co/200x200?text=Tennis+Racket" alt="Lightweight Tennis Racket" class="mx-auto w-32 h-32 object-cover">
-        <h4 class="mt-4 font-bold text-lg">Tennis Racket</h4>
-        <p class="text-gray-600">Lightweight racket with grip.</p>
-        <p class="text-blue-600 font-semibold mt-2">₹3500</p>
-        <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-      </div>
-
-      <!-- Cricket Helmet -->
-      <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-        <img src="https://placehold.co/200x200?text=Helmet" alt="Protective Cricket Helmet" class="mx-auto w-32 h-32 object-cover">
+      <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition">
+        <img src="https://placehold.co/200x200?text=Helmet" alt="Helmet" class="mx-auto w-32 h-32 object-cover">
         <h4 class="mt-4 font-bold text-lg">Cricket Helmet</h4>
-        <p class="text-gray-600">Protective helmet for cricket safety.</p>
+        <p class="text-gray-600">Protective gear for head safety.</p>
         <p class="text-blue-600 font-semibold mt-2">₹2200</p>
-        <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-      </div>
-
-      <!-- Cricket Pads -->
-      <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-        <img src="https://placehold.co/200x200?text=Pads" alt="Comfortable Cricket Pads" class="mx-auto w-32 h-32 object-cover">
-        <h4 class="mt-4 font-bold text-lg">Cricket Pads</h4>
-        <p class="text-gray-600">Comfortable and durable leg guards.</p>
-        <p class="text-blue-600 font-semibold mt-2">₹1600</p>
         <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
       </div>
 
@@ -101,46 +73,35 @@
   </section>
 
   <!-- Footer -->
-  <footer class="bg-gray-900 text-white text-center py-4 mt-8">
+  <footer class="bg-gray-900 text-white text-center py-4 mt-12">
     <p>&copy; 2025 ShopWithUs - All Rights Reserved.</p>
   </footer>
 
-  <!-- Back to Top Button -->
-  <button id="backToTop" class="bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition text-lg">↑</button>
-
-  <!-- Cart & Scroll Script -->
+  <!-- Cart Script -->
   <script>
     const buttons = document.querySelectorAll("button");
     buttons.forEach(button => {
-      if (button.textContent.includes("Add to Cart")) {
-        button.addEventListener("click", () => {
-          const productCard = button.closest("div");
-          const name = productCard.querySelector("h4").textContent;
-          const price = productCard.querySelector("p.text-blue-600").textContent;
-          const image = productCard.querySelector("img").src;
+      button.addEventListener("click", () => {
+        const productCard = button.closest("div");
+        const name = productCard.querySelector("h4").textContent;
+        const price = productCard.querySelector("p.text-blue-600").textContent;
+        const image = productCard.querySelector("img").src;
 
-          const item = { name, price, image };
+        const item = { name, price, image, quantity: 1 };
 
-          let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        // Check if item already exists in cart
+        const existingItemIndex = cart.findIndex(i => i.name === item.name);
+        if (existingItemIndex > -1) {
+          cart[existingItemIndex].quantity += 1;
+        } else {
           cart.push(item);
-          localStorage.setItem("cart", JSON.stringify(cart));
-          alert(`${name} added to cart!`);
-        });
-      }
-    });
+        }
 
-    const backToTopBtn = document.getElementById("backToTop");
-
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 300) {
-        backToTopBtn.style.display = "block";
-      } else {
-        backToTopBtn.style.display = "none";
-      }
-    });
-
-    backToTopBtn.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert(`${name} added to cart!`);
+      });
     });
   </script>
 </body>
