@@ -729,6 +729,11 @@
 
     <label for="guestEmail">Email:</label>
     <input type="email" id="guestEmail" required />
+    <label for="guestPhone">Phone Number:</label>
+    <input type="text" id="guestPhone" pattern="[0-9]{10}" placeholder="10-digit mobile number" required />
+    
+    <label for="specialRequests">Special Requests:</label>
+    <input type="text" id="specialRequests" placeholder="Optional (e.g. late check-in, room preferences)" />    
 
     <button type="button" onclick="nextStep('guest')">Next →</button>
   </div>
@@ -740,11 +745,18 @@
 
     <label for="bookingCheckout">Check-out:</label>
     <input type="date" id="bookingCheckout" required />
+    <label for="roomType">Room Type:</label>
+  <select id="roomType" required>
+    <option value="">Select a room type</option>
+    <option value="standard">Standard</option>
+    <option value="deluxe">Deluxe</option>
+    <option value="suite">Suite</option>
+  </select>
 
     <label for="documentUpload">Upload ID Proof:</label>
     <input type="file" id="documentUpload" accept=".pdf,.jpg,.png" required />
-
     <button type="button" onclick="prevStep('stay')">← Back</button>
+    <div style="height: 20px;"></div>
     <button type="button" onclick="nextStep('stay')">Next →</button>
   </div>
 
@@ -757,7 +769,7 @@
       <option value="upi">UPI</option>
       <option value="paypal">PayPal</option>
     </select>
-
+    <div style="height: 20px;"></div>
     <button type="button" onclick="prevStep('payment')">← Back</button>
     <button type="submit">Confirm Booking</button>
   </div>
