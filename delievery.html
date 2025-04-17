@@ -5,8 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ShopWithUs - Delivery</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .checkmark {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: block;
+      stroke-width: 2;
+      stroke: #4ade80;
+      stroke-miterlimit: 10;
+      margin: 0 auto 10px auto;
+      box-shadow: inset 0px 0px 0px #4ade80;
+      animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+    }
+    .checkmark__circle {
+      stroke-dasharray: 166;
+      stroke-dashoffset: 166;
+      stroke-width: 2;
+      stroke-miterlimit: 10;
+      stroke: #4ade80;
+      fill: none;
+      animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+    }
+    .checkmark__check {
+      transform-origin: 50% 50%;
+      stroke-dasharray: 48;
+      stroke-dashoffset: 48;
+      animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.6s forwards;
+    }
+    @keyframes stroke {
+      100% {
+        stroke-dashoffset: 0;
+      }
+    }
+    @keyframes scale {
+      0%, 100% {
+        transform: none;
+      }
+      50% {
+        transform: scale3d(1.1, 1.1, 1);
+      }
+    }
+    @keyframes fill {
+      100% {
+        box-shadow: inset 0px 0px 0px 30px #4ade80;
+      }
+    }
+  </style>
 </head>
 <body class="bg-yellow-100">
+
   <!-- Navbar -->
   <nav class="bg-white shadow-md p-4 flex justify-between items-center">
     <h1 class="text-2xl font-bold text-blue-600">ShopWithUs</h1>
@@ -19,9 +67,12 @@
     <p class="mt-2 text-lg">Please provide your shipping information</p>
   </header>
 
+  <!-- Cart Summary -->
+  <div id="cartSummary" class="text-center text-lg font-medium text-gray-700 mt-4"></div>
+
   <!-- Form Section -->
   <section class="container mx-auto my-8 px-4">
-    <form class="bg-white p-6 rounded-lg shadow-md max-w-xl mx-auto">
+    <form class="bg-white p-6 rounded-lg shadow-md max-w-xl mx-auto" id="deliveryForm">
       <!-- Name -->
       <div class="mb-4">
         <label for="name" class="block text-gray-700 font-semibold mb-2">Full Name</label>
@@ -43,13 +94,13 @@
       <!-- Pincode -->
       <div class="mb-4">
         <label for="pincode" class="block text-gray-700 font-semibold mb-2">Pincode</label>
-        <input type="text" id="pincode" class="w-full px-4 py-2 border rounded" placeholder="123456" pattern="\d{6}" title="Enter a 6-digit pincode" required>
+        <input type="text" id="pincode" class="w-full px-4 py-2 border rounded" placeholder="123456" pattern="\d{6}" required>
       </div>
 
       <!-- Phone -->
       <div class="mb-4">
         <label for="phone" class="block text-gray-700 font-semibold mb-2">Phone Number</label>
-        <input type="tel" id="phone" class="w-full px-4 py-2 border rounded" placeholder="9876543210" pattern="\d{10}" title="Enter a 10-digit phone number" required>
+        <input type="tel" id="phone" class="w-full px-4 py-2 border rounded" placeholder="9876543210" pattern="\d{10}" required>
       </div>
 
       <!-- Delivery Method -->
@@ -75,8 +126,14 @@
         </button>
       </div>
 
-      <!-- Confirmation Message Placeholder -->
-      <p id="confirmation" class="text-green-600 font-medium text-center mt-4 hidden">Your delivery information has been submitted!</p>
+      <!-- Confirmation Message -->
+      <div id="confirmation" class="text-center mt-6 hidden">
+        <svg class="checkmark" viewBox="0 0 52 52">
+          <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+          <path class="checkmark__check" fill="none" d="M14 27l7 7 16-16"/>
+        </svg>
+        <p class="text-green-600 text-xl font-semibold">Delivery Confirmed!</p>
+      </div>
     </form>
   </section>
 
@@ -85,19 +142,62 @@
     <p>&copy; 2025 ShopWithUs - All Rights Reserved.</p>
   </footer>
 
-  <!-- JS Confirmation Handling -->
+  <!-- Script -->
   <script>
-    const form = document.querySelector("form");
+    const form = document.getElementById("deliveryForm");
     const confirmation = document.getElementById("confirmation");
+
+    // Prefill form if saved
+    window.addEventListener("DOMContentLoaded", () => {
+      const saved = JSON.parse(localStorage.getItem("deliveryInfo"));
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const summary = document.getElementById("cartSummary");
+
+      if (saved) {
+        form.name.value = saved.name;
+        form.email.value = saved.email;
+        form.address.value = saved.address;
+        form.pincode.value = saved.pincode;
+        form.phone.value = saved.phone;
+        form.delivery.value = saved.delivery;
+        document.getElementById("save").checked = true;
+      }
+
+      if (cart.length > 0) {
+        const total = cart.reduce((sum, item) => {
+          return sum + (parseInt(item.price.replace(/[^\d]/g, "")) * item.quantity);
+        }, 0);
+        summary.innerHTML = `🛍️ You have ${cart.length} item(s). Total: ₹${total}`;
+      } else {
+        summary.innerHTML = `Your cart is empty. <a href="index.html" class="text-blue-600 underline">Go back to shop</a>`;
+      }
+    });
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       confirmation.classList.remove("hidden");
 
-      setTimeout(() => {
-        form.reset();
-      }, 1500); // small delay before reset
+      if (document.getElementById("save").checked) {
+        const info = {
+          name: form.name.value,
+          email: form.email.value,
+          address: form.address.value,
+          pincode: form.pincode.value,
+          phone: form.phone.value,
+          delivery: form.delivery.value
+        };
+        localStorage.setItem("deliveryInfo", JSON.stringify(info));
+      }
+
+      // Clear cart after confirm
+      localStorage.removeItem("cart");
+
+      // Optional redirect after a short delay
+      // setTimeout(() => {
+      //   window.location.href = "thankyou.html";
+      // }, 2500);
     });
   </script>
+
 </body>
 </html>
