@@ -78,10 +78,18 @@
       loadCartState();
     }
 
+    function clearCart() {
+      if (confirm("Are you sure you want to clear the cart?")) {
+        localStorage.removeItem("cart");
+        loadCartState();
+      }
+    }
+
     window.onload = loadCartState;
   </script>
 </head>
 <body class="bg-yellow-100">
+  <!-- Navbar -->
   <nav class="bg-white shadow-md p-4 flex justify-between items-center">
     <h1 class="text-2xl font-bold text-blue-600">ShopWithUs</h1>
     <div class="flex items-center">
@@ -90,24 +98,32 @@
     </div>
   </nav>
 
+  <!-- Header -->
   <header class="bg-blue-500 text-white text-center py-12">
     <h2 class="text-4xl font-bold">Your Shopping Cart</h2>
     <p class="mt-2 text-lg">All your selected sports gear in one place</p>
   </header>
 
+  <!-- Cart Items Section -->
   <section class="container mx-auto my-8 px-4">
     <h3 class="text-2xl font-bold mb-6 text-gray-800">All Sports Gear</h3>
     <div class="cart-items grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      <!-- Cart items will be injected here by JS -->
+      <!-- Cart items will be injected here -->
     </div>
 
-    <div class="mt-10 flex justify-between items-center bg-white p-4 shadow-md rounded-lg">
-      <p class="text-lg font-semibold">Total Items in Cart: <span id="total-count">0</span> | Total Price: <span id="total-price">₹0.00</span></p>
-      <button class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 transition">Proceed to Checkout</button>
+    <!-- Summary and Action Buttons -->
+    <div class="mt-10 flex flex-col sm:flex-row sm:justify-between sm:items-center bg-white p-4 shadow-md rounded-lg gap-4">
+      <p class="text-lg font-semibold">
+        Total Items in Cart: <span id="total-count">0</span> | Total Price: <span id="total-price">₹0.00</span>
+      </p>
+      <div class="flex gap-4">
+        <button onclick="clearCart()" class="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-600 transition">Clear Cart</button>
+        <a href="delivery.html" class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 transition">Proceed to Checkout</a>
+      </div>
     </div>
   </section>
 
-  <!-- Suggestion Slider -->
+  <!-- Suggestions Slider -->
   <section class="mt-12 px-4">
     <h3 class="text-2xl font-bold mb-4 text-gray-800">You might also like</h3>
     <div class="flex overflow-x-auto space-x-4 pb-4">
@@ -136,6 +152,7 @@
     </div>
   </section>
 
+  <!-- Footer -->
   <footer class="bg-gray-800 text-white text-center py-4 mt-12">
     <p>&copy; 2025 ShopWithUs - All Rights Reserved.</p>
   </footer>
