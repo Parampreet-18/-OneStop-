@@ -30,13 +30,26 @@
     </div>
   </header>
 
-  <!-- Product Section -->
-  <section class="container mx-auto my-12 px-4">
-    <h3 class="text-3xl font-bold mb-8 text-gray-800">Featured Products</h3>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+  <!-- Filter Section -->
+  <section class="container mx-auto px-4 mt-10">
+    <div class="flex justify-end mb-4">
+      <label class="text-lg mr-2 font-medium">Filter by Price:</label>
+      <select id="price-filter" class="border rounded px-3 py-1">
+        <option value="all">All</option>
+        <option value="0-500">₹0 - ₹500</option>
+        <option value="501-1500">₹501 - ₹1500</option>
+        <option value="1501-2500">₹1501 - ₹2500</option>
+      </select>
+    </div>
+  </section>
 
-      <!-- Product Template (Repeatable) -->
-      <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition">
+  <!-- Product Section -->
+  <section class="container mx-auto px-4">
+    <h3 class="text-3xl font-bold mb-8 text-gray-800">Featured Products</h3>
+    <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+      <!-- Product Items -->
+      <div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition" data-price="200">
         <img src="https://placehold.co/200x200?text=Cricket+Ball" alt="Cricket Ball" class="mx-auto w-32 h-32 object-cover">
         <h4 class="mt-4 font-bold text-lg">Cricket Ball</h4>
         <p class="text-gray-600">High-quality leather ball for professional play.</p>
@@ -47,7 +60,7 @@
         </div>
       </div>
 
-      <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition">
+      <div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition" data-price="1800">
         <img src="https://placehold.co/200x200?text=Football" alt="Football" class="mx-auto w-32 h-32 object-cover">
         <h4 class="mt-4 font-bold text-lg">Football</h4>
         <p class="text-gray-600">FIFA-approved match ball.</p>
@@ -58,7 +71,7 @@
         </div>
       </div>
 
-      <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition">
+      <div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition" data-price="1500">
         <img src="https://placehold.co/200x200?text=Basketball" alt="Basketball" class="mx-auto w-32 h-32 object-cover">
         <h4 class="mt-4 font-bold text-lg">Basketball</h4>
         <p class="text-gray-600">Durable indoor/outdoor basketball.</p>
@@ -69,7 +82,7 @@
         </div>
       </div>
 
-      <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition">
+      <div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition" data-price="2200">
         <img src="https://placehold.co/200x200?text=Helmet" alt="Helmet" class="mx-auto w-32 h-32 object-cover">
         <h4 class="mt-4 font-bold text-lg">Cricket Helmet</h4>
         <p class="text-gray-600">Protective gear for head safety.</p>
@@ -97,7 +110,7 @@
   <script>
     document.querySelectorAll(".add-to-cart").forEach(button => {
       button.addEventListener("click", () => {
-        const productCard = button.closest("div");
+        const productCard = button.closest("div.product");
         const name = productCard.querySelector("h4").textContent;
         const price = productCard.querySelector("p.text-blue-600").textContent;
         const image = productCard.querySelector("img").src;
@@ -118,7 +131,7 @@
 
     document.querySelectorAll(".add-to-wishlist").forEach(button => {
       button.addEventListener("click", () => {
-        const productCard = button.closest("div");
+        const productCard = button.closest("div.product");
         const name = productCard.querySelector("h4").textContent;
         const price = productCard.querySelector("p.text-blue-600").textContent;
         const image = productCard.querySelector("img").src;
@@ -133,6 +146,24 @@
         } else {
           alert(`${name} is already in your wishlist!`);
         }
+      });
+    });
+
+    // Filter by price logic
+    document.getElementById("price-filter").addEventListener("change", function () {
+      const selected = this.value;
+      const products = document.querySelectorAll(".product");
+
+      products.forEach(product => {
+        const price = parseInt(product.getAttribute("data-price"));
+        let show = true;
+
+        if (selected === "0-500") show = price <= 500;
+        else if (selected === "501-1500") show = price > 500 && price <= 1500;
+        else if (selected === "1501-2500") show = price > 1500 && price <= 2500;
+        else show = true;
+
+        product.style.display = show ? "block" : "none";
       });
     });
   </script>
