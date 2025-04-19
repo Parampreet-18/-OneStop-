@@ -54,41 +54,41 @@
 
   <!-- Cart Summary -->
   <div id="cartSummary" class="text-center text-lg font-medium text-gray-700 mt-4"></div>
+  <div id="repeatOrderContainer" class="text-center mt-2 hidden">
+    <button id="repeatOrderBtn" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+      Repeat Last Order
+    </button>
+  </div>
 
   <!-- Form Section -->
   <section class="container mx-auto my-8 px-4">
     <form class="bg-white p-6 rounded-lg shadow-md max-w-xl mx-auto" id="deliveryForm">
-      <!-- Name -->
+      <!-- Full form unchanged from your version -->
       <div class="mb-4">
         <label for="name" class="block text-gray-700 font-semibold mb-2">Full Name</label>
         <input type="text" id="name" class="w-full px-4 py-2 border rounded" placeholder="John Doe" required>
       </div>
 
-      <!-- Email -->
       <div class="mb-4">
         <label for="email" class="block text-gray-700 font-semibold mb-2">Email Address</label>
         <input type="email" id="email" class="w-full px-4 py-2 border rounded" placeholder="john@example.com" required>
       </div>
 
-      <!-- Address -->
       <div class="mb-4">
         <label for="address" class="block text-gray-700 font-semibold mb-2">Address</label>
         <textarea id="address" class="w-full px-4 py-2 border rounded" placeholder="123 Main Street, City, State" rows="3" required></textarea>
       </div>
 
-      <!-- Pincode -->
       <div class="mb-4">
         <label for="pincode" class="block text-gray-700 font-semibold mb-2">Pincode</label>
         <input type="text" id="pincode" class="w-full px-4 py-2 border rounded" placeholder="123456" pattern="\d{6}" required>
       </div>
 
-      <!-- Phone -->
       <div class="mb-4">
         <label for="phone" class="block text-gray-700 font-semibold mb-2">Phone Number</label>
         <input type="tel" id="phone" class="w-full px-4 py-2 border rounded" placeholder="9876543210" pattern="\d{10}" required>
       </div>
 
-      <!-- Delivery Method -->
       <div class="mb-4">
         <label for="delivery" class="block text-gray-700 font-semibold mb-2">Delivery Method</label>
         <select id="delivery" class="w-full px-4 py-2 border rounded" required>
@@ -99,26 +99,22 @@
         <p id="estimatedDate" class="mt-2 text-green-600 text-sm font-medium"></p>
       </div>
 
-      <!-- Order Notes -->
       <div class="mb-4">
         <label for="notes" class="block text-gray-700 font-semibold mb-2">Order Notes</label>
         <textarea id="notes" class="w-full px-4 py-2 border rounded" placeholder="Any delivery instructions?" rows="3"></textarea>
       </div>
 
-      <!-- Save Info -->
       <div class="mb-4 flex items-center">
         <input type="checkbox" id="save" class="mr-2">
         <label for="save" class="text-gray-700">Save this information for next time</label>
       </div>
 
-      <!-- Submit Button -->
       <div class="mt-6">
         <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 transition w-full">
           Confirm Delivery
         </button>
       </div>
 
-      <!-- Confirmation Message -->
       <div id="confirmation" class="text-center mt-6 hidden">
         <svg class="checkmark" viewBox="0 0 52 52">
           <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
@@ -139,11 +135,18 @@
     const form = document.getElementById("deliveryForm");
     const confirmation = document.getElementById("confirmation");
     const estimatedDate = document.getElementById("estimatedDate");
+    const summary = document.getElementById("cartSummary");
+    const repeatContainer = document.getElementById("repeatOrderContainer");
+    const repeatBtn = document.getElementById("repeatOrderBtn");
+
+    const lastCart = [
+      { name: "Running Shoes", price: "₹2999", quantity: 1 },
+      { name: "Cricket Bat", price: "₹1499", quantity: 2 }
+    ];
 
     window.addEventListener("DOMContentLoaded", () => {
       const saved = JSON.parse(localStorage.getItem("deliveryInfo"));
       const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      const summary = document.getElementById("cartSummary");
 
       if (saved) {
         form.name.value = saved.name;
@@ -164,7 +167,13 @@
         summary.innerHTML = `🛍️ You have ${cart.length} item(s). Total: ₹${total}`;
       } else {
         summary.innerHTML = `Your cart is empty. <a href="index.html" class="text-blue-600 underline">Go back to shop</a>`;
+        if (saved) repeatContainer.classList.remove("hidden");
       }
+    });
+
+    repeatBtn.addEventListener("click", () => {
+      localStorage.setItem("cart", JSON.stringify(lastCart));
+      location.reload();
     });
 
     document.getElementById("delivery").addEventListener("change", (e) => {
@@ -205,10 +214,6 @@
       }
 
       localStorage.removeItem("cart");
-
-      // setTimeout(() => {
-      //   window.location.href = "thankyou.html";
-      // }, 2500);
     });
   </script>
 </body>
