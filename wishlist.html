@@ -49,7 +49,10 @@
           <img src="${item.image}" alt="${item.name}" class="mx-auto w-32 h-32 object-cover mb-4">
           <h4 class="text-lg font-bold">${item.name}</h4>
           <p class="text-blue-600 font-semibold mt-2">${item.price}</p>
-          <button onclick="removeFromWishlist(${index})" class="mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Remove</button>
+          <div class="mt-4 flex flex-col gap-2">
+            <button onclick="moveToCart(${index})" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition">Move to Cart</button>
+            <button onclick="removeFromWishlist(${index})" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Remove</button>
+          </div>
         `;
 
         wishlistContainer.appendChild(card);
@@ -60,6 +63,22 @@
       let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
       wishlist.splice(index, 1);
       localStorage.setItem('wishlist', JSON.stringify(wishlist));
+      loadWishlist();
+    }
+
+    function moveToCart(index) {
+      let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+      const itemToMove = wishlist[index];
+      // Add quantity = 1 by default
+      cart.push({ ...itemToMove, quantity: 1 });
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+      // Remove from wishlist
+      wishlist.splice(index, 1);
+      localStorage.setItem('wishlist', JSON.stringify(wishlist));
+
       loadWishlist();
     }
 
