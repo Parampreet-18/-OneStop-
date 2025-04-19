@@ -288,6 +288,120 @@
     .close-button:hover {
       transform: rotate(90deg);
     }
+    .progress-container {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 10px;
+    height: 14px;
+  }
+
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #ff9a9e, #fad0c4);
+    border-radius: 20px;
+    transition: width 0.5s ease;
+  }
+  
+  .book-progress {
+  margin-top: 0.8rem;
+  text-align: left;
+}
+
+.progress-label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+  color: #555;
+  font-weight: bold;
+}
+
+.book .progress-container {
+  height: 10px;
+  border-radius: 10px;
+  background-color: #eee;
+}
+
+.book .progress-bar {
+  height: 100%;
+  border-radius: 10px;
+  background: linear-gradient(to right, #fcb69f, #ff9a9e);
+  transition: width 0.5s ease-in-out;
+}
+body.dark-mode .progress-label {
+  color: #ddd;
+}
+
+body.dark-mode .book .progress-container {
+  background-color: #444;
+}
+
+body.dark-mode .book .progress-bar {
+  background: linear-gradient(to right, #888, #bbb);
+}
+#readingProgress {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 2rem;
+  border-radius: 8px;
+  animation: fadeIn 1.5s ease forwards;
+}
+
+body.dark-mode #readingProgress {
+  background: rgba(50, 50, 50, 0.6);
+}
+
+.progress-list {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.progress-entry h3 {
+  margin-bottom: 0.3rem;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+body.dark-mode .progress-entry h3 {
+  color: #eee;
+}
+
+.progress-label {
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 0.4rem;
+}
+
+body.dark-mode .progress-label {
+  color: #ccc;
+}
+
+.progress-container {
+  height: 12px;
+  border-radius: 10px;
+  background-color: #ddd;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  transition: width 0.5s ease-in-out;
+  border-radius: 10px;
+}
+
+body.dark-mode .progress-container {
+  background-color: #444;
+}
+
+body.dark-mode .progress-bar {
+  background: linear-gradient(to right, #888, #bbb);
+}
+
   </style>
 
 
@@ -339,7 +453,74 @@
         <button id="randomBookBtn" aria-label="Show a random book">Random Book</button>
       </div>
       <div id="books-container"></div>
+      <div class="book">
+        <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794" alt="Book Cover" />
+        <h3>The Midnight Library</h3>
+        <p>by Matt Haig</p>
+        <p>Category: Fiction</p>
+        <!-- Progress Bar -->
+        <div class="book-progress">
+          <span class="progress-label">Progress: 65%</span>
+          <div class="progress-container">
+            <div class="progress-bar" style="width: 65%;"></div>
+          </div>
+        </div>
+         
+      </div>
+      
+      <div class="book">
+        <img src="https://images.unsplash.com/photo-1529655683826-aba9b3e77383" alt="Book Cover" />
+        <h3>Atomic Habits</h3>
+        <p>by James Clear</p>
+        <p>Category: Non-fiction</p>
+        <span class="progress-label">Progress: 15%</span>
+        <div class="progress-container">
+          <div class="progress-bar" style="width: 45%;"></div>
+        </div>
+      </div>
+      
+      <div class="book">
+        <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66" alt="Book Cover" />
+        <h3>Gone Girl</h3>
+        <p>by Gillian Flynn</p>
+        <p>Category: Mystery</p>
+        class="progress-label">Progress: 90%</span>
+        <div class="progress-container">
+          <div class="progress-bar" style="width: 80%;"></div>
+        </div>
+      </div>
     </section>
+    <!-- Add this just after the #featured section in <main> -->
+<section id="readingProgress">
+  <h2>Reading Progress</h2>
+  <div class="progress-list">
+
+    <div class="progress-entry">
+      <h3>The Midnight Library</h3>
+      <span class="progress-label">65% completed</span>
+      <div class="progress-container">
+        <div class="progress-bar" style="width: 65%;"></div>
+      </div>
+    </div>
+
+    <div class="progress-entry">
+      <h3>Atomic Habits</h3>
+      <span class="progress-label">45% completed</span>
+      <div class="progress-container">
+        <div class="progress-bar" style="width: 45%;"></div>
+      </div>
+    </div>
+
+    <div class="progress-entry">
+      <h3>Gone Girl</h3>
+      <span class="progress-label">80% completed</span>
+      <div class="progress-container">
+        <div class="progress-bar" style="width: 80%;"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
 
     <section id="submitBook">
       <h2>Submit a New Book</h2>
@@ -408,6 +589,6 @@
     </div>
   </div>
 
-  <script src="Books-JS.js"></script>
+  <script src="Books-JS.txt"></script>
 </body>
 </html>
