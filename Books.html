@@ -401,7 +401,78 @@ body.dark-mode .progress-container {
 body.dark-mode .progress-bar {
   background: linear-gradient(to right, #888, #bbb);
 }
+#chatBot {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 260px;
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: sans-serif;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  z-index: 9999;
+}
 
+#chatBot.collapsed .chat-body,
+#chatBot.collapsed .chat-input-area {
+  display: none;
+}
+
+.chat-header {
+  background: #4a90e2;
+  color: white;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.chat-body {
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 10px;
+  background: #fff;
+}
+
+.chat-input-area {
+  display: flex;
+  padding: 8px;
+  border-top: 1px solid #ddd;
+}
+
+.chat-input-area input {
+  flex: 1;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.chat-input-area button {
+  margin-left: 6px;
+  padding: 6px 10px;
+  border: none;
+  background: #4a90e2;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.chat-message {
+  margin-bottom: 8px;
+}
+
+.chat-message.user {
+  text-align: right;
+  color: #2c3e50;
+}
+
+.chat-message.bot {
+  text-align: left;
+  color: #27ae60;
+}
   </style>
 
 
@@ -588,6 +659,16 @@ body.dark-mode .progress-bar {
       </form>
     </div>
   </div>
+  <!-- Chat Bot UI Container (if not added via JS) -->
+<div id="chatBot">
+  <div class="chat-header">📚 Book Chat Bot <span id="chatToggle">_</span></div>
+  <div class="chat-body" id="chatBody"></div>
+  <div class="chat-input-area">
+    <input type="text" id="chatInput" placeholder="Ask me something..." />
+    <button id="sendChat">Send</button>
+  </div>
+</div>
+
 
   <script src="Books-JS.js"></script>
 </body>
