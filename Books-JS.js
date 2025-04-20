@@ -26,6 +26,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const submitBookForm = getEl('submitBookForm');
   const scrollTopBtn = getEl('scrollTopBtn');
   const searchSuggestions = getEl('searchSuggestions');
+  const darkModeToggle = getEl('darkModeToggle');
+  const trendingContainer = getEl('trendingContainer');
+  const botdContainer = getEl('botdContainer');
+  const progressInput = getEl('progressInput');
+  const recommendBtn = getEl('recommendBtn');
 
   const books = [
     {
@@ -165,14 +170,13 @@ document.addEventListener('DOMContentLoaded', () => {
     book.category = bookCategories.get(book.title) || 'Uncategorized';
   });
 
-  // Dark Mode
-  const darkModeToggle = getEl('darkModeToggle');
-  darkModeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-    darkModeToggle.textContent = document.body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
-  });
+  if (darkModeToggle) {
+    darkModeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      darkModeToggle.textContent = document.body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
+    });
+  }
 
-  // Filter and Sort
   function filterAndSortBooks() {
     const query = searchBar.value.toLowerCase();
     const selectedCategory = categoryFilter.value;
@@ -196,7 +200,121 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
 
-  // Display Books
+  books.forEach(book => {
+    const savedData = JSON.parse(localStorage.getItem(`book-${book.title}`));
+    if (savedData) {
+      book.reviews = savedData.reviews || [];
+      book.progress = savedData.progress || 0;
+    } else {
+      book.progress = 0;
+    }
+  });
+
+  function getTrendingBooks() {
+    return books
+      .filter(b => b.reviews.length > 0)
+      .sort((a, b) => b.reviews.length - a.reviews.length)
+      .slice(0, 3);
+  }
+
+  function showTrendingBooks() {
+    if (!trendingContainer) return;
+    const trendingBooks = getTrendingBooks();
+    trendingContainer.innerHTML = `<h3>📈 Trending Books</h3>`;
+    trendingBooks.forEach(book => {
+      const div = document.createElement('div');
+      div.className = 'trending-book';
+      div.innerHTML = `
+        <strong>${book.title}</strong> by ${book.author}
+        <p>${book.reviews.length} review(s)</p>
+      `;
+      trendingContainer.appendChild(div);
+    });
+  }
+
+  function getBookOfTheDay() {
+    const todayIndex = new Date().getDate() % books.length;
+    return books[todayIndex];
+  }
+
+  function showBookOfTheDay() {
+    if (!botdContainer) return;
+    const botd = getBookOfTheDay();
+    botdContainer.innerHTML = `
+      <h3>📅 Book of the Day</h3>
+      <p><strong>${botd.title}</strong> by ${botd.author}</p>
+    `;
+  }
+
+  function saveBookData(book) {
+    const data = {
+      reviews: book.reviews,
+      progress: book.progress
+    };
+    localStorage.setItem(`book-${book.title}`, JSON.stringify(data));
+  }
+
+  function updateReviewsList(reviews) {
+    reviewsList.innerHTML = '';
+    reviews.forEach(review => {
+      const li = document.createElement('li');
+      li.textContent = review;
+      reviewsList.appendChild(li);
+    });
+  }
+
+  if (reviewForm) {
+    reviewForm.addEventListener('submit', e => {
+      e.preventDefault();
+      if (currentBook && newReviewText.value.trim()) {
+        currentBook.reviews.push(newReviewText.value.trim());
+        updateReviewsList(currentBook.reviews);
+        saveBookData(currentBook);
+        newReviewText.value = '';
+      }
+    });
+  }
+
+  function openModal(book) {
+    currentBook = book;
+    modalCover.src = book.cover;
+    modalTitle.textContent = book.title;
+    modalAuthor.textContent = `by ${book.author}`;
+    modalDescription.textContent = book.description;
+    const stars = '★'.repeat(book.rating) + '☆'.repeat(5 - book.rating);
+    modalRating.textContent = `Rating: ${stars}`;
+    updateReviewsList(book.reviews);
+    if (progressInput) progressInput.value = book.progress || 0;
+    modal.style.display = 'block';
+  }
+
+  if (progressInput) {
+    progressInput.addEventListener('input', () => {
+      if (currentBook) {
+        currentBook.progress = Number(progressInput.value);
+        saveBookData(currentBook);
+      }
+    });
+  }
+
+  if (recommendBtn) {
+    recommendBtn.addEventListener('click', () => {
+      if (favorites.length === 0) {
+        alert('Add some favorites first!');
+        return;
+      }
+
+      const topFavorite = books.find(b => favorites.includes(b.title) && b.rating >= 4);
+      const sameCategory = books.find(b => b.category === topFavorite?.category && !favorites.includes(b.title));
+
+      if (sameCategory) {
+        openModal(sameCategory);
+      } else {
+        alert('No similar books found. Try adding more favorites.');
+      }
+    });
+  }
+
   function displayBooks() {
     booksContainer.innerHTML = '';
     const filteredBooks = filterAndSortBooks();
@@ -222,7 +340,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Toggle Favorite
   function toggleFavorite(book) {
     if (favorites.includes(book.title)) {
       favorites = favorites.filter(fav => fav !== book.title);
@@ -232,23 +349,12 @@ document.addEventListener('DOMContentLoaded', () => {
     displayBooks();
   }
 
-  // Open Modal
-  function openModal(book) {
-    currentBook = book;
-    modalCover.src = book.cover;
-    modalTitle.textContent = book.title;
-    modalAuthor.textContent = `by ${book.author}`;
-    modalDescription.textContent = book.description;
-    modalRating.textContent = `Rating: ${book.rating} / 5`;
-    updateReviewsList(book.reviews);
-    modal.style.display = 'block';
+  if (closeButton) {
+    closeButton.addEventListener('click', () => {
+      modal.style.display = 'none';
+      currentBook = null;
+    });
   }
-
-  // Close Modal
-  closeButton.addEventListener('click', () => {
-    modal.style.display = 'none';
-    currentBook = null;
-  });
 
   window.addEventListener('click', e => {
     if (e.target === modal) {
@@ -257,44 +363,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Update Reviews
-  function updateReviewsList(reviews) {
-    reviewsList.innerHTML = '';
-    reviews.forEach(review => {
-      const li = document.createElement('li');
-      li.textContent = review;
-      reviewsList.appendChild(li);
-    });
+  function populateCategoryFilter() {
+    categoryFilter.innerHTML = `<option value="All">All Categories</option>` +
+      [...new Set(books.map(b => b.category))].sort().map(cat =>
+        `<option value="${cat}">${cat}</option>`
+      ).join('');
   }
 
-  reviewForm.addEventListener('submit', e => {
-    e.preventDefault();
-    if (currentBook && newReviewText.value.trim()) {
-      currentBook.reviews.push(newReviewText.value.trim());
-      updateReviewsList(currentBook.reviews);
-      newReviewText.value = '';
+  window.addEventListener('scroll', () => {
+    if (scrollTopBtn) {
+      scrollTopBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
     }
   });
 
-  // Category Filter
-  function populateCategoryFilter() {
-    categoryFilter.innerHTML = `<option value="All">All Categories</option>` +
-      [...new Set(books.map(b => b.category))]
-        .sort()
-        .map(cat => `<option value="${cat}">${cat}</option>`)
-        .join('');
+  if (scrollTopBtn) {
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   }
 
-  // Scroll to Top Button
-  window.addEventListener('scroll', () => {
-    scrollTopBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
-  });
-
-  scrollTopBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-
-  // Search Suggestions
   searchBar.addEventListener('input', () => {
     const query = searchBar.value.toLowerCase();
     searchSuggestions.innerHTML = '';
@@ -316,7 +403,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Sort, Filter, View Events
   [sortDropdown, categoryFilter].forEach(el => el.addEventListener('change', displayBooks));
   allBooksBtn.addEventListener('click', () => {
     viewMode = 'all';
@@ -333,7 +419,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Book Submission
   submitBookForm.addEventListener('submit', e => {
     e.preventDefault();
 
@@ -343,7 +428,7 @@ document.addEventListener('DOMContentLoaded', () => {
       cover: getEl('newCover').value,
       category: getEl('newCategory').value,
       description: getEl('newDescription').value,
-      rating: Math.floor(Math.random() * 3) + 3, // 3–5
+      rating: Math.floor(Math.random() * 3) + 3,
       reviews: []
     };
 
@@ -354,7 +439,8 @@ document.addEventListener('DOMContentLoaded', () => {
     alert('Book added successfully!');
   });
 
-  // Initialize
   populateCategoryFilter();
   displayBooks();
+  showTrendingBooks();
+  showBookOfTheDay();
 });
