@@ -30,16 +30,22 @@
     </div>
   </header>
 
-  <!-- Filter Section -->
+  <!-- Filter & Search Section -->
   <section class="container mx-auto px-4 mt-10">
-    <div class="flex justify-end mb-4">
-      <label class="text-lg mr-2 font-medium">Filter by Price:</label>
-      <select id="price-filter" class="border rounded px-3 py-1">
-        <option value="all">All</option>
-        <option value="0-500">₹0 - ₹500</option>
-        <option value="501-1500">₹501 - ₹1500</option>
-        <option value="1501-2500">₹1501 - ₹2500</option>
-      </select>
+    <div class="flex flex-col md:flex-row justify-between mb-6 gap-4">
+      <div>
+        <label class="text-lg mr-2 font-medium">Search:</label>
+        <input type="text" id="search-input" placeholder="Search product..." class="border rounded px-3 py-1 w-64">
+      </div>
+      <div>
+        <label class="text-lg mr-2 font-medium">Filter by Price:</label>
+        <select id="price-filter" class="border rounded px-3 py-1">
+          <option value="all">All</option>
+          <option value="0-500">₹0 - ₹500</option>
+          <option value="501-1500">₹501 - ₹1500</option>
+          <option value="1501-2500">₹1501 - ₹2500</option>
+        </select>
+      </div>
     </div>
   </section>
 
@@ -49,7 +55,7 @@
     <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
       <!-- Product Items -->
-      <div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition" data-price="200">
+      <div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition" data-price="200" data-name="Cricket Ball">
         <img src="https://placehold.co/200x200?text=Cricket+Ball" alt="Cricket Ball" class="mx-auto w-32 h-32 object-cover">
         <h4 class="mt-4 font-bold text-lg">Cricket Ball</h4>
         <p class="text-gray-600">High-quality leather ball for professional play.</p>
@@ -60,7 +66,7 @@
         </div>
       </div>
 
-      <div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition" data-price="1800">
+      <div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition" data-price="1800" data-name="Football">
         <img src="https://placehold.co/200x200?text=Football" alt="Football" class="mx-auto w-32 h-32 object-cover">
         <h4 class="mt-4 font-bold text-lg">Football</h4>
         <p class="text-gray-600">FIFA-approved match ball.</p>
@@ -71,7 +77,7 @@
         </div>
       </div>
 
-      <div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition" data-price="1500">
+      <div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition" data-price="1500" data-name="Basketball">
         <img src="https://placehold.co/200x200?text=Basketball" alt="Basketball" class="mx-auto w-32 h-32 object-cover">
         <h4 class="mt-4 font-bold text-lg">Basketball</h4>
         <p class="text-gray-600">Durable indoor/outdoor basketball.</p>
@@ -82,7 +88,7 @@
         </div>
       </div>
 
-      <div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition" data-price="2200">
+      <div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition" data-price="2200" data-name="Cricket Helmet">
         <img src="https://placehold.co/200x200?text=Helmet" alt="Helmet" class="mx-auto w-32 h-32 object-cover">
         <h4 class="mt-4 font-bold text-lg">Cricket Helmet</h4>
         <p class="text-gray-600">Protective gear for head safety.</p>
@@ -149,23 +155,30 @@
       });
     });
 
-    // Filter by price logic
-    document.getElementById("price-filter").addEventListener("change", function () {
-      const selected = this.value;
+    // Filter by price
+    document.getElementById("price-filter").addEventListener("change", filterProducts);
+    // Filter by name
+    document.getElementById("search-input").addEventListener("input", filterProducts);
+
+    function filterProducts() {
+      const priceValue = document.getElementById("price-filter").value;
+      const searchValue = document.getElementById("search-input").value.toLowerCase();
       const products = document.querySelectorAll(".product");
 
       products.forEach(product => {
         const price = parseInt(product.getAttribute("data-price"));
-        let show = true;
+        const name = product.getAttribute("data-name").toLowerCase();
 
-        if (selected === "0-500") show = price <= 500;
-        else if (selected === "501-1500") show = price > 500 && price <= 1500;
-        else if (selected === "1501-2500") show = price > 1500 && price <= 2500;
-        else show = true;
+        let priceMatch = true;
+        if (priceValue === "0-500") priceMatch = price <= 500;
+        else if (priceValue === "501-1500") priceMatch = price > 500 && price <= 1500;
+        else if (priceValue === "1501-2500") priceMatch = price > 1500 && price <= 2500;
 
-        product.style.display = show ? "block" : "none";
+        const searchMatch = name.includes(searchValue);
+
+        product.style.display = (priceMatch && searchMatch) ? "block" : "none";
       });
-    });
+    }
   </script>
 </body>
 </html>
