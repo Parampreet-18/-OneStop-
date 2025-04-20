@@ -438,7 +438,60 @@ document.addEventListener('DOMContentLoaded', () => {
     submitBookForm.reset();
     alert('Book added successfully!');
   });
-
+    // Chatbot logic starts here
+    const chatbotInput = getEl('chatbot-input');
+    const chatbotSend = getEl('chatbot-send');
+    const chatbotMessages = getEl('chatbot-messages');
+  
+    function appendMessage(text, sender = 'bot') {
+      const msg = document.createElement('div');
+      msg.textContent = `${sender === 'user' ? 'You' : 'Bot'}: ${text}`;
+      msg.style.margin = '5px 0';
+      msg.style.textAlign = sender === 'user' ? 'right' : 'left';
+      chatbotMessages.appendChild(msg);
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+  
+    function handleChatbotInput(input) {
+      const message = input.toLowerCase();
+  
+      if (message.includes('recommend')) {
+        const topRated = books.filter(b => b.rating >= 4);
+        const suggestion = topRated[Math.floor(Math.random() * topRated.length)];
+        appendMessage(`How about "${suggestion.title}" by ${suggestion.author}?`);
+      } else if (message.includes('favorite')) {
+        appendMessage(`You have ${favorites.length} favorite book(s).`);
+      } else if (message.includes('trending')) {
+        const trending = getTrendingBooks();
+        const list = trending.map(b => b.title).join(', ');
+        appendMessage(`Trending books: ${list}`);
+      } else if (message.includes('help')) {
+        appendMessage(`You can ask me to recommend a book, list your favorites, or show trending books.`);
+      } else {
+        appendMessage(`I'm not sure how to help with that. Try asking about trending books, favorites, or for a recommendation.`);
+      }
+    }
+  
+    if (chatbotInput && chatbotSend && chatbotMessages) {
+      // Greet the user
+      appendMessage("Hi there! Ask me for a book recommendation, trending books, or your favorites.");
+  
+      chatbotSend.addEventListener('click', () => {
+        const input = chatbotInput.value.trim();
+        if (input) {
+          appendMessage(input, 'user');
+          handleChatbotInput(input);
+          chatbotInput.value = '';
+        }
+      });
+  
+      chatbotInput.addEventListener('keypress', e => {
+        if (e.key === 'Enter') {
+          chatbotSend.click();
+        }
+      });
+    }
+  
   populateCategoryFilter();
   displayBooks();
   showTrendingBooks();
