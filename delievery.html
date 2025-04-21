@@ -114,12 +114,16 @@
         </button>
       </div>
 
+      <!-- Confirmation -->
       <div id="confirmation" class="text-center mt-6 hidden">
         <svg class="checkmark" viewBox="0 0 52 52">
           <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
           <path class="checkmark__check" fill="none" d="M14 27l7 7 16-16"/>
         </svg>
         <p class="text-green-600 text-xl font-semibold">Delivery Confirmed!</p>
+        <button id="downloadReceipt" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+          Download Delivery Receipt
+        </button>
       </div>
     </form>
   </section>
@@ -138,6 +142,7 @@
     const repeatContainer = document.getElementById("repeatOrderContainer");
     const repeatBtn = document.getElementById("repeatOrderBtn");
     const deliveryFeeDisplay = document.getElementById("deliveryFeeDisplay");
+    const downloadBtn = document.getElementById("downloadReceipt");
 
     const lastCart = [
       { name: "Running Shoes", price: "₹2999", quantity: 1 },
@@ -228,6 +233,34 @@
       }
 
       localStorage.removeItem("cart");
+    });
+
+    downloadBtn.addEventListener("click", () => {
+      const name = form.name.value;
+      const address = form.address.value;
+      const phone = form.phone.value;
+      const delivery = form.delivery.value;
+      const notes = form.notes.value;
+      const fee = delivery === "express" ? 150 : delivery === "standard" ? 50 : 0;
+      const total = cartTotal + fee;
+
+      const content = `
+        --- ShopWithUs Delivery Receipt ---
+        Name: ${name}
+        Address: ${address}
+        Phone: ${phone}
+        Delivery Type: ${delivery}
+        Notes: ${notes}
+        Total Amount: ₹${total}
+        ------------------------------------
+        Thank you for shopping with us!
+      `;
+
+      const blob = new Blob([content], { type: "text/plain" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "Delivery_Receipt.txt";
+      link.click();
     });
   </script>
 </body>
