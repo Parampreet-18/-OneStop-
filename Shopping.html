@@ -62,6 +62,11 @@
           <option value="desc">Price: High to Low</option>
         </select>
       </div>
+      <div>
+        <button id="clear-filters" class="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600 transition">
+          Clear Filters
+        </button>
+      </div>
     </div>
   </section>
 
@@ -171,6 +176,14 @@
     document.getElementById("search-input").addEventListener("input", filterAndSortProducts);
     document.getElementById("sort-price").addEventListener("change", filterAndSortProducts);
     document.getElementById("rating-filter").addEventListener("change", filterAndSortProducts);
+
+    document.getElementById("clear-filters").addEventListener("click", () => {
+      document.getElementById("search-input").value = "";
+      document.getElementById("price-filter").value = "all";
+      document.getElementById("rating-filter").value = "all";
+      document.getElementById("sort-price").value = "default";
+      filterAndSortProducts();
+    });
 
     function filterAndSortProducts() {
       const priceValue = document.getElementById("price-filter").value;
