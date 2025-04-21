@@ -78,10 +78,11 @@
         <p class="text-yellow-500 mb-1">★★★★☆</p>
         <p class="text-gray-600">High-quality leather ball for professional play.</p>
         <p class="text-blue-600 font-semibold mt-2">₹200</p>
-        <div class="mt-4 flex flex-wrap justify-center gap-3">
-          <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition add-to-cart">Add to Cart</button>
-          <button class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition add-to-wishlist">♡ Wishlist</button>
-          <button class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-800 transition quick-view">Quick View</button>
+        <div class="mt-4 flex flex-wrap justify-center gap-2">
+          <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition add-to-cart">Add to Cart</button>
+          <button class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition add-to-wishlist">♡ Wishlist</button>
+          <button class="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-800 transition quick-view">Quick View</button>
+          <button class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition compare-btn">Compare</button>
         </div>
       </div>
 
@@ -102,6 +103,18 @@
       <p id="modal-rating" class="text-yellow-500 text-center mb-1"></p>
       <p id="modal-description" class="text-gray-700 mb-4 text-center"></p>
       <p id="modal-price" class="text-blue-600 text-center font-semibold text-lg"></p>
+    </div>
+  </div>
+
+  <!-- Compare Modal -->
+  <div id="compare-modal" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-6 w-11/12 max-w-4xl relative">
+      <button id="close-compare" class="absolute top-2 right-2 text-gray-600 hover:text-black text-xl">×</button>
+      <h3 class="text-2xl font-bold text-center mb-4">Compare Products</h3>
+      <div class="grid grid-cols-2 gap-6 text-center">
+        <div id="compare-product-1"></div>
+        <div id="compare-product-2"></div>
+      </div>
     </div>
   </div>
 
@@ -231,6 +244,52 @@
         modal.classList.add("hidden");
         modal.classList.remove("flex");
       }
+    });
+
+    // Compare Feature
+    let compareItems = [];
+    const compareModal = document.getElementById("compare-modal");
+    const closeCompare = document.getElementById("close-compare");
+
+    document.querySelectorAll(".compare-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        const product = button.closest(".product");
+        const data = {
+          name: product.getAttribute("data-name"),
+          price: product.getAttribute("data-price"),
+          desc: product.getAttribute("data-description"),
+          rating: product.getAttribute("data-rating"),
+          img: product.querySelector("img").src
+        };
+        compareItems.push(data);
+        if (compareItems.length === 2) {
+          const [a, b] = compareItems;
+          document.getElementById("compare-product-1").innerHTML = `
+            <img src="${a.img}" class="mx-auto mb-2 w-24 h-24 object-cover">
+            <h4 class="font-bold">${a.name}</h4>
+            <p>₹${a.price}</p>
+            <p>Rating: ${a.rating}★</p>
+            <p class="text-sm text-gray-600">${a.desc}</p>
+          `;
+          document.getElementById("compare-product-2").innerHTML = `
+            <img src="${b.img}" class="mx-auto mb-2 w-24 h-24 object-cover">
+            <h4 class="font-bold">${b.name}</h4>
+            <p>₹${b.price}</p>
+            <p>Rating: ${b.rating}★</p>
+            <p class="text-sm text-gray-600">${b.desc}</p>
+          `;
+          compareModal.classList.remove("hidden");
+          compareModal.classList.add("flex");
+          compareItems = [];
+        } else {
+          alert("Select one more product to compare.");
+        }
+      });
+    });
+
+    closeCompare.addEventListener("click", () => {
+      compareModal.classList.add("hidden");
+      compareModal.classList.remove("flex");
     });
   </script>
 </body>
