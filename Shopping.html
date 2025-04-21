@@ -32,7 +32,7 @@
 
   <!-- Filter & Search Section -->
   <section class="container mx-auto px-4 mt-10">
-    <div class="flex flex-col md:flex-row justify-between mb-6 gap-4">
+    <div class="flex flex-col md:flex-row flex-wrap justify-between mb-6 gap-4">
       <div>
         <label class="text-lg mr-2 font-medium">Search:</label>
         <input type="text" id="search-input" placeholder="Search product..." class="border rounded px-3 py-1 w-64">
@@ -44,6 +44,14 @@
           <option value="0-500">₹0 - ₹500</option>
           <option value="501-1500">₹501 - ₹1500</option>
           <option value="1501-2500">₹1501 - ₹2500</option>
+        </select>
+      </div>
+      <div>
+        <label class="text-lg mr-2 font-medium">Sort by:</label>
+        <select id="sort-price" class="border rounded px-3 py-1">
+          <option value="default">Default</option>
+          <option value="asc">Price: Low to High</option>
+          <option value="desc">Price: High to Low</option>
         </select>
       </div>
     </div>
@@ -155,17 +163,21 @@
       });
     });
 
-    // Filter by price
-    document.getElementById("price-filter").addEventListener("change", filterProducts);
-    // Filter by name
-    document.getElementById("search-input").addEventListener("input", filterProducts);
+    // Filter and sort
+    document.getElementById("price-filter").addEventListener("change", filterAndSortProducts);
+    document.getElementById("search-input").addEventListener("input", filterAndSortProducts);
+    document.getElementById("sort-price").addEventListener("change", filterAndSortProducts);
 
-    function filterProducts() {
+    function filterAndSortProducts() {
       const priceValue = document.getElementById("price-filter").value;
       const searchValue = document.getElementById("search-input").value.toLowerCase();
-      const products = document.querySelectorAll(".product");
+      const sortValue = document.getElementById("sort-price").value;
 
-      products.forEach(product => {
+      const productList = document.getElementById("product-list");
+      const products = Array.from(productList.querySelectorAll(".product"));
+
+      // Filter
+      let filtered = products.filter(product => {
         const price = parseInt(product.getAttribute("data-price"));
         const name = product.getAttribute("data-name").toLowerCase();
 
@@ -175,10 +187,22 @@
         else if (priceValue === "1501-2500") priceMatch = price > 1500 && price <= 2500;
 
         const searchMatch = name.includes(searchValue);
-
-        product.style.display = (priceMatch && searchMatch) ? "block" : "none";
+        return priceMatch && searchMatch;
       });
+
+      // Sort
+      if (sortValue === "asc") {
+        filtered.sort((a, b) => parseInt(a.dataset.price) - parseInt(b.dataset.price));
+      } else if (sortValue === "desc") {
+        filtered.sort((a, b) => parseInt(b.dataset.price) - parseInt(a.dataset.price));
+      }
+
+      // Render
+      productList.innerHTML = "";
+      filtered.forEach(p => productList.appendChild(p));
     }
+
+    filterAndSortProducts();
   </script>
 </body>
 </html>
