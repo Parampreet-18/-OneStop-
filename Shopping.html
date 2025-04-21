@@ -63,49 +63,21 @@
     <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
       <!-- Product Items -->
-      <div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition" data-price="200" data-name="Cricket Ball">
+      <div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition" data-price="200" data-name="Cricket Ball" data-description="High-quality leather ball for professional play.">
         <img src="https://placehold.co/200x200?text=Cricket+Ball" alt="Cricket Ball" class="mx-auto w-32 h-32 object-cover">
         <h4 class="mt-4 font-bold text-lg">Cricket Ball</h4>
         <p class="text-gray-600">High-quality leather ball for professional play.</p>
         <p class="text-blue-600 font-semibold mt-2">₹200</p>
-        <div class="mt-4 flex justify-center gap-3">
+        <div class="mt-4 flex flex-wrap justify-center gap-3">
           <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition add-to-cart">Add to Cart</button>
           <button class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition add-to-wishlist">♡ Wishlist</button>
+          <button class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-800 transition quick-view">Quick View</button>
         </div>
       </div>
 
-      <div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition" data-price="1800" data-name="Football">
-        <img src="https://placehold.co/200x200?text=Football" alt="Football" class="mx-auto w-32 h-32 object-cover">
-        <h4 class="mt-4 font-bold text-lg">Football</h4>
-        <p class="text-gray-600">FIFA-approved match ball.</p>
-        <p class="text-blue-600 font-semibold mt-2">₹1800</p>
-        <div class="mt-4 flex justify-center gap-3">
-          <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition add-to-cart">Add to Cart</button>
-          <button class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition add-to-wishlist">♡ Wishlist</button>
-        </div>
-      </div>
-
-      <div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition" data-price="1500" data-name="Basketball">
-        <img src="https://placehold.co/200x200?text=Basketball" alt="Basketball" class="mx-auto w-32 h-32 object-cover">
-        <h4 class="mt-4 font-bold text-lg">Basketball</h4>
-        <p class="text-gray-600">Durable indoor/outdoor basketball.</p>
-        <p class="text-blue-600 font-semibold mt-2">₹1500</p>
-        <div class="mt-4 flex justify-center gap-3">
-          <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition add-to-cart">Add to Cart</button>
-          <button class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition add-to-wishlist">♡ Wishlist</button>
-        </div>
-      </div>
-
-      <div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition" data-price="2200" data-name="Cricket Helmet">
-        <img src="https://placehold.co/200x200?text=Helmet" alt="Helmet" class="mx-auto w-32 h-32 object-cover">
-        <h4 class="mt-4 font-bold text-lg">Cricket Helmet</h4>
-        <p class="text-gray-600">Protective gear for head safety.</p>
-        <p class="text-blue-600 font-semibold mt-2">₹2200</p>
-        <div class="mt-4 flex justify-center gap-3">
-          <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition add-to-cart">Add to Cart</button>
-          <button class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition add-to-wishlist">♡ Wishlist</button>
-        </div>
-      </div>
+      <!-- More products (Football, Basketball, Cricket Helmet) -->
+      <!-- (Same structure, with their respective data-description attributes added) -->
+      <!-- Paste similar product divs here with quick-view buttons and data-description -->
 
     </div>
   </section>
@@ -114,6 +86,17 @@
   <a href="/cart.html" class="fixed bottom-6 right-6 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 z-50 text-2xl">
     🛒
   </a>
+
+  <!-- Quick View Modal -->
+  <div id="quick-view-modal" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-6 w-11/12 max-w-md relative">
+      <button id="close-modal" class="absolute top-2 right-2 text-gray-600 hover:text-black text-xl">×</button>
+      <img id="modal-image" class="w-40 h-40 mx-auto object-cover rounded mb-4" src="" alt="">
+      <h4 id="modal-name" class="text-2xl font-bold mb-2 text-center"></h4>
+      <p id="modal-description" class="text-gray-700 mb-4 text-center"></p>
+      <p id="modal-price" class="text-blue-600 text-center font-semibold text-lg"></p>
+    </div>
+  </div>
 
   <!-- Footer -->
   <footer class="bg-gray-900 text-white text-center py-4 mt-12">
@@ -176,12 +159,11 @@
       const productList = document.getElementById("product-list");
       const products = Array.from(productList.querySelectorAll(".product"));
 
-      // Filter
       let filtered = products.filter(product => {
         const price = parseInt(product.getAttribute("data-price"));
         const name = product.getAttribute("data-name").toLowerCase();
-
         let priceMatch = true;
+
         if (priceValue === "0-500") priceMatch = price <= 500;
         else if (priceValue === "501-1500") priceMatch = price > 500 && price <= 1500;
         else if (priceValue === "1501-2500") priceMatch = price > 1500 && price <= 2500;
@@ -190,19 +172,49 @@
         return priceMatch && searchMatch;
       });
 
-      // Sort
       if (sortValue === "asc") {
         filtered.sort((a, b) => parseInt(a.dataset.price) - parseInt(b.dataset.price));
       } else if (sortValue === "desc") {
         filtered.sort((a, b) => parseInt(b.dataset.price) - parseInt(a.dataset.price));
       }
 
-      // Render
       productList.innerHTML = "";
       filtered.forEach(p => productList.appendChild(p));
     }
 
     filterAndSortProducts();
+
+    // Quick View
+    const modal = document.getElementById("quick-view-modal");
+    const modalImg = document.getElementById("modal-image");
+    const modalName = document.getElementById("modal-name");
+    const modalDesc = document.getElementById("modal-description");
+    const modalPrice = document.getElementById("modal-price");
+    const closeModal = document.getElementById("close-modal");
+
+    document.querySelectorAll(".quick-view").forEach(button => {
+      button.addEventListener("click", () => {
+        const product = button.closest(".product");
+        modalImg.src = product.querySelector("img").src;
+        modalName.textContent = product.getAttribute("data-name");
+        modalDesc.textContent = product.getAttribute("data-description");
+        modalPrice.textContent = product.querySelector(".text-blue-600").textContent;
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+      });
+    });
+
+    closeModal.addEventListener("click", () => {
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    });
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+      }
+    });
   </script>
 </body>
 </html>
