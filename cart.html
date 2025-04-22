@@ -5,107 +5,110 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ShopWithUs - Cart</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Pop animation */
+    @keyframes pop {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.4); }
+      100% { transform: scale(1); }
+    }
+    .pop {
+      animation: pop 0.3s ease;
+    }
+  </style>
   <script>
+    function animateBadge() {
+      const badge = document.getElementById('cart-count');
+      badge.classList.add('pop');
+      badge.addEventListener('animationend', ()=> badge.classList.remove('pop'), { once: true });
+    }
+
     function removeItem(index) {
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      cart.splice(index, 1);
-      localStorage.setItem("cart", JSON.stringify(cart));
+      let cart = JSON.parse(localStorage.getItem("cart"))||[];
+      cart.splice(index,1);
+      localStorage.setItem("cart",JSON.stringify(cart));
       loadCartState();
     }
 
-    function updateQuantity(input, index) {
-      if (input.value < 1) input.value = 1;
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      cart[index].quantity = parseInt(input.value);
-      localStorage.setItem("cart", JSON.stringify(cart));
+    function updateQuantity(input,index) {
+      if(input.value<1) input.value=1;
+      let cart=JSON.parse(localStorage.getItem("cart"))||[];
+      cart[index].quantity=parseInt(input.value);
+      localStorage.setItem("cart",JSON.stringify(cart));
       updateCartSummary();
     }
 
     function updateCartSummary() {
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      let totalItems = 0;
-      let totalPrice = 0;
-
-      cart.forEach(item => {
-        const qty = item.quantity || 1;
-        const price = parseFloat(item.price.replace('₹',''));
-        totalItems += qty;
-        totalPrice += qty * price;
+      let cart=JSON.parse(localStorage.getItem("cart"))||[];
+      let totalItems=0,totalPrice=0;
+      cart.forEach(i=>{
+        totalItems+=i.quantity;
+        totalPrice+=i.quantity*parseFloat(i.price.replace('₹',''));
       });
-
-      document.getElementById('cart-count').textContent = totalItems;
-      document.getElementById('total-count').textContent = totalItems;
-      document.getElementById('total-price').textContent = `₹${totalPrice.toFixed(2)}`;
+      document.getElementById('cart-count').textContent=totalItems;
+      document.getElementById('total-count').textContent=totalItems;
+      document.getElementById('total-price').textContent=`₹${totalPrice.toFixed(2)}`;
     }
 
     function loadCartState() {
-      const cartItemsContainer = document.querySelector('.cart-items');
-      cartItemsContainer.innerHTML = '';
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-      cart.forEach((item, index) => {
-        const quantity = item.quantity || 1;
-        const card = document.createElement('div');
-        card.className = "product-card bg-white shadow-md rounded-lg p-4 text-center";
-
-        card.innerHTML = `
+      const container=document.querySelector('.cart-items');
+      container.innerHTML='';
+      let cart=JSON.parse(localStorage.getItem("cart"))||[];
+      cart.forEach((item,idx)=>{
+        const card=document.createElement('div');
+        card.className="product-card bg-white shadow-md rounded-lg p-4 text-center";
+        card.innerHTML=`
           <img src="${item.image}" alt="${item.name}" class="mx-auto mb-2 w-24 h-24 object-cover">
           <h4 class="text-lg font-bold">${item.name}</h4>
           <p class="text-blue-600 item-price">${item.price}</p>
           <div class="mt-2">
             <label class="block text-sm">Qty:</label>
-            <input type="number" class="item-qty w-16 px-2 py-1 border rounded text-center" value="${quantity}" min="1" onchange="updateQuantity(this, ${index})">
+            <input type="number" class="item-qty w-16 px-2 py-1 border rounded text-center"
+                   value="${item.quantity}" min="1" onchange="updateQuantity(this,${idx})">
           </div>
           <div class="flex flex-col mt-3 space-y-2">
-            <button onclick="removeItem(${index})" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition">Remove</button>
-            <button onclick="moveToWishlist(${index})" class="bg-purple-500 text-white px-3 py-1 rounded hover:bg-purple-600 transition">Add to Wishlist</button>
-          </div>
-        `;
-        cartItemsContainer.appendChild(card);
+            <button onclick="removeItem(${idx})" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition">Remove</button>
+            <button onclick="moveToWishlist(${idx})" class="bg-purple-500 text-white px-3 py-1 rounded hover:bg-purple-600 transition">Add to Wishlist</button>
+          </div>`;
+        container.appendChild(card);
       });
-
       updateCartSummary();
     }
 
-    function addToCart(name, price, image) {
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      let existing = cart.find(item => item.name === name);
-      if (existing) existing.quantity += 1;
-      else cart.push({ name, price, image, quantity: 1 });
-      localStorage.setItem("cart", JSON.stringify(cart));
+    function addToCart(name,price,image){
+      let cart=JSON.parse(localStorage.getItem("cart"))||[];
+      let ex=cart.find(i=>i.name===name);
+      if(ex) ex.quantity+=1; else cart.push({name,price,image,quantity:1});
+      localStorage.setItem("cart",JSON.stringify(cart));
       loadCartState();
+      animateBadge();
     }
 
-    function clearCart() {
-      if (confirm("Are you sure you want to clear the cart?")) {
+    function clearCart(){
+      if(confirm("Clear the cart?")){
         localStorage.removeItem("cart");
         loadCartState();
       }
     }
 
-    function moveToWishlist(index) {
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-      const item = cart.splice(index, 1)[0];
-      wishlist.push(item);
-      localStorage.setItem("wishlist", JSON.stringify(wishlist));
-      localStorage.setItem("cart", JSON.stringify(cart));
+    function moveToWishlist(idx){
+      let cart=JSON.parse(localStorage.getItem("cart"))||[];
+      let wish=JSON.parse(localStorage.getItem("wishlist"))||[];
+      wish.push(cart.splice(idx,1)[0]);
+      localStorage.setItem("wishlist",JSON.stringify(wish));
+      localStorage.setItem("cart",JSON.stringify(cart));
       loadCartState();
     }
 
-    function quickCheckout() {
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      if (!cart.length) {
-        alert("Your cart is empty!");
-        return;
-      }
-      const total = document.getElementById('total-price').textContent;
-      alert(`Quick Checkout:\n\nYou are purchasing ${cart.length} item(s) for a total of ${total}.\n\nThank you!`);
+    function quickCheckout(){
+      let cart=JSON.parse(localStorage.getItem("cart"))||[];
+      if(!cart.length)return alert("Your cart is empty!");
+      alert(`Quick Checkout:\n${cart.length} item(s) for ${document.getElementById('total-price').textContent}`);
       localStorage.removeItem("cart");
       loadCartState();
     }
 
-    window.onload = loadCartState;
+    window.onload=loadCartState;
   </script>
 </head>
 <body class="bg-yellow-100">
@@ -128,19 +131,13 @@
 
     <div class="mt-10 flex flex-col sm:flex-row sm:justify-between sm:items-center bg-white p-4 shadow-md rounded-lg gap-4">
       <p class="text-lg font-semibold">
-        Total Items in Cart: <span id="total-count">0</span> |
+        Total Items: <span id="total-count">0</span> |
         Total Price: <span id="total-price">₹0.00</span>
       </p>
       <div class="flex gap-4">
-        <button onclick="clearCart()" class="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-600 transition">
-          Clear Cart
-        </button>
-        <a href="delivery.html" class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 transition">
-          Proceed to Checkout
-        </a>
-        <button onclick="quickCheckout()" class="bg-indigo-500 text-white px-6 py-2 rounded hover:bg-indigo-600 transition">
-          Quick Checkout
-        </button>
+        <button onclick="clearCart()" class="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-600 transition">Clear Cart</button>
+        <a href="delivery.html" class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 transition">Checkout</a>
+        <button onclick="quickCheckout()" class="bg-indigo-500 text-white px-6 py-2 rounded hover:bg-indigo-600 transition">Quick Checkout</button>
       </div>
     </div>
   </section>
