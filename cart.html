@@ -6,7 +6,6 @@
   <title>ShopWithUs - Cart</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* Pop animation for badge */
     @keyframes pop {
       0%,100% { transform: scale(1); }
       50%      { transform: scale(1.4); }
@@ -80,7 +79,6 @@
       let boxes = document.querySelectorAll('.bulk-checkbox:checked');
       if (!boxes.length) return alert('Select items to bulk remove.');
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      // remove from highest index downward to avoid shifting
       Array.from(boxes)
         .map(cb => parseInt(cb.dataset.index))
         .sort((a,b) => b - a)
@@ -160,6 +158,37 @@
         </a>
         <button onclick="quickCheckout()" class="bg-indigo-500 text-white px-4 py-2 rounded hover:bg-indigo-600 transition">
           Quick Checkout
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Suggested Items -->
+  <section class="container mx-auto px-4 mt-12">
+    <h3 class="text-2xl font-bold text-center mb-6 text-blue-700">You Might Also Like</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div class="bg-white p-4 shadow-md rounded text-center">
+        <img src="https://via.placeholder.com/100" alt="Football" class="mx-auto mb-2 w-24 h-24 object-cover">
+        <h4 class="text-lg font-semibold">Football</h4>
+        <p class="text-blue-600 mb-2">₹799</p>
+        <button onclick="addToCart('Football', '₹799', 'https://via.placeholder.com/100')" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
+          Add to Cart
+        </button>
+      </div>
+      <div class="bg-white p-4 shadow-md rounded text-center">
+        <img src="https://via.placeholder.com/100" alt="Badminton Racket" class="mx-auto mb-2 w-24 h-24 object-cover">
+        <h4 class="text-lg font-semibold">Badminton Racket</h4>
+        <p class="text-blue-600 mb-2">₹599</p>
+        <button onclick="addToCart('Badminton Racket', '₹599', 'https://via.placeholder.com/100')" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
+          Add to Cart
+        </button>
+      </div>
+      <div class="bg-white p-4 shadow-md rounded text-center">
+        <img src="https://via.placeholder.com/100" alt="Yoga Mat" class="mx-auto mb-2 w-24 h-24 object-cover">
+        <h4 class="text-lg font-semibold">Yoga Mat</h4>
+        <p class="text-blue-600 mb-2">₹499</p>
+        <button onclick="addToCart('Yoga Mat', '₹499', 'https://via.placeholder.com/100')" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
+          Add to Cart
         </button>
       </div>
     </div>
