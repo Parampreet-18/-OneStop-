@@ -23,61 +23,61 @@ let track_list = [
   {
     name: "Night Owl",
     artist: "Broke For Free",
-    image: "media/img1.jpeg",
+    image: "img1.jpeg.jpg",
     path: "media/aud1.mp3"
   },
   {
     name: "Enthusiast",
     artist: "Tours",
-    image: "media/img2.jpeg",
+    image: "img2.jpeg.jpg",
     path: "media/aud2.mp3"
   },
   {
     name: "Shipping Lanes",
     artist: "Chad Crouch",
-    image: "media/img3.jpeg",
+    image: "img3.jpeg.jpg",
     path: "media/aud3.mp3"
   },
   {
     name: "Night Detective",
     artist: "Chad Crouch",
-    image: "media/img4.jpg",
+    image: "img4.jpg",
     path: "media/aud4.mp3"
   },
   {
     name: "Trippy People",
     artist: "Lil Eye-N-$tine",
-    image: "media/img5.jpg",
+    image: "img5.jpg",
     path: "media/aud5.mp3"
   },
   {
     name: "Just Dippin",
     artist: "Snoop Dogg",
-    image: "media/img6.jpg",
+    image: "img6.jpg",
     path: "media/aud6.mp3"
   },
   {
     name: "Squabble Up",
     artist: "Kendrick Lamar",
-    image: "media/img7.jpg",
+    image: "img7.jpg",
     path: "media/aud7.mp3"
   },
   {
     name: "Switching Lanes",
     artist: "Chad Crouch",
-    image: "media/img8.jpg",
+    image: "img8.jpg",
     path: "media/aud8.mp3"
   },
   {
     name: "Lazy Day",
     artist: "Chad Crouch",
-    image: "media/img9.jpg",
+    image: "img9.jpg",
     path: "media/aud9.mp3"
   },
   {
     name: "Movement",
     artist: "Chad Crouch",
-    image: "media/img10.jpg",
+    image: "img10.jpg",
     path: "media/aud10.mp3"
   }
 ];
