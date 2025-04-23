@@ -327,17 +327,24 @@ document.addEventListener('DOMContentLoaded', () => {
         <h3>${book.title}</h3>
         <p>by ${book.author}</p>
         <p>Rating: ${book.rating} / 5</p>
-        <button class="favorite-btn">${favorites.includes(book.title) ? 'Unfavorite' : 'Favorite'}</button>
+        <button class="favorite-btn">${favorites.includes(book.title) ? 'Unfavorite' : 'Favorite'}</button><br>
+      <button class="read-now-btn">Read Now</button>  
       `;
 
       bookDiv.querySelector('.favorite-btn').addEventListener('click', e => {
         e.stopPropagation();
         toggleFavorite(book);
       });
+      bookDiv.querySelector('.read-now-btn').addEventListener('click', e => {
+        e.stopPropagation();
+        alert(`Opening "${book.title}" for reading...`);
+        // Optionally redirect: window.location.href = `/reader/${book.title}`;
+      });
 
       bookDiv.addEventListener('click', () => openModal(book));
       booksContainer.appendChild(bookDiv);
     });
+    
   }
 
   function toggleFavorite(book) {
