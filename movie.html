@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Movie Site</title>
   <style>
     body {
@@ -30,11 +30,19 @@
       color: #bbbbbb;
       margin: 0 1rem;
       text-decoration: none;
-      transition: color 0.3s;
+      transition: color 0.3s, border-bottom 0.3s;
+      padding-bottom: 4px;
+      border-bottom: 2px solid transparent;
     }
 
     nav a:hover {
       color: #ffffff;
+      border-bottom: 2px solid #ff4d4d;
+    }
+
+    nav a.active {
+      color: #ffffff;
+      border-bottom: 2px solid #ff4d4d;
     }
 
     .search-bar {
@@ -223,7 +231,7 @@
   <header>
     <h1>MovieMania</h1>
     <nav>
-      <a href="#">Home</a>
+      <a href="#" class="active">Home</a>
       <a href="#now-showing">Now Showing</a>
       <a href="#upcoming">Upcoming</a>
       <a href="#contact">Contact</a>
