@@ -37,18 +37,51 @@
       color: #ffffff;
     }
 
+    .search-bar {
+      margin-top: 1rem;
+    }
+
+    .search-bar input {
+      width: 80%;
+      max-width: 400px;
+      padding: 0.5rem;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
     .hero {
-      background: url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4') center/cover no-repeat;
-      padding: 6rem 2rem;
-      text-align: center;
+      position: relative;
+      height: 400px;
+      background: url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4') center center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
     }
 
     .hero h2 {
       background-color: rgba(0, 0, 0, 0.6);
-      display: inline-block;
       padding: 1rem 2rem;
       border-radius: 8px;
       font-size: 2rem;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .hero button {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      background-color: #ff4d4d;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .hero button:hover {
+      background-color: #ff1a1a;
     }
 
     section {
@@ -94,6 +127,40 @@
       color: #ccc;
     }
 
+    .contact {
+      background-color: #1e1e1e;
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .contact h3 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .contact input, .contact textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: none;
+      border-radius: 6px;
+      background-color: #2b2b2b;
+      color: white;
+    }
+
+    .contact button {
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      display: block;
+      margin: auto;
+    }
+
     footer {
       background-color: #1e1e1e;
       text-align: center;
@@ -101,6 +168,30 @@
       margin-top: 2rem;
       font-size: 0.9rem;
       color: #888;
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        height: 250px;
+      }
+
+      .hero h2 {
+        font-size: 1.4rem;
+        padding: 0.75rem 1rem;
+      }
+
+      nav a {
+        display: block;
+        margin: 0.5rem 0;
+      }
+
+      section {
+        padding: 1rem;
+      }
+
+      .contact {
+        padding: 1rem;
+      }
     }
   </style>
 </head>
@@ -113,24 +204,28 @@
       <a href="#upcoming">Upcoming</a>
       <a href="#contact">Contact</a>
     </nav>
+    <div class="search-bar">
+      <input type="text" placeholder="Search for movies...">
+    </div>
   </header>
 
   <section class="hero">
     <h2>Welcome to MovieMania</h2>
+    <button>Book Tickets</button>
   </section>
 
   <section id="now-showing">
     <h3>Now Showing</h3>
     <div class="movie-grid">
       <div class="movie-card">
-        <img src="https://source.unsplash.com/200x300/?movie" alt="Movie Poster">
+        <img src="https://m.media-amazon.com/images/I/81NiLI6cNML._AC_SY679_.jpg" alt="Movie Poster">
         <div class="info">
           <h4>The Last Echo</h4>
           <p>Action | 2h 10m</p>
         </div>
       </div>
       <div class="movie-card">
-        <img src="https://source.unsplash.com/201x300/?cinema" alt="Movie Poster">
+        <img src="https://m.media-amazon.com/images/I/91E5sPDeMEL._AC_SY679_.jpg" alt="Movie Poster">
         <div class="info">
           <h4>Dreamscape</h4>
           <p>Drama | 1h 50m</p>
@@ -143,14 +238,14 @@
     <h3>Upcoming Movies</h3>
     <div class="movie-grid">
       <div class="movie-card">
-        <img src="https://source.unsplash.com/202x300/?film" alt="Movie Poster">
+        <img src="https://m.media-amazon.com/images/I/81nCz3U9RzL._AC_SY679_.jpg" alt="Movie Poster">
         <div class="info">
           <h4>Neon Horizon</h4>
           <p>Sci-Fi | Coming Soon</p>
         </div>
       </div>
       <div class="movie-card">
-        <img src="https://source.unsplash.com/203x300/?hollywood" alt="Movie Poster">
+        <img src="https://m.media-amazon.com/images/I/61nZk4K3L7L._AC_SY679_.jpg" alt="Movie Poster">
         <div class="info">
           <h4>Silent Storm</h4>
           <p>Thriller | Coming Soon</p>
@@ -159,8 +254,19 @@
     </div>
   </section>
 
+  <section id="contact">
+    <div class="contact">
+      <h3>Contact Us</h3>
+      <input type="text" placeholder="Your Name">
+      <input type="email" placeholder="Your Email">
+      <textarea rows="5" placeholder="Your Message"></textarea>
+      <button type="submit">Send Message</button>
+    </div>
+  </section>
+
   <footer>
     <p>&copy; 2025 MovieMania. All rights reserved.</p>
   </footer>
 </body>
 </html>
+
