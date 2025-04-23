@@ -100,6 +100,9 @@
       border-radius: 8px;
       overflow: hidden;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .movie-card:hover {
@@ -131,6 +134,21 @@
     .rating {
       color: gold;
       font-size: 1rem;
+    }
+
+    .trailer-btn {
+      background-color: #555;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      margin: 0.5rem 1rem 1rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .trailer-btn:hover {
+      background-color: #777;
     }
 
     .contact {
@@ -230,6 +248,7 @@
           <p>Action | 2h 10m</p>
           <div class="rating">⭐ 8.5</div>
         </div>
+        <button class="trailer-btn">Watch Trailer</button>
       </div>
       <div class="movie-card">
         <img src="https://m.media-amazon.com/images/I/91E5sPDeMEL._AC_SY679_.jpg" alt="Movie Poster">
@@ -238,6 +257,7 @@
           <p>Drama | 1h 50m</p>
           <div class="rating">⭐ 7.9</div>
         </div>
+        <button class="trailer-btn">Watch Trailer</button>
       </div>
     </div>
   </section>
@@ -252,6 +272,7 @@
           <p>Sci-Fi | Coming Soon</p>
           <div class="rating">⭐ 8.2 (expected)</div>
         </div>
+        <button class="trailer-btn">Watch Trailer</button>
       </div>
       <div class="movie-card">
         <img src="https://m.media-amazon.com/images/I/61nZk4K3L7L._AC_SY679_.jpg" alt="Movie Poster">
@@ -260,6 +281,7 @@
           <p>Thriller | Coming Soon</p>
           <div class="rating">⭐ 8.0 (expected)</div>
         </div>
+        <button class="trailer-btn">Watch Trailer</button>
       </div>
     </div>
   </section>
