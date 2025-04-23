@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Epic Reads</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ffecd2, #fcb69f);
+      color: #333;
+      line-height: 1.6;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    /* Add Dark Mode Styles */
+    body.dark-mode {
+      background: linear-gradient(135deg, #333, #555);
+      color: #fff;
+    }
+    body.dark-mode header,
+    body.dark-mode footer {
+      background-color: #000;
+      color: #fff;
+    }
+    body.dark-mode .book {
+      background-color: #444;
+      color: #fff;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes popUp {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    header {
+      background-color: #1a1a1a;
+      color: #fff;
+      padding: 1rem 0;
+      animation: slideIn 1s ease forwards;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1rem;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      margin-top: 0.5rem;
+    }
+    nav ul li {
+      margin: 0 1rem;
+      transition: transform 0.3s ease;
+    }
+    nav ul li:hover {
+      transform: translateY(-3px);
+    }
+    nav ul li a {
+      color: #ffecd2;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    main {
+      padding: 2rem;
+      padding-bottom: 5rem;
+      animation: fadeIn 1.5s ease forwards;
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      animation: fadeIn 1.2s ease forwards;
+    }
+
+    input, select, textarea, button {
+      font-family: inherit;
+      transition: all 0.3s ease;
+    }
+
+    #searchBar, #sortDropdown, #categoryFilter {
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .view-toggle button,
+    #randomBookBtn {
+      padding: 0.5rem 1rem;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .view-toggle button:hover,
+    #randomBookBtn:hover {
+      background-color: #fcb69f;
+      transform: scale(1.05);
+    }
+
+    #books-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .book {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      padding: 1rem;
+      width: 200px;
+      text-align: center;
+      border-radius: 8px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: popUp 0.5s ease forwards;
+    }
+    .book:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .book img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 0.5rem;
+      border-radius: 4px;
+      transition: transform 0.3s ease;
+    }
+    .book img:hover {
+      transform: scale(1.05);
+    }
+
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    form label {
+      margin-top: 1rem;
+    }
+
+    form input,
+    form textarea,
+    form select {
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-top: 0.5rem;
+    }
+
+    form button {
+      margin-top: 1rem;
+      padding: 0.7rem;
+      background-color: #1a1a1a;
+      color: #ffecd2;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    form button:hover {
+      background-color: #333;
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #1a1a1a;
+      color: #ffecd2;
+    }
+
+    .social-icons {
+      margin-top: 0.5rem;
+    }
+
+    .social-icons a {
+      color: #ffecd2;
+      margin: 0 0.5rem;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      color: #fcb69f;
+      transform: scale(1.2);
+    }
+
+    #scrollTopBtn {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      background-color: #ffecd2;
+      color: #1a1a1a;
+      border: none;
+      padding: 0.5rem;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    #scrollTopBtn:hover {
+      background-color: #fcb69f;
+      transform: scale(1.1);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    .modal-content {
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      max-width: 500px;
+      margin: auto;
+      position: relative;
+      animation: popUp 0.4s ease forwards;
+    }
+
+    .rating-star {
+      font-size: 24px;
+      cursor: pointer;
+      margin-right: 5px;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+    .rating-star.red {
+      color: red;
+    }
+    .rating-star.inactive {
+      color: lightgray;
+    }
+    .rating-star:hover {
+      transform: scale(1.2);
+    }
+
+    .close-button {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .close-button:hover {
+      transform: rotate(90deg);
+    }
+    .progress-container {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 10px;
+    height: 14px;
+  }
+
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #ff9a9e, #fad0c4);
+    border-radius: 20px;
+    transition: width 0.5s ease;
+  }
+  
+  .book-progress {
+  margin-top: 0.8rem;
+  text-align: left;
+}
+
+.progress-label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+  color: #555;
+  font-weight: bold;
+}
+
+.book .progress-container {
+  height: 10px;
+  border-radius: 10px;
+  background-color: #eee;
+}
+
+.book .progress-bar {
+  height: 100%;
+  border-radius: 10px;
+  background: linear-gradient(to right, #fcb69f, #ff9a9e);
+  transition: width 0.5s ease-in-out;
+}
+body.dark-mode .progress-label {
+  color: #ddd;
+}
+
+body.dark-mode .book .progress-container {
+  background-color: #444;
+}
+
+body.dark-mode .book .progress-bar {
+  background: linear-gradient(to right, #888, #bbb);
+}
+#readingProgress {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 2rem;
+  border-radius: 8px;
+  animation: fadeIn 1.5s ease forwards;
+}
+
+body.dark-mode #readingProgress {
+  background: rgba(50, 50, 50, 0.6);
+}
+
+.progress-list {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.progress-entry h3 {
+  margin-bottom: 0.3rem;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+body.dark-mode .progress-entry h3 {
+  color: #eee;
+}
+
+.progress-label {
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 0.4rem;
+}
+
+body.dark-mode .progress-label {
+  color: #ccc;
+}
+
+.progress-container {
+  height: 12px;
+  border-radius: 10px;
+  background-color: #ddd;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  transition: width 0.5s ease-in-out;
+  border-radius: 10px;
+}
+
+body.dark-mode .progress-container {
+  background-color: #444;
+}
+
+body.dark-mode .progress-bar {
+  background: linear-gradient(to right, #888, #bbb);
+}
+#chatBot {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 260px;
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: sans-serif;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  z-index: 9999;
+}
+
+#chatBot.collapsed .chat-body,
+#chatBot.collapsed .chat-input-area {
+  display: none;
+}
+
+.chat-header {
+  background: #4a90e2;
+  color: white;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.chat-body {
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 10px;
+  background: #fff;
+}
+
+.chat-input-area {
+  display: flex;
+  padding: 8px;
+  border-top: 1px solid #ddd;
+}
+
+.chat-input-area input {
+  flex: 1;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.chat-input-area button {
+  margin-left: 6px;
+  padding: 6px 10px;
+  border: none;
+  background: #4a90e2;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.chat-message {
+  margin-bottom: 8px;
+}
+
+.chat-message.user {
+  text-align: right;
+  color: #2c3e50;
+}
+
+.chat-message.bot {
+  text-align: left;
+  color: #27ae60;
+}
+/* Draggable container */
+#epicbot-draggable {
+  position: absolute;
+  top: 100px;
+  right: 50px;
+  z-index: 1000;
+  cursor: move;
+}
+
+/* Main chatbot box */
+#epicbot {
+  width: 320px;
+  height: 440px;
+  background-color: #1e1e2f;
+  color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: transform 0.3s ease;
+}
+
+/* Chatbox area */
+#epicbot-messages {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+#epicbot-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+#epicbot-messages::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 4px;
+}
+
+/* Chat message bubbles */
+.user-message, .bot-message {
+  margin: 6px 0;
+  padding: 10px 14px;
+  border-radius: 16px;
+  max-width: 80%;
+  word-wrap: break-word;
+  line-height: 1.4;
+}
+
+.user-message {
+  background-color: #4a90e2;
+  align-self: flex-end;
+  color: white;
+}
+
+.bot-message {
+  background-color: #333850;
+  align-self: flex-start;
+}
+
+/* Input and send */
+#epicbot-input-area {
+  display: flex;
+  padding: 10px;
+  background-color: #2c2f3a;
+}
+
+#epicbot-input {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background-color: #44495e;
+  color: white;
+  font-size: 14px;
+}
+
+#epicbot-send {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  margin-left: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#epicbot-send:hover {
+  background-color: #357abd;
+}
+
+/* Toggle Button */
+#epicbot-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  background-color: #4a90e2;
+  color: white;
+  padding: 12px 16px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+#epicbot-toggle:hover {
+  transform: scale(1.1);
+  background-color: #357abd;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+#epicbot {
+  animation: fadeIn 0.3s ease;
+}
+
+.favorite-btn, .read-now-btn {
+  padding: 8px 12px;
+  margin-top: 8px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.favorite-btn {
+  background-color: #ff6b6b;
+  color: white;
+}
+
+.favorite-btn:hover {
+  background-color: #e74c3c;
+}
+
+.read-now-btn {
+  background-color: #3498db;
+  color: white;
+}
+
+.read-now-btn:hover {
+  background-color: #2980b9;
+}
+
+</style>
+
+
+</head>
+<body>
+  <header>
+    <div class="header-top">
+      <h1>Epic Reads</h1>
+      <button id="darkModeToggle" aria-label="Toggle dark mode">Dark Mode</button>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#featured">Featured Books</a></li>
+        <li><a href="#submitBook">Submit Book</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="featured">
+      <h2>Featured Books</h2>
+      <div class="controls">
+        <input type="text" id="searchBar" placeholder="Search books..." aria-label="Search books" />
+        <ul id="searchSuggestions"></ul>
+
+        <select id="sortDropdown" aria-label="Sort books">
+          <option value="none">Sort By</option>
+          <option value="title-asc">Title (A–Z)</option>
+          <option value="title-desc">Title (Z–A)</option>
+          <option value="author-asc">Author (A–Z)</option>
+          <option value="author-desc">Author (Z–A)</option>
+          <option value="rating-asc">Rating (Low to High)</option>
+          <option value="rating-desc">Rating (High to Low)</option>
+        </select>
+
+        <select id="categoryFilter" aria-label="Filter by category">
+          <option value="All">All Categories</option>
+          <option value="fiction">Fiction</option>
+          <option value="non-fiction">Non-fiction</option>
+          <option value="mystery">Mystery</option>
+        </select>
+
+        <div class="view-toggle">
+          <button id="allBooksBtn" aria-label="Show all books">All Books</button>
+          <button id="favoritesBtn" aria-label="Show favorite books">Favorites</button>
+        </div>
+
+        <button id="randomBookBtn" aria-label="Show a random book">Random Book</button>
+      </div>
+      <div id="books-container"></div>
+      <div class="book">
+        <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794" alt="Book Cover" />
+        <h3>The Midnight Library</h3>
+        <p>by Matt Haig</p>
+        <p>Category: Fiction</p>
+        Progress Bar
+        <div class="book-progress">
+          <span class="progress-label">Progress: 65%</span>
+          <div class="progress-container">
+            <div class="progress-bar" style="width: 65%;"></div>
+          </div>
+        </div>
+         
+      </div>
+      
+      <div class="book">
+        <img src="https://images.unsplash.com/photo-1529655683826-aba9b3e77383" alt="Book Cover" />
+        <h3>Atomic Habits</h3>
+        <p>by James Clear</p>
+        <p>Category: Non-fiction</p>
+        <span class="progress-label">Progress: 45%</span>
+        <div class="progress-container">
+          <div class="progress-bar" style="width: 45%;"></div>
+        </div>
+      </div>
+      
+      <div class="book">
+        <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66" alt="Book Cover" />
+        <h3>Gone Girl</h3>
+        <p>by Gillian Flynn</p>
+        <p>Category: Mystery</p>
+        class="progress-label">Progress: 80%</span>
+        <div class="progress-container">
+          <div class="progress-bar" style="width: 80%;"></div>
+        </div>
+      </div>
+    </section>
+    <!-- Add this just after the #featured section in <main> -->
+<section id="readingProgress">
+  <h2>Reading Progress</h2>
+  <div class="progress-list">
+
+    <div class="progress-entry">
+      <h3>The Midnight Library</h3>
+      <span class="progress-label">65% completed</span>
+      <div class="progress-container">
+        <div class="progress-bar" style="width: 65%;"></div>
+      </div>
+    </div>
+
+    <div class="progress-entry">
+      <h3>Atomic Habits</h3>
+      <span class="progress-label">45% completed</span>
+      <div class="progress-container">
+        <div class="progress-bar" style="width: 45%;"></div>
+      </div>
+    </div>
+
+    <div class="progress-entry">
+      <h3>Gone Girl</h3>
+      <span class="progress-label">80% completed</span>
+      <div class="progress-container">
+        <div class="progress-bar" style="width: 80%;"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+    <section id="submitBook">
+      <h2>Submit a New Book</h2>
+      <form id="submitBookForm">
+        <label for="newTitle">Title:</label>
+        <input type="text" id="newTitle" name="newTitle" required />
+
+        <label for="newAuthor">Author:</label>
+        <input type="text" id="newAuthor" name="newAuthor" required />
+
+        <label for="newCover">Cover URL:</label>
+        <input type="url" id="newCover" name="newCover" required />
+
+        <label for="newCategory">Category:</label>
+        <select id="newCategory" name="newCategory">
+          <option value="classic">Classic</option>
+          <option value="dystopian">Dystopian</option>
+          <option value="fiction">Fiction</option>
+          <option value="non-fiction">Non-fiction</option>
+        </select>
+
+        <label for="newDescription">Description:</label>
+        <textarea id="newDescription" name="newDescription" required></textarea>
+
+        <button type="submit">Add Book</button>
+      </form>
+    </section>
+
+    <section id="about">
+      <h2>About Epic Reads</h2>
+      <p>
+        Epic Reads is a vibrant online community and platform created by HarperCollins, dedicated to young adult (YA) literature. It helps readers discover new and upcoming YA books across genres like fantasy, romance, sci-fi, and contemporary fiction. Known for its fun, fan-centered vibe, Epic Reads features book recommendations, quizzes, polls, cover reveals, and exclusive content such as author interviews and sneak peeks. The platform also thrives on social media, engaging readers through TikToks, memes, and aesthetic bookish content. With a strong sense of community and excitement, Epic Reads is the go-to space for YA book lovers to connect, explore, and fangirl."Where every page begins a quest, and stories bring your soul to rest."
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Epic Reads. All rights reserved.</p>
+    <div class="social-icons">
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+      <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+  </footer>
+
+  <button id="scrollTopBtn" title="Go to top" aria-label="Scroll to top">↑</button>
+
+  <!-- Book Modal -->
+  <div id="bookModal" class="modal" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <span class="close-button" data-close="bookModal" aria-label="Close modal">&times;</span>
+      <img id="modalCover" src="" alt="Book Cover" />
+      <h3 id="modalTitle">Book Title</h3>
+      <p id="modalAuthor">Author</p>
+      <p id="modalDescription">Description</p>
+      <p id="modalRating">Rating: </p>
+      <div id="ratingContainer"></div>
+      <hr />
+      <h4>Reviews</h4>
+      <ul id="reviewsList"></ul>
+      <form id="reviewForm">
+        <input type="text" id="newReview" name="newReview" placeholder="Write a review..." required />
+        <button type="submit">Add Review</button>
+      </form>
+    </div>
+  </div>
+  <!-- Chat Bot UI Container (if not added via JS) -->
+<div id="chatBot">
+  <div class="chat-header">📚 Book Chat Bot <span id="chatToggle">_</span></div>
+  <div class="chat-body" id="chatBody"></div>
+  <div class="chat-input-area">
+    <input type="text" id="chatInput" placeholder="Ask me something..." />
+    <button id="sendChat">Send</button>
+  </div>
+</div>
+
+
+  <script src="Books-JS.js"></script>
+</body>
+</html>
