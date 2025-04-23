@@ -51,17 +51,37 @@
     }
 
     .hero {
-      background: url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4') center/cover no-repeat;
-      padding: 6rem 2rem;
-      text-align: center;
+      position: relative;
+      height: 400px;
+      background: url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4') center center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
     }
 
     .hero h2 {
       background-color: rgba(0, 0, 0, 0.6);
-      display: inline-block;
       padding: 1rem 2rem;
       border-radius: 8px;
       font-size: 2rem;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .hero button {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      background-color: #ff4d4d;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .hero button:hover {
+      background-color: #ff1a1a;
     }
 
     section {
@@ -79,11 +99,15 @@
       background-color: #1e1e1e;
       border-radius: 8px;
       overflow: hidden;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .movie-card:hover {
-      transform: scale(1.03);
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(255, 77, 77, 0.3);
     }
 
     .movie-card img {
@@ -102,7 +126,7 @@
     }
 
     .movie-card .info p {
-      margin: 0;
+      margin: 0 0 0.5rem 0;
       font-size: 0.9rem;
       color: #ccc;
     }
@@ -151,6 +175,7 @@
     }
 
     @media (max-width: 600px) {
+
       .hero h2 {
         font-size: 1.4rem;
         padding: 0.75rem 1rem;
@@ -187,24 +212,29 @@
 
   <section class="hero">
     <h2>Welcome to MovieMania</h2>
+    <button>Book Tickets</button>
   </section>
 
   <section id="now-showing">
     <h3>Now Showing</h3>
     <div class="movie-grid">
       <div class="movie-card">
-        <img src="https://source.unsplash.com/200x300/?movie" alt="Movie Poster">
+        <img src="https://m.media-amazon.com/images/I/81NiLI6cNML._AC_SY679_.jpg" alt="Movie Poster">
         <div class="info">
           <h4>The Last Echo</h4>
           <p>Action | 2h 10m</p>
+          <div class="rating">⭐ 8.5</div>
         </div>
+        <button class="trailer-btn">Watch Trailer</button>
       </div>
       <div class="movie-card">
-        <img src="https://source.unsplash.com/201x300/?cinema" alt="Movie Poster">
+        <img src="https://m.media-amazon.com/images/I/91E5sPDeMEL._AC_SY679_.jpg" alt="Movie Poster">
         <div class="info">
           <h4>Dreamscape</h4>
           <p>Drama | 1h 50m</p>
+          <div class="rating">⭐ 7.9</div>
         </div>
+        <button class="trailer-btn">Watch Trailer</button>
       </div>
     </div>
   </section>
@@ -213,18 +243,22 @@
     <h3>Upcoming Movies</h3>
     <div class="movie-grid">
       <div class="movie-card">
-        <img src="https://source.unsplash.com/202x300/?film" alt="Movie Poster">
+        <img src="https://m.media-amazon.com/images/I/81nCz3U9RzL._AC_SY679_.jpg" alt="Movie Poster">
         <div class="info">
           <h4>Neon Horizon</h4>
           <p>Sci-Fi | Coming Soon</p>
+          <div class="rating">⭐ 8.2 (expected)</div>
         </div>
+        <button class="trailer-btn">Watch Trailer</button>
       </div>
       <div class="movie-card">
-        <img src="https://source.unsplash.com/203x300/?hollywood" alt="Movie Poster">
+        <img src="https://m.media-amazon.com/images/I/61nZk4K3L7L._AC_SY679_.jpg" alt="Movie Poster">
         <div class="info">
           <h4>Silent Storm</h4>
           <p>Thriller | Coming Soon</p>
+          <div class="rating">⭐ 8.0 (expected)</div>
         </div>
+        <button class="trailer-btn">Watch Trailer</button>
       </div>
     </div>
   </section>
