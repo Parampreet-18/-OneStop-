@@ -4,7 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>S.W.U</title>
+    <title>Unified Platform</title>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    integrity="sha512-1ycn6IcaQQ40/MKBW2W5ro1Mdfb57P9N43IHTzS0P6fyV7QlGqYXw2HgPY+2JyxV7Afw1Xnzw25D6XemhY0zjg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
     <link rel="icon" type="image/png"
         href="https://play-lh.googleusercontent.com/yyYdYmchIUBnIjhhTCkNG25BaJ97h4KdG9QIbB9XN8GyqLRDhaxXeKfBRYC_Fs_wGg=w240-h480-rw">
     <style>
@@ -32,6 +39,8 @@
             background-repeat: no-repeat;
             /* changes */
             height: 100%;
+
+             
         }
 
         .top-bar {
@@ -214,34 +223,107 @@
             background-color: #717171;
         }
 
-        .footer {
-            background: #222;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: auto;
-        }
+    footer {
+      background-color: #000;
+      /* color: #403225; Bronze */
+      /* padding: 3rem 1rem; */
+      text-align: center;
+    }
 
-        .footer .social-icons a {
-            margin: 0 10px;
-            text-decoration: none;
-            color: white;
-            font-size: 20px;
-        }
+    .footer-container {
+      max-width: 1000px;
+      margin: auto;
+    }
 
-        .footer .links {
-            margin: 10px 0;
-        }
+    .footer-title {
+      font-size: 2rem;
+      /* margin-bottom: 1rem; */
+    }
 
-        .footer .links a {
-            color: white;
-            text-decoration: none;
-            margin: 0 10px;
-        }
+    .footer-subtitle {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      color: #ddd;
+    }
 
-        .footer .links a:hover {
-            text-decoration: underline;
-        }
+    .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .newsletter-form input[type="email"] {
+      padding: 0.8rem 1rem;
+      /* width: 100%; */
+      width: 200px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #1e1e1e;
+      color: white;
+      outline: none;
+      border: 1px solid #cd7f32;
+    }
+
+    .newsletter-form input[type="submit"] {
+      background-color: #cd7f32;
+      color: black;
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .newsletter-form input[type="submit"]:hover {
+      background-color: #b06a29;
+    }
+
+    .footer-links {
+      margin: 1rem 0;
+    }
+
+    .footer-links a {
+      color: #cd7f32;
+      margin: 0 12px;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      font-weight: bold;
+    }
+
+    .footer-links a:hover {
+      color: #fff;
+    }
+
+    .social-icons a {
+      color: #8b7e71;
+      font-size: 1.0rem;
+      margin: 10px 3px;
+      transition: color 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: white;
+    }
+
+    .footer-copy {
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    @media (max-width: 600px) {
+      .footer-title {
+        font-size: 1.5rem;
+      }
+
+      .newsletter-form input[type="email"] {
+        max-width: 90%;
+      }
+    }       
     </style>
 </head>
 
@@ -263,7 +345,7 @@
 
     <div class="nav-bar">
         <div class="logo">
-            <span>|ShopwithUs|</span>
+            <span>|Unified Platform|</span>
         </div>
         <div class="search-box">
             <input type="text" placeholder="Search products & brands">
@@ -335,37 +417,41 @@
         </section>
 
         <section class="products">
-            <!-- <h2>New arrivals</h2> -->
             <div class="product-list">
                 <a href="movie.html">
                     <img src="cinema-logo-movie-emblem-template-movie-production-logo-film-camera-logo-template-film-strip-ci_1041545-4853-removebg-preview.png"
                     alt="Touch me" style="width:310px; height: auto; cursor: pointer;">
                 </a>
-                <h2>Warch Me</h2>
+                <h2>Watch Me</h2>
                 
             </div>
         </section>
     </div>
-    <div class="footer">
-        <div class="social-icons">
+    <footer>
+        <div class="footer-container">
+          <h2 class="footer-title">Join Our Newsletter</h2>
+          <p class="footer-subtitle">Subscribe to receive updates, offers, and exclusive content.</p>
+          <form class="newsletter-form" action="#" method="POST">
+            <input type="email" name="email" placeholder="Enter your email address" required>
+            <input type="submit" value="Subscribe">
+          </form>
+    
+          <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="terms.html">Services</a>
+            <a href="privacy.html">Privacy</a>
+          </div>
+          <div class="social-icons">
             <a href="https://www.facebook.com/">🔵 Facebook</a>
             <a href="https://www.instagram.com/">📸 Instagram</a>
             <a href="https://x.com/?lang=en">🐦 Twitter</a>
             <a href="https://in.linkedin.com/">💼 LinkedIn</a>
-        </div>
+      </div>
 
-        <div class="links">
-            <a href="about.html">About</a> |
-            <a href="#">Contact</a> |
-            <a href="privacy.html">Privacy Policy</a> |
-            <a href="terms.html">Terms of Service</a>
-        </div>
-
-        <p>© 2025 |Shopwithme|. All rights reserved.</p>
-    </div>
-
-
-
+      
+          
+        <p>© 2025 |Unified Platform|. All rights reserved.</p>
+    </footer>
 </body>
-
 </html>
