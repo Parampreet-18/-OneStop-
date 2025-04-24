@@ -82,6 +82,27 @@ let track_list = [
   }
 ];
 
+document.getElementById('searchInput').addEventListener('input', function () {
+  const filter = this.value.toLowerCase();
+  const queue = document.getElementById('queue');
+  queue.innerHTML = '';
+
+  track_list.forEach((track, index) => {
+    if (track.name.toLowerCase().includes(filter) || track.artist.toLowerCase().includes(filter)) {
+      const li = document.createElement('li');
+      li.textContent = `${track.name} - ${track.artist}`;
+      li.onclick = () => {
+        track_index = index;
+        loadTrack(index);
+        playTrack();
+      };
+      queue.appendChild(li);
+    }
+  });
+
+  updateQueueActiveStatus();
+});
+
 function random_bg_color() {
   let red = Math.floor(Math.random() * 256) + 64;
   let green = Math.floor(Math.random() * 256) + 64;
