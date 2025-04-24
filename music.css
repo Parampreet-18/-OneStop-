@@ -149,4 +149,31 @@ i.fa-play-circle, i.fa-pause-circle, i.fa-step-forward, i.fa-step-backward {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+header img {
+  height: 50px;
+  width: 50px;
+  margin-right: 10px;
+}
+
+#searchInput {
+  padding: 10px;
+  width: 250px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+
 
