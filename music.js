@@ -226,6 +226,11 @@ function updateQueueActiveStatus() {
   });
 }
 
+function toggleLoop() {
+  curr_track.loop = !curr_track.loop;
+  alert("Loop is now " + (curr_track.loop ? "ON" : "OFF"));
+}
+
 
 loadQueue();
 loadTrack(track_index);
