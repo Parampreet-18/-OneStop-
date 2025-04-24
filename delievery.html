@@ -1,59 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ShopWithUs - Delivery</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .checkmark {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: block;
+      stroke-width: 2;
+      stroke: #4ade80;
+      stroke-miterlimit: 10;
+      margin: 0 auto 10px auto;
+      box-shadow: inset 0px 0px 0px #4ade80;
+      animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+    }
+    .checkmark__circle {
+      stroke-dasharray: 166;
+      stroke-dashoffset: 166;
+      stroke-width: 2;
+      stroke-miterlimit: 10;
+      stroke: #4ade80;
+      fill: none;
+      animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+    }
+    .checkmark__check {
+      transform-origin: 50% 50%;
+      stroke-dasharray: 48;
+      stroke-dashoffset: 48;
+      animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.6s forwards;
+    }
+    @keyframes stroke { 100% { stroke-dashoffset: 0; } }
+    @keyframes scale { 0%, 100% { transform: none; } 50% { transform: scale3d(1.1, 1.1, 1); } }
+    @keyframes fill { 100% { box-shadow: inset 0px 0px 0px 30px #4ade80; } }
+  </style>
 </head>
-<body class="bg-gray-100">
+<body class="bg-yellow-100">
+
+  <!-- Navbar -->
   <nav class="bg-white shadow-md p-4 flex justify-between items-center">
-    <h1 class="text-2xl font-bold text-blue-600">ShopWithUs</h1>
-    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Cart</button>
+    <a href="file:///D:/shop-me/Shopping.html"><h1 class="text-2xl font-bold text-blue-600">ShopWithUs</h1></a>
+    <a href="file:///D:/shop-me/cart.html" class="text-blue-600 hover:underline">Back to Cart</a>
   </nav>
 
+  <!-- Header -->
   <header class="bg-blue-500 text-white text-center py-12">
-    <h2 class="text-4xl font-bold">Delivery Information</h2>
-    <p class="mt-2 text-lg">Fast, Safe, and Reliable Shipping Across India</p>
+    <h2 class="text-4xl font-bold">Delivery Details</h2>
+    <p class="mt-2 text-lg">Please provide your shipping information</p>
   </header>
 
-  <section class="container mx-auto my-10 px-4">
-    <div class="bg-white shadow-lg rounded-lg p-8">
-      <h3 class="text-3xl font-semibold mb-4 text-gray-800">Our Delivery Promise</h3>
-      <p class="text-gray-700 mb-6">At ShopWithUs, we prioritize getting your items to you as quickly and safely as possible. We offer flexible delivery options and real-time tracking so you stay informed every step of the way.</p>
+  <!-- Cart Summary -->
+  <div id="cartSummary" class="text-center text-lg font-medium text-gray-700 mt-4"></div>
+  <div id="repeatOrderContainer" class="text-center mt-2 hidden">
+    <button id="repeatOrderBtn" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+      Repeat Last Order
+    </button>
+  </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <h4 class="text-xl font-bold text-gray-800 mb-2">Delivery Options</h4>
-          <ul class="list-disc list-inside text-gray-600 space-y-1">
-            <li>🚚 Standard Delivery: 3-5 business days</li>
-            <li>⚡ Express Delivery: 1-2 business days</li>
-            <li>🎁 Free Shipping on orders over ₹999</li>
-            <li>📦 Live Order Tracking</li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="text-xl font-bold text-gray-800 mb-2">Our Delivery Partners</h4>
-          <ul class="list-disc list-inside text-gray-600 space-y-1">
-            <li>Bluedart</li>
-            <li>Delhivery</li>
-            <li>India Post</li>
-            <li>Shiprocket</li>
-          </ul>
-        </div>
+  <!-- Form Section -->
+  <section class="container mx-auto my-8 px-4">
+    <form class="bg-white p-6 rounded-lg shadow-md max-w-xl mx-auto" id="deliveryForm">
+
+      <!-- Existing Fields -->
+      <!-- (unchanged content here...) -->
+
+      <!-- Add Gift Option -->
+      <div class="mb-4 flex items-center">
+        <input type="checkbox" id="giftOption" class="mr-2">
+        <label for="giftOption" class="text-gray-700">This order is a gift</label>
       </div>
 
-      <div class="mt-8">
-        <h4 class="text-xl font-bold text-gray-800 mb-2">Need Help?</h4>
-        <p class="text-gray-600">If you have any questions regarding your shipment, feel free to <a href="#" class="text-blue-500 hover:underline">contact our support team</a>.</p>
+      <div class="mb-4 hidden" id="giftMessageContainer">
+        <label for="giftMessage" class="block text-gray-700 font-semibold mb-2">Gift Message</label>
+        <textarea id="giftMessage" class="w-full px-4 py-2 border rounded" rows="3" placeholder="Write a special message..."></textarea>
       </div>
-    </div>
+
+      <!-- Submit -->
+      <div class="mt-6">
+        <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 transition w-full">
+          Confirm Delivery
+        </button>
+      </div>
+
+      <!-- Confirmation -->
+      <div id="confirmation" class="text-center mt-6 hidden">
+        <svg class="checkmark" viewBox="0 0 52 52">
+          <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+          <path class="checkmark__check" fill="none" d="M14 27l7 7 16-16"/>
+        </svg>
+        <p class="text-green-600 text-xl font-semibold">Delivery Confirmed!</p>
+        <button id="downloadReceipt" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+          Download Delivery Receipt
+        </button>
+      </div>
+
+    </form>
   </section>
 
+  <!-- Footer -->
   <footer class="bg-gray-800 text-white text-center py-4 mt-8">
     <p>&copy; 2025 ShopWithUs - All Rights Reserved.</p>
   </footer>
+
+  <!-- Script -->
+  <script>
+    const form = document.getElementById("deliveryForm");
+    const confirmation = document.getElementById("confirmation");
+    const estimatedDate = document.getElementById("estimatedDate");
+    const summary = document.getElementById("cartSummary");
+    const repeatContainer = document.getElementById("repeatOrderContainer");
+    const repeatBtn = document.getElementById("repeatOrderBtn");
+    const deliveryFeeDisplay = document.getElementById("deliveryFeeDisplay");
+    const downloadBtn = document.getElementById("downloadReceipt");
+
+    const giftCheckbox = document.getElementById("giftOption");
+    const giftMessageContainer = document.getElementById("giftMessageContainer");
+
+    giftCheckbox.addEventListener("change", () => {
+      giftMessageContainer.classList.toggle("hidden", !giftCheckbox.checked);
+    });
+
+    const lastCart = [
+      { name: "Running Shoes", price: "₹2999", quantity: 1 },
+      { name: "Cricket Bat", price: "₹1499", quantity: 2 }
+    ];
+
+    let cartTotal = 0;
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const saved = JSON.parse(localStorage.getItem("deliveryInfo"));
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      if (saved) {
+        form.name.value = saved.name;
+        form.email.value = saved.email;
+        form.address.value = saved.address;
+        form.pincode.value = saved.pincode;
+        form.phone.value = saved.phone;
+        form.delivery.value = saved.delivery;
+        form.timeSlot.value = saved.timeSlot || '';
+        form.notes.value = saved.notes || '';
+        document.getElementById("save").checked = true;
+        calculateDeliveryDate(saved.delivery);
+        updateDeliveryFee(saved.delivery);
+      }
+
+      if (cart.length > 0) {
+        cartTotal = cart.reduce((sum, item) => {
+          return sum + (parseInt(item.price.replace(/[^\d]/g, "")) * item.quantity);
+        }, 0);
+        summary.innerHTML = `🛍️ You have ${cart.length} item(s). Subtotal: ₹${cartTotal}`;
+      } else {
+        summary.innerHTML = `Your cart is empty. <a href="index.html" class="text-blue-600 underline">Go back to shop</a>`;
+        if (saved) repeatContainer.classList.remove("hidden");
+      }
+    });
+
+    repeatBtn.addEventListener("click", () => {
+      localStorage.setItem("cart", JSON.stringify(lastCart));
+      location.reload();
+    });
+
+    document.getElementById("delivery").addEventListener("change", (e) => {
+      const method = e.target.value;
+      calculateDeliveryDate(method);
+      updateDeliveryFee(method);
+    });
+
+    function updateDeliveryFee(method) {
+      const fee = method === "express" ? 150 : method === "standard" ? 50 : 0;
+      if (fee) {
+        deliveryFeeDisplay.innerHTML = `🚚 Delivery Fee: ₹${fee} <br> 💰 Total: ₹${cartTotal + fee}`;
+      } else {
+        deliveryFeeDisplay.innerHTML = '';
+      }
+    }
+
+    function calculateDeliveryDate(method) {
+      if (!method) return estimatedDate.textContent = "";
+      const now = new Date();
+      const offset = method === "express" ? [1, 2] : [3, 5];
+      const minDate = new Date(now);
+      const maxDate = new Date(now);
+      minDate.setDate(minDate.getDate() + offset[0]);
+      maxDate.setDate(maxDate.getDate() + offset[1]);
+
+      const format = d => d.toLocaleDateString("en-IN", {
+        weekday: "short", year: "numeric", month: "short", day: "numeric"
+      });
+
+      estimatedDate.textContent = `Estimated Delivery: ${format(minDate)} - ${format(maxDate)}`;
+    }
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      confirmation.classList.remove("hidden");
+
+      if (document.getElementById("save").checked) {
+        const info = {
+          name: form.name.value,
+          email: form.email.value,
+          address: form.address.value,
+          pincode: form.pincode.value,
+          phone: form.phone.value,
+          delivery: form.delivery.value,
+          timeSlot: form.timeSlot.value,
+          notes: form.notes.value
+        };
+        localStorage.setItem("deliveryInfo", JSON.stringify(info));
+      }
+
+      localStorage.removeItem("cart");
+    });
+
+    downloadBtn.addEventListener("click", () => {
+      const name = form.name.value;
+      const address = form.address.value;
+      const phone = form.phone.value;
+      const delivery = form.delivery.value;
+      const timeSlot = form.timeSlot.value;
+      const notes = form.notes.value;
+      const isGift = giftCheckbox.checked;
+      const giftMessage = document.getElementById("giftMessage").value;
+      const fee = delivery === "express" ? 150 : delivery === "standard" ? 50 : 0;
+      const total = cartTotal + fee;
+
+      const content = `
+        --- ShopWithUs Delivery Receipt ---
+        Name: ${name}
+        Address: ${address}
+        Phone: ${phone}
+        Delivery Type: ${delivery}
+        Preferred Time Slot: ${timeSlot}
+        Notes: ${notes}
+        ${isGift ? `🎁 Gift Message: ${giftMessage}` : ""}
+        Total Amount: ₹${total}
+        ------------------------------------
+        Thank you for shopping with us!
+      `;
+
+      const blob = new Blob([content], { type: "text/plain" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "Delivery_Receipt.txt";
+      link.click();
+    });
+  </script>
 </body>
 </html>
-
-
