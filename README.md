@@ -13,6 +13,7 @@ ShopwithUs is an all-in-one site that integrates the following services:
 - **Books (Epic Reads):** Browse and purchase a wide selection of books.
 - **Shopping:** Shop for a variety of products from multiple categories.
 - **Movies:** Discover and book movie tickets for the latest releases.
+- **Music:** Composed the entire music website, adding rhythm and melody to the team's portfolio.
 
 Each service is accessible through a unified platform, designed for a smooth user experience and easy navigation using Flexbox layouts.
 
@@ -43,6 +44,8 @@ Each service is accessible through a unified platform, designed for a smooth use
 **Books (Epic Reads):** Browse categories, read reviews, and add books to your cart or wishlist.
 **Shopping:** Explore products, filter by categories, and enjoy exclusive deals.
 **Movies:** Check showtimes, watch trailers, and reserve your seats.
+**Music:** Listen trending  music melody .
+
 
 ---
 
@@ -54,6 +57,7 @@ ShopwithUs is actively maintained and developed by the following contributors:
 - Gupta2006
 - Thunderer11
 - ravinoor55
+- Rishank0
 
 We welcome new contributors! If you're interested in improving ShopwithUs, please check out our contributing guidelines and start with open issues.
 

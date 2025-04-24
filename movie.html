@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,131 +10,291 @@
       color: white;
       margin: 0;
       padding: 0;
-    }
+    }header {
+  background-color: #1e1e1e;
+  padding: 1rem;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
 
-    header {
-      background-color: #1e1e1e;
-      padding: 1rem;
-      text-align: center;
-    }
+nav {
+  margin-top: 0.5rem;
+}
 
-    nav {
-      margin-top: 0.5rem;
-    }
+nav a {
+  color: #bbbbbb;
+  margin: 0 1rem;
+  text-decoration: none;
+  transition: color 0.3s, border-bottom 0.3s;
+  padding-bottom: 4px;
+}
 
-    nav a {
-      color: #bbbbbb;
-      margin: 0 1rem;
-      text-decoration: none;
-    }
+nav a:hover {
+  color: #ffffff;
+  border-bottom: 2px solid #ff4d4d;
+}
 
-    .hero {
-      background: url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4') center/cover no-repeat;
-      padding: 6rem 2rem;
-      text-align: center;
-    }
+nav a.active {
+  color: white;
+  border-bottom: 2px solid #ff4d4d;
+}
 
-    .hero h2 {
-      background-color: rgba(0, 0, 0, 0.6);
-      display: inline-block;
-      padding: 1rem 2rem;
-      border-radius: 8px;
-      font-size: 2rem;
-    }
+.search-bar {
+  margin-top: 1rem;
+}
 
-    section {
-      padding: 2rem;
-    }
+.search-bar input {
+  width: 80%;
+  max-width: 400px;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  outline: none;
+}
 
-    .movie-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-    }
+.hero {
+  position: relative;
+  height: 400px;
+  background: url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4') center center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
 
-    .movie-card {
-      background-color: #1e1e1e;
-      border-radius: 8px;
-      overflow: hidden;
-      transition: transform 0.3s ease;
-    }
+.hero h2 {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
 
-    .movie-card:hover {
-      transform: scale(1.03);
-    }
+.hero button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #ff4d4d;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 
-    .movie-card img {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-    }
+.hero button:hover {
+  background-color: #ff1a1a;
+}
 
-    .movie-card .info {
-      padding: 1rem;
-    }
+section {
+  padding: 2rem;
+}
 
-    .movie-card .info h4 {
-      margin: 0 0 0.5rem 0;
-      font-size: 1.1rem;
-    }
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
 
-    .movie-card .info p {
-      margin: 0;
-      font-size: 0.9rem;
-      color: #ccc;
-    }
+.movie-card {
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
-    footer {
-      background-color: #1e1e1e;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
-      font-size: 0.9rem;
-      color: #888;
-    }
+.movie-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(255, 77, 77, 0.3);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.movie-card .info {
+  padding: 1rem;
+}
+
+.movie-card .info h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.movie-card .info p {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.rating {
+  color: gold;
+  font-size: 1rem;
+}
+
+.trailer-btn {
+  background-color: #555;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 1rem 1rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.trailer-btn:hover {
+  background-color: #777;
+}
+
+.contact {
+  background-color: #1e1e1e;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.contact h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.contact input, .contact textarea {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #2b2b2b;
+  color: white;
+}
+
+.contact button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  display: block;
+  margin: auto;
+}
+
+footer {
+  background-color: #1e1e1e;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+@media (max-width: 600px) {
+  .hero {
+    height: 250px;
+  }
+
+  .hero h2 {
+    font-size: 1.4rem;
+    padding: 0.75rem 1rem;
+  }
+
+  nav a {
+    display: block;
+    margin: 0.5rem 0;
+  }
+
+  section {
+    padding: 1rem;
+  }
+
+  .contact {
+    padding: 1rem;
+  }
+}
+
   </style>
 </head>
 <body>
   <header>
     <h1>MovieMania</h1>
     <nav>
-      <a href="#">Home</a>
+      <a href="#" class="active">Home</a>
       <a href="#now-showing">Now Showing</a>
       <a href="#upcoming">Upcoming</a>
       <a href="#contact">Contact</a>
     </nav>
-  </header>
-
-  <section class="hero">
+    <div class="search-bar">
+      <input type="text" placeholder="Search for movies...">
+    </div>
+  </header>  <section class="hero">
     <h2>Welcome to MovieMania</h2>
-  </section>
-
-  <section id="now-showing">
+    <button>Book Tickets</button>
+  </section>  <section id="now-showing">
     <h3>Now Showing</h3>
     <div class="movie-grid">
       <div class="movie-card">
-        <img src="https://source.unsplash.com/200x300/?movie" alt="Movie Poster">
+        <img src="https://m.media-amazon.com/images/M/MV5BMzc0NTVmNjktNjA0MS00MzljLTg5NTYtZWI1ZWQ2OTczMDhhXkEyXkFqcGc@._V1_.jpg" alt="Movie Poster">
         <div class="info">
           <h4>The Last Echo</h4>
           <p>Action | 2h 10m</p>
+          <div class="rating">⭐ 8.5</div>
         </div>
+        <button class="trailer-btn">Watch Trailer</button>
       </div>
       <div class="movie-card">
-        <img src="https://source.unsplash.com/201x300/?cinema" alt="Movie Poster">
+        <img src="https://static.beebom.com/wp-content/uploads/2025/03/Infinity-Castle-arc.jpg?quality=75&strip=all" alt="Movie Poster">
         <div class="info">
-          <h4>Dreamscape</h4>
+          <h4>Demon Slayer</h4>
           <p>Drama | 1h 50m</p>
+          <div class="rating">⭐ 7.9</div>
         </div>
+        <button class="trailer-btn">Watch Trailer</button>
       </div>
     </div>
-  </section>
-
-  <section id="upcoming">
+  </section>  <section id="upcoming">
     <h3>Upcoming Movies</h3>
-  </section>
-
-  <footer>
+    <div class="movie-grid">
+      <div class="movie-card">
+        <img src="https://newshour-classroom-tc.digi-producers.pbs.org/uploads/images/Oppenheimer-Christopher-Nolan-0.width-1024.jpg" alt="Movie Poster">
+     
+        <div class="info">
+          <h4>Oppenheimer</h4>
+          <p>Action | Coming Soon</p>
+          <div class="rating">⭐ 8.2 (expected)</div>
+        </div>
+        <button class="trailer-btn">Watch Trailer</button>
+      </div>
+      <div class="movie-card">
+        <img src="https://i.etsystatic.com/12175780/r/il/889f4d/1685607859/il_1588xN.1685607859_49fn.jpg" alt="Movie Poster">
+        <div class="info">
+          <h4>Devil May Cry</h4>
+          <p>Thriller | Coming Soon</p>
+          <div class="rating">⭐ 8.0 (expected)</div>
+        </div>
+        <button class="trailer-btn">Watch Trailer</button>
+      </div>
+    </div>
+  </section>  <section id="contact">
+    <div class="contact">
+      <h3>Contact Us</h3>
+      <input type="text" placeholder="Your Name">
+      <input type="email" placeholder="Your Email">
+      <textarea rows="5" placeholder="Your Message"></textarea>
+      <button type="submit">Send Message</button>
+    </div>
+  </section>  <footer>
     <p>&copy; 2025 MovieMania. All rights reserved.</p>
   </footer>
 </body>

@@ -473,7 +473,161 @@ body.dark-mode .progress-bar {
   text-align: left;
   color: #27ae60;
 }
-  </style>
+/* Draggable container */
+#epicbot-draggable {
+  position: absolute;
+  top: 100px;
+  right: 50px;
+  z-index: 1000;
+  cursor: move;
+}
+
+/* Main chatbot box */
+#epicbot {
+  width: 320px;
+  height: 440px;
+  background-color: #1e1e2f;
+  color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: transform 0.3s ease;
+}
+
+/* Chatbox area */
+#epicbot-messages {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+#epicbot-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+#epicbot-messages::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 4px;
+}
+
+/* Chat message bubbles */
+.user-message, .bot-message {
+  margin: 6px 0;
+  padding: 10px 14px;
+  border-radius: 16px;
+  max-width: 80%;
+  word-wrap: break-word;
+  line-height: 1.4;
+}
+
+.user-message {
+  background-color: #4a90e2;
+  align-self: flex-end;
+  color: white;
+}
+
+.bot-message {
+  background-color: #333850;
+  align-self: flex-start;
+}
+
+/* Input and send */
+#epicbot-input-area {
+  display: flex;
+  padding: 10px;
+  background-color: #2c2f3a;
+}
+
+#epicbot-input {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background-color: #44495e;
+  color: white;
+  font-size: 14px;
+}
+
+#epicbot-send {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  margin-left: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#epicbot-send:hover {
+  background-color: #357abd;
+}
+
+/* Toggle Button */
+#epicbot-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  background-color: #4a90e2;
+  color: white;
+  padding: 12px 16px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+#epicbot-toggle:hover {
+  transform: scale(1.1);
+  background-color: #357abd;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+#epicbot {
+  animation: fadeIn 0.3s ease;
+}
+
+.favorite-btn, .read-now-btn {
+  padding: 8px 12px;
+  margin-top: 8px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.favorite-btn {
+  background-color: #ff6b6b;
+  color: white;
+}
+
+.favorite-btn:hover {
+  background-color: #e74c3c;
+}
+
+.read-now-btn {
+  background-color: #3498db;
+  color: white;
+}
+
+.read-now-btn:hover {
+  background-color: #2980b9;
+}
+
+</style>
 
 
 </head>
