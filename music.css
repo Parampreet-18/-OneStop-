@@ -176,4 +176,16 @@ header img {
   border: 1px solid gray;
 }
 
+.loop-track {
+  padding: 25px;
+  opacity: 0.8;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.loop-track:hover {
+  opacity: 1.0;
+}
+
+
 
