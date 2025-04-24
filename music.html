@@ -8,6 +8,14 @@
   <link rel="stylesheet" href="music.css">
 </head>
 <body>
+<header style="display: flex; align-items: center; justify-content: space-between; padding: 20px; max-width: 1200px; margin: auto;">
+  <div style="display: flex; align-items: center;">
+    <img src="musiclogo.png" alt="Music Logo" style="height: 50px; width: 50px; margin-right: 10px;">
+    <h1 style="margin: 0;">SOUNDORA</h1>
+  </div>
+  <input type="text" id="searchInput" placeholder="Search songs..." style="padding: 10px; width: 250px; border-radius: 5px; border: 1px solid gray;">
+</header>
+
   <div class="container">
     <div class="player">
       <div class="details">
@@ -20,6 +28,7 @@
         <div class="prev-track" onclick="prevTrack()"><i class="fa fa-step-backward fa-2x"></i></div>
         <div class="playpause-track" onclick="playpauseTrack()"><i class="fa fa-play-circle fa-5x"></i></div>
         <div class="next-track" onclick="nextTrack()"><i class="fa fa-step-forward fa-2x"></i></div>
+        <div class="loop-track" onclick="toggleLoop()"><i class="fa fa-retweet fa-2x"></i></div>
       </div>
       <div class="slider_container">
         <div class="current-time">00:00</div>

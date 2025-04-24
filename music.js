@@ -24,63 +24,84 @@ let track_list = [
     name: "Night Owl",
     artist: "Broke For Free",
     image: "img1.jpeg.jpg",
-    path: "media/aud1.mp3"
+    path: "aud1.mp3"
   },
   {
     name: "Enthusiast",
     artist: "Tours",
     image: "img2.jpeg.jpg",
-    path: "media/aud2.mp3"
+    path: "aud2.mp3"
   },
   {
     name: "Shipping Lanes",
     artist: "Chad Crouch",
     image: "img3.jpeg.jpg",
-    path: "media/aud3.mp3"
+    path: "aud3.mp3"
   },
   {
     name: "Night Detective",
     artist: "Chad Crouch",
     image: "img4.jpg",
-    path: "media/aud4.mp3"
+    path: "aud4.mp3"
   },
   {
     name: "Trippy People",
     artist: "Lil Eye-N-$tine",
     image: "img5.jpg",
-    path: "media/aud5.mp3"
+    path: "aud5.mp3"
   },
   {
     name: "Just Dippin",
     artist: "Snoop Dogg",
     image: "img6.jpg",
-    path: "media/aud6.mp3"
+    path: "aud6.mp3"
   },
   {
     name: "Squabble Up",
     artist: "Kendrick Lamar",
     image: "img7.jpg",
-    path: "media/aud7.mp3"
+    path: "aud7.mp3"
   },
   {
     name: "Switching Lanes",
     artist: "Chad Crouch",
     image: "img8.jpg",
-    path: "media/aud8.mp3"
+    path: "aud8.mp3"
   },
   {
     name: "Lazy Day",
     artist: "Chad Crouch",
     image: "img9.jpg",
-    path: "media/aud9.mp3"
+    path: "aud9.mp3"
   },
   {
     name: "Movement",
     artist: "Chad Crouch",
     image: "img10.jpg",
-    path: "media/aud10.mp3"
+    path: "aud10.mp3"
   }
 ];
+
+document.getElementById('searchInput').addEventListener('input', function () {
+  const filter = this.value.toLowerCase();
+  const queue = document.getElementById('queue');
+  queue.innerHTML = '';
+
+  track_list.forEach((track, index) => {
+    if (track.name.toLowerCase().includes(filter) || track.artist.toLowerCase().includes(filter)) {
+      const li = document.createElement('li');
+      li.textContent = `${track.name} - ${track.artist}`;
+      li.onclick = () => {
+        track_index = index;
+        loadTrack(index);
+        playTrack();
+      };
+      queue.appendChild(li);
+    }
+  });
+
+  updateQueueActiveStatus();
+});
 
 function random_bg_color() {
   let red = Math.floor(Math.random() * 256) + 64;
@@ -203,6 +224,11 @@ function updateQueueActiveStatus() {
       item.classList.remove('active');
     }
   });
+}
+
+function toggleLoop() {
+  curr_track.loop = !curr_track.loop;
+  alert("Loop is now " + (curr_track.loop ? "ON" : "OFF"));
 }
 
 
