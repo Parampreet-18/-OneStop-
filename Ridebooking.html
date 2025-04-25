@@ -1,177 +1,881 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>First Class Cab Booking</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to right, #ebf8ff, #ffffff);
-    }
-    .container {
-      max-width: 1200px;
-      margin: auto;
-      padding: 20px;
-    }
-    h1 {
-      text-align: center;
-      font-size: 2.5rem;
-      color: #1e3a8a;
-      margin-bottom: 2rem;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-    }
-    @media (min-width: 768px) {
-      .grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-    .card {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      padding: 24px;
-    }
-    .card h2 {
-      color: #1e3a8a;
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
-    }
-    .input, select, button {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      border-radius: 12px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-    }
-    button {
-      background-color: #2563eb;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #1d4ed8;
-    }
-    ul {
-      padding-left: 20px;
-      color: #1e3a8a;
-    }
-    .tabs {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-    .tab-btn {
-      background: #e0e7ff;
-      padding: 10px 16px;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-    .tab-btn.active {
-      background: #4338ca;
-      color: white;
-    }
-    .tab-content {
-      display: none;
-    }
-    .tab-content.active {
-      display: block;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desert Cab - Premium Rides</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #C19A6B; /* Camel brown */
+            --primary-dark: #8B6B3D;
+            --primary-light: #E6D5B8;
+            --accent: #D4A76A;
+            --text: #333333;
+            --light: #F8F4E9;
+            --white: #FFFFFF;
+            --shadow: 0 4px 12px rgba(194, 154, 107, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            padding: 20px 0;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--white);
+            padding: 10px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: url('https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin-top: 70px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(194, 154, 107, 0.8), rgba(139, 107, 61, 0.6));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: var(--white);
+            width: 50%;
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        /* Booking Form */
+        .booking-form {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin-top: 30px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--primary-light);
+            border-radius: 5px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(194, 154, 107, 0.2);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            background-color: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+
+        .section-title p {
+            color: var(--text);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(194, 154, 107, 0.3);
+        }
+
+        .service-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .service-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover .service-img img {
+            transform: scale(1.1);
+        }
+
+        .service-content {
+            padding: 25px;
+        }
+
+        .service-content h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary-dark);
+        }
+
+        .service-content p {
+            margin-bottom: 20px;
+        }
+
+        /* Fleet Section */
+        .fleet {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+
+        .fleet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .vehicle-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .vehicle-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .vehicle-img {
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .vehicle-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .vehicle-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .vehicle-info h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+        }
+
+        .vehicle-specs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .vehicle-specs span {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .vehicle-specs i {
+            margin-right: 5px;
+        }
+
+        .price {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 0;
+            background-color: var(--white);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background-color: var(--light);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 60px;
+            color: var(--primary-light);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .testimonial-content {
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+
+        .author-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: var(--primary-dark);
+        }
+
+        .author-info p {
+            font-size: 14px;
+            color: var(--primary);
+        }
+
+        .rating {
+            color: var(--accent);
+            margin-top: 5px;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: var(--primary-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--white);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: var(--primary-light);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-content {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .booking-form {
+                margin: 30px auto 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            nav ul li {
+                margin-left: 15px;
+                margin-right: 15px;
+            }
+            
+            .hero-content h1 {
+                font-size: 36px;
+            }
+            
+            .section-title h2 {
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Ride Booking</h1>
-    <div class="tabs">
-      <div class="tab-btn active" onclick="showTab('booking')">Book a Ride</div>
-      <div class="tab-btn" onclick="showTab('tracking')">Live Tracking</div>
-      <div class="tab-btn" onclick="showTab('admin')">Admin Panel</div>
-      <div class="tab-btn" onclick="showTab('driver')">Driver Dashboard</div>
-    </div>
-
-    <div id="booking" class="tab-content active">
-      <div class="grid">
-        <div class="card">
-          <h2>Book a Ride</h2>
-          <input class="input" type="text" placeholder="Pickup Location" />
-          <input class="input" type="text" placeholder="Dropoff Location" />
-          <input class="input" type="date" />
-          <input class="input" type="time" />
-          <select class="input">
-            <option>Select Car Type</option>
-            <option value="sedan">Sedan</option>
-            <option value="suv">SUV</option>
-            <option value="luxury">Luxury</option>
-          </select>
-          <button>Confirm Booking & Pay</button>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-car"></i>
+                <span>Desert Cab</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="privacy.html">Services</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
         </div>
-        <div class="card">
-          <h2>Why Choose Us?</h2>
-          <ul>
-            <li>Luxury & Clean Vehicles</li>
-            <li>Professional Drivers</li>
-            <li>24/7 Availability</li>
-            <li>Instant Booking Confirmation</li>
-            <li>Secure Online Payments</li>
-            <li>Live Tracking</li>
-          </ul>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Premium Cab Services in Your City</h1>
+                <p>Experience luxury, comfort, and reliability with our premium cab services. Book your ride now and travel in style.</p>
+                <a href="#" class="btn">Book Now</a>
+                
+                <form class="booking-form">
+                    <h3>Book Your Ride</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="pickup">Pickup Location</label>
+                            <input type="text" id="pickup" class="form-control" placeholder="Enter pickup address">
+                        </div>
+                        <div class="form-group">
+                            <label for="dropoff">Dropoff Location</label>
+                            <input type="text" id="dropoff" class="form-control" placeholder="Enter destination">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="date">Pickup Date</label>
+                            <input type="date" id="date" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Pickup Time</label>
+                            <input type="time" id="time" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="vehicle">Vehicle Type</label>
+                        <select id="vehicle" class="form-control">
+                            <option value="">Select Vehicle</option>
+                            <option value="sedan">Sedan</option>
+                            <option value="suv">SUV</option>
+                            <option value="luxury">Luxury</option>
+                            <option value="minivan">Minivan</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Find Available Cabs</button>
+                </form>
+            </div>
         </div>
-      </div>
-    </div>
+    </section>
 
-    <div id="tracking" class="tab-content">
-      <div class="card">
-        <h2>Live Tracking</h2>
-        <input class="input" type="text" placeholder="Enter Booking ID" />
-        <button>Track Ride</button>
-        <div style="margin-top: 16px; background: #f3f4f6; padding: 40px; border-radius: 12px; text-align: center;">
-          Map view (placeholder)
+    <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Services</h2>
+                <p>We offer a range of premium transportation services to meet all your travel needs.</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1025&q=80" alt="Airport Transfer">
+                    </div>
+                    <div class="service-content">
+                        <h3>Airport Transfers</h3>
+                        <p>Reliable and punctual airport transfers with flight tracking and meet & greet service.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="City Tours">
+                    </div>
+                    <div class="service-content">
+                        <h3>City Tours</h3>
+                        <p>Explore the city in comfort with our knowledgeable drivers and custom tour packages.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1601584115197-04ecc2a1f1f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Corporate Travel">
+                    </div>
+                    <div class="service-content">
+                        <h3>Corporate Travel</h3>
+                        <p>Professional transportation services for business meetings and corporate events.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
+    </section>
 
-    <div id="admin" class="tab-content">
-      <div class="card">
-        <h2>Admin Panel</h2>
-        <ul>
-          <li>View all bookings</li>
-          <li>Manage drivers</li>
-          <li>Analytics dashboard</li>
-          <li>System settings</li>
-        </ul>
-      </div>
-    </div>
+    <!-- Fleet Section -->
+    <section class="fleet">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Fleet</h2>
+                <p>Choose from our premium selection of vehicles to suit your needs and style.</p>
+            </div>
+            
+            <div class="fleet-grid">
+                <div class="vehicle-card">
+                    <div class="vehicle-img">
+                        <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Luxury Sedan">
+                    </div>
+                    <div class="vehicle-info">
+                        <h3>Luxury Sedan</h3>
+                        <div class="vehicle-specs">
+                            <span><i class="fas fa-user"></i> 4</span>
+                            <span><i class="fas fa-suitcase"></i> 3</span>
+                            <span><i class="fas fa-snowflake"></i> Yes</span>
+                        </div>
+                        <div class="price">$45/hour</div>
+                        <a href="#" class="btn">Book Now</a>
+                    </div>
+                </div>
+                
+                <div class="vehicle-card">
+                    <div class="vehicle-img">
+                        <img src="https://images.unsplash.com/photo-1494976388901-7509ad593e19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" alt="Premium SUV">
+                    </div>
+                    <div class="vehicle-info">
+                        <h3>Premium SUV</h3>
+                        <div class="vehicle-specs">
+                            <span><i class="fas fa-user"></i> 6</span>
+                            <span><i class="fas fa-suitcase"></i> 4</span>
+                            <span><i class="fas fa-snowflake"></i> Yes</span>
+                        </div>
+                        <div class="price">$60/hour</div>
+                        <a href="#" class="btn">Book Now</a>
+                    </div>
+                </div>
+                
+                <div class="vehicle-card">
+                    <div class="vehicle-img">
+                        <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Executive Van">
+                    </div>
+                    <div class="vehicle-info">
+                        <h3>Executive Van</h3>
+                        <div class="vehicle-specs">
+                            <span><i class="fas fa-user"></i> 8</span>
+                            <span><i class="fas fa-suitcase"></i> 6</span>
+                            <span><i class="fas fa-snowflake"></i> Yes</span>
+                        </div>
+                        <div class="price">$75/hour</div>
+                        <a href="#" class="btn">Book Now</a>
+                    </div>
+                </div>
+                
+                <div class="vehicle-card">
+                    <div class="vehicle-img">
+                        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Luxury Limousine">
+                    </div>
+                    <div class="vehicle-info">
+                        <h3>Luxury Limousine</h3>
+                        <div class="vehicle-specs">
+                            <span><i class="fas fa-user"></i> 10</span>
+                            <span><i class="fas fa-suitcase"></i> 8</span>
+                            <span><i class="fas fa-snowflake"></i> Yes</span>
+                        </div>
+                        <div class="price">$120/hour</div>
+                        <a href="#" class="btn">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div id="driver" class="tab-content">
-      <div class="card">
-        <h2>Driver Dashboard</h2>
-        <ul>
-          <li>View assigned rides</li>
-          <li>Start/End rides</li>
-          <li>Driver ratings</li>
-          <li>Earnings summary</li>
-        </ul>
-      </div>
-    </div>
-  </div>
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Clients Say</h2>
+                <p>Don't just take our word for it - hear from our satisfied customers.</p>
+            </div>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>Excellent service! The driver was punctual, professional, and the car was spotless. Will definitely use Desert Cab again for my airport transfers.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Sarah Johnson">
+                        </div>
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>Business Executive</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>I've tried many cab services, but Desert Cab stands out for their reliability and luxury vehicles. The app makes booking so easy too!</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen">
+                        </div>
+                        <div class="author-info">
+                            <h4>Michael Chen</h4>
+                            <p>Frequent Traveler</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>Used their service for our wedding day and couldn't be happier. The white limousine was stunning and the driver was incredibly professional.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emily Rodriguez">
+                        </div>
+                        <div class="author-info">
+                            <h4>Emily Rodriguez</h4>
+                            <p>Bride</p>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <script>
-    function showTab(tabId) {
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-      document.getElementById(tabId).classList.add('active');
-      event.target.classList.add('active');
-    }
-  </script>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Desert Cab</h3>
+                    <p>Premium transportation services with a focus on luxury, comfort, and reliability.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Fleet</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Airport Transfers</a></li>
+                        <li><a href="#">City Tours</a></li>
+                        <li><a href="#">Corporate Travel</a></li>
+                        <li><a href="#">Wedding Services</a></li>
+                        <li><a href="#">Hourly Charter</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Chitkara University</li>
+                        <li><i class="fas fa-phone"></i> 7087040756</li>
+                        <li><i class="fas fa-envelope"></i> info@desertcab.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025esert Cab. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple form submission handler
+        document.querySelector('.booking-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your booking request! We will contact you shortly to confirm your ride.');
+            this.reset();
+        });
+    </script>
 </body>
 </html>

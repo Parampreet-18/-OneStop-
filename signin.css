@@ -8,8 +8,18 @@
 }
 
 body{
-    background-color: #c9d6ff;
-    background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+    background-image: url('https://www.shutterstock.com/image-vector/background-beige-wall-studio-room-260nw-2454797933.jpg');
+            /* background-image: url(''); bg.png */
+            /* background-color: rgb(227, 215, 250); */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            /* changes */
+            height: 100%;
+    /* background-image: url('https://www.shutterstock.com/image-vector/background-beige-wall-studio-room-260nw-2454797933.jpg'); */
+
+    /* background-color: #c9d6ff; */
+    /* background: linear-gradient(to right, #e2e2e2, #c9d6ff); */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -23,7 +33,7 @@ body{
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
     position: relative;
     overflow: hidden;
-    width: 768px;
+    width: 968px;
     max-width: 100%;
     min-height: 480px;
 }
@@ -47,7 +57,7 @@ body{
 }
 
 .container button{
-    background-color: #512da8;
+    background-color: #4c2a9c;
     color: #fff;
     font-size: 12px;
     padding: 10px 45px;
@@ -133,7 +143,7 @@ body{
 }
 
 .social-icons a{
-    border: 1px solid #ccc;
+    border: 1px solid #120101;
     border-radius: 20%;
     display: inline-flex;
     justify-content: center;
@@ -161,9 +171,9 @@ body{
 }
 
 .toggle{
-    background-color: #512da8;
+    /* background-color: #512da8; */
     height: 100%;
-    background: linear-gradient(to right, #5c6bc0, #512da8);
+    background: linear-gradient(to right, #0b1f84, #584482);
     color: #fff;
     position: relative;
     left: -100%;
