@@ -1,9 +1,13 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Movie Site</title>
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       background-color: #121212;
       font-family: Arial, sans-serif;
@@ -172,7 +176,8 @@
       margin-bottom: 1rem;
     }
 
-    .contact input, .contact textarea {
+    .contact input,
+    .contact textarea {
       width: 100%;
       padding: 0.75rem;
       margin-bottom: 1rem;
@@ -225,7 +230,6 @@
         padding: 1rem;
       }
     }
-
   </style>
 </head>
 <body>
@@ -241,10 +245,12 @@
       <input type="text" placeholder="Search for movies...">
     </div>
   </header>
+
   <section class="hero">
     <h2>Welcome to MovieMania</h2>
     <button>Book Tickets</button>
   </section>
+
   <section id="now-showing">
     <h3>Now Showing</h3>
     <div class="movie-grid">
@@ -257,6 +263,7 @@
         </div>
         <button class="trailer-btn">Watch Trailer</button>
       </div>
+
       <div class="movie-card">
         <img src="https://static.beebom.com/wp-content/uploads/2025/03/Infinity-Castle-arc.jpg?quality=75&strip=all" alt="Movie Poster">
         <div class="info">
@@ -268,6 +275,7 @@
       </div>
     </div>
   </section>
+
   <section id="upcoming">
     <h3>Upcoming Movies</h3>
     <div class="movie-grid">
@@ -280,6 +288,7 @@
         </div>
         <button class="trailer-btn">Watch Trailer</button>
       </div>
+
       <div class="movie-card">
         <img src="https://i.etsystatic.com/12175780/r/il/889f4d/1685607859/il_1588xN.1685607859_49fn.jpg" alt="Movie Poster">
         <div class="info">
@@ -291,6 +300,7 @@
       </div>
     </div>
   </section>
+
   <section id="top-rated">
     <h3>Top Rated</h3>
     <div class="movie-grid">
@@ -303,6 +313,7 @@
         </div>
         <button class="trailer-btn">Watch Trailer</button>
       </div>
+
       <div class="movie-card">
         <img src="https://i.pinimg.com/736x/8b/54/e3/8b54e36ad46b99fdff9f44d1083e8072.jpg" alt="Movie Poster">
         <div class="info">
@@ -314,6 +325,7 @@
       </div>
     </div>
   </section>
+
   <section id="contact">
     <div class="contact">
       <h3>Contact Us</h3>
@@ -323,6 +335,7 @@
       <button type="submit">Send Message</button>
     </div>
   </section>
+
   <footer>
     <p>&copy; 2025 MovieMania. All rights reserved.</p>
   </footer>
