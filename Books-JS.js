@@ -1,10 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
   let viewMode = 'all';
   let currentBook = null;
-  let favorites = [];
+  let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+  let isSpeaking = false;
+  let speechSynthesis = window.speechSynthesis;
+  let speechUtterance = null;
 
+  // DOM Elements
   const getEl = id => document.getElementById(id);
-
   const booksContainer = getEl('books-container');
   const searchBar = getEl('searchBar');
   const sortDropdown = getEl('sortDropdown');
@@ -27,11 +30,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const scrollTopBtn = getEl('scrollTopBtn');
   const searchSuggestions = getEl('searchSuggestions');
   const darkModeToggle = getEl('darkModeToggle');
-  const trendingContainer = getEl('trendingContainer');
-  const botdContainer = getEl('botdContainer');
-  const progressInput = getEl('progressInput');
-  const recommendBtn = getEl('recommendBtn');
+  const voiceNarrationBtn = getEl('voiceNarrationBtn');
+  const voiceSpeedControl = getEl('voiceSpeedControl');
+  const voiceStatus = getEl('voiceStatus');
 
+  // Chatbot elements
+  const chatToggle = getEl('chatToggle');
+  const chatBot = getEl('chatBot');
+  const chatBody = getEl('chatBody');
+  const chatInput = getEl('chatInput');
+  const sendChat = getEl('sendChat');
+
+  // Book data
   const books = [
     {
       title: 'The Great Gatsby',
@@ -170,13 +180,250 @@ document.addEventListener('DOMContentLoaded', () => {
     book.category = bookCategories.get(book.title) || 'Uncategorized';
   });
 
-  if (darkModeToggle) {
-    darkModeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-      darkModeToggle.textContent = document.body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
-    });
+
+  // Initialize the application
+  function init() {
+    setupEventListeners();
+    populateCategoryFilter();
+    displayBooks();
+    initChatbot();
+    initVoiceNarration();
   }
 
+  // Set up all event listeners
+  function setupEventListeners() {
+    // Dark mode toggle
+    darkModeToggle.addEventListener('click', toggleDarkMode);
+
+    // Book filtering and sorting
+    searchBar.addEventListener('input', () => {
+      displayBooks();
+      updateSearchSuggestions();
+    });
+    
+    [sortDropdown, categoryFilter].forEach(el => {
+      el.addEventListener('change', displayBooks);
+    });
+
+    // View mode toggles
+    allBooksBtn.addEventListener('click', () => {
+      viewMode = 'all';
+      displayBooks();
+    });
+    
+    favoritesBtn.addEventListener('click', () => {
+      viewMode = 'favorites';
+      displayBooks();
+    });
+
+    // Random book button
+    randomBookBtn.addEventListener('click', showRandomBook);
+
+    // Modal interactions
+    closeButton.addEventListener('click', closeModal);
+    window.addEventListener('click', e => {
+      if (e.target === modal) closeModal();
+    });
+
+    // Review form submission
+    reviewForm.addEventListener('submit', e => {
+      e.preventDefault();
+      addReview();
+    });
+
+    // Submit new book form
+    submitBookForm.addEventListener('submit', e => {
+      e.preventDefault();
+      addNewBook();
+    });
+
+    // Scroll to top button
+    window.addEventListener('scroll', toggleScrollTopButton);
+    scrollTopBtn.addEventListener('click', scrollToTop);
+  }
+
+  // Chatbot functionality
+  function initChatbot() {
+    // Toggle chatbot visibility
+    chatToggle.addEventListener('click', () => {
+      chatBot.classList.toggle('collapsed');
+      chatToggle.textContent = chatBot.classList.contains('collapsed') ? '+' : '_';
+    });
+
+    // Send message function
+    function sendMessage() {
+      const message = chatInput.value.trim();
+      if (message) {
+        addChatMessage(message, 'user');
+        chatInput.value = '';
+        respondToMessage(message);
+      }
+    }
+
+    // Add message to chat
+    function addChatMessage(text, sender) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `chat-message ${sender}`;
+      messageDiv.textContent = text;
+      chatBody.appendChild(messageDiv);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    // Bot response logic
+    function respondToMessage(message) {
+      const lowerMsg = message.toLowerCase();
+      let response;
+
+      if (lowerMsg.includes('hello') || lowerMsg.includes('hi')) {
+        response = "Hello! How can I help you with your reading journey today?";
+      } 
+      else if (lowerMsg.includes('recommend') || lowerMsg.includes('suggest')) {
+        response = getBookRecommendation();
+      }
+      else if (lowerMsg.includes('favorite') || lowerMsg.includes('favourite')) {
+        response = getFavoritesResponse();
+      }
+      else if (lowerMsg.includes('progress')) {
+        response = getReadingProgress();
+      }
+      else if (lowerMsg.includes('trending')) {
+        response = getTrendingBooksResponse();
+      }
+      else if (lowerMsg.includes('help')) {
+        response = getHelpResponse();
+      }
+      else {
+        response = "I'm not sure I understand. Try asking about:\n- Book recommendations\n- Your reading progress\n- Favorite books\nOr say 'help' for more options.";
+      }
+
+      // Simulate typing delay
+      setTimeout(() => {
+        addChatMessage(response, 'bot');
+      }, 500);
+    }
+
+    // Get book recommendation based on context
+    function getBookRecommendation() {
+      if (favorites.length > 0) {
+        const favCategory = books.find(b => b.title === favorites[0])?.category;
+        const recommendation = books.find(b => b.category === favCategory && !favorites.includes(b.title));
+        return recommendation 
+          ? `Since you like ${favorites[0]}, you might enjoy "${recommendation.title}" by ${recommendation.author}.`
+          : "I recommend checking out 'The Midnight Library' by Matt Haig. It's a fantastic read!";
+      } else {
+        const topRated = books.filter(b => b.rating >= 4);
+        const randomBook = topRated[Math.floor(Math.random() * topRated.length)];
+        return `I recommend "${randomBook.title}" by ${randomBook.author}. It has a ${randomBook.rating}-star rating!`;
+      }
+    }
+
+    // Get response about favorites
+    function getFavoritesResponse() {
+      return favorites.length 
+        ? `Your favorite books: ${favorites.join(', ')}`
+        : "You haven't added any favorites yet. Click the heart icon on books to add them!";
+    }
+
+    // Get reading progress response
+    function getReadingProgress() {
+      const readingBooks = books.filter(b => b.progress > 0 && b.progress < 100);
+      if (readingBooks.length) {
+        const progressList = readingBooks.map(b => 
+          `${b.title} (${b.progress}%)`).join('\n');
+        return `Your reading progress:\n${progressList}`;
+      }
+      return "You haven't started reading any books yet. Click 'Read Now' to begin!";
+    }
+
+    // Get trending books response
+    function getTrendingBooksResponse() {
+      const trending = getTrendingBooks();
+      return trending.length 
+        ? `Trending books:\n${trending.map(b => b.title).join('\n')}`
+        : "No trending books yet. Be the first to review a book!";
+    }
+
+    // Get help response
+    function getHelpResponse() {
+      return "I can help with:\n- Book recommendations\n- Your reading progress\n- Favorite books\n- Trending books\nTry asking me anything about books!";
+    }
+
+    // Event listeners for chat
+    sendChat.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keypress', e => {
+      if (e.key === 'Enter') sendMessage();
+    });
+
+    // Initial greeting
+    setTimeout(() => {
+      addChatMessage("Hi there! I'm your book assistant. Ask me for recommendations, your reading progress, or anything book-related!", 'bot');
+    }, 1000);
+  }
+
+  // Voice narration functionality
+  function initVoiceNarration() {
+    if (!speechSynthesis) {
+      voiceNarrationBtn.disabled = true;
+      voiceStatus.textContent = "Voice narration not supported in your browser";
+      return;
+    }
+
+    voiceNarrationBtn.addEventListener('click', toggleVoiceNarration);
+    voiceSpeedControl.addEventListener('change', updateVoiceSpeed);
+  }
+
+  function toggleVoiceNarration() {
+    if (isSpeaking) {
+      stopNarration();
+    } else {
+      startNarration();
+    }
+  }
+
+  function startNarration() {
+    const mainContent = document.querySelector('main').textContent;
+    const cleanText = mainContent.replace(/\s+/g, ' ').trim();
+    
+    speechUtterance = new SpeechSynthesisUtterance(cleanText);
+    speechUtterance.rate = parseFloat(voiceSpeedControl.value);
+    
+    voiceNarrationBtn.classList.add('voice-active');
+    voiceNarrationBtn.innerHTML = '<i class="fas fa-microphone-slash"></i> Stop';
+    voiceStatus.textContent = "Reading content...";
+    isSpeaking = true;
+    
+    speechUtterance.onend = () => {
+      stopNarration();
+      voiceStatus.textContent = "Narration completed";
+    };
+    
+    speechUtterance.onerror = (event) => {
+      console.error("SpeechSynthesis error:", event);
+      voiceStatus.textContent = "Error: " + event.error;
+      isSpeaking = false;
+    };
+    
+    speechSynthesis.speak(speechUtterance);
+  }
+
+  function stopNarration() {
+    if (speechSynthesis.speaking) {
+      speechSynthesis.cancel();
+    }
+    voiceNarrationBtn.classList.remove('voice-active');
+    voiceNarrationBtn.innerHTML = '<i class="fas fa-microphone"></i> Listen';
+    voiceStatus.textContent = "Voice narration stopped";
+    isSpeaking = false;
+  }
+
+  function updateVoiceSpeed() {
+    if (isSpeaking) {
+      stopNarration();
+      startNarration();
+    }
+  }
+
+  // Book display and filtering
   function filterAndSortBooks() {
     const query = searchBar.value.toLowerCase();
     const selectedCategory = categoryFilter.value;
@@ -200,121 +447,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
 
-  books.forEach(book => {
-    const savedData = JSON.parse(localStorage.getItem(`book-${book.title}`));
-    if (savedData) {
-      book.reviews = savedData.reviews || [];
-      book.progress = savedData.progress || 0;
-    } else {
-      book.progress = 0;
-    }
-  });
-
-  function getTrendingBooks() {
-    return books
-      .filter(b => b.reviews.length > 0)
-      .sort((a, b) => b.reviews.length - a.reviews.length)
-      .slice(0, 3);
-  }
-
-  function showTrendingBooks() {
-    if (!trendingContainer) return;
-    const trendingBooks = getTrendingBooks();
-    trendingContainer.innerHTML = `<h3>📈 Trending Books</h3>`;
-    trendingBooks.forEach(book => {
-      const div = document.createElement('div');
-      div.className = 'trending-book';
-      div.innerHTML = `
-        <strong>${book.title}</strong> by ${book.author}
-        <p>${book.reviews.length} review(s)</p>
-      `;
-      trendingContainer.appendChild(div);
-    });
-  }
-
-  function getBookOfTheDay() {
-    const todayIndex = new Date().getDate() % books.length;
-    return books[todayIndex];
-  }
-
-  function showBookOfTheDay() {
-    if (!botdContainer) return;
-    const botd = getBookOfTheDay();
-    botdContainer.innerHTML = `
-      <h3>📅 Book of the Day</h3>
-      <p><strong>${botd.title}</strong> by ${botd.author}</p>
-    `;
-  }
-
-  function saveBookData(book) {
-    const data = {
-      reviews: book.reviews,
-      progress: book.progress
-    };
-    localStorage.setItem(`book-${book.title}`, JSON.stringify(data));
-  }
-
-  function updateReviewsList(reviews) {
-    reviewsList.innerHTML = '';
-    reviews.forEach(review => {
-      const li = document.createElement('li');
-      li.textContent = review;
-      reviewsList.appendChild(li);
-    });
-  }
-
-  if (reviewForm) {
-    reviewForm.addEventListener('submit', e => {
-      e.preventDefault();
-      if (currentBook && newReviewText.value.trim()) {
-        currentBook.reviews.push(newReviewText.value.trim());
-        updateReviewsList(currentBook.reviews);
-        saveBookData(currentBook);
-        newReviewText.value = '';
-      }
-    });
-  }
-
-  function openModal(book) {
-    currentBook = book;
-    modalCover.src = book.cover;
-    modalTitle.textContent = book.title;
-    modalAuthor.textContent = `by ${book.author}`;
-    modalDescription.textContent = book.description;
-    const stars = '★'.repeat(book.rating) + '☆'.repeat(5 - book.rating);
-    modalRating.textContent = `Rating: ${stars}`;
-    updateReviewsList(book.reviews);
-    if (progressInput) progressInput.value = book.progress || 0;
-    modal.style.display = 'block';
-  }
-
-  if (progressInput) {
-    progressInput.addEventListener('input', () => {
-      if (currentBook) {
-        currentBook.progress = Number(progressInput.value);
-        saveBookData(currentBook);
-      }
-    });
-  }
-
-  if (recommendBtn) {
-    recommendBtn.addEventListener('click', () => {
-      if (favorites.length === 0) {
-        alert('Add some favorites first!');
-        return;
-      }
-
-      const topFavorite = books.find(b => favorites.includes(b.title) && b.rating >= 4);
-      const sameCategory = books.find(b => b.category === topFavorite?.category && !favorites.includes(b.title));
-
-      if (sameCategory) {
-        openModal(sameCategory);
-      } else {
-        alert('No similar books found. Try adding more favorites.');
-      }
-    });
-  }
-
   function displayBooks() {
     booksContainer.innerHTML = '';
     const filteredBooks = filterAndSortBooks();
@@ -326,109 +458,101 @@ document.addEventListener('DOMContentLoaded', () => {
         <img src="${book.cover}" alt="${book.title}" />
         <h3>${book.title}</h3>
         <p>by ${book.author}</p>
-        <p>Rating: ${book.rating} / 5</p>
-        <button class="favorite-btn">${favorites.includes(book.title) ? 'Unfavorite' : 'Favorite'}</button><br>
-      <button class="read-now-btn">Read Now</button>  
+        <p>Category: ${book.category}</p>
+        <div class="book-progress">
+          <span class="progress-label">Progress: ${book.progress}%</span>
+          <div class="progress-container">
+            <div class="progress-bar" style="width: ${book.progress}%;"></div>
+          </div>
+        </div>
+        <div class="book-actions">
+          <button class="favorite-btn">
+            <i class="fas fa-heart"></i> ${favorites.includes(book.title) ? 'Unfavorite' : 'Favorite'}
+          </button>
+          <button class="read-now-btn">
+            <i class="fas fa-book-open"></i> Read Now
+          </button>
+        </div>
       `;
 
       bookDiv.querySelector('.favorite-btn').addEventListener('click', e => {
         e.stopPropagation();
         toggleFavorite(book);
       });
+
       bookDiv.querySelector('.read-now-btn').addEventListener('click', e => {
         e.stopPropagation();
-        alert(`Opening "${book.title}" for reading...`);
-        // Optionally redirect: window.location.href = `/reader/${book.title}`;
+        openBookReader(book);
       });
 
       bookDiv.addEventListener('click', () => openModal(book));
       booksContainer.appendChild(bookDiv);
     });
-    
   }
 
   function toggleFavorite(book) {
-    if (favorites.includes(book.title)) {
-      favorites = favorites.filter(fav => fav !== book.title);
+    const index = favorites.indexOf(book.title);
+    if (index > -1) {
+      favorites.splice(index, 1);
     } else {
       favorites.push(book.title);
     }
+    localStorage.setItem('favorites', JSON.stringify(favorites));
     displayBooks();
   }
 
-  if (closeButton) {
-    closeButton.addEventListener('click', () => {
-      modal.style.display = 'none';
-      currentBook = null;
-    });
+  function openBookReader(book) {
+    alert(`Opening "${book.title}" for reading...`);
+    // In a real app, you would redirect to a reader page:
+    // window.location.href = `/reader?title=${encodeURIComponent(book.title)}`;
   }
 
-  window.addEventListener('click', e => {
-    if (e.target === modal) {
-      modal.style.display = 'none';
-      currentBook = null;
-    }
-  });
-
-  function populateCategoryFilter() {
-    categoryFilter.innerHTML = `<option value="All">All Categories</option>` +
-      [...new Set(books.map(b => b.category))].sort().map(cat =>
-        `<option value="${cat}">${cat}</option>`
-      ).join('');
+  // Modal functions
+  function openModal(book) {
+    currentBook = book;
+    modalCover.src = book.cover;
+    modalCover.alt = book.title;
+    modalTitle.textContent = book.title;
+    modalAuthor.textContent = `by ${book.author}`;
+    modalDescription.textContent = book.description;
+    modalRating.textContent = `Rating: ${'★'.repeat(book.rating)}${'☆'.repeat(5 - book.rating)}`;
+    updateReviewsList(book.reviews);
+    modal.style.display = 'block';
   }
 
-  window.addEventListener('scroll', () => {
-    if (scrollTopBtn) {
-      scrollTopBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
-    }
-  });
-
-  if (scrollTopBtn) {
-    scrollTopBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+  function closeModal() {
+    modal.style.display = 'none';
+    currentBook = null;
   }
 
-  searchBar.addEventListener('input', () => {
-    const query = searchBar.value.toLowerCase();
-    searchSuggestions.innerHTML = '';
-    if (!query) return;
-
-    const suggestions = books
-      .filter(b => b.title.toLowerCase().includes(query) || b.author.toLowerCase().includes(query))
-      .slice(0, 5);
-
-    suggestions.forEach(s => {
+  function updateReviewsList(reviews) {
+    reviewsList.innerHTML = '';
+    reviews.forEach(review => {
       const li = document.createElement('li');
-      li.textContent = s.title;
-      li.addEventListener('click', () => {
-        searchBar.value = s.title;
-        searchSuggestions.innerHTML = '';
-        displayBooks();
-      });
-      searchSuggestions.appendChild(li);
+      li.textContent = review;
+      reviewsList.appendChild(li);
     });
-  });
+  }
 
-  [sortDropdown, categoryFilter].forEach(el => el.addEventListener('change', displayBooks));
-  allBooksBtn.addEventListener('click', () => {
-    viewMode = 'all';
-    displayBooks();
-  });
-  favoritesBtn.addEventListener('click', () => {
-    viewMode = 'favorites';
-    displayBooks();
-  });
-  randomBookBtn.addEventListener('click', () => {
-    const filteredBooks = filterAndSortBooks();
-    if (filteredBooks.length) {
-      openModal(filteredBooks[Math.floor(Math.random() * filteredBooks.length)]);
+  function addReview() {
+    const reviewText = newReviewText.value.trim();
+    if (currentBook && reviewText) {
+      currentBook.reviews.push(reviewText);
+      updateReviewsList(currentBook.reviews);
+      newReviewText.value = '';
+      saveBookData(currentBook);
     }
-  });
+  }
 
-  submitBookForm.addEventListener('submit', e => {
-    e.preventDefault();
+  function saveBookData(book) {
+    localStorage.setItem(`book-${book.title}`, JSON.stringify({
+      reviews: book.reviews,
+      progress: book.progress
+    }));
+  }
 
+  // Form handling
+  function addNewBook() {
     const newBook = {
       title: getEl('newTitle').value,
       author: getEl('newAuthor').value,
@@ -436,7 +560,8 @@ document.addEventListener('DOMContentLoaded', () => {
       category: getEl('newCategory').value,
       description: getEl('newDescription').value,
       rating: Math.floor(Math.random() * 3) + 3,
-      reviews: []
+      reviews: [],
+      progress: 0
     };
 
     books.push(newBook);
@@ -444,63 +569,69 @@ document.addEventListener('DOMContentLoaded', () => {
     displayBooks();
     submitBookForm.reset();
     alert('Book added successfully!');
-  });
-    // Chatbot logic starts here
-    const chatbotInput = getEl('chatbot-input');
-    const chatbotSend = getEl('chatbot-send');
-    const chatbotMessages = getEl('chatbot-messages');
-  
-    function appendMessage(text, sender = 'bot') {
-      const msg = document.createElement('div');
-      msg.textContent = `${sender === 'user' ? 'You' : 'Bot'}: ${text}`;
-      msg.style.margin = '5px 0';
-      msg.style.textAlign = sender === 'user' ? 'right' : 'left';
-      chatbotMessages.appendChild(msg);
-      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-    }
-  
-    function handleChatbotInput(input) {
-      const message = input.toLowerCase();
-  
-      if (message.includes('recommend')) {
-        const topRated = books.filter(b => b.rating >= 4);
-        const suggestion = topRated[Math.floor(Math.random() * topRated.length)];
-        appendMessage(`How about "${suggestion.title}" by ${suggestion.author}?`);
-      } else if (message.includes('favorite')) {
-        appendMessage(`You have ${favorites.length} favorite book(s).`);
-      } else if (message.includes('trending')) {
-        const trending = getTrendingBooks();
-        const list = trending.map(b => b.title).join(', ');
-        appendMessage(`Trending books: ${list}`);
-      } else if (message.includes('help')) {
-        appendMessage(`You can ask me to recommend a book, list your favorites, or show trending books.`);
-      } else {
-        appendMessage(`I'm not sure how to help with that. Try asking about trending books, favorites, or for a recommendation.`);
-      }
-    }
-  
-    if (chatbotInput && chatbotSend && chatbotMessages) {
-      // Greet the user
-      appendMessage("Hi there! Ask me for a book recommendation, trending books, or your favorites.");
-  
-      chatbotSend.addEventListener('click', () => {
-        const input = chatbotInput.value.trim();
-        if (input) {
-          appendMessage(input, 'user');
-          handleChatbotInput(input);
-          chatbotInput.value = '';
-        }
+  }
+
+  // UI helper functions
+  function populateCategoryFilter() {
+    const categories = ['All', ...new Set(books.map(b => b.category))].sort();
+    categoryFilter.innerHTML = categories.map(cat =>
+      `<option value="${cat}">${cat}</option>`
+    ).join('');
+  }
+
+  function updateSearchSuggestions() {
+    const query = searchBar.value.toLowerCase();
+    searchSuggestions.innerHTML = '';
+    
+    if (!query) return;
+
+    const suggestions = books
+      .filter(b => b.title.toLowerCase().includes(query) || b.author.toLowerCase().includes(query))
+      .slice(0, 5);
+
+    suggestions.forEach(book => {
+      const li = document.createElement('li');
+      li.textContent = `${book.title} by ${book.author}`;
+      li.addEventListener('click', () => {
+        searchBar.value = book.title;
+        searchSuggestions.innerHTML = '';
+        displayBooks();
       });
-  
-      chatbotInput.addEventListener('keypress', e => {
-        if (e.key === 'Enter') {
-          chatbotSend.click();
-        }
-      });
+      searchSuggestions.appendChild(li);
+    });
+  }
+
+  function showRandomBook() {
+    const filteredBooks = filterAndSortBooks();
+    if (filteredBooks.length) {
+      const randomIndex = Math.floor(Math.random() * filteredBooks.length);
+      openModal(filteredBooks[randomIndex]);
     }
-  
-  populateCategoryFilter();
-  displayBooks();
-  showTrendingBooks();
-  showBookOfTheDay();
+  }
+
+  function getTrendingBooks() {
+    return books
+      .filter(b => b.reviews.length > 0)
+      .sort((a, b) => b.reviews.length - a.reviews.length)
+      .slice(0, 3);
+  }
+
+  function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    darkModeToggle.textContent = document.body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
+  }
+
+  function toggleScrollTopButton() {
+    scrollTopBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+  }
+
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  // Initialize the application
+  init();
 });
