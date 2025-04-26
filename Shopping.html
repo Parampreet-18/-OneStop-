@@ -1,187 +1,533 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopWithUs - Your Online Store</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ShopWithUs - Your Online Store</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .hero {
+      background-image: url('https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
 </head>
-<body class="bg-amber-900">
-    <nav class="bg-white shadow-md p-4 flex justify-between items-center">
-        <h1 class="text-2xl font-bold text-blue-600">ShopWithUs</h1>
-        <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Cart</button>
-    </nav>
-    
-    <header class="bg-blue-500 text-white text-center py-12">
-        <h2 class="text-4xl font-bold">Welcome to ShopWithUs</h2>
-        <p class="mt-2 text-lg">Your one-stop shop for quality cricket gear!</p>
-    </header>
-    
-    <section class="container mx-auto my-8 px-4">
-        <h3 class="text-2xl font-bold mb-6 text-white">Featured Products</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            <!-- Product 1 -->
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTUI4ZoywYumCRci35_9jsxmZfKhjtQxW9nZe72SUC9zmtF_txVOsQlsHZSxUSyawbf_StxV5NU6tpyN7r-4ui3AV-ki1_vmBJuOr37aoBEW_xjtWQq2JJf" alt="Cricket Ball" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Cricket Ball</h4>
-                <p class="text-gray-600">High-quality leather ball for professional play.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹200</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
-            <!-- Product 2 -->
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSgnQGbxsGXJl4tw_Q2zpmWXJnLSdg_H8CIprAwdX68rB1U7LTKXivVxqPeS9SVydXy6hv0WsaPRaFn-kdsyqmWGQOhOy5JGNghWC7XIwFxwxvdxbue5Lg4" alt="Cricket Bat" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Cricket Bat</h4>
-                <p class="text-gray-600">Premium quality willow bat for powerful shots.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹2500</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
-            <!-- Product 3 -->
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://m.media-amazon.com/images/I/61Z0+ihZF5L._AC_UF1000,1000_QL80_.jpg" alt="Cricket Helmet" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Cricket Helmet</h4>
-                <p class="text-gray-600">Durable helmet for maximum head protection.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹1200</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
-            <!-- Product 4 -->
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://5.imimg.com/data5/YH/BL/MY-41417742/cricket-gloves.jpg" alt="Cricket Gloves" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Cricket Gloves</h4>
-                <p class="text-gray-600">Comfortable gloves for secure grip and safety.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹800</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
-            <!-- Product 5 -->
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://m.media-amazon.com/images/I/51V6MChyRDL._SX466_.jpg" alt="Cricket Pads" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Cricket Pads</h4>
-                <p class="text-gray-600">Lightweight pads with extra knee protection.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹950</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
-            <!-- Product 6 -->
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://www.khelmart.com/pub/media/catalog/product/cache/1/image/600x600/9df78eab33525d08d6e5fb8d27136e95/m/r/mrf-sticker-kit-for-bat.jpg" alt="Bat Stickers" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Bat Stickers</h4>
-                <p class="text-gray-600">Stylish MRF bat stickers to personalize your gear.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹150</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://example.com/football.jpg" alt="Football" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Football</h4>
-                <p class="text-gray-600">FIFA-approved match ball.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹1800</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
-    
-                <!-- Basketball Gear -->
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://example.com/basketball.jpg" alt="Basketball" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Basketball</h4>
-                <p class="text-gray-600">Durable indoor/outdoor ball.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹1500</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
-    
-                <!-- Tennis Gear -->
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://example.com/tennis-racket.jpg" alt="Tennis Racket" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Tennis Racket</h4>
-                <p class="text-gray-600">Lightweight racket with grip.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹3500</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
-    
-                <!-- Hockey Gear -->
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://example.com/hockey-stick.jpg" alt="Hockey Stick" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Hockey Stick</h4>
-                <p class="text-gray-600">Fiberglass hockey stick.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹2200</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
-    
-                <!-- Badminton Gear -->
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://example.com/badminton-racket.jpg" alt="Badminton Racket" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Badminton Racket</h4>
-                <p class="text-gray-600">Lightweight graphite frame.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹1200</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
-    
-                <!-- Table Tennis Paddle -->
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://example.com/table-tennis.jpg" alt="Table Tennis Paddle" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Table Tennis Paddle</h4>
-                <p class="text-gray-600">Professional paddle with grip.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹800</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
-    
-                <!-- Boxing Gloves -->
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://example.com/boxing-gloves.jpg" alt="Boxing Gloves" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Boxing Gloves</h4>
-                <p class="text-gray-600">Heavy-duty training gloves.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹2200</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
-    
-                <!-- Baseball Bat -->
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://example.com/baseball-bat.jpg" alt="Baseball Bat" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Baseball Bat</h4>
-                <p class="text-gray-600">Aluminum bat for practice and match.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹3000</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://example.com/football-shoes.jpg" alt="Football Shoes" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Football Shoes</h4>
-                <p class="text-gray-600">Grip-enhanced cleats for turf play.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹3200</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
+<body class="bg-amber-100">
 
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://example.com/football-socks.jpg" alt="Football Socks" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Football Socks</h4>
-                <p class="text-gray-600">Moisture-wicking long socks.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹350</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md p-4 flex justify-between items-center sticky top-0 z-50">
+    <h1 class="text-2xl font-bold text-blue-600">ShopWithUs</h1>
+    <a href="wishlist.html" class="text-blue-600 font-medium hover:underline">Wishlist</a>
+  </nav>
 
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://example.com/basketball-shoes.jpg" alt="Basketball Shoes" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Basketball Shoes</h4>
-                <p class="text-gray-600">Ankle support and shock absorption.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹4000</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
+  <!-- Hero Section -->
+  <header class="hero text-white text-center py-32 relative">
+    <div class="bg-black bg-opacity-50 absolute inset-0"></div>
+    <div class="relative z-10">
+      <h2 class="text-5xl font-bold mb-4">Welcome to ShopWithUs</h2>
+      <p class="text-xl">Your one-stop shop for all sports gear</p>
+    </div>
+  </header>
 
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://example.com/basketball-socks.jpg" alt="Basketball Socks" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Basketball Socks</h4>
-                <p class="text-gray-600">Cushioned socks for comfort.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹300</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
+  <!-- Filter & Search Section -->
+  <section class="container mx-auto px-4 mt-10">
+    <div class="flex flex-col md:flex-row flex-wrap justify-between mb-6 gap-4">
+      <div>
+        <label class="text-lg mr-2 font-medium">Search:</label>
+        <input type="text" id="search-input" placeholder="Search product..." class="border rounded px-3 py-1 w-64">
+      </div>
+      <div>
+        <label class="text-lg mr-2 font-medium">Filter by Price:</label>
+        <select id="price-filter" class="border rounded px-3 py-1">
+          <option value="all">All</option>
+          <option value="0-500">₹0 - ₹500</option>
+          <option value="501-1500">₹501 - ₹1500</option>
+          <option value="1501-2500">₹1501 - ₹2500</option>
+        </select>
+      </div>
+      <div>
+        <label class="text-lg mr-2 font-medium">Filter by Rating:</label>
+        <select id="rating-filter" class="border rounded px-3 py-1">
+          <option value="all">All</option>
+          <option value="4">4 stars & above</option>
+          <option value="3">3 stars & above</option>
+        </select>
+      </div>
+      <div>
+        <label class="text-lg mr-2 font-medium">Sort by:</label>
+        <select id="sort-price" class="border rounded px-3 py-1">
+          <option value="default">Default</option>
+          <option value="asc">Price: Low to High</option>
+          <option value="desc">Price: High to Low</option>
+        </select>
+      </div>
+      <div>
+        <button id="clear-filters" class="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600 transition">
+          Clear Filters
+        </button>
+      </div>
+    </div>
+  </section>
 
-            <!-- Baseball Ball -->
-            <div class="bg-white shadow-md rounded-lg p-6 text-center hover:shadow-lg transition">
-                <img src="https://example.com/baseball-ball.jpg" alt="Baseball Ball" class="mx-auto w-32 h-32 object-cover">
-                <h4 class="mt-4 font-bold text-lg">Baseball Ball</h4>
-                <p class="text-gray-600">Official size leather ball.</p>
-                <p class="text-blue-600 font-semibold mt-2">₹500</p>
-                <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Add to Cart</button>
-            </div>
+  <!-- Product Section -->
+  <section class="container mx-auto px-4">
+    <h3 class="text-3xl font-bold mb-8 text-gray-800">Featured Products</h3>
+    <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+      <!-- Product Example -->
+      <div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition"
+           data-price="200" data-name="Cricket Ball" data-description="High-quality leather ball for professional play." data-rating="4">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTMz1ML61kiK9y26QDYcCI7sFDscNceeUFmg&s" alt="Cricket Ball" class="mx-auto w-32 h-32 object-cover">
+        <h4 class="mt-4 font-bold text-lg">Cricket Ball</h4>
+        <p class="text-yellow-500 mb-1">★★★★☆</p>
+        <p class="text-gray-600">High-quality leather ball for professional play.</p>
+        <p class="text-blue-600 font-semibold mt-2">₹200</p>
+        <div class="mt-4 flex flex-wrap justify-center gap-2">
+          <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition add-to-cart">Add to Cart</button>
+          <button class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition add-to-wishlist">♡ Wishlist</button>
+          <button class="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-800 transition quick-view">Quick View</button>
+          <button class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition compare-btn">Compare</button>
         </div>
-    </section>
-    
-    <footer class="bg-gray-900 text-white text-center py-4 mt-8">
-        <p>&copy; 2025 ShopWithUs - All Rights Reserved.</p>
-    </footer>
+      </div>
+      <div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition"
+      data-price="1500" data-name="Football Shoes" data-description="Sturdy grip shoes perfect for turf and ground matches." data-rating="5">
+      <img src="https://m.media-amazon.com/images/I/812hiBhPexL._AC_UY1000_.jpg" alt="Football Shoes" class="mx-auto w-32 h-32 object-cover">
+      <h4 class="mt-4 font-bold text-lg">Football Shoes</h4>
+      <p class="text-yellow-500 mb-1">★★★★★</p>
+      <p class="text-gray-600">Sturdy grip shoes perfect for turf and ground matches.</p>
+      <p class="text-blue-600 font-semibold mt-2">₹1500</p>
+   <div class="mt-4 flex flex-wrap justify-center gap-2">
+     <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition add-to-cart">Add to Cart</button>
+     <button class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition add-to-wishlist">♡ Wishlist</button>
+     <button class="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-800 transition quick-view">Quick View</button>
+     <button class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition compare-btn">Compare</button>
+   </div>
+ </div>
+
+ <!-- Product 3 -->
+ <div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition"
+      data-price="1200" data-name="Tennis Racket" data-description="Lightweight racket for competitive and recreational play." data-rating="3">
+   <img src="https://nwscdn.com/media/wysiwyg/3kf/tennis/Well_Balanced_Tennis_Racket_For_Senior_Tennis_Players.jpg" alt="Tennis Racket" class="mx-auto w-32 h-32 object-cover">
+   <h4 class="mt-4 font-bold text-lg">Tennis Racket</h4>
+   <p class="text-yellow-500 mb-1">★★★☆☆</p>
+   <p class="text-gray-600">Lightweight racket for competitive and recreational play.</p>
+   <p class="text-blue-600 font-semibold mt-2">₹1200</p>
+   <div class="mt-4 flex flex-wrap justify-center gap-2">
+     <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition add-to-cart">Add to Cart</button>
+     <button class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition add-to-wishlist">♡ Wishlist</button>
+     <button class="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-800 transition quick-view">Quick View</button>
+     <button class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition compare-btn">Compare</button>
+   </div>
+ </div>
+
+ <!-- Product 4 -->
+ <div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition"
+      data-price="1800" data-name="Badminton Kit" data-description="Complete kit with racket, shuttlecocks and a cover." data-rating="4">
+   <img src="https://images.meesho.com/images/products/422098640/sjeld_512.webp" alt="Badminton Kit" class="mx-auto w-32 h-32 object-cover">
+   <h4 class="mt-4 font-bold text-lg">Badminton Kit</h4>
+   <p class="text-yellow-500 mb-1">★★★★☆</p>
+   <p class="text-gray-600">Complete kit with racket, shuttlecocks and a cover.</p>
+   <p class="text-blue-600 font-semibold mt-2">₹1800</p>
+   <div class="mt-4 flex flex-wrap justify-center gap-2">
+     <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition add-to-cart">Add to Cart</button>
+     <button class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition add-to-wishlist">♡ Wishlist</button>
+     <button class="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-800 transition quick-view">Quick View</button>
+     <button class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition compare-btn">Compare</button>
+   </div>
+ </div>
+
+ <!-- Product 5 -->
+ <div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition"
+      data-price="950" data-name="Yoga Mat" data-description="Non-slip surface and extra cushioning for workouts." data-rating="4">
+   <img src="https://sppartos.com/cdn/shop/files/31VX-aIlgWL.jpg?v=1702469142" alt="Yoga Mat" class="mx-auto w-32 h-32 object-cover">
+   <h4 class="mt-4 font-bold text-lg">Yoga Mat</h4>
+   <p class="text-yellow-500 mb-1">★★★★☆</p>
+   <p class="text-gray-600">Non-slip surface and extra cushioning for workouts.</p>
+   <p class="text-blue-600 font-semibold mt-2">₹950</p>
+   <div class="mt-4 flex flex-wrap justify-center gap-2">
+     <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition add-to-cart">Add to Cart</button>
+     <button class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition add-to-wishlist">♡ Wishlist</button>
+     <button class="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-800 transition quick-view">Quick View</button>
+     <button class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition compare-btn">Compare</button>
+   </div>
+ </div>
+<div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition" 
+ data-price="1500" data-name="Football" data-description="High-quality leather football for professional matches." data-rating="4">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiTi0-IsLfXXYWAetzaRgp3JYWCbZV2rP3sw&s" alt="Football" class="mx-auto w-32 h-32 object-cover">
+  <h4 class="mt-4 font-bold text-lg">Football</h4>
+  <p class="text-yellow-500 mb-1">★★★★☆</p>
+  <p class="text-gray-600">High-quality leather football for professional matches.</p>
+  <p class="text-blue-600 font-semibold mt-2">₹1500</p>
+  <div class="mt-4 flex flex-wrap justify-center gap-2">
+    <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition add-to-cart">Add to Cart</button>
+    <button class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition add-to-wishlist">♡ Wishlist</button>
+    <button class="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-800 transition quick-view">Quick View</button>
+    <button class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition compare-btn">Compare</button>
+  </div>
+</div>
+
+<div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition" 
+ data-price="1200" data-name="Basketball" data-description="Durable rubber basketball suitable for indoor and outdoor play." data-rating="4">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNo1gOP6yjIdRxZRv8usJI2O_zfq7nAiRftA&s" alt="Basketball" class="mx-auto w-32 h-32 object-cover">
+  <h4 class="mt-4 font-bold text-lg">Basketball</h4>
+  <p class="text-yellow-500 mb-1">★★★★☆</p>
+  <p class="text-gray-600">Durable rubber basketball suitable for indoor and outdoor play.</p>
+  <p class="text-blue-600 font-semibold mt-2">₹1200</p>
+  <div class="mt-4 flex flex-wrap justify-center gap-2">
+    <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition add-to-cart">Add to Cart</button>
+    <button class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition add-to-wishlist">♡ Wishlist</button>
+    <button class="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-800 transition quick-view">Quick View</button>
+    <button class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition compare-btn">Compare</button>
+  </div>
+</div>
+
+<div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition"
+ data-price="200" data-name="Cricket Bat" data-description="High-quality Season Bat for professional play." data-rating="4">
+<img src="https://cricketershop.com/cdn/shop/files/KookaburraBeastPro2.0EnglishWillowCricketBatSize6_Front.jpg?v=1731392529" alt="Cricket Bat" class="mx-auto w-32 h-32 object-cover">
+<h4 class="mt-4 font-bold text-lg">Cricket Bat</h4>
+<p class="text-yellow-500 mb-1">★★★★☆</p>
+<p class="text-gray-600">High-quality Season Bat for professional play.</p>
+<p class="text-blue-600 font-semibold mt-2">₹3000</p>
+<div class="mt-4 flex flex-wrap justify-center gap-2">
+<button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition add-to-cart">Add to Cart</button>
+<button class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition add-to-wishlist">♡ Wishlist</button>
+<button class="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-800 transition quick-view">Quick View</button>
+<button class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition compare-btn">Compare</button>
+</div>
+</div>
+<div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition" 
+data-price="800" data-name="Badminton Shuttlecock Set" data-description="Pack of 12 feather shuttlecocks for professional play." data-rating="4">
+ <img src="https://m.media-amazon.com/images/I/71dY2cS-7bL.jpg" alt="Badminton Shuttlecock Set" class="mx-auto w-32 h-32 object-cover">
+ <h4 class="mt-4 font-bold text-lg">Badminton Shuttlecock Set</h4>
+ <p class="text-yellow-500 mb-1">★★★★☆</p>
+ <p class="text-gray-600">Pack of 12 feather shuttlecocks for professional play.</p>
+ <p class="text-blue-600 font-semibold mt-2">₹800</p>
+ <div class="mt-4 flex flex-wrap justify-center gap-2">
+   <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition add-to-cart">Add to Cart</button>
+   <button class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition add-to-wishlist">♡ Wishlist</button>
+   <button class="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-800 transition quick-view">Quick View</button>
+   <button class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition compare-btn">Compare</button>
+ </div>
+</div>
+
+<div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition" 
+data-price="15000" data-name="Golf Club Set" data-description="Premium set of 10 clubs for all skill levels." data-rating="4">
+ <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCuRNUCZVdTtWvJwItJ_pz4nFq_KJCWfZitQ&s" alt="Golf Club Set" class="mx-auto w-32 h-32 object-cover">
+ <h4 class="mt-4 font-bold text-lg">Golf Club Set</h4>
+ <p class="text-yellow-500 mb-1">★★★★☆</p>
+ <p class="text-gray-600">Premium set of 10 clubs for all skill levels.</p>
+ <p class="text-blue-600 font-semibold mt-2">₹15000</p>
+ <div class="mt-4 flex flex-wrap justify-center gap-2">
+   <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition add-to-cart">Add to Cart</button>
+   <button class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition add-to-wishlist">♡ Wishlist</button>
+   <button class="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-800 transition quick-view">Quick View</button>
+   <button class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition compare-btn">Compare</button>
+ </div>
+</div>
+
+<div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition" 
+data-price="2000" data-name="Boxing Gloves" data-description="Padded gloves for training and sparring sessions." data-rating="4">
+ <img src="https://m.media-amazon.com/images/I/71kRp1fDB2L.jpg" alt="Boxing Gloves" class="mx-auto w-32 h-32 object-cover">
+ <h4 class="mt-4 font-bold text-lg">Boxing Gloves</h4>
+ <p class="text-yellow-500 mb-1">★★★★☆</p>
+ <p class="text-gray-600">Padded gloves for training and sparring sessions.</p>
+ <p class="text-blue-600 font-semibold mt-2">₹2000</p>
+ <div class="mt-4 flex flex-wrap justify-center gap-2">
+   <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition add-to-cart">Add to Cart</button>
+   <button class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition add-to-wishlist">♡ Wishlist</button>
+   <button class="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-800 transition quick-view">Quick View</button>
+   <button class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition compare-btn">Compare</button>
+ </div>
+</div>
+
+<div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition" 
+data-price="500" data-name="Swimming Goggles" data-description="Anti-fog goggles with UV protection for clear vision underwater." data-rating="4">
+ <img src="https://m.media-amazon.com/images/I/61TMyMBwZoL._AC_UF894,1000_QL80_.jpg" alt="Swimming Goggles" class="mx-auto w-32 h-32 object-cover">
+ <h4 class="mt-4 font-bold text-lg">Swimming Goggles</h4>
+ <p class="text-yellow-500 mb-1">★★★★☆</p>
+ <p class="text-gray-600">Anti-fog goggles with UV protection for clear vision underwater.</p>
+ <p class="text-blue-600 font-semibold mt-2">₹500</p>
+ <div class="mt-4 flex flex-wrap justify-center gap-2">
+   <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition add-to-cart">Add to Cart</button>
+   <button class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition add-to-wishlist">♡ Wishlist</button>
+   <button class="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-800 transition quick-view">Quick View</button>
+   <button class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition compare-btn">Compare</button>
+ </div>
+</div>
+
+<div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition" 
+ data-price="900" data-name="Volleyball" data-description="Soft-touch volleyball for recreational and competitive play." data-rating="4">
+  <img src="https://nwscdn.com/media/wysiwyg/3kf/forza/FORZA_Size_5_competition_standard_volleyball_for_all_volleyball_tournaments_and_matches.jpg" alt="Volleyball" class="mx-auto w-32 h-32 object-cover">
+  <h4 class="mt-4 font-bold text-lg">Volleyball</h4>
+  <p class="text-yellow-500 mb-1">★★★★☆</p>
+  <p class="text-gray-600">Soft-touch volleyball for recreational and competitive play.</p>
+  <p class="text-blue-600 font-semibold mt-2">₹900</p>
+  <div class="mt-4 flex flex-wrap justify-center gap-2">
+    <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition add-to-cart">Add to Cart</button>
+    <button class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition add-to-wishlist">♡ Wishlist</button>
+    <button class="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-800 transition quick-view">Quick View</button>
+    <button class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition compare-btn">Compare</button>
+  </div>
+</div>
+
+<div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition" 
+ data-price="3000" data-name="Hockey Stick" data-description="Durable wooden hockey stick for powerful shots." data-rating="5">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4WeApQ4S9s_nb_0Y_VoGAPkZ_jThtsbiybw&s" alt="Hockey Stick" class="mx-auto w-32 h-32 object-cover">
+  <h4 class="mt-4 font-bold text-lg">Hockey Stick</h4>
+  <p class="text-yellow-500 mb-1">★★★★★</p>
+  <p class="text-gray-600">Durable wooden hockey stick for powerful shots.</p>
+  <p class="text-blue-600 font-semibold mt-2">₹3000</p>
+  <div class="mt-4 flex flex-wrap justify-center gap-2">
+    <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition add-to-cart">Add to Cart</button>
+    <button class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition add-to-wishlist">♡ Wishlist</button>
+    <button class="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-800 transition quick-view">Quick View</button>
+    <button class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition compare-btn">Compare</button>
+  </div>
+</div>
+
+<div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition" 
+ data-price="750" data-name="Table Tennis Paddle Set" data-description="Set of two paddles with a smooth surface for enhanced grip." data-rating="4">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQC2lbF14vSs8fJK55pItGk67Z5DQMuRizzQg&s" alt="Table Tennis Paddle Set" class="mx-auto w-32 h-32 object-cover">
+  <h4 class="mt-4 font-bold text-lg">Table Tennis Paddle Set</h4>
+  <p class="text-yellow-500 mb-1">★★★★☆</p>
+  <p class="text-gray-600">Set of two paddles with a smooth surface for enhanced grip.</p>
+  <p class="text-blue-600 font-semibold mt-2">₹750</p>
+  <div class="mt-4 flex flex-wrap justify-center gap-2">
+    <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition add-to-cart">Add to Cart</button>
+    <button class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition add-to-wishlist">♡ Wishlist</button>
+    <button class="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-800 transition quick-view">Quick View</button>
+    <button class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition compare-btn">Compare</button>
+  </div>
+</div>
+
+<div class="product bg-white shadow-md rounded-lg p-6 text-center hover:shadow-xl transition" 
+ data-price="5000" data-name="Skateboard" data-description="High-quality deck with sturdy wheels for freestyle tricks." data-rating="5">
+  <img src="https://m.media-amazon.com/images/I/71PfGyStYmL.jpg" alt="Skateboard" class="mx-auto w-32 h-32 object-cover">
+  <h4 class="mt-4 font-bold text-lg">Skateboard</h4>
+  <p class="text-yellow-500 mb-1">★★★★★</p>
+  <p class="text-gray-600">High-quality deck with sturdy wheels for freestyle tricks.</p>
+  <p class="text-blue-600 font-semibold mt-2">₹5000</p>
+  <div class="mt-4 flex flex-wrap justify-center gap-2">
+    <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition add-to-cart">Add to Cart</button>
+    <button class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition add-to-wishlist">♡ Wishlist</button>
+    <button class="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-800 transition quick-view">Quick View</button>
+    <button class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition compare-btn">Compare</button>
+  </div>
+</div>
+    </div>
+  </section>
+
+  <!-- Floating Cart Icon -->
+  <a href="cart.html" class="fixed bottom-6 right-6 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 z-50 text-2xl">
+    🛒
+  </a>
+
+  <!-- Quick View Modal -->
+  <div id="quick-view-modal" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-6 w-11/12 max-w-md relative">
+      <button id="close-modal" class="absolute top-2 right-2 text-gray-600 hover:text-black text-xl">×</button>
+      <img id="modal-image" class="w-40 h-40 mx-auto object-cover rounded mb-4" src="" alt="">
+      <h4 id="modal-name" class="text-2xl font-bold mb-1 text-center"></h4>
+      <p id="modal-rating" class="text-yellow-500 text-center mb-1"></p>
+      <p id="modal-description" class="text-gray-700 mb-4 text-center"></p>
+      <p id="modal-price" class="text-blue-600 text-center font-semibold text-lg"></p>
+    </div>
+  </div>
+
+  <!-- Compare Modal -->
+  <div id="compare-modal" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-6 w-11/12 max-w-4xl relative">
+      <button id="close-compare" class="absolute top-2 right-2 text-gray-600 hover:text-black text-xl">×</button>
+      <h3 class="text-2xl font-bold text-center mb-4">Compare Products</h3>
+      <div class="grid grid-cols-2 gap-6 text-center">
+        <div id="compare-product-1"></div>
+        <div id="compare-product-2"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white text-center py-4 mt-12">
+    <p>&copy; 2025 ShopWithUs - All Rights Reserved.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Add to Cart
+    document.querySelectorAll(".add-to-cart").forEach(button => {
+      button.addEventListener("click", () => {
+        const productCard = button.closest("div.product");
+        const name = productCard.querySelector("h4").textContent;
+        const price = productCard.querySelector("p.text-blue-600").textContent;
+        const image = productCard.querySelector("img").src;
+        const item = { name, price, image, quantity: 1 };
+
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const index = cart.findIndex(i => i.name === item.name);
+        if (index > -1) {
+          cart[index].quantity += 1;
+        } else {
+          cart.push(item);
+        }
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert(`${name} added to cart!`);
+      });
+    });
+
+    // Wishlist
+    document.querySelectorAll(".add-to-wishlist").forEach(button => {
+      button.addEventListener("click", () => {
+        const productCard = button.closest("div.product");
+        const name = productCard.querySelector("h4").textContent;
+        const price = productCard.querySelector("p.text-blue-600").textContent;
+        const image = productCard.querySelector("img").src;
+        const item = { name, price, image };
+
+        let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+        if (!wishlist.some(i => i.name === item.name)) {
+          wishlist.push(item);
+          localStorage.setItem("wishlist", JSON.stringify(wishlist));
+          alert(`${name} added to wishlist!`);
+        } else {
+          alert(`${name} is already in your wishlist!`);
+        }
+      });
+    });
+
+    // Filter, Sort, Search
+    document.getElementById("price-filter").addEventListener("change", filterAndSortProducts);
+    document.getElementById("search-input").addEventListener("input", filterAndSortProducts);
+    document.getElementById("sort-price").addEventListener("change", filterAndSortProducts);
+    document.getElementById("rating-filter").addEventListener("change", filterAndSortProducts);
+
+    document.getElementById("clear-filters").addEventListener("click", () => {
+      document.getElementById("search-input").value = "";
+      document.getElementById("price-filter").value = "all";
+      document.getElementById("rating-filter").value = "all";
+      document.getElementById("sort-price").value = "default";
+      filterAndSortProducts();
+    });
+
+    function filterAndSortProducts() {
+      const priceValue = document.getElementById("price-filter").value;
+      const ratingValue = parseInt(document.getElementById("rating-filter").value) || 0;
+      const searchValue = document.getElementById("search-input").value.toLowerCase();
+      const sortValue = document.getElementById("sort-price").value;
+
+      const productList = document.getElementById("product-list");
+      const products = Array.from(productList.querySelectorAll(".product"));
+
+      let filtered = products.filter(product => {
+        const price = parseInt(product.getAttribute("data-price"));
+        const name = product.getAttribute("data-name").toLowerCase();
+        const rating = parseInt(product.getAttribute("data-rating"));
+        let priceMatch = true;
+
+        if (priceValue === "0-500") priceMatch = price <= 500;
+        else if (priceValue === "501-1500") priceMatch = price > 500 && price <= 1500;
+        else if (priceValue === "1501-2500") priceMatch = price > 1500 && price <= 2500;
+
+        const searchMatch = name.includes(searchValue);
+        const ratingMatch = rating >= ratingValue;
+
+        return priceMatch && searchMatch && ratingMatch;
+      });
+
+      if (sortValue === "asc") {
+        filtered.sort((a, b) => parseInt(a.dataset.price) - parseInt(b.dataset.price));
+      } else if (sortValue === "desc") {
+        filtered.sort((a, b) => parseInt(b.dataset.price) - parseInt(a.dataset.price));
+      }
+
+      productList.innerHTML = "";
+      filtered.forEach(p => productList.appendChild(p));
+    }
+
+    filterAndSortProducts();
+
+    // Quick View Modal
+    const modal = document.getElementById("quick-view-modal");
+    const modalImg = document.getElementById("modal-image");
+    const modalName = document.getElementById("modal-name");
+    const modalDesc = document.getElementById("modal-description");
+    const modalPrice = document.getElementById("modal-price");
+    const modalRating = document.getElementById("modal-rating");
+    const closeModal = document.getElementById("close-modal");
+
+    document.querySelectorAll(".quick-view").forEach(button => {
+      button.addEventListener("click", () => {
+        const product = button.closest(".product");
+        modalImg.src = product.querySelector("img").src;
+        modalName.textContent = product.getAttribute("data-name");
+        modalDesc.textContent = product.getAttribute("data-description");
+        modalPrice.textContent = product.querySelector(".text-blue-600").textContent;
+
+        const rating = parseInt(product.getAttribute("data-rating"));
+        modalRating.textContent = "★".repeat(rating) + "☆".repeat(5 - rating);
+
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+      });
+    });
+
+    closeModal.addEventListener("click", () => {
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    });
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+      }
+    });
+
+    // Compare Feature
+    let compareItems = [];
+    const compareModal = document.getElementById("compare-modal");
+    const closeCompare = document.getElementById("close-compare");
+
+    document.querySelectorAll(".compare-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        const product = button.closest(".product");
+        const data = {
+          name: product.getAttribute("data-name"),
+          price: product.getAttribute("data-price"),
+          desc: product.getAttribute("data-description"),
+          rating: product.getAttribute("data-rating"),
+          img: product.querySelector("img").src
+        };
+        compareItems.push(data);
+        if (compareItems.length === 2) {
+          const [a, b] = compareItems;
+          document.getElementById("compare-product-1").innerHTML = `
+            <img src="${a.img}" class="mx-auto mb-2 w-24 h-24 object-cover">
+            <h4 class="font-bold">${a.name}</h4>
+            <p>₹${a.price}</p>
+            <p>Rating: ${a.rating}★</p>
+            <p class="text-sm text-gray-600">${a.desc}</p>
+          `;
+          document.getElementById("compare-product-2").innerHTML = `
+            <img src="${b.img}" class="mx-auto mb-2 w-24 h-24 object-cover">
+            <h4 class="font-bold">${b.name}</h4>
+            <p>₹${b.price}</p>
+            <p>Rating: ${b.rating}★</p>
+            <p class="text-sm text-gray-600">${b.desc}</p>
+          `;
+          compareModal.classList.remove("hidden");
+          compareModal.classList.add("flex");
+          compareItems = [];
+        } else {
+          alert("Select one more product to compare.");
+        }
+      });
+    });
+
+    closeCompare.addEventListener("click", () => {
+      compareModal.classList.add("hidden");
+      compareModal.classList.remove("flex");
+    });
+  </script>
 </body>
 </html>
