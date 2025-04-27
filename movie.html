@@ -5,17 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MovieMania</title>
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
     body {
       background-color: #121212;
       font-family: Arial, sans-serif;
       color: white;
       margin: 0;
       padding: 0;
+      position: relative;
     }
-
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #121212;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s, visibility 0.5s;
+    }
+    .loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .loader::after {
+      content: "";
+      width: 50px;
+      height: 50px;
+      border: 5px solid #ff4d4d;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: loading 0.75s linear infinite;
+    }
+    @keyframes loading {
+      from { transform: rotate(0turn); }
+      to { transform: rotate(1turn); }
+    }
     header {
       background-color: #1e1e1e;
       padding: 1rem;
@@ -24,11 +52,7 @@
       top: 0;
       z-index: 100;
     }
-
-    nav {
-      margin-top: 0.5rem;
-    }
-
+    nav { margin-top: 0.5rem; }
     nav a {
       color: #bbbbbb;
       margin: 0 1rem;
@@ -36,17 +60,11 @@
       transition: color 0.3s, border-bottom 0.3s;
       padding-bottom: 4px;
     }
-
-    nav a:hover,
-    nav a.active {
+    nav a:hover, nav a.active {
       color: #ffffff;
       border-bottom: 2px solid #ff4d4d;
     }
-
-    .search-bar {
-      margin-top: 1rem;
-    }
-
+    .search-bar { margin-top: 1rem; }
     .search-bar input {
       width: 80%;
       max-width: 400px;
@@ -57,13 +75,11 @@
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
       outline: none;
     }
-
     .hero {
       position: relative;
       height: 400px;
       overflow: hidden;
     }
-
     .hero::before {
       content: '';
       position: absolute;
@@ -76,7 +92,6 @@
       transition: transform 8s ease;
       transform: scale(1.1);
     }
-
     .hero::after {
       content: '';
       position: absolute;
@@ -87,11 +102,7 @@
       background: rgba(0, 0, 0, 0.5);
       z-index: 2;
     }
-
-    .hero:hover::before {
-      transform: scale(1.2);
-    }
-
+    .hero:hover::before { transform: scale(1.2); }
     .hero-content {
       position: relative;
       z-index: 3;
@@ -102,12 +113,10 @@
       justify-content: center;
       text-align: center;
     }
-
     .hero-content h2 {
       font-size: 2rem;
       margin-bottom: 1rem;
     }
-
     .hero-content button {
       padding: 0.75rem 1.5rem;
       font-size: 1rem;
@@ -118,29 +127,22 @@
       cursor: pointer;
       transition: background-color 0.3s;
     }
-
     .hero-content button:hover {
       background-color: #ff1a1a;
     }
-
-    section {
-      padding: 2rem;
-    }
-
+    section { padding: 2rem; }
     h3 {
       text-align: center;
       margin-bottom: 1rem;
       font-size: 1.8rem;
       color: #ff4d4d;
     }
-
     .movie-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1.5rem;
       margin-top: 1.5rem;
     }
-
     .movie-card {
       background-color: #1e1e1e;
       border-radius: 8px;
@@ -150,38 +152,29 @@
       flex-direction: column;
       justify-content: space-between;
     }
-
     .movie-card:hover {
       transform: scale(1.05);
       box-shadow: 0 8px 20px rgba(255, 77, 77, 0.3);
     }
-
     .movie-card img {
       width: 100%;
       height: 300px;
       object-fit: cover;
     }
-
-    .movie-card .info {
-      padding: 1rem;
-    }
-
+    .movie-card .info { padding: 1rem; }
     .movie-card .info h4 {
       margin: 0 0 0.5rem 0;
       font-size: 1.1rem;
     }
-
     .movie-card .info p {
       margin: 0 0 0.5rem 0;
       font-size: 0.9rem;
       color: #ccc;
     }
-
     .rating {
       color: gold;
       font-size: 1rem;
     }
-
     .trailer-btn {
       background-color: #555;
       color: white;
@@ -192,11 +185,7 @@
       cursor: pointer;
       transition: background-color 0.3s;
     }
-
-    .trailer-btn:hover {
-      background-color: #777;
-    }
-
+    .trailer-btn:hover { background-color: #777; }
     .contact {
       background-color: #1e1e1e;
       padding: 2rem;
@@ -204,7 +193,6 @@
       max-width: 600px;
       margin: auto;
     }
-
     .contact input,
     .contact textarea {
       width: 100%;
@@ -215,7 +203,6 @@
       background-color: #2b2b2b;
       color: white;
     }
-
     .contact button {
       background-color: #ff4d4d;
       color: white;
@@ -226,7 +213,6 @@
       display: block;
       margin: auto;
     }
-
     footer {
       background-color: #1e1e1e;
       text-align: center;
@@ -235,33 +221,59 @@
       font-size: 0.9rem;
       color: #888;
     }
-
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #ff4d4d;
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 99;
+    }
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    .back-to-top:hover {
+      background-color: #ff1a1a;
+    }
     @media (max-width: 600px) {
-      .hero {
-        height: 250px;
-      }
-
+      .hero { height: 250px; }
       .hero-content h2 {
         font-size: 1.4rem;
         padding: 0.75rem 1rem;
       }
-
-      nav a {
-        display: block;
-        margin: 0.5rem 0;
+      nav a { display: block; margin: 0.5rem 0; }
+      section { padding: 1rem; }
+      .contact { padding: 1rem; }
+      .back-to-top {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
       }
-
-      section {
-        padding: 1rem;
-      }
-
-      .contact {
-        padding: 1rem;
+      .loader::after {
+        width: 30px;
+        height: 30px;
+        border-width: 3px;
       }
     }
   </style>
 </head>
 <body>
+  <div class="loader">
+    <span class="sr-only">Loading...</span>
+  </div>
+  
   <header>
     <h1>MovieMania</h1>
     <nav>
@@ -295,7 +307,6 @@
         </div>
         <button class="trailer-btn">Watch Trailer</button>
       </div>
-
       <div class="movie-card">
         <img src="https://static.beebom.com/wp-content/uploads/2025/03/Infinity-Castle-arc.jpg?quality=75&strip=all" alt="Movie Poster">
         <div class="info">
@@ -320,7 +331,6 @@
         </div>
         <button class="trailer-btn">Watch Trailer</button>
       </div>
-
       <div class="movie-card">
         <img src="https://i.etsystatic.com/12175780/r/il/889f4d/1685607859/il_1588xN.1685607859_49fn.jpg" alt="Movie Poster">
         <div class="info">
@@ -345,7 +355,6 @@
         </div>
         <button class="trailer-btn">Watch Trailer</button>
       </div>
-
       <div class="movie-card">
         <img src="https://i.pinimg.com/736x/8b/54/e3/8b54e36ad46b99fdff9f44d1083e8072.jpg" alt="Movie Poster">
         <div class="info">
@@ -371,5 +380,30 @@
   <footer>
     <p>&copy; 2025 MovieMania. All rights reserved.</p>
   </footer>
+
+  <a href="#" class="back-to-top" id="backToTop">↑</a>
+
+  <script>
+    window.addEventListener('load', function() {
+      const loader = document.querySelector('.loader');
+      setTimeout(() => {
+        loader.classList.add('hidden');
+      }, 500);
+    });
+    
+    const backToTopButton = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTopButton.classList.add('visible');
+      } else {
+        backToTopButton.classList.remove('visible');
+      }
+    });
+    
+    backToTopButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
 </body>
 </html>
