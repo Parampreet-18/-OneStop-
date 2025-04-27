@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MovieMania</title>
   <style>
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       background-color: #121212;
       font-family: Arial, sans-serif;
@@ -13,6 +15,36 @@
       margin: 0;
       padding: 0;
       position: relative;
+      transition: background 0.3s, color 0.3s;
+    }
+    .theme-toggle {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      background: #ff4d4d;
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 99;
+      border: none;
+      font-size: 1.5rem;
+    }
+    .light-mode {
+      background: #f5f5f5;
+      color: #333;
+    }
+    .light-mode header, 
+    .light-mode .movie-card,
+    .light-mode .contact {
+      background: white;
+    }
+    .light-mode nav a {
+      color: #666;
     }
     .loader {
       position: fixed;
@@ -52,7 +84,9 @@
       top: 0;
       z-index: 100;
     }
-    nav { margin-top: 0.5rem; }
+    nav {
+      margin-top: 0.5rem;
+    }
     nav a {
       color: #bbbbbb;
       margin: 0 1rem;
@@ -60,11 +94,14 @@
       transition: color 0.3s, border-bottom 0.3s;
       padding-bottom: 4px;
     }
-    nav a:hover, nav a.active {
+    nav a:hover,
+    nav a.active {
       color: #ffffff;
       border-bottom: 2px solid #ff4d4d;
     }
-    .search-bar { margin-top: 1rem; }
+    .search-bar {
+      margin-top: 1rem;
+    }
     .search-bar input {
       width: 80%;
       max-width: 400px;
@@ -102,7 +139,9 @@
       background: rgba(0, 0, 0, 0.5);
       z-index: 2;
     }
-    .hero:hover::before { transform: scale(1.2); }
+    .hero:hover::before {
+      transform: scale(1.2);
+    }
     .hero-content {
       position: relative;
       z-index: 3;
@@ -130,7 +169,9 @@
     .hero-content button:hover {
       background-color: #ff1a1a;
     }
-    section { padding: 2rem; }
+    section {
+      padding: 2rem;
+    }
     h3 {
       text-align: center;
       margin-bottom: 1rem;
@@ -161,7 +202,9 @@
       height: 300px;
       object-fit: cover;
     }
-    .movie-card .info { padding: 1rem; }
+    .movie-card .info {
+      padding: 1rem;
+    }
     .movie-card .info h4 {
       margin: 0 0 0.5rem 0;
       font-size: 1.1rem;
@@ -185,7 +228,9 @@
       cursor: pointer;
       transition: background-color 0.3s;
     }
-    .trailer-btn:hover { background-color: #777; }
+    .trailer-btn:hover {
+      background-color: #777;
+    }
     .contact {
       background-color: #1e1e1e;
       padding: 2rem;
@@ -248,23 +293,33 @@
       background-color: #ff1a1a;
     }
     @media (max-width: 600px) {
-      .hero { height: 250px; }
+      .hero {
+        height: 250px;
+      }
       .hero-content h2 {
         font-size: 1.4rem;
         padding: 0.75rem 1rem;
       }
-      nav a { display: block; margin: 0.5rem 0; }
-      section { padding: 1rem; }
-      .contact { padding: 1rem; }
+      nav a {
+        display: block;
+        margin: 0.5rem 0;
+      }
+      section {
+        padding: 1rem;
+      }
+      .contact {
+        padding: 1rem;
+      }
       .back-to-top {
         width: 40px;
         height: 40px;
         font-size: 1.2rem;
       }
-      .loader::after {
-        width: 30px;
-        height: 30px;
-        border-width: 3px;
+      .theme-toggle {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+        bottom: 70px;
       }
     }
   </style>
@@ -274,6 +329,8 @@
     <span class="sr-only">Loading...</span>
   </div>
   
+  <button class="theme-toggle" id="themeToggle">🌓</button>
+
   <header>
     <h1>MovieMania</h1>
     <nav>
@@ -307,6 +364,7 @@
         </div>
         <button class="trailer-btn">Watch Trailer</button>
       </div>
+
       <div class="movie-card">
         <img src="https://static.beebom.com/wp-content/uploads/2025/03/Infinity-Castle-arc.jpg?quality=75&strip=all" alt="Movie Poster">
         <div class="info">
@@ -331,6 +389,7 @@
         </div>
         <button class="trailer-btn">Watch Trailer</button>
       </div>
+
       <div class="movie-card">
         <img src="https://i.etsystatic.com/12175780/r/il/889f4d/1685607859/il_1588xN.1685607859_49fn.jpg" alt="Movie Poster">
         <div class="info">
@@ -355,6 +414,7 @@
         </div>
         <button class="trailer-btn">Watch Trailer</button>
       </div>
+
       <div class="movie-card">
         <img src="https://i.pinimg.com/736x/8b/54/e3/8b54e36ad46b99fdff9f44d1083e8072.jpg" alt="Movie Poster">
         <div class="info">
@@ -404,6 +464,16 @@
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+    });
+    
+    if (localStorage.getItem('theme') === 'light') {
+      document.body.classList.add('light-mode');
+    }
   </script>
 </body>
 </html>
