@@ -65,23 +65,50 @@
     .hero {
       position: relative;
       height: 400px;
-      background: url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4') center center/cover no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
+      overflow: hidden;
     }
 
-    .hero h2 {
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 1rem 2rem;
-      border-radius: 8px;
-      font-size: 2rem;
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4') center center/cover no-repeat;
+      z-index: 1;
+      transition: transform 8s ease;
+      transform: scale(1.1);
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 2;
+    }
+
+    .hero:hover::before {
+      transform: scale(1.2);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-align: center;
+    }
+
+    .hero-content h2 {
+      font-size: 2rem;
       margin-bottom: 1rem;
     }
 
-    .hero button {
+    .hero-content button {
       padding: 0.75rem 1.5rem;
       font-size: 1rem;
       border: none;
@@ -92,7 +119,7 @@
       transition: background-color 0.3s;
     }
 
-    .hero button:hover {
+    .hero-content button:hover {
       background-color: #ff1a1a;
     }
 
@@ -212,7 +239,7 @@
         height: 250px;
       }
 
-      .hero h2 {
+      .hero-content h2 {
         font-size: 1.4rem;
         padding: 0.75rem 1rem;
       }
@@ -247,8 +274,10 @@
   </header>
 
   <section class="hero">
-    <h2>Welcome to MovieMania</h2>
-    <button>Book Tickets</button>
+    <div class="hero-content">
+      <h2>Welcome to MovieMania</h2>
+      <button>Book Tickets</button>
+    </div>
   </section>
 
   <section id="now-showing">
