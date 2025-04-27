@@ -187,5 +187,9 @@ header img {
   opacity: 1.0;
 }
 
+.favorite {
+  font-size: 1.2rem;
+  margin-left: 10px;
+}
 
 
