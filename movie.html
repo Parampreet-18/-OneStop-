@@ -188,10 +188,16 @@
       background-color: #1e1e1e;
       border-radius: 8px;
       overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+    }
+    .movie-card.hidden {
+      opacity: 0;
+      height: 0;
+      margin: 0;
+      transform: scale(0);
     }
     .movie-card:hover {
       transform: scale(1.05);
@@ -444,6 +450,14 @@
   <a href="#" class="back-to-top" id="backToTop">↑</a>
 
   <script>
+    document.querySelector('.search-bar input').addEventListener('input', function(e) {
+      const searchTerm = e.target.value.toLowerCase();
+      document.querySelectorAll('.movie-card').forEach(card => {
+        const title = card.querySelector('.info h4').textContent.toLowerCase();
+        card.classList.toggle('hidden', !title.includes(searchTerm));
+      });
+    });
+
     window.addEventListener('load', function() {
       const loader = document.querySelector('.loader');
       setTimeout(() => {
