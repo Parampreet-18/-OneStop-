@@ -128,7 +128,7 @@ function loadTrack(track_index) {
   curr_track.addEventListener("ended", nextTrack);
   random_bg_color();
 
-  // Update active class in queue list
+  
   updateQueueActiveStatus();
 }
 
@@ -204,16 +204,39 @@ function seekUpdate() {
 }
 
 
-
 function loadQueue() {
   const queueElement = document.getElementById('queue');
+  queueElement.innerHTML = '';
+
+  
+  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
   track_list.forEach((track, index) => {
     const li = document.createElement('li');
-    li.textContent = `${track.name} - ${track.artist}`;
-    li.onclick = () => loadTrack(index);
+    li.innerHTML = `
+      ${track.name} - ${track.artist}
+      <span class="favorite" data-index="${index}" style="float: right; cursor: pointer;">
+        ${favorites.includes(index) ? '❤️' : '🤍'}
+      </span>
+    `;
+
+    li.onclick = (event) => {
+      if (event.target.classList.contains('favorite')) {
+        toggleFavorite(index);
+        event.stopPropagation(); 
+      } else {
+        track_index = index;
+        loadTrack(index);
+        playTrack();
+      }
+    };
+
     queueElement.appendChild(li);
   });
+
+  updateQueueActiveStatus();
 }
+
 
 function updateQueueActiveStatus() {
   const queueItems = document.querySelectorAll('#queue li');
@@ -229,6 +252,19 @@ function updateQueueActiveStatus() {
 function toggleLoop() {
   curr_track.loop = !curr_track.loop;
   alert("Loop is now " + (curr_track.loop ? "ON" : "OFF"));
+}
+
+function toggleFavorite(index) {
+  let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+  if (favorites.includes(index)) {
+    favorites = favorites.filter(favIndex => favIndex !== index);
+  } else {
+    favorites.push(index);
+  }
+
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+  loadQueue();
 }
 
 
