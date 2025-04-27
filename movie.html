@@ -5,23 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MovieMania</title>
   <style>
-    html {
-      scroll-behavior: smooth;
+    :root {
+      --bg-color: #121212;
+      --header-color: #1e1e1e;
+      --text-color: white;
+      --accent-color: #ff4d4d;
+      --card-color: #1e1e1e;
+      --input-color: #2b2b2b;
+      --secondary-text: #ccc;
     }
+    
+    .light-mode {
+      --bg-color: #f5f5f5;
+      --header-color: #ffffff;
+      --text-color: #333333;
+      --accent-color: #e74c3c;
+      --card-color: #ffffff;
+      --input-color: #f0f0f0;
+      --secondary-text: #666;
+    }
+
+    html { scroll-behavior: smooth; }
     body {
-      background-color: #121212;
+      background-color: var(--bg-color);
       font-family: Arial, sans-serif;
-      color: white;
+      color: var(--text-color);
       margin: 0;
       padding: 0;
       position: relative;
-      transition: background 0.3s, color 0.3s;
+      transition: background-color 0.3s, color 0.3s;
     }
+
     .theme-toggle {
       position: fixed;
       bottom: 80px;
       right: 20px;
-      background: #ff4d4d;
+      background-color: var(--accent-color);
       color: white;
       width: 50px;
       height: 50px;
@@ -34,74 +53,67 @@
       border: none;
       font-size: 1.5rem;
     }
-    .light-mode {
-      background: #f5f5f5;
-      color: #333;
-    }
-    .light-mode header, 
-    .light-mode .movie-card,
-    .light-mode .contact {
-      background: white;
-    }
-    .light-mode nav a {
-      color: #666;
-    }
+
     .loader {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: #121212;
+      background-color: var(--bg-color);
       display: flex;
       justify-content: center;
       align-items: center;
       z-index: 9999;
       transition: opacity 0.5s, visibility 0.5s;
     }
+
     .loader.hidden {
       opacity: 0;
       visibility: hidden;
     }
+
     .loader::after {
       content: "";
       width: 50px;
       height: 50px;
-      border: 5px solid #ff4d4d;
+      border: 5px solid var(--accent-color);
       border-top-color: transparent;
       border-radius: 50%;
       animation: loading 0.75s linear infinite;
     }
+
     @keyframes loading {
       from { transform: rotate(0turn); }
       to { transform: rotate(1turn); }
     }
+
     header {
-      background-color: #1e1e1e;
+      background-color: var(--header-color);
       padding: 1rem;
       text-align: center;
       position: sticky;
       top: 0;
       z-index: 100;
     }
-    nav {
-      margin-top: 0.5rem;
-    }
+
+    nav { margin-top: 0.5rem; }
+
     nav a {
-      color: #bbbbbb;
+      color: var(--secondary-text);
       margin: 0 1rem;
       text-decoration: none;
       transition: color 0.3s, border-bottom 0.3s;
       padding-bottom: 4px;
     }
-    nav a:hover,
-    nav a.active {
-      color: #ffffff;
-      border-bottom: 2px solid #ff4d4d;
+
+    nav a:hover, nav a.active {
+      color: var(--text-color);
+      border-bottom: 2px solid var(--accent-color);
     }
-    .search-bar {
-      margin-top: 1rem;
-    }
+
+    .search-bar { margin-top: 1rem; }
+
     .search-bar input {
       width: 80%;
       max-width: 400px;
@@ -109,14 +121,18 @@
       border: none;
       border-radius: 8px;
       font-size: 1rem;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       outline: none;
+      background-color: var(--input-color);
+      color: var(--text-color);
     }
+
     .hero {
       position: relative;
       height: 400px;
       overflow: hidden;
     }
+
     .hero::before {
       content: '';
       position: absolute;
@@ -129,6 +145,7 @@
       transition: transform 8s ease;
       transform: scale(1.1);
     }
+
     .hero::after {
       content: '';
       position: absolute;
@@ -139,9 +156,9 @@
       background: rgba(0, 0, 0, 0.5);
       z-index: 2;
     }
-    .hero:hover::before {
-      transform: scale(1.2);
-    }
+
+    .hero:hover::before { transform: scale(1.2); }
+
     .hero-content {
       position: relative;
       z-index: 3;
@@ -152,78 +169,92 @@
       justify-content: center;
       text-align: center;
     }
+
     .hero-content h2 {
       font-size: 2rem;
       margin-bottom: 1rem;
+      color: white;
     }
+
     .hero-content button {
       padding: 0.75rem 1.5rem;
       font-size: 1rem;
       border: none;
       border-radius: 6px;
-      background-color: #ff4d4d;
+      background-color: var(--accent-color);
       color: white;
       cursor: pointer;
       transition: background-color 0.3s;
     }
+
     .hero-content button:hover {
       background-color: #ff1a1a;
     }
-    section {
-      padding: 2rem;
-    }
+
+    section { padding: 2rem; }
+
     h3 {
       text-align: center;
       margin-bottom: 1rem;
       font-size: 1.8rem;
-      color: #ff4d4d;
+      color: var(--accent-color);
     }
+
     .movie-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1.5rem;
       margin-top: 1.5rem;
     }
+
     .movie-card {
-      background-color: #1e1e1e;
+      background-color: var(--card-color);
       border-radius: 8px;
       overflow: hidden;
       transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
+
     .movie-card.hidden {
       opacity: 0;
       height: 0;
       margin: 0;
       transform: scale(0);
     }
+
     .movie-card:hover {
       transform: scale(1.05);
       box-shadow: 0 8px 20px rgba(255, 77, 77, 0.3);
     }
+
     .movie-card img {
       width: 100%;
       height: 300px;
       object-fit: cover;
     }
-    .movie-card .info {
-      padding: 1rem;
-    }
+
+    .movie-card .info { padding: 1rem; }
+
     .movie-card .info h4 {
       margin: 0 0 0.5rem 0;
       font-size: 1.1rem;
+      color: var(--text-color);
     }
+
     .movie-card .info p {
       margin: 0 0 0.5rem 0;
       font-size: 0.9rem;
-      color: #ccc;
+      color: var(--secondary-text);
     }
+
     .rating {
       color: gold;
       font-size: 1rem;
     }
+
     .trailer-btn {
       background-color: #555;
       color: white;
@@ -234,16 +265,18 @@
       cursor: pointer;
       transition: background-color 0.3s;
     }
-    .trailer-btn:hover {
-      background-color: #777;
-    }
+
+    .trailer-btn:hover { background-color: #777; }
+
     .contact {
-      background-color: #1e1e1e;
+      background-color: var(--card-color);
       padding: 2rem;
       border-radius: 10px;
       max-width: 600px;
       margin: auto;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
+
     .contact input,
     .contact textarea {
       width: 100%;
@@ -251,11 +284,12 @@
       margin-bottom: 1rem;
       border: none;
       border-radius: 6px;
-      background-color: #2b2b2b;
-      color: white;
+      background-color: var(--input-color);
+      color: var(--text-color);
     }
+
     .contact button {
-      background-color: #ff4d4d;
+      background-color: var(--accent-color);
       color: white;
       border: none;
       padding: 0.75rem 2rem;
@@ -264,19 +298,22 @@
       display: block;
       margin: auto;
     }
+
     footer {
-      background-color: #1e1e1e;
+      background-color: var(--header-color);
       text-align: center;
       padding: 1rem;
       margin-top: 2rem;
       font-size: 0.9rem;
-      color: #888;
+      color: var(--secondary-text);
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
     }
+
     .back-to-top {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background-color: #ff4d4d;
+      background-color: var(--accent-color);
       color: white;
       width: 50px;
       height: 50px;
@@ -291,31 +328,25 @@
       transition: all 0.3s ease;
       z-index: 99;
     }
+
     .back-to-top.visible {
       opacity: 1;
       visibility: visible;
     }
+
     .back-to-top:hover {
       background-color: #ff1a1a;
     }
+
     @media (max-width: 600px) {
-      .hero {
-        height: 250px;
-      }
+      .hero { height: 250px; }
       .hero-content h2 {
         font-size: 1.4rem;
         padding: 0.75rem 1rem;
       }
-      nav a {
-        display: block;
-        margin: 0.5rem 0;
-      }
-      section {
-        padding: 1rem;
-      }
-      .contact {
-        padding: 1rem;
-      }
+      nav a { display: block; margin: 0.5rem 0; }
+      section { padding: 1rem; }
+      .contact { padding: 1rem; }
       .back-to-top {
         width: 40px;
         height: 40px;
@@ -326,6 +357,11 @@
         height: 40px;
         font-size: 1.2rem;
         bottom: 70px;
+      }
+      .loader::after {
+        width: 30px;
+        height: 30px;
+        border-width: 3px;
       }
     }
   </style>
