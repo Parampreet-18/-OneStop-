@@ -192,4 +192,40 @@ header img {
   margin-left: 10px;
 }
 
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #333;
+}
+
+nav a {
+  margin-right: 10px;
+  text-decoration: none;
+  color: #007BFF;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+ul#queue {
+  list-style: none;
+  padding: 0;
+}
+
+ul#queue li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.favorite {
+  font-size: 1.5rem;
+}
 
