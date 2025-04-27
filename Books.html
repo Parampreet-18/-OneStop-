@@ -127,36 +127,69 @@
     }
 
     #books-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem;
       justify-content: center;
+      padding: 1rem;
     }
 
     .book {
       background-color: #fff;
       border: 1px solid #ddd;
-      padding: 1rem;
-      width: 200px;
+      padding: 1.5rem;
       text-align: center;
-      border-radius: 8px;
+      border-radius: 10px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       animation: popUp 0.5s ease forwards;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
     }
     .book:hover {
       transform: translateY(-5px);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
     }
 
     .book img {
       max-width: 100%;
-      height: auto;
-      margin-bottom: 0.5rem;
-      border-radius: 4px;
+      height: 180px;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      border-radius: 6px;
       transition: transform 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
     .book img:hover {
-      transform: scale(1.05);
+      transform: scale(1.03);
+    }
+
+    .book h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .book p {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 0.3rem;
+    }
+
+    .book-actions {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 1rem;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .book-progress {
+      margin-top: 1rem;
+      width: 100%;
+      text-align: left;
     }
 
     form {
@@ -231,6 +264,7 @@
       font-size: 1.2rem;
       cursor: pointer;
       transition: background-color 0.3s ease, transform 0.3s ease;
+      display: none;
     }
     #scrollTopBtn:hover {
       background-color: #fcb69f;
@@ -606,7 +640,13 @@ body.dark-mode .progress-bar {
   border-radius: 6px;
   font-size: 14px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex: 1;
+  min-width: 100px;
 }
 
 .favorite-btn {
@@ -616,6 +656,8 @@ body.dark-mode .progress-bar {
 
 .favorite-btn:hover {
   background-color: #e74c3c;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(231, 76, 60, 0.3);
 }
 
 .read-now-btn {
@@ -625,11 +667,116 @@ body.dark-mode .progress-bar {
 
 .read-now-btn:hover {
   background-color: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(41, 128, 185, 0.3);
 }
 
-</style>
+.favorite-btn i, .read-now-btn i {
+  font-size: 14px;
+}
 
+/* Voice Narration Styles */
+.voice-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
 
+#voiceNarrationBtn {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+#voiceNarrationBtn:hover {
+  background-color: #357abd;
+}
+
+#voiceNarrationBtn i {
+  font-size: 16px;
+}
+
+#voiceSpeedControl {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: white;
+}
+
+.voice-active {
+  background-color: #e74c3c !important;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(231, 76, 60, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+}
+
+#voiceStatus {
+  font-size: 0.8rem;
+  color: #555;
+  margin-top: 5px;
+  text-align: center;
+}
+
+body.dark-mode #voiceStatus {
+  color: #ccc;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #books-container {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  
+  .book {
+    padding: 1rem;
+  }
+  
+  .book-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .favorite-btn, .read-now-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  #books-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .view-toggle {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .view-toggle button {
+    flex: 1;
+  }
+}
+  </style>
 </head>
 <body>
   <header>
@@ -677,75 +824,102 @@ body.dark-mode .progress-bar {
 
         <button id="randomBookBtn" aria-label="Show a random book">Random Book</button>
       </div>
-      <div id="books-container"></div>
-      <div class="book">
-        <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794" alt="Book Cover" />
-        <h3>The Midnight Library</h3>
-        <p>by Matt Haig</p>
-        <p>Category: Fiction</p>
-        Progress Bar
-        <div class="book-progress">
-          <span class="progress-label">Progress: 65%</span>
+      
+      <!-- Voice Narration Controls -->
+      <div class="voice-controls">
+        <button id="voiceNarrationBtn" aria-label="Toggle voice narration">
+          <i class="fas fa-microphone"></i> Listen
+        </button>
+        <select id="voiceSpeedControl" aria-label="Voice speed control">
+          <option value="0.8">Slow</option>
+          <option value="1" selected>Normal</option>
+          <option value="1.2">Fast</option>
+        </select>
+      </div>
+      <div id="voiceStatus">Voice narration is ready</div>
+      
+      <div id="books-container">
+        <div class="book">
+          <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794" alt="The Midnight Library Cover" />
+          <h3>The Midnight Library</h3>
+          <p>by Matt Haig</p>
+          <p>Category: Fiction</p>
+          <div class="book-progress">
+            <span class="progress-label">Progress: 65%</span>
+            <div class="progress-container">
+              <div class="progress-bar" style="width: 65%;"></div>
+            </div>
+          </div>
+          <div class="book-actions">
+            <button class="favorite-btn"><i class="fas fa-heart"></i> Favorite</button>
+            <button class="read-now-btn"><i class="fas fa-book-open"></i> Read Now</button>
+          </div>
+        </div>
+        
+        <div class="book">
+          <img src="https://images.unsplash.com/photo-1529655683826-aba9b3e77383" alt="Atomic Habits Cover" />
+          <h3>Atomic Habits</h3>
+          <p>by James Clear</p>
+          <p>Category: Non-fiction</p>
+          <div class="book-progress">
+            <span class="progress-label">Progress: 45%</span>
+            <div class="progress-container">
+              <div class="progress-bar" style="width: 45%;"></div>
+            </div>
+          </div>
+          <div class="book-actions">
+            <button class="favorite-btn"><i class="fas fa-heart"></i> Favorite</button>
+            <button class="read-now-btn"><i class="fas fa-book-open"></i> Read Now</button>
+          </div>
+        </div>
+        
+        <div class="book">
+          <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66" alt="Gone Girl Cover" />
+          <h3>Gone Girl</h3>
+          <p>by Gillian Flynn</p>
+          <p>Category: Mystery</p>
+          <div class="book-progress">
+            <span class="progress-label">Progress: 80%</span>
+            <div class="progress-container">
+              <div class="progress-bar" style="width: 80%;"></div>
+            </div>
+          </div>
+          <div class="book-actions">
+            <button class="favorite-btn"><i class="fas fa-heart"></i> Favorite</button>
+            <button class="read-now-btn"><i class="fas fa-book-open"></i> Read Now</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section id="readingProgress">
+      <h2>Reading Progress</h2>
+      <div class="progress-list">
+        <div class="progress-entry">
+          <h3>The Midnight Library</h3>
+          <span class="progress-label">65% completed</span>
           <div class="progress-container">
             <div class="progress-bar" style="width: 65%;"></div>
           </div>
         </div>
-         
-      </div>
-      
-      <div class="book">
-        <img src="https://images.unsplash.com/photo-1529655683826-aba9b3e77383" alt="Book Cover" />
-        <h3>Atomic Habits</h3>
-        <p>by James Clear</p>
-        <p>Category: Non-fiction</p>
-        <span class="progress-label">Progress: 45%</span>
-        <div class="progress-container">
-          <div class="progress-bar" style="width: 45%;"></div>
+
+        <div class="progress-entry">
+          <h3>Atomic Habits</h3>
+          <span class="progress-label">45% completed</span>
+          <div class="progress-container">
+            <div class="progress-bar" style="width: 45%;"></div>
+          </div>
         </div>
-      </div>
-      
-      <div class="book">
-        <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66" alt="Book Cover" />
-        <h3>Gone Girl</h3>
-        <p>by Gillian Flynn</p>
-        <p>Category: Mystery</p>
-        class="progress-label">Progress: 80%</span>
-        <div class="progress-container">
-          <div class="progress-bar" style="width: 80%;"></div>
+
+        <div class="progress-entry">
+          <h3>Gone Girl</h3>
+          <span class="progress-label">80% completed</span>
+          <div class="progress-container">
+            <div class="progress-bar" style="width: 80%;"></div>
+          </div>
         </div>
       </div>
     </section>
-    <!-- Add this just after the #featured section in <main> -->
-<section id="readingProgress">
-  <h2>Reading Progress</h2>
-  <div class="progress-list">
-
-    <div class="progress-entry">
-      <h3>The Midnight Library</h3>
-      <span class="progress-label">65% completed</span>
-      <div class="progress-container">
-        <div class="progress-bar" style="width: 65%;"></div>
-      </div>
-    </div>
-
-    <div class="progress-entry">
-      <h3>Atomic Habits</h3>
-      <span class="progress-label">45% completed</span>
-      <div class="progress-container">
-        <div class="progress-bar" style="width: 45%;"></div>
-      </div>
-    </div>
-
-    <div class="progress-entry">
-      <h3>Gone Girl</h3>
-      <span class="progress-label">80% completed</span>
-      <div class="progress-container">
-        <div class="progress-bar" style="width: 80%;"></div>
-      </div>
-    </div>
-
-  </div>
-</section>
 
     <section id="submitBook">
       <h2>Submit a New Book</h2>
@@ -813,17 +987,16 @@ body.dark-mode .progress-bar {
       </form>
     </div>
   </div>
-  <!-- Chat Bot UI Container (if not added via JS) -->
-<div id="chatBot">
-  <div class="chat-header">📚 Book Chat Bot <span id="chatToggle">_</span></div>
-  <div class="chat-body" id="chatBody"></div>
-  <div class="chat-input-area">
-    <input type="text" id="chatInput" placeholder="Ask me something..." />
-    <button id="sendChat">Send</button>
+  
+  <!-- Chat Bot UI Container -->
+  <div id="chatBot">
+    <div class="chat-header">📚 Book Chat Bot <span id="chatToggle">_</span></div>
+    <div class="chat-body" id="chatBody"></div>
+    <div class="chat-input-area">
+      <input type="text" id="chatInput" placeholder="Ask me something..." />
+      <button id="sendChat">Send</button>
+    </div>
   </div>
-</div>
-
-
   <script src="Books-JS.js"></script>
 </body>
 </html>

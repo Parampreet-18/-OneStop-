@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Favorite Songs</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <h1>Favorite Songs ❤️</h1>
+  <nav>
+    <a href="index.html">Home</a> |
+    <a href="favorites.html">Favorites ❤️</a>
+  </nav>
+
+  <ul id="queue"></ul>
+
+  <script src="music.js"></script>
+  <script>
+
+    window.onload = () => {
+      loadQueue(true); 
+    };
+  </script>
+
+</body>
+</html>

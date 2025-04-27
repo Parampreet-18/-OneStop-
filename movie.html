@@ -1,229 +1,235 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Movie Site</title>
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       background-color: #121212;
       font-family: Arial, sans-serif;
       color: white;
       margin: 0;
       padding: 0;
-    }header {
-  background-color: #1e1e1e;
-  padding: 1rem;
-  text-align: center;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
+    }
 
-nav {
-  margin-top: 0.5rem;
-}
+    header {
+      background-color: #1e1e1e;
+      padding: 1rem;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
 
-nav a {
-  color: #bbbbbb;
-  margin: 0 1rem;
-  text-decoration: none;
-  transition: color 0.3s, border-bottom 0.3s;
-  padding-bottom: 4px;
-}
+    nav {
+      margin-top: 0.5rem;
+    }
 
-nav a:hover {
-  color: #ffffff;
-  border-bottom: 2px solid #ff4d4d;
-}
+    nav a {
+      color: #bbbbbb;
+      margin: 0 1rem;
+      text-decoration: none;
+      transition: color 0.3s, border-bottom 0.3s;
+      padding-bottom: 4px;
+    }
 
-nav a.active {
-  color: white;
-  border-bottom: 2px solid #ff4d4d;
-}
+    nav a:hover {
+      color: #ffffff;
+      border-bottom: 2px solid #ff4d4d;
+    }
 
-.search-bar {
-  margin-top: 1rem;
-}
+    nav a.active {
+      color: white;
+      border-bottom: 2px solid #ff4d4d;
+    }
 
-.search-bar input {
-  width: 80%;
-  max-width: 400px;
-  padding: 0.6rem 1rem;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-  outline: none;
-}
+    .search-bar {
+      margin-top: 1rem;
+    }
 
-.hero {
-  position: relative;
-  height: 400px;
-  background: url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4') center center/cover no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
+    .search-bar input {
+      width: 80%;
+      max-width: 400px;
+      padding: 0.6rem 1rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+      outline: none;
+    }
 
-.hero h2 {
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  font-size: 2rem;
-  text-align: center;
-  margin-bottom: 1rem;
-}
+    .hero {
+      position: relative;
+      height: 400px;
+      background: url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4') center center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
 
-.hero button {
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 6px;
-  background-color: #ff4d4d;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
+    .hero h2 {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
 
-.hero button:hover {
-  background-color: #ff1a1a;
-}
+    .hero button {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      background-color: #ff4d4d;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
 
-section {
-  padding: 2rem;
-}
+    .hero button:hover {
+      background-color: #ff1a1a;
+    }
 
-.movie-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1.5rem;
-}
+    section {
+      padding: 2rem;
+    }
 
-.movie-card {
-  background-color: #1e1e1e;
-  border-radius: 8px;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+    .movie-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
 
-.movie-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(255, 77, 77, 0.3);
-}
+    .movie-card {
+      background-color: #1e1e1e;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
 
-.movie-card img {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-}
+    .movie-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(255, 77, 77, 0.3);
+    }
 
-.movie-card .info {
-  padding: 1rem;
-}
+    .movie-card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
 
-.movie-card .info h4 {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.1rem;
-}
+    .movie-card .info {
+      padding: 1rem;
+    }
 
-.movie-card .info p {
-  margin: 0 0 0.5rem 0;
-  font-size: 0.9rem;
-  color: #ccc;
-}
+    .movie-card .info h4 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.1rem;
+    }
 
-.rating {
-  color: gold;
-  font-size: 1rem;
-}
+    .movie-card .info p {
+      margin: 0 0 0.5rem 0;
+      font-size: 0.9rem;
+      color: #ccc;
+    }
 
-.trailer-btn {
-  background-color: #555;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  margin: 0.5rem 1rem 1rem 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
+    .rating {
+      color: gold;
+      font-size: 1rem;
+    }
 
-.trailer-btn:hover {
-  background-color: #777;
-}
+    .trailer-btn {
+      background-color: #555;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      margin: 0.5rem 1rem 1rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
 
-.contact {
-  background-color: #1e1e1e;
-  padding: 2rem;
-  border-radius: 10px;
-  max-width: 600px;
-  margin: auto;
-}
+    .trailer-btn:hover {
+      background-color: #777;
+    }
 
-.contact h3 {
-  text-align: center;
-  margin-bottom: 1rem;
-}
+    .contact {
+      background-color: #1e1e1e;
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: auto;
+    }
 
-.contact input, .contact textarea {
-  width: 100%;
-  padding: 0.75rem;
-  margin-bottom: 1rem;
-  border: none;
-  border-radius: 6px;
-  background-color: #2b2b2b;
-  color: white;
-}
+    .contact h3 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
 
-.contact button {
-  background-color: #ff4d4d;
-  color: white;
-  border: none;
-  padding: 0.75rem 2rem;
-  border-radius: 6px;
-  cursor: pointer;
-  display: block;
-  margin: auto;
-}
+    .contact input,
+    .contact textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: none;
+      border-radius: 6px;
+      background-color: #2b2b2b;
+      color: white;
+    }
 
-footer {
-  background-color: #1e1e1e;
-  text-align: center;
-  padding: 1rem;
-  margin-top: 2rem;
-  font-size: 0.9rem;
-  color: #888;
-}
+    .contact button {
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      display: block;
+      margin: auto;
+    }
 
-@media (max-width: 600px) {
-  .hero {
-    height: 250px;
-  }
+    footer {
+      background-color: #1e1e1e;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
 
-  .hero h2 {
-    font-size: 1.4rem;
-    padding: 0.75rem 1rem;
-  }
+    @media (max-width: 600px) {
+      .hero {
+        height: 250px;
+      }
 
-  nav a {
-    display: block;
-    margin: 0.5rem 0;
-  }
+      .hero h2 {
+        font-size: 1.4rem;
+        padding: 0.75rem 1rem;
+      }
 
-  section {
-    padding: 1rem;
-  }
+      nav a {
+        display: block;
+        margin: 0.5rem 0;
+      }
 
-  .contact {
-    padding: 1rem;
-  }
-}
+      section {
+        padding: 1rem;
+      }
 
+      .contact {
+        padding: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -238,10 +244,14 @@ footer {
     <div class="search-bar">
       <input type="text" placeholder="Search for movies...">
     </div>
-  </header>  <section class="hero">
+  </header>
+
+  <section class="hero">
     <h2>Welcome to MovieMania</h2>
     <button>Book Tickets</button>
-  </section>  <section id="now-showing">
+  </section>
+
+  <section id="now-showing">
     <h3>Now Showing</h3>
     <div class="movie-grid">
       <div class="movie-card">
@@ -253,6 +263,7 @@ footer {
         </div>
         <button class="trailer-btn">Watch Trailer</button>
       </div>
+
       <div class="movie-card">
         <img src="https://static.beebom.com/wp-content/uploads/2025/03/Infinity-Castle-arc.jpg?quality=75&strip=all" alt="Movie Poster">
         <div class="info">
@@ -263,12 +274,13 @@ footer {
         <button class="trailer-btn">Watch Trailer</button>
       </div>
     </div>
-  </section>  <section id="upcoming">
+  </section>
+
+  <section id="upcoming">
     <h3>Upcoming Movies</h3>
     <div class="movie-grid">
       <div class="movie-card">
         <img src="https://newshour-classroom-tc.digi-producers.pbs.org/uploads/images/Oppenheimer-Christopher-Nolan-0.width-1024.jpg" alt="Movie Poster">
-     
         <div class="info">
           <h4>Oppenheimer</h4>
           <p>Action | Coming Soon</p>
@@ -276,6 +288,7 @@ footer {
         </div>
         <button class="trailer-btn">Watch Trailer</button>
       </div>
+
       <div class="movie-card">
         <img src="https://i.etsystatic.com/12175780/r/il/889f4d/1685607859/il_1588xN.1685607859_49fn.jpg" alt="Movie Poster">
         <div class="info">
@@ -286,7 +299,34 @@ footer {
         <button class="trailer-btn">Watch Trailer</button>
       </div>
     </div>
-  </section>  <section id="contact">
+  </section>
+
+  <section id="top-rated">
+    <h3>Top Rated</h3>
+    <div class="movie-grid">
+      <div class="movie-card">
+        <img src="https://i.pinimg.com/736x/d5/11/d6/d511d6922fd9c818d1497b0b79c026a2.jpg" alt="Movie Poster">
+        <div class="info">
+          <h4>Avengers: Endgame</h4>
+          <p>Action | 3h 1m</p>
+          <div class="rating">⭐ 9.0</div>
+        </div>
+        <button class="trailer-btn">Watch Trailer</button>
+      </div>
+
+      <div class="movie-card">
+        <img src="https://i.pinimg.com/736x/8b/54/e3/8b54e36ad46b99fdff9f44d1083e8072.jpg" alt="Movie Poster">
+        <div class="info">
+          <h4>Inception</h4>
+          <p>Sci-Fi | 2h 28m</p>
+          <div class="rating">⭐ 8.8</div>
+        </div>
+        <button class="trailer-btn">Watch Trailer</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
     <div class="contact">
       <h3>Contact Us</h3>
       <input type="text" placeholder="Your Name">
@@ -294,7 +334,9 @@ footer {
       <textarea rows="5" placeholder="Your Message"></textarea>
       <button type="submit">Send Message</button>
     </div>
-  </section>  <footer>
+  </section>
+
+  <footer>
     <p>&copy; 2025 MovieMania. All rights reserved.</p>
   </footer>
 </body>
